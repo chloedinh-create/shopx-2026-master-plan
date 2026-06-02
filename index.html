@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<style id="mh-gate-style">body{visibility:hidden}#mh-gate{position:fixed;inset:0;display:grid;place-items:center;background:#0f172a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;z-index:2147483647;visibility:visible}</style>
+<script>
+(function(){
+  if (sessionStorage.getItem('shopx-unlock') === '1') {
+    var s = document.getElementById('mh-gate-style'); if (s) s.remove();
+    return;
+  }
+  function mount(){
+    var g = document.createElement('div');
+    g.id = 'mh-gate';
+    g.innerHTML = '<div style="background:#1e293b;padding:32px;border-radius:12px;width:340px;max-width:90vw;box-shadow:0 10px 40px rgba(0,0,0,.5)"><h1 style="margin:0 0 8px;font-size:20px;font-weight:600">ShopX 2026 — Master Plan</h1><p style="margin:0 0 20px;color:#94a3b8;font-size:14px">Tài liệu nội bộ — nhập mật khẩu để xem</p><form id="mh-form"><input id="mh-pwd" type="password" autofocus placeholder="Mật khẩu" style="width:100%;padding:10px 12px;border-radius:6px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:14px;margin-bottom:12px;box-sizing:border-box"/><button type="submit" style="width:100%;padding:10px;border:0;border-radius:6px;background:#3b82f6;color:#fff;font-size:14px;font-weight:600;cursor:pointer">Mở khóa</button></form></div>';
+    document.body.appendChild(g);
+    document.getElementById('mh-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      var inp = document.getElementById('mh-pwd');
+      if (inp.value === 'ShopX@2026') {
+        sessionStorage.setItem('shopx-unlock','1');
+        var s = document.getElementById('mh-gate-style'); if (s) s.remove();
+        g.remove();
+      } else {
+        inp.value = '';
+        inp.placeholder = 'Sai mật khẩu, thử lại';
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mount);
+  } else { mount(); }
+})();
+</script>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ShopX 2026 — Master Communication Plan</title>
+<style>
+  :root {
+    --bg: #0b0d17;
+    --bg-soft: #11142a;
+    --surface: #ffffff;
+    --surface-2: #f7f8fc;
+    --surface-3: #eef0f8;
+    --border: #e3e6f0;
+    --text: #1a1d2e;
+    --text-soft: #50556f;
+    --text-muted: #6b7090;
+    --primary: #6b46ff;
+    --primary-soft: #efeaff;
+    --primary-dark: #4a2dd4;
+    --accent: #ff7a59;
+    --success: #16a085;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+    --gem-gold: #F9B42D;
+    --gem-pink: #E5396E;
+    --gem-blue: #3F5AE3;
+    --shadow-sm: 0 1px 2px rgba(20,22,51,.06);
+    --shadow-md: 0 6px 24px rgba(20,22,51,.08);
+    --shadow-lg: 0 20px 60px rgba(20,22,51,.12);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: var(--text);
+    background: var(--surface-2);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    font-size: 15px;
+  }
+  .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar { position: sticky; top: 0; height: 100vh; background: var(--bg); color: #d5d8ea; padding: 0 20px 24px; overflow-y: auto; border-right: 1px solid #1c1f36; }
+  .sidebar .brand { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: 24px 0 16px; margin-bottom: 8px; border-bottom: 1px solid #21243c; }
+  .brand-title { font-size: 17px; font-weight: 700; color: #fff; margin: 0; letter-spacing: .2px; }
+  .brand-sub { font-size: 11px; color: #9aa0bd; margin-top: 6px; letter-spacing: .4px; text-transform: uppercase; font-weight: 600; }
+  .brand-meta { font-size: 11px; color: #6b7196; margin-top: 4px; }
+  .nav-section-title { font-size: 10.5px; text-transform: uppercase; letter-spacing: 1.2px; color: #6b7196; margin: 18px 12px 8px; font-weight: 600; }
+  .nav-link { display: flex; align-items: center; gap: 10px; padding: 9px 12px; color: #c2c6df; text-decoration: none; border-radius: 8px; font-size: 13.5px; transition: all .15s ease; margin-bottom: 2px; line-height: 1.4; }
+  .nav-link:hover { background: #1c1f36; color: white; }
+  .nav-link.active { background: rgba(107,70,255,.15); color: white; box-shadow: inset 3px 0 0 var(--primary); }
+  .nav-link .num { font-size: 11px; color: #6b7196; font-variant-numeric: tabular-nums; min-width: 18px; }
+  .nav-link.active .num { color: var(--primary); }
+
+  /* Confidential bar */
+  .conf-bar { background: linear-gradient(90deg, #fef2f2, #fff1f5); border-bottom: 1px solid #fecaca; color: #991b1b; font-size: 12px; padding: 7px 24px; text-align: center; font-weight: 600; letter-spacing: .2px; }
+
+  /* Main */
+  .main { max-width: 1140px; margin: 0 auto; padding: 0 48px 80px; width: 100%; }
+  .hero { padding: 48px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+  .hero h1 { font-size: 32px; margin: 0 0 10px; line-height: 1.2; letter-spacing: -.5px; }
+  .hero .tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); padding: 4px 12px; border-radius: 100px; font-size: 11.5px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; margin-bottom: 14px; }
+  .hero p { color: var(--text-soft); font-size: 16px; margin: 8px 0 0; max-width: 720px; }
+  .hero .meta { display: flex; gap: 24px; margin-top: 18px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); }
+  .hero .meta strong { color: var(--text); }
+
+  /* Sections */
+  section { padding: 40px 0 16px; border-top: 1px dashed var(--border); }
+  section:first-of-type { border-top: 0; padding-top: 0; }
+  section h2 { font-size: 22px; margin: 0 0 6px; letter-spacing: -.2px; display: flex; align-items: center; gap: 12px; }
+  section h2 .ord { background: var(--primary); color: white; font-size: 12px; padding: 3px 10px; border-radius: 6px; font-weight: 700; letter-spacing: .5px; }
+  section .lead { color: var(--text-soft); font-size: 14.5px; margin: 0 0 20px; max-width: 760px; }
+  h3 { font-size: 16px; margin: 28px 0 12px; color: var(--text); scroll-margin-top: 24px; }
+  h4 { font-size: 14px; margin: 20px 0 10px; color: var(--text-soft); text-transform: uppercase; letter-spacing: .6px; font-weight: 700; }
+
+  /* Cards */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+  .card-title { font-weight: 700; font-size: 14.5px; margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
+  .card-body { color: var(--text-soft); font-size: 14px; line-height: 1.6; }
+  .card-body ul { margin: 8px 0; padding-left: 20px; }
+  .card-body li { margin-bottom: 4px; }
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 900px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } }
+
+  /* Stat tiles */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 18px 0 30px; }
+  .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow-sm); }
+  .stat .v { font-size: 22px; font-weight: 800; color: var(--text); letter-spacing: -.4px; }
+  .stat .l { font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .6px; margin-top: 4px; font-weight: 600; }
+  .stat.danger .v { color: var(--danger); }
+  .stat.warning .v { color: var(--warning); }
+  .stat.success .v { color: var(--success); }
+  .stat.info .v { color: var(--info); }
+  @media (max-width: 700px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
+  .badge.critical { background: #fee2e2; color: #991b1b; }
+  .badge.high { background: #fef3c7; color: #92400e; }
+  .badge.medium { background: #dbeafe; color: #1e40af; }
+  .badge.lower, .badge.low { background: #e0e7ff; color: #3730a3; }
+  .badge.success { background: #d1fae5; color: #065f46; }
+  .badge.warn { background: #fef3c7; color: #92400e; }
+  .badge.danger { background: #fee2e2; color: #991b1b; }
+  .badge.info { background: #dbeafe; color: #1e40af; }
+  .badge.muted { background: #f1f5f9; color: #475569; }
+
+  /* Needs owner */
+  .no-owner { background: #fee2e2; color: #991b1b; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; letter-spacing: .3px; display: inline-block; }
+  .gap-flag { background: #fef9c3; border: 1px solid #fde68a; padding: 10px 14px; border-radius: 8px; margin: 8px 0; color: #92400e; font-size: 13px; line-height: 1.5; }
+  .gap-flag strong { color: #78350f; }
+
+  /* Tables */
+  .table-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow-sm); margin: 12px 0 18px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--surface-3); text-align: left; padding: 10px 12px; font-weight: 700; color: var(--text); font-size: 11.5px; text-transform: uppercase; letter-spacing: .5px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+  td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; color: var(--text-soft); line-height: 1.5; }
+  tr:last-child td { border-bottom: 0; }
+  tr:hover td { background: var(--surface-2); }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.center { text-align: center; }
+
+  /* Risk score color */
+  .score { display: inline-block; padding: 3px 8px; border-radius: 5px; font-weight: 800; font-size: 12px; min-width: 28px; text-align: center; }
+  .score-16, .score-15, .score-14, .score-13, .score-12 { background: #fee2e2; color: #991b1b; }
+  .score-11, .score-10, .score-9 { background: #fef3c7; color: #92400e; }
+  .score-8, .score-7, .score-6 { background: #dbeafe; color: #1e40af; }
+  .score-5, .score-4, .score-3, .score-2, .score-1 { background: #d1fae5; color: #065f46; }
+
+  /* Phase pill */
+  .phase-pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .4px; }
+  .phase-p1 { background: #ede9fe; color: #5b21b6; }
+  .phase-p2 { background: #dbeafe; color: #1e40af; }
+  .phase-p3 { background: #fee2e2; color: #991b1b; }
+  .phase-p4 { background: #fef3c7; color: #92400e; }
+  .phase-p5 { background: #d1fae5; color: #065f46; }
+
+  /* Phase timeline */
+  .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 18px 0; }
+  .timeline-phase { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+  .timeline-phase .ph-label { font-size: 11px; font-weight: 800; letter-spacing: .8px; text-transform: uppercase; color: var(--primary); }
+  .timeline-phase .ph-name { font-size: 14px; font-weight: 700; margin: 4px 0 6px; }
+  .timeline-phase .ph-date { font-size: 11.5px; color: var(--text-muted); margin-bottom: 8px; }
+  .timeline-phase .ph-goal { font-size: 12px; color: var(--text-soft); line-height: 1.5; }
+  @media (max-width: 1000px) { .timeline { grid-template-columns: 1fr 1fr; } }
+
+  /* Heatmap-style risk grid */
+  .heatmap { display: grid; grid-template-columns: 60px repeat(5, 1fr); gap: 4px; margin: 16px 0; max-width: 700px; }
+  .heatmap-cell { padding: 10px 6px; text-align: center; font-size: 11px; border-radius: 4px; }
+  .heatmap-label { background: transparent; color: var(--text-muted); font-weight: 700; }
+  .h-low { background: #d1fae5; color: #065f46; }
+  .h-med { background: #fef3c7; color: #92400e; }
+  .h-hi { background: #fee2e2; color: #991b1b; }
+
+  /* Boxes */
+  .info-box { background: linear-gradient(135deg, #f3f4ff, #fef3f8); border-left: 4px solid var(--primary); border-radius: 8px; padding: 14px 18px; margin: 16px 0; }
+  .info-box.warn { background: #fffbeb; border-left-color: var(--warning); }
+  .info-box.danger { background: #fef2f2; border-left-color: var(--danger); }
+  .info-box.success { background: #ecfdf5; border-left-color: var(--success); }
+  .info-box-title { font-size: 13px; font-weight: 800; color: var(--text); margin: 0 0 4px; }
+  .info-box-body { font-size: 13.5px; color: var(--text-soft); line-height: 1.55; }
+
+  /* Lists in cards */
+  ul.compact { margin: 4px 0; padding-left: 18px; font-size: 13px; }
+  ul.compact li { margin-bottom: 3px; line-height: 1.5; }
+
+  /* Action items */
+  .action-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; }
+  .action-item .ai-prio { width: 28px; height: 28px; border-radius: 50%; background: var(--danger); color: white; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .action-item.med .ai-prio { background: var(--warning); }
+  .action-item.low .ai-prio { background: var(--info); }
+  .action-item .ai-body { flex: 1; }
+  .action-item .ai-title { font-weight: 700; font-size: 14px; color: var(--text); margin: 0 0 4px; }
+  .action-item .ai-desc { font-size: 13px; color: var(--text-soft); margin: 0 0 4px; line-height: 1.5; }
+  .action-item .ai-meta { font-size: 11.5px; color: var(--text-muted); }
+
+  /* Footer */
+  .footer { padding: 32px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 12.5px; margin-top: 40px; }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .main { padding: 0 20px 60px; }
+    .hero h1 { font-size: 24px; }
+  }
+
+  /* Print */
+  @media print {
+    .sidebar, .conf-bar { display: none; }
+    .app { grid-template-columns: 1fr; }
+    section { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="conf-bar">⚠ TÀI LIỆU MẬT NỘI BỘ — Không chia sẻ ra ngoài team Marketing Gem Commerce / ShopX 2026</div>
+<div class="app">
+
+<!-- ============ SIDEBAR ============ -->
+<aside class="sidebar">
+  <div class="brand">
+    <h1 class="brand-title">ShopX 2026</h1>
+    <div class="brand-sub">Master Communication Plan</div>
+    <div class="brand-meta">v1.0 · Cập nhật 02/06/2026</div>
+  </div>
+
+  <div class="nav-section-title">Overview</div>
+  <a href="#executive" class="nav-link"><span class="num">00</span> Executive Summary</a>
+  <a href="#gaps" class="nav-link"><span class="num">01</span> Gaps & Action Items</a>
+
+  <div class="nav-section-title">Strategy</div>
+  <a href="#rationale" class="nav-link"><span class="num">02</span> Cơ sở đề xuất</a>
+  <a href="#goals" class="nav-link"><span class="num">03</span> 3 mục tiêu chiến dịch</a>
+  <a href="#audience" class="nav-link"><span class="num">04</span> 3 phân khúc audience</a>
+  <a href="#tagline" class="nav-link"><span class="num">05</span> Tagline + 5 Hooks</a>
+
+  <div class="nav-section-title">Execution</div>
+  <a href="#timeline" class="nav-link"><span class="num">06</span> Phase Timeline (5)</a>
+  <a href="#markets" class="nav-link"><span class="num">07</span> Markets (6)</a>
+  <a href="#channels" class="nav-link"><span class="num">08</span> Channels (23)</a>
+  <a href="#pillars" class="nav-link"><span class="num">09</span> Content Pillars (8)</a>
+  <a href="#funnel" class="nav-link"><span class="num">10</span> Ticket Funnel (6)</a>
+
+  <div class="nav-section-title">Operations</div>
+  <a href="#risk" class="nav-link"><span class="num">11</span> Risk Register (20)</a>
+  <a href="#crisis" class="nav-link"><span class="num">12</span> Crisis Quick-Response</a>
+  <a href="#kpi" class="nav-link"><span class="num">13</span> KPI Dashboard</a>
+
+  <div class="nav-section-title">Bổ sung (mới)</div>
+  <a href="#raci" class="nav-link"><span class="num">14</span> Team RACI</a>
+  <a href="#budget" class="nav-link"><span class="num">15</span> Budget Rollup</a>
+  <a href="#calendar" class="nav-link"><span class="num">16</span> Weekly Content Cal.</a>
+  <a href="#speaker-tracker" class="nav-link"><span class="num">17</span> Speaker Tracker</a>
+  <a href="#sponsor-pipeline" class="nav-link"><span class="num">18</span> Sponsor Pipeline</a>
+</aside>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="tag">Internal · Marketing · Sept 17, 2026 · Saigon</span>
+  <h1>ShopX 2026 — Master Communication Plan</h1>
+  <p>Khung truyền thông cho summit AI ecommerce đầu tiên ở APAC. 250 curated attendees · 6 markets · 5 phases · 23 kênh · 8 pillars · 20 rủi ro · ~16 tuần.</p>
+  <div class="meta">
+    <span><strong>Event:</strong> 17/09/2026 · Gem Center · HCM</span>
+    <span><strong>Target:</strong> 250 attendees · ~60% intl</span>
+    <span><strong>Tagline:</strong> "The Future of AI-Powered Ecommerce"</span>
+    <span><strong>Source:</strong> Google Sheets Master Plan</span>
+  </div>
+</div>
+
+<!-- ============ 00 EXECUTIVE ============ -->
+<section id="executive">
+  <h2><span class="ord">00</span>Executive Summary</h2>
+  <p class="lead">Snapshot toàn bộ campaign — số mục tiêu chính, risk level, và tình trạng owner gaps.</p>
+
+  <div class="stats">
+    <div class="stat info"><div class="v">250</div><div class="l">Confirmed attendees</div></div>
+    <div class="stat info"><div class="v">6</div><div class="l">Markets APAC</div></div>
+    <div class="stat info"><div class="v">12+</div><div class="l">Speakers target</div></div>
+    <div class="stat info"><div class="v">5</div><div class="l">Phases (P1→P5)</div></div>
+    <div class="stat success"><div class="v">23</div><div class="l">Kênh truyền thông</div></div>
+    <div class="stat success"><div class="v">8</div><div class="l">Content pillars</div></div>
+    <div class="stat warning"><div class="v">20</div><div class="l">Risks identified</div></div>
+    <div class="stat danger"><div class="v">60+</div><div class="l">Ô owner đang TRỐNG</div></div>
+  </div>
+
+  <div class="info-box danger">
+    <div class="info-box-title">🔴 3 Blocker phải fix ngay (P0)</div>
+    <div class="info-box-body">
+      <strong>1. Owner/PIC trống 100%</strong> trên Risk Register, KPI Dashboard, Funnel, 23 Channels — không ai accountable.<br/>
+      <strong>2. Timeline phase mâu thuẫn</strong> giữa 3 bảng (P1 = 15/6 vs 28/5 vs 1/7) — team sẽ confused.<br/>
+      <strong>3. Country Lead CN & PH chưa confirm</strong>, ShopOS alignment đã quá deadline 31/5.
+    </div>
+  </div>
+
+  <div class="info-box warn">
+    <div class="info-box-title">🟡 4 Gap quan trọng (P1)</div>
+    <div class="info-box-body">
+      <strong>4.</strong> Budget tổng chưa có (chỉ có spend per market). · <strong>5.</strong> Risk Group 4 (Team/Ops) bị thiếu. · <strong>6.</strong> Content calendar tuần chưa có. · <strong>7.</strong> Plan A/B cho Meta-TikTok confirm chưa document rõ.
+    </div>
+  </div>
+
+  <div class="info-box success">
+    <div class="info-box-title">✅ Điểm mạnh có thể leverage</div>
+    <div class="info-box-body">
+      Insight cốt lõi rõ ("Sellers fear being left behind, not AI"). 5 hooks specific. 6 market playbook chi tiết (audience profile + activation tactic + logistics per country). 20-risk register có XS×TĐ scoring + prevention + response action. Email sequence 12 emails đã có sẵn.
+    </div>
+  </div>
+
+  <h3>Phân bổ rủi ro theo điểm XS×TĐ</h3>
+  <div class="heatmap">
+    <div class="heatmap-cell heatmap-label">XS\TĐ</div>
+    <div class="heatmap-cell heatmap-label">1</div>
+    <div class="heatmap-cell heatmap-label">2</div>
+    <div class="heatmap-cell heatmap-label">3</div>
+    <div class="heatmap-cell heatmap-label">4</div>
+    <div class="heatmap-cell heatmap-label">5</div>
+
+    <div class="heatmap-cell heatmap-label">5</div>
+    <div class="heatmap-cell h-low">5</div>
+    <div class="heatmap-cell h-med">10</div>
+    <div class="heatmap-cell h-hi">15</div>
+    <div class="heatmap-cell h-hi">20</div>
+    <div class="heatmap-cell h-hi">25</div>
+
+    <div class="heatmap-cell heatmap-label">4</div>
+    <div class="heatmap-cell h-low">4</div>
+    <div class="heatmap-cell h-med">8</div>
+    <div class="heatmap-cell h-med">12</div>
+    <div class="heatmap-cell h-hi">R01, R08</div>
+    <div class="heatmap-cell h-hi">20</div>
+
+    <div class="heatmap-cell heatmap-label">3</div>
+    <div class="heatmap-cell h-low">3</div>
+    <div class="heatmap-cell h-med">R03</div>
+    <div class="heatmap-cell h-med">R18</div>
+    <div class="heatmap-cell h-med">R02,R06,R07,R09,R10,R11,R19</div>
+    <div class="heatmap-cell h-hi">R04, R05</div>
+
+    <div class="heatmap-cell heatmap-label">2</div>
+    <div class="heatmap-cell h-low">2</div>
+    <div class="heatmap-cell h-low">4</div>
+    <div class="heatmap-cell h-low">6</div>
+    <div class="heatmap-cell h-med">R16, R20</div>
+    <div class="heatmap-cell h-med">R15, R17</div>
+
+    <div class="heatmap-cell heatmap-label">1</div>
+    <div class="heatmap-cell h-low">1</div>
+    <div class="heatmap-cell h-low">2</div>
+    <div class="heatmap-cell h-low">3</div>
+    <div class="heatmap-cell h-low">4</div>
+    <div class="heatmap-cell h-low">5</div>
+  </div>
+  <p class="lead" style="font-size:12px;margin-top:8px;">XS = Xác suất · TĐ = Tác động · Đỏ ≥12, vàng 7–11, xanh ≤6</p>
+</section>
+
+<!-- ============ 01 GAPS ============ -->
+<section id="gaps">
+  <h2><span class="ord">01</span>Gaps & Action Items</h2>
+  <p class="lead">10 hành động ưu tiên — bổ sung từ rà soát logic. Sắp xếp theo prio (đỏ = blocker phải làm trong 7 ngày).</p>
+
+  <div class="action-item">
+    <div class="ai-prio">1</div>
+    <div class="ai-body">
+      <div class="ai-title">Gán PIC/Owner cho 100% items đang trống</div>
+      <div class="ai-desc">Risk Register (20), KPI Dashboard (14), Ticket Funnel (6 stages), 23 Channels. Đề xuất dùng RACI template ở section 14 → mỗi item có Responsible + Accountable rõ.</div>
+      <div class="ai-meta">⏱ Deadline: 09/06 · Owner: Jessi (head) + Chris (review)</div>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="ai-prio">2</div>
+    <div class="ai-body">
+      <div class="ai-title">Reconcile timeline phase</div>
+      <div class="ai-desc">Chọn 1 hệ thống dating thống nhất. Đề xuất chuẩn: <span class="phase-pill phase-p1">P1 28/5–15/6 Warming Up</span> · <span class="phase-pill phase-p2">P2 16/6–31/7 Blooming</span> · <span class="phase-pill phase-p3">P3 1/8–16/9 Peak</span> · <span class="phase-pill phase-p4">P4 17/9 Event Day</span> · <span class="phase-pill phase-p5">P5 18/9–17/10 Afterglow</span>. (Khớp với Funnel + Channel map.)</div>
+      <div class="ai-meta">⏱ Deadline: 05/06 · Owner: Chloe</div>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="ai-prio">3</div>
+    <div class="ai-body">
+      <div class="ai-title">Confirm Country Lead CN + PH</div>
+      <div class="ai-desc">CN: cần native ZH speaker — Sunny đảm nhận ZH channel nhưng vẫn cần CN local lead. PH: đang là Chloe outreach + PH alumni 2025 (xác nhận lại). Điền vào Market Target table.</div>
+      <div class="ai-meta">⏱ Deadline: 09/06 (sớm hơn deadline gốc 30/6) · Owner: Chris</div>
+    </div>
+  </div>
+
+  <div class="action-item">
+    <div class="ai-prio">4</div>
+    <div class="ai-body">
+      <div class="ai-title">ShopOS Alignment Meeting (đã quá deadline 31/5)</div>
+      <div class="ai-desc">Escalate ngay — Chris founder-to-founder. Nếu không confirm deliverables trước 15/6 → treat ShopOS as logo partner only, GemPages chạy plan độc lập.</div>
+      <div class="ai-meta">⏱ Deadline: 06/06 · Owner: Chris</div>
+    </div>
+  </div>
+
+  <div class="action-item med">
+    <div class="ai-prio">5</div>
+    <div class="ai-body">
+      <div class="ai-title">Bóc tách Budget tổng</div>
+      <div class="ai-desc">Hiện chỉ có spend per market (~$1.5K paid ads). Cần thêm: PR retainer, design freelance backup, KOL gifts, welcome kit, travel reimburse (sponsors/speakers), contingency 10%. Xem template ở section 15.</div>
+      <div class="ai-meta">⏱ Deadline: 12/06 · Owner: Chloe + Jessi approve</div>
+    </div>
+  </div>
+
+  <div class="action-item med">
+    <div class="ai-prio">6</div>
+    <div class="ai-body">
+      <div class="ai-title">Thêm Risk Group 4 — Team & Operations</div>
+      <div class="ai-desc">Hiện có Nhóm 1,2,3,5,6 — thiếu 4. Đề xuất R12 Team burnout P3, R13 Key person dependency (Chris bottleneck), R14 Approval flow chậm. Crisis quick-response đã có "Team burnout P3" — chuyển vào register chính.</div>
+      <div class="ai-meta">⏱ Deadline: 12/06 · Owner: Jessi</div>
+    </div>
+  </div>
+
+  <div class="action-item med">
+    <div class="ai-prio">7</div>
+    <div class="ai-body">
+      <div class="ai-title">Tạo Weekly Content Calendar</div>
+      <div class="ai-desc">Plan hiện theo Phase × Pillar nhưng thiếu Mon/Tue/Wed schedule. Tú Vân không thể batch design 30 templates nếu không có calendar. Template ở section 16.</div>
+      <div class="ai-meta">⏱ Deadline: 19/06 · Owner: Christine + Chloe</div>
+    </div>
+  </div>
+
+  <div class="action-item med">
+    <div class="ai-prio">8</div>
+    <div class="ai-body">
+      <div class="ai-title">Document Plan A/B cho Meta + TikTok confirm</div>
+      <div class="ai-desc">Internal check 15/6. Cần 2 messaging draft sẵn: (A) Confirmed → Meta/TikTok = primary PR hook; (B) Not confirmed → East-West crossover = primary hook. Tránh kẹt khi tin về sát ngày.</div>
+      <div class="ai-meta">⏱ Deadline: 15/06 · Owner: Chris</div>
+    </div>
+  </div>
+
+  <div class="action-item low">
+    <div class="ai-prio">9</div>
+    <div class="ai-body">
+      <div class="ai-title">Speaker Tracker + Sponsor Pipeline (bảng riêng)</div>
+      <div class="ai-desc">Plan hiện không có bảng theo dõi 12 speaker targets (status: invited/confirmed/declined/no-response) và sponsor LOI status. Template sẵn ở section 17+18.</div>
+      <div class="ai-meta">⏱ Deadline: 16/06 · Owner: Christine</div>
+    </div>
+  </div>
+
+  <div class="action-item low">
+    <div class="ai-prio">10</div>
+    <div class="ai-body">
+      <div class="ai-title">Baseline ShopX 2025 → validate "5x growth" target</div>
+      <div class="ai-desc">Plan target 250 attendees ~5x so với 2025 (50+ brands). Cần baseline data 2025 cụ thể: total attendance, intl %, email open rate, reach để đánh giá target có realistic không, hay phải re-scope.</div>
+      <div class="ai-meta">⏱ Deadline: 23/06 · Owner: Jessi + Chloe</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 RATIONALE ============ -->
+<section id="rationale">
+  <h2><span class="ord">02</span>Cơ sở đề xuất</h2>
+  <p class="lead">Tại sao ShopX 2026 cần kế hoạch truyền thông bài bản hơn 2025.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">🌏 Cơ hội thị trường</div>
+      <div class="card-body">AI adoption trong ecommerce đang accelerating khắp APAC. Sellers adopt AI tools nhanh nhưng <strong>không có quality practical learning venue</strong>. Không có event nào ở SEA chuyên về AI cho ecommerce. ShopX 2026 có <strong>first-mover window</strong> để own positioning này trước khi đối thủ chiếm.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">🎯 Insight truyền thông cốt lõi</div>
+      <div class="card-body"><strong>"Sellers do not fear AI — they fear being left behind by competitors who are already using it."</strong> Competitive fear là emotional lever chính cho mọi messaging. <strong>Live AI demos</strong> là conversion hook mạnh nhất, không phải abstract keynote content. ShopX 2025 đã prove format này tạo real outcomes — dùng aggressively trong 2026.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 GOALS ============ -->
+<section id="goals">
+  <h2><span class="ord">03</span>3 mục tiêu chiến dịch</h2>
+  <p class="lead">3 mục tiêu chi phối mọi quyết định truyền thông.</p>
+
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-title"><span class="badge info">01</span> Xây dựng nhận thức</div>
+      <div class="card-body">Position ShopX 2026 là <strong>#1 AI ecommerce summit ở APAC</strong>. Mỗi người trong industry phải nghe ShopX ít nhất <strong>3 lần trước 17/9</strong>.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge info">02</span> Thu hút đơn đăng ký chất lượng</div>
+      <div class="card-body"><strong>200–250 curated attendees</strong> đúng người. Serious operators, real revenue, real intent apply AI, real BFCM stakes.</div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="badge info">03</span> Xây dựng cộng đồng dài hạn</div>
+      <div class="card-body">Chuyển ShopX từ event 1 lần thành <strong>hệ sinh thái APAC sống động</strong>. Attendees quay lại 2027, giới thiệu bạn bè, promote tự nguyện.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 AUDIENCE ============ -->
+<section id="audience">
+  <h2><span class="ord">04</span>3 phân khúc audience</h2>
+  <p class="lead">3 nhóm với profile, pain point và cách tiếp cận riêng biệt.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Phân khúc</th><th>Demographics + Geo</th><th>Tâm lý + Hành vi</th><th>Pain Point + Trigger</th><th>Vai trò</th>
+      </tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>A1 ECOMMERCE SELLERS</strong><br/><span class="badge danger">PRIMARY</span></td>
+          <td>26–42, $100K–$10M/năm. Store Owner, DTC Founder, Ecom Manager. 55% nam / 45% nữ. VN (HCM Q1/Q3/Bình Thạnh, HN Cầu Giấy) · SG (CBD, Tampines) · MY (KL, Penang) · PH (Makati, BGC, Cebu) · CN (Quảng Châu, Thâm Quyến, Thượng Hải, HK) · IN (Bangalore, Mumbai, Delhi)</td>
+          <td>Học qua community + peer recommendation. Tin người đã làm hơn brand account. Driven bởi FOMO. Scroll FB groups buổi tối, check LI buổi sáng. Quyết định: 2–5 ngày sau khi nghe từ đúng người.</td>
+          <td><strong>Pain:</strong> "Biết AI quan trọng nhưng không biết bắt đầu từ đâu." Muốn được dạy bài bản cách dùng + vận hành cùng AI.</td>
+          <td>Mua vé · Tạo UGC · Cộng đồng cốt lõi · Quay lại 2027</td>
+        </tr>
+        <tr>
+          <td><strong>A2 AGENCY + APP ECOSYSTEM</strong><br/><span class="badge warn">SECONDARY</span></td>
+          <td>28–45, ARR $500K–$50M. Founder, CEO, VP Partnerships, App Dev. 65% nam / 35% nữ. IN (Bangalore — Shopify app dev hub #1 APAC), SG (One-North, CBD), VN (HCM startup ecosystem), AU (Sydney Shopify Plus partners).</td>
+          <td>Đang mở rộng thị trường APAC, xem ShopX là điểm vào chất lượng nhất. Active LinkedIn, đọc TechInAsia. CEO/Founder quyết định ngân sách. Lead time ký HĐ: 3–6 tháng.</td>
+          <td><strong>Pain:</strong> Khó tiếp cận premium APAC sellers tập trung 1 điểm. Cần demo trực tiếp với decision-maker thật.<br/><strong>Trigger:</strong> Danh sách 200 curated sellers, ROI proof sponsor 2025, warm intro từ Chris/Arvind.</td>
+          <td>Doanh thu sponsor · Pool diễn giả · Case study sau event</td>
+        </tr>
+        <tr>
+          <td><strong>A3 BUILDERS + INNOVATORS</strong><br/><span class="badge muted">TERTIARY</span></td>
+          <td>22–38, solo hoặc &lt;5 người. Indie Hacker, App Dev, AI Engineer. 75% nam / 25% nữ. Cụm: Bali/Singapore, Bangalore, HCM.</td>
+          <td>Tư duy build-first, học bằng cách làm. Tin founder-to-founder hơn brand. Cần tiếp cận sellers thật để validate AI sản phẩm. Active trên X/Twitter, Threads, Reddit r/shopify, IndieHackers.</td>
+          <td><strong>Pain:</strong> Build AI tools cho ecommerce nhưng thiếu platform demo cho đúng audience.<br/><strong>Trigger:</strong> Track E cho builders. Speaker được dev/indie community tôn trọng. Chris Koh trên X nói về building with AI.</td>
+          <td>Audience Track E · YouTube SEO long-tail · Builder track 2027</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 05 TAGLINE + HOOKS ============ -->
+<section id="tagline">
+  <h2><span class="ord">05</span>Tagline + 5 Hooks</h2>
+  <p class="lead">Thông điệp chính + 5 lý do để bay đến Saigon.</p>
+
+  <div class="info-box">
+    <div class="info-box-title">TAGLINE CHÍNH</div>
+    <div class="info-box-body" style="font-size:18px;font-weight:700;color:var(--text);">"The Future of AI-Powered Ecommerce"</div>
+  </div>
+
+  <h3>Why Fly to Saigon for ShopX 2026</h3>
+  <div class="grid grid-2">
+    <div class="card"><div class="card-title">🏛 HOOK 1 — The Room You Can't Find Anywhere Else</div><div class="card-body">250 curated Shopify operators từ 6 APAC markets. Không phải random attendees — people with real revenue, real stores, real BFCM pressure. This room only exists once a year. In Saigon. September 17.</div></div>
+    <div class="card"><div class="card-title">⚡ HOOK 2 — Live AI Demos</div><div class="card-body">Mỗi session đều có live AI demo. Xem AI build landing page, write ad copy, automate ops — trong real time. Bạn ra về với <strong>workflow, không chỉ idea</strong>.</div></div>
+    <div class="card"><div class="card-title">🔥 HOOK 3 — The BFCM 2026 Playbook</div><div class="card-body">BFCM 2026 bắt đầu &lt;90 ngày từ 17/9. ShopX là <strong>last chance to learn, adapt, implement AI tools</strong> trước revenue season quan trọng nhất năm.</div></div>
+    <div class="card"><div class="card-title">🌐 HOOK 4 — East Meets West APAC Crossover</div><div class="card-body">Event duy nhất ở APAC có <strong>Chinese-speaking + English-speaking sellers cùng phòng</strong>. CN cross-border + SEA DTC + IN app builders. Connections không thể tạo ở nơi khác.</div></div>
+    <div class="card"><div class="card-title">🌅 HOOK 5 — Saigon Is Worth the Trip</div><div class="card-body">Sau summit: Saigon River Cruise với VIP speakers. Sau đó weekend ở thành phố vibrant nhất VN. Extend trip đến Vũng Tàu, Đà Lạt, hoặc Phú Quốc. ShopX = lý do bạn finally visit.</div></div>
+  </div>
+</section>
+
+<!-- ============ 06 TIMELINE ============ -->
+<section id="timeline">
+  <h2><span class="ord">06</span>Phase Timeline (5)</h2>
+  <p class="lead">5 phase truyền thông — từ Warming Up đến Afterglow. <strong>Chuẩn dating đã reconcile</strong> theo Funnel + Channel map.</p>
+
+  <div class="gap-flag">
+    <strong>⚠ Đã reconcile timeline:</strong> Phase header gốc ghi P1 = 15/6–30/6 nhưng Channel map + Funnel ghi P1 = 28/5–15/6. Dashboard này dùng chuẩn <strong>Channel map + Funnel</strong> (chi tiết hơn). Cần sync lại sheet gốc.
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-phase">
+      <div class="ph-label">P1 · Warming Up</div>
+      <div class="ph-name">Brand Story</div>
+      <div class="ph-date">28/05 – 15/06</div>
+      <div class="ph-goal">Recall 2025, seed identity 2026, activate community. Build credibility before selling.</div>
+    </div>
+    <div class="timeline-phase">
+      <div class="ph-label">P2 · Blooming</div>
+      <div class="ph-name">Education + Speakers</div>
+      <div class="ph-date">16/06 – 31/07</div>
+      <div class="ph-goal">Landing live, education builds trust, speaker reveals, Early Bird Free opens.</div>
+    </div>
+    <div class="timeline-phase">
+      <div class="ph-label">P3 · Peak</div>
+      <div class="ph-name">FOMO + Paid Tickets</div>
+      <div class="ph-date">01/08 – 16/09</div>
+      <div class="ph-goal">All-out FOMO, paid ticket, all-hands partner activation, countdown to sold out.</div>
+    </div>
+    <div class="timeline-phase">
+      <div class="ph-label">P4 · Event Day</div>
+      <div class="ph-name">Maximize Earned</div>
+      <div class="ph-date">17/09</div>
+      <div class="ph-goal">Maximize earned media. WhatsApp = primary channel ngày 17/9. Chloe 100% social.</div>
+    </div>
+    <div class="timeline-phase">
+      <div class="ph-label">P5 · Afterglow</div>
+      <div class="ph-name">Momentum 2027</div>
+      <div class="ph-date">18/09 – 17/10</div>
+      <div class="ph-goal">Tận dụng momentum, giữ chân community quanh năm 2027. Begin 2027 conversation.</div>
+    </div>
+  </div>
+
+  <h3>Critical milestones theo phase</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mốc</th><th>Phase</th><th>Mô tả</th><th>Status</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr><td>31/05</td><td><span class="phase-pill phase-p1">P1</span></td><td>ShopOS Alignment meeting (HARD deadline)</td><td><span class="badge danger">QUÁ HẠN</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>Tuần đầu P1</td><td><span class="phase-pill phase-p1">P1</span></td><td>Nộp WeChat Official Account application</td><td><span class="badge warn">PENDING</span></td><td>Sunny (gợi ý)</td></tr>
+        <tr><td>15/06</td><td><span class="phase-pill phase-p1">P1</span></td><td>Internal check Meta/TikTok response từ EFE</td><td><span class="badge warn">PENDING</span></td><td>Chris (gợi ý)</td></tr>
+        <tr><td>16/06</td><td><span class="phase-pill phase-p2">P2</span></td><td>Landing Page live + LinkedIn Event tạo</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>30/06</td><td><span class="phase-pill phase-p2">P2</span></td><td>CN + PH Country Lead confirm · Shopify APAC decision · 4+ speakers confirmed (30%)</td><td><span class="badge info">PENDING</span></td><td>Chris (gợi ý)</td></tr>
+        <tr><td>01/07</td><td><span class="phase-pill phase-p2">P2</span></td><td>Early Bird Free opens · Email 1 sent</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>10/07</td><td><span class="phase-pill phase-p2">P2</span></td><td>≥4 speakers confirmed (warning trigger R08)</td><td><span class="badge info">PENDING</span></td><td>Christine (gợi ý)</td></tr>
+        <tr><td>31/07</td><td><span class="phase-pill phase-p2">P2</span></td><td>Early Bird Free đóng · 150 approved</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>01/08</td><td><span class="phase-pill phase-p3">P3</span></td><td>Paid ticket opens ($49 VN / $99 Intl)</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>11/08</td><td><span class="phase-pill phase-p3">P3</span></td><td>All-Hands Week brief gửi đi cho mọi partners</td><td><span class="badge info">PENDING</span></td><td>Christine (gợi ý)</td></tr>
+        <tr><td>15/08</td><td><span class="phase-pill phase-p3">P3</span></td><td>Apply ≥125 (50% target — trigger emergency nếu miss)</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>25–31/08</td><td><span class="phase-pill phase-p3">P3</span></td><td>All-Hands Week — toàn bộ speakers + sponsors + partners post</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>~10/09</td><td><span class="phase-pill phase-p3">P3</span></td><td>SOLD OUT target — open 2027 interest list</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>15/09</td><td><span class="phase-pill phase-p3">P3</span></td><td>Technical rehearsal at Gem Center (T-48h)</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+        <tr><td>17/09</td><td><span class="phase-pill phase-p4">P4</span></td><td>EVENT DAY · WhatsApp primary · Kallie 7:30am–10pm</td><td><span class="badge info">PENDING</span></td><td>Kallie (gợi ý)</td></tr>
+        <tr><td>17/10</td><td><span class="phase-pill phase-p5">P5</span></td><td>Email 12 (30 ngày sau): "bạn đang áp dụng gì?"</td><td><span class="badge info">PENDING</span></td><td><span class="no-owner">NEEDS OWNER</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 07 MARKETS ============ -->
+<section id="markets">
+  <h2><span class="ord">07</span>Markets (6)</h2>
+  <p class="lead">6 thị trường APAC — apply target, country lead, biggest risk, backup plan. <strong>Country Lead đã merge từ playbook chi tiết</strong> (sheet gốc bảng tổng để trống).</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Market</th><th>Apply</th><th>Confirm</th><th>% Total</th><th>Priority</th><th>Country Lead</th><th>Main Channel</th><th>Biggest Risk</th><th>Backup Plan</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>🇻🇳 <strong>Vietnam</strong></td><td class="num">80+</td><td class="num">70+</td><td class="num">~30%</td>
+          <td><span class="badge critical">CRITICAL</span></td>
+          <td>Chloe + Kallie</td>
+          <td>FB groups + Email</td>
+          <td>VN sellers hesitant pay $49 (suggest VND pricing)</td>
+          <td>Free ticket cho top VN brands + community admin trade</td>
+        </tr>
+        <tr>
+          <td>🇸🇬 <strong>Singapore</strong></td><td class="num">25+</td><td class="num">20+</td><td class="num">~20%</td>
+          <td><span class="badge high">HIGH</span></td>
+          <td>Arvind (primary) + Agency partner SG</td>
+          <td>LinkedIn + Arvind network</td>
+          <td>SG có nhiều event options — why fly to VN?</td>
+          <td>ROI framing: $99 + $120 flight &lt; 1 paid customer từ BFCM</td>
+        </tr>
+        <tr>
+          <td>🇮🇳 <strong>India</strong></td><td class="num">25+</td><td class="num">20+</td><td class="num">~20%</td>
+          <td><span class="badge high">HIGH</span></td>
+          <td>Arvind (critical primary champion)</td>
+          <td>Arvind personal network</td>
+          <td>IN app builders không tự nhận là "ecom sellers"</td>
+          <td>Position Track E explicitly: "For IN Shopify app builders"</td>
+        </tr>
+        <tr>
+          <td>🇨🇳 <strong>China/HK</strong></td><td class="num">20+</td><td class="num">15+</td><td class="num">~15%</td>
+          <td><span class="badge medium">MEDIUM</span></td>
+          <td>Sunny (ZH channel) + <span class="no-owner">CN local lead TBD</span></td>
+          <td>WeChat + Xiaohongshu</td>
+          <td>ZH channel cần native speaker — chưa có CN local</td>
+          <td>Hire ZH community manager hoặc partner CN KOL</td>
+        </tr>
+        <tr>
+          <td>🇲🇾 <strong>Malaysia</strong></td><td class="num">20+</td><td class="num">15+</td><td class="num">~15%</td>
+          <td><span class="badge medium">MEDIUM</span></td>
+          <td>Sunny (primary) + KL Shopify admin</td>
+          <td>FB groups + WeChat</td>
+          <td>POD angle có thể weak alone</td>
+          <td>Add general Shopify AI angle cho MY non-POD sellers</td>
+        </tr>
+        <tr>
+          <td>🇵🇭 <strong>Philippines</strong></td><td class="num">15+</td><td class="num">10+</td><td class="num">~10%</td>
+          <td><span class="badge lower">LOWER</span></td>
+          <td>Chloe (outreach) + PH alumni 2025</td>
+          <td>Facebook groups PH</td>
+          <td>PH sellers lower budget — $99 may be barrier</td>
+          <td>Lower PH price → $49 nếu intl conversion thấp by 1/8</td>
+        </tr>
+        <tr style="background: var(--surface-3); font-weight: 700;">
+          <td><strong>TOTAL INTL</strong></td><td class="num">185+</td><td class="num">150+</td><td class="num">~60%</td>
+          <td>—</td><td>—</td><td>All channels</td>
+          <td>No country lead for CN local là critical gap</td>
+          <td>Confirm CN local lead by 30/6</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Market Playbook — Snapshot per market</h3>
+  <div class="grid grid-2">
+
+    <div class="card">
+      <div class="card-title">🇻🇳 Vietnam — Home Base + Foundation</div>
+      <div class="card-body">
+        <strong>Profile:</strong> VND 500M–$1M USD revenue · 24–38 · HCM Q1/Q3/Bình Thạnh, HN Cầu Giấy · Vietnamese primary, EN working level<br/>
+        <strong>Lý do:</strong> Event IN THEIR CITY · AI urgent vì pressure CN · GemPages home market · Chris Koh known + trusted ở VN Shopify community<br/>
+        <strong>Trigger:</strong> "Đây là sự kiện AI ecommerce đầu tiên ở Việt Nam có giá trị quốc tế. Và nó diễn ra ngay tại Sài Gòn."<br/>
+        <strong>Channels:</strong> EFE · Shopify VN (Phú/Vinh/Linh Thạch/Quang) · GemPages FB page · GemPages email · Chris Koh personal · Meta Ads VN $300-400 P1-P3<br/>
+        <strong>Logistics:</strong> HCM = no travel · HN→HCM Vietjet ~VND 500-800K, 2hr · VND pricing trên landing<br/>
+        <strong>KPI:</strong> 80+ apply · 70+ confirmed · HCM sellers 50+ · HN sellers 20+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🇸🇬 Singapore — Primary Intl Market</div>
+      <div class="card-body">
+        <strong>Profile:</strong> SGD 500K–$10M+ · 28–42 EN-speaking · Shopify/Woo · CBD/Jurong/Tampines · ROI-focused<br/>
+        <strong>Lý do:</strong> Network 250 APAC sellers · Live AI demos relevant Shopify/DTC · VN market insight · Saigon weekend trip<br/>
+        <strong>Trigger:</strong> "Join the room where SG's top Shopify brands figure out AI before BFCM 2026"<br/>
+        <strong>Channels:</strong> LinkedIn SG · Shopify SG community · Agency partner SG · Arvind network · LinkedIn Ads + Meta Ads $200-300<br/>
+        <strong>Logistics:</strong> SQ/Scoot/VietJet SIN→SGN ~$100-150 return, 2hr · VN e-visa required · Pullman/Sofitel Q1<br/>
+        <strong>KPI:</strong> 25+ apply · 20+ confirmed · 25-30% intl · First batch within 72h of Early Bird
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🇮🇳 India — Shopify App Partner Hub</div>
+      <div class="card-body">
+        <strong>Profile:</strong> Shopify app ARR $100K–$10M · 26–38 EN · Bangalore Koramangala, Mumbai, Hyderabad · Building FOR Shopify (Judge.me, PushOwl, Recharge từ IN)<br/>
+        <strong>Lý do:</strong> Arvind là trust signal · Shopify app founders cần APAC seller access · Track E directly relevant · ShopX 2025 IN alumni<br/>
+        <strong>Trigger:</strong> "250 serious Shopify sellers from 6 markets. All in one room. For IN app builders, this is your APAC launch pad."<br/>
+        <strong>Channels:</strong> LinkedIn IN (Shopify Partner, App Dev) · Arvind personal · PushOwl/Brevo warm intro · LinkedIn Ads IN $150-200<br/>
+        <strong>Logistics:</strong> IndiGo/Vistara BLR/BOM→SGN 4-5hr, ~INR 15-25K · VN e-visa required · ibis/Novotel Q1<br/>
+        <strong>KPI:</strong> 25+ apply · 20+ confirmed · 20-25% intl · App ecosystem 10+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🇨🇳 China/HK — Cross-Border Power Market</div>
+      <div class="card-body">
+        <strong>Profile:</strong> CNY 1M–$5M USD cross-border · 26–40 Mandarin · 广州/深圳/上海/香港 · Shopify + AliExpress/SHEIN pipeline<br/>
+        <strong>Lý do:</strong> AI for cross-border (product copy, ad creation) · East-West crossover · SEA distribution network · Mandarin translation available<br/>
+        <strong>Trigger (ZH):</strong> "全球跨境卖家在西贡相聚——第一个真正把中文社区和英语电商世界连接起来的峰会"<br/>
+        <strong>Channels:</strong> WeChat Official + Xiaohongshu (Sunny) · Benny's Kuajing Shenzhen community · WeChat Ads + Xiaohongshu sponsored $500-800 P3<br/>
+        <strong>Logistics:</strong> 广州/深圳→SGN 3-4hr ~RMB 1.5-2.5K · HK→SGN 2hr HKD 1.5-2K · Sofitel/Pullman · 全程普通话同声传译<br/>
+        <strong>KPI:</strong> 20+ apply · 15+ confirmed · 15-20% intl · ZH content 2K+/post Xiaohongshu
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🇲🇾 Malaysia — Strong Potential</div>
+      <div class="card-body">
+        <strong>Profile:</strong> MYR 300K–$3M+ · 26–40 EN+ZH bilingual · KL Bukit Bintang/PJ, Penang, JB · POD strong (Printful/Printify)<br/>
+        <strong>Lý do:</strong> POD + AI direct relevance (Track D) · Bilingual EN/ZH community · Cross-border SG/AU/US · MY → VN proximity (2hr)<br/>
+        <strong>Trigger:</strong> "Track D was built for POD sellers like you. And it's only in Saigon on Sept 17."<br/>
+        <strong>Channels:</strong> KL Shopify admin · FB Groups MY ecom · Xiaohongshu MY ZH · EFE cross-promo · Meta Ads + Xiaohongshu $100-150<br/>
+        <strong>Logistics:</strong> AirAsia KUL→SGN 2hr ~MYR 300 · VN e-visa required · ibis/Mercure Q1<br/>
+        <strong>KPI:</strong> 20+ apply · 15+ confirmed · 15-20% intl · ZH-speaking MY ≥5
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🇵🇭 Philippines — Emerging TikTok Commerce</div>
+      <div class="card-body">
+        <strong>Profile:</strong> PHP 1M–$500K USD · 24–38 EN-proficient · TikTok Shop → Shopify · Makati BGC, Cebu · Fast-growing<br/>
+        <strong>Lý do:</strong> AI for TikTok + Shopify hybrid · APAC network access · EN content comfortable · PH alumni 2025 social proof · <strong>VN visa-free for PH</strong><br/>
+        <strong>Trigger:</strong> "PH sellers are going global. ShopX 2026 is where you build the connections to make it happen."<br/>
+        <strong>Channels:</strong> FB Groups PH ecom · LinkedIn PH · Klaviyo/Triple Whale PH warm intro · Meta Ads PH $100<br/>
+        <strong>Logistics:</strong> Cebu Pacific/PAL MNL→SGN 2.5hr ~PHP 3-5K · <strong>VN VISA-FREE 30 ngày cho PH</strong> · Budget hotels Q1 ~$50-70<br/>
+        <strong>KPI:</strong> 15+ apply · 10+ confirmed · 10-15% intl · PH alumni 2025 ambassadors 2+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ 08 CHANNELS ============ -->
+<section id="channels">
+  <h2><span class="ord">08</span>Channels (23)</h2>
+  <p class="lead">Bản đồ 23 kênh — Owned + Internal · Paid Media · Earned Media · Partnership.</p>
+
+  <h3>OWNED + INTERNAL — Nền tảng toàn bộ chiến dịch</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kênh</th><th>Mục tiêu</th><th>KPI</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Facebook Page</strong> · GemPages Brand · 4K followers</td>
+          <td>Mass reach VN + APAC ecom community. Content 40% edu / 30% social proof / 20% event / 10% BTS. Không promotion trước education.</td>
+          <td>Reach 1K+ P2 / 2K+ P3 · Apply 150+ · Stories views 800+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>LinkedIn Page</strong> · 1K+ followers · LinkedIn Event</td>
+          <td>B2B, sponsors, founders IN/SG/AU. Thought leadership. LinkedIn Event Page tạo 16/6.</td>
+          <td>Reach 2K+/bài · Engagement &gt;4% · LI Event RSVPs 500+ · Apply LI 80+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>Instagram</strong> · GemPages Brand</td>
+          <td>Visual + Saigon Experience. Primary cho MY/PH audience.</td>
+          <td>Stories 400+ views · Reels 1K+ views · Speaker collab posts = free cross-reach</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>X / Twitter + Threads</strong> · Brand</td>
+          <td>Real-time AI commentary + builder. Brand account amplify Chris trong 30 phút.</td>
+          <td>5K+ impressions/bài · Brand = amplifier</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>YouTube</strong> · GemPages Channel</td>
+          <td>SEO asset 12+ tháng. Title format: [Tên speaker] [Topic cụ thể] ShopX 2026.</td>
+          <td>Pre-event 500+ · Recordings 300+/session · SEO compound 12+ tháng</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>📧 Email Marketing</strong><br/><span class="badge danger">ROI CAO NHẤT (3-8x social)</span></td>
+          <td>Gửi từ <strong>chris@gempages.net</strong> (không phải noreply). 12 emails từ Email 1 (1/7) đến Email 12 (17/10). A/B subject test BẮT BUỘC mọi send. 6 segments: GemPages users · 2025 attendees · Waitlist · Approved · Sponsors · Speakers.</td>
+          <td><strong>Open &gt;38% · CTR &gt;9% · Apply 200+ · Unsubscribe &lt;1%</strong></td>
+          <td><span class="no-owner">NEEDS OWNER</span> · Chris draft + Christine ops (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>WeChat + Xiaohongshu</strong> · CN/MY ZH</td>
+          <td>Bắt buộc cho CN cross-border + MY ZH community. <strong>Nộp WeChat application TUẦN ĐẦU — không trì hoãn.</strong></td>
+          <td>Traffic 500+/tuần P2, 1K+/tuần P3 · Conversion &gt;5%</td>
+          <td>Sunny (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>WhatsApp Groups</strong> · 4 groups</td>
+          <td>Partner/Sponsor Brief · Speaker Logistics · Attendees · VIP Delegates. <strong>Kênh DUY NHẤT ngày 17/9.</strong> Kallie monitor 7:30am–10pm.</td>
+          <td>Join rate 95%+</td>
+          <td>Kallie (gợi ý)</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>👤 Chris Koh Personal</strong> · LI/FB/X/Threads<br/><span class="badge danger">REACH CAO NHẤT</span></td>
+          <td>Kênh uy tín + engagement <strong>CAO NHẤT toàn kế hoạch</strong>. Quy trình: Christine draft → Chris chỉnh/approve → Chris đăng. LI 2+/tuần · Threads 3+/tuần.</td>
+          <td><strong>Reach P1-P5: 60K+ · LI engagement &gt;6% (avg industry 2%)</strong></td>
+          <td>Chris (writer) + Christine (calendar)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>PAID MEDIA — Khuếch đại organic, retarget warm leads</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kênh</th><th>Mục tiêu + Strategy</th><th>KPI</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Meta Ads</strong> · FB + IG</td>
+          <td>P2 soft launch VN+SG, A/B test 4 creative variants: (A) KV artwork (B) Speaker face (C) Social proof (D) FOMO copy. Kill CTR &lt;1% sau 7 ngày. P3 scale winners + mở full APAC, 70% retarget / 30% cold.</td>
+          <td>P2 CTR &gt;2% · P3 CTR &gt;3% · CPL &lt;$8 · Apply 120+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>LinkedIn Ads</strong></td>
+          <td>P2 soft launch SG+IN. Speaker face creative. LI Event page boost. P3 mở AU. Retarget LI visitors chưa apply.</td>
+          <td>CTR &gt;2% · CPL &lt;$12 · Apply LI Ads 50+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>Landing Page</strong></td>
+          <td>Hub conversion mọi kênh đều dẫn về. Build + QA P1 (speed &lt;3s, SSL, Hotjar/Clarity). Live 16/6 với Waitlist → Apply Free 1/7. A/B test CTA P2. Đổi paid CTA 1/8. Scarcity counter real-time P3.</td>
+          <td>P2 CVR &gt;3% · P3 CVR &gt;5%</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>EARNED MEDIA — Không trả tiền, earned qua chất lượng</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Kênh</th><th>Strategy</th><th>KPI</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>PR + Media</strong> · TechInAsia, e27, Vietcetera, The Drum APAC</td>
+          <td>Primary hooks ưu tiên: (1) Meta/TikTok confirm (2) First AI-native ecom summit APAC (3) East-West crossover. Personalized pitch per outlet. Vietcetera pitched first (lowest barrier). Offer exclusivity Chris interview.</td>
+          <td>Ít nhất 1 bài trước 17/9 · On-site 2 phóng viên · Nếu zero by 15/7 → Chris LI article thay</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>Speaker UGC</strong> · 12+ speakers</td>
+          <td>12+ speakers × avg 3K followers = <strong>36,000+ reach miễn phí</strong>. Hệ thống 3 sóng: Wave 1 (Steve+Arvind) · Wave 2 (giữa P2) · All-Hands Week (P3). GemPages chuẩn bị caption + visual ready-to-paste.</td>
+          <td>100% speakers post · Reach 36K+ · Apply spike +30% sau All-Hands Week</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>Attendee UGC</strong> · #ShopX2026</td>
+          <td>250 attendees × 200 followers = <strong>50,000 impressions</strong>. 4 elements: photo wall + MC announce + gamification + welcome kit brief.</td>
+          <td>UGC 50+ posts · Hashtag reach 20K+ · Photo wall = ROI cao nhất</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>Community Seeding</strong> · EFE, Shopify VN, KL/PH/CN/IN groups</td>
+          <td>Model: 1 vé VIP đổi 1 pinned + 1 personal post + 1 urgency follow-up. <strong>QUY TẮC VÀNG: viết riêng từng message cho từng group — copy-paste = phá hủy mối quan hệ vĩnh viễn.</strong></td>
+          <td>Groups seeded 8+ · Apply referral 80+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>PARTNERSHIP CHANNELS — Mạng lưới bên ngoài kích hoạt thay mặt ShopX</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Partner</th><th>Status + Strategy</th><th>KPI / Notes</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>ShopOS</strong> · Co-Organizer</td>
+          <td>Đồng tổ chức — reach audience GemPages không tự làm được. Mọi action là <strong>yêu cầu cần confirm</strong>, không phải giả định. Alignment meeting <strong>trước 31/5 — hard deadline</strong>.</td>
+          <td><span class="badge danger">⚠ ĐÃ QUÁ DEADLINE</span> · Cập nhật section này sau meeting</td>
+          <td>Chris (escalate)</td>
+        </tr>
+        <tr>
+          <td><strong>Shopify APAC</strong> · Official support target</td>
+          <td>Endorsement = highest credibility signal. Warm intro qua Avada/PageFly/Arvind. <strong>Deadline confirm/decline: 30/6.</strong> Custom pitch deck 2 selling points: (1) CN community access (2) 6-market APAC reach.</td>
+          <td>Nếu confirm → PR headline: "First AI ecom summit supported by Shopify APAC"</td>
+          <td>Chris (gợi ý)</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>Meta + TikTok</strong> · Via EFE outreach</td>
+          <td>EFE outreach ongoing. <strong>Tuyệt đối không announce cho đến khi confirm chính thức.</strong> Internal status check 15/6. Nếu confirm trước 1/7 → primary PR hook, changes media strategy entirely.</td>
+          <td><strong>⚠ Cần Plan A/B documented</strong> · Internal check 15/6 · Announce deadline: chỉ sau official confirm</td>
+          <td>Chris + Jessi</td>
+        </tr>
+        <tr>
+          <td><strong>KOL Ecommerce</strong> · 5+ KOL</td>
+          <td>KOL VN/MY/SG/PH ecom = cộng đồng sellers engaged tin hơn brand post. Outreach P2 với VIP offer. <strong>VIP + cruise đủ làm deal — không add cash.</strong></td>
+          <td>KOL posts 5+ · Collective reach 50K+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>EFE Vietnam</strong> · Community partner</td>
+          <td>Cộng đồng ecommerce lớn nhất VN — warm audience không paid ads nào thay được. Value trade: vé VIP độc quyền cho EFE members. Xử lý như partnership year-round, không one-time activation.</td>
+          <td>Referral apply 50+ · Begin 2027 conversation trong P5</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>Named Community Admins</strong> · 6+ targets</td>
+          <td>Phú (Shopify VN), Vinh (AE Shopify VN), Linh Thạch, Quang (GEC), admin KL Shopify, admin PH TikTok. Model: 2-3 vé VIP đổi 1 pinned + 1 personal + 1 urgency. <strong>Mỗi tin nhắn viết riêng cho từng group.</strong></td>
+          <td>Groups seeded 8+ · Referral apply 80+</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 09 PILLARS ============ -->
+<section id="pillars">
+  <h2><span class="ord">09</span>Content Pillars (8)</h2>
+  <p class="lead">8 trụ cột nội dung — mỗi pillar có mục tiêu, lý do chọn, triển khai cụ thể, format codes và phân bổ theo phase.</p>
+
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title"><span class="badge info">P1</span> BRAND STORY · Câu chuyện thương hiệu</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Xây niềm tin và recall ShopX 2025 trước khi bán bất cứ thứ gì.<br/>
+        <strong>Tại sao:</strong> Người mới chưa biết ShopX. Người cũ cần được nhắc giá trị. Cả hai nhóm cần thấy đây là sự kiện thật, do người thật tổ chức, đã làm được điều gì đó thật — trước khi đăng ký.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Recap ShopX 2025 carousel 8 slides (20+ experts, 50+ brands, top quotes). Caption: "Year 1 done. Year 2 sẽ khác." — không nhắc event mới.</li>
+          <li>Founder letter Chris Koh: tại sao Saigon, tại sao AI, mong đợi gì. 800-1,000 từ. LI + FB personal. Không CTA.</li>
+          <li>BTS video 60s raw — team bay vào Sài Gòn, đi Gem Center lần đầu.</li>
+          <li>Series "Tại sao ShopX": 4 posts ngắn — tại sao HCMC, tại sao AI, tại sao 250 người, tại sao 17/9.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_STORY</span> <span class="badge muted">SX_BTS</span><br/>
+        <strong>Kênh:</strong> LI Chris · FB Personal Chris · IG Stories · Threads
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P2</span> AI INSIGHT · Quan sát AI thật</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Tạo urgency bằng cách chứng minh AI đang thay đổi ecommerce ngay lúc này.<br/>
+        <strong>Tại sao:</strong> Trigger chính là sợ bị đối thủ bỏ lại, không phải sợ AI. Pillar này khai thác nỗi sợ bằng data và quan sát thật, không phải hype.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Observation posts daily (Threads/X): Chris chia sẻ 1 điều vừa thấy/test với AI. 3-5 câu, không hashtag, không CTA.</li>
+          <li>Stat carousel: "AI đang làm gì cho ecommerce APAC" — 8 slides data thật, nguồn cụ thể.</li>
+          <li>Before/After thread: Store có/không AI cùng task. Ví dụ thật từ network.</li>
+          <li>BFCM countdown angle: T-90, T-60, T-30 days to BFCM 2026.</li>
+          <li>Trend newsjack khi AI news liên quan ecom — không force.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_TREND</span> <span class="badge muted">SX_INSIGHT</span><br/>
+        <strong>Kênh:</strong> Threads · X · LI Chris · FB Brand · Blog
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P3</span> SPEAKER & PANEL · Diễn giả</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Chuyển credibility từ speaker → event. Mỗi announce reach vào network của speaker.<br/>
+        <strong>Tại sao:</strong> Người đăng ký không đến vì "AI ecommerce summit" — họ đến vì người X hoặc Y có mặt. Speaker credibility là conversion hook thật nhất.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Speaker announce stagger 3-5 ngày: headshot slide 1, tên+credential slide 2, "Demo gì cụ thể" slide 3-4, Chris quote slide 5. Caption: "Tôi muốn kể lý do tôi mời [Tên]..."</li>
+          <li>Track reveal theo outcome: "Ra về với workflow brief→landing→live trong 20 phút. Bằng AI. Trực tiếp trên sân khấu."</li>
+          <li>Mini interview 3 câu: Q1 build/scale bằng AI gì gần đây? Q2 sẽ demo gì chưa share đâu? Q3 Ai nên có mặt?</li>
+          <li>All-Hands Week 25-31/8: TẤT CẢ speakers post cùng 1 tuần.</li>
+          <li>Post-event quote cards: 1 bài/ngày × 14 ngày, tag speaker reshare.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_SPEAKER</span> <span class="badge muted">SX_TRACK</span><br/>
+        <strong>Kênh:</strong> Tất cả social · Email · LI Event · YouTube preview
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P4</span> SPONSOR SPOTLIGHT · Đối tác</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Chuyển sponsor từ logo banner thành tên người trong cộng đồng tin tưởng.<br/>
+        <strong>Tại sao:</strong> Sponsors (Klaviyo, Triple Whale, Postscript...) có customers chính xác là Shopify sellers chúng ta muốn thu hút. 1 bài từ sponsor page = paid advertising miễn phí đến perfect audience.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Sponsor announce khi ký HĐ — GemPages co-tag sponsor. Caption nêu rõ tại sao sponsor này quan trọng.</li>
+          <li>Sponsor perspective posts từ page sponsor. Cung cấp caption sẵn.</li>
+          <li>All-Hands Week: mỗi sponsor đăng activation preview.</li>
+          <li>Booth/activation reveal T-7: tiết lộ demo slots, exclusive offers, free tools.</li>
+          <li>Post-event ROI case study mỗi sponsor — template sẵn. Social proof cho 2027.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_SPONSOR</span> <span class="badge muted">SX_PARTNER</span><br/>
+        <strong>Kênh:</strong> FB Brand · LI Brand · Sponsor page · Email mention
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P5</span> EDUCATION · Dạy trước khi bán</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Dạy trước khi bán. Khi người đọc học được gì hữu ích, họ tự muốn đến học thêm.<br/>
+        <strong>Tại sao:</strong> Education = conversion tool hiệu quả nhất không cần mention event. Tỷ lệ save + share cao nhất. Bằng chứng ShopX biết mình đang nói gì.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>AI how-to carousel FB/IG 2x/tuần P2: 1 skill cụ thể, prompt thật, kết quả thật.</li>
+          <li>LI how-to posts 3x/tuần P2: 1 tip, 3-5 sentences, ví dụ thật.</li>
+          <li>YouTube tutorial 2-5 phút P2: screen recording thật, không script.</li>
+          <li>Session preview P3: announce OUTCOME, không phải speaker name.</li>
+          <li>Resource roundup P5: compile tools, prompts, frameworks — SEO dài hạn.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_EDU</span> <span class="badge muted">SX_DEMO</span> <span class="badge muted">SX_HOWTO</span><br/>
+        <strong>Kênh:</strong> FB Carousel · LI · YouTube · Blog · Email body
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P6</span> COMMUNITY & SOCIAL PROOF</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Trigger quyết định cuối cùng. Khi thấy peer đã apply, seller từ thị trường mình đã confirm, speaker mình respect sẽ có mặt — decision time giảm từ tuần xuống ngày.<br/>
+        <strong>⚠ QUY TẮC:</strong> Tất cả scarcity numbers phải là số THẬT. Không fake "50 spots left" khi còn 150.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Country flag series khi 1 market đủ confirm: "Sellers từ Singapore đã confirm. Ai tiếp theo?"</li>
+          <li>Milestone posts số thật: 50%, 80%, 95% capacity.</li>
+          <li>Attendee profile tease (không tên): "Tuần này confirm 1 DTC founder $3M/năm từ SG, 2 app builders từ BLR, 1 POD operator từ KL."</li>
+          <li>2025 testimonials video 30s — real name, real face, real revenue.</li>
+          <li>Sold Out announcement — PR moment. Open 2027 interest ngay.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_SOCIAL</span> <span class="badge muted">SX_FOMO</span> <span class="badge muted">SX_PROOF</span><br/>
+        <strong>Kênh:</strong> FB · IG Stories · Email · Landing counter · WhatsApp
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P7</span> SAIGON EXPERIENCE · Lý do bay đến</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Biến ShopX thành chuyến đi đáng thực hiện, không chỉ event đáng tham dự.<br/>
+        <strong>Tại sao:</strong> Với international audience, lý do thật để book vé thường không phải agenda — mà là tổng trải nghiệm. Saigon River Cruise + đồ ăn + community premium = trip worth taking.<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Saigon lifestyle series: ảnh Gem Center, món ăn 5 phút đi bộ, river hoàng hôn.</li>
+          <li>"Tại sao Saigon" editorial blog 800 từ — lý do thật.</li>
+          <li>Travel guide per market trong email: SG, MY, PH, CN, IN cụ thể.</li>
+          <li>Cruise teaser T-30: "Sau 8 tiếng demo, kết thúc trên sông Sài Gòn."</li>
+          <li>Weekend extension guide T-7: Vũng Tàu, Đà Lạt, hoặc Saigon weekend dining.</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_SAIGON</span> <span class="badge muted">SX_TRAVEL</span> <span class="badge muted">SX_BTS</span><br/>
+        <strong>Kênh:</strong> IG (primary) · FB Stories · Email footer · Blog · YouTube B-roll
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><span class="badge info">P8</span> PRACTICAL GUIDE · Remove friction</div>
+      <div class="card-body">
+        <strong>Mục tiêu:</strong> Convert người đang cân nhắc bằng cách remove friction thực tế. Build trust với approved attendees.<br/>
+        <strong>Tại sao:</strong> Nhiều người không đăng ký không phải vì không muốn — mà vì câu hỏi chưa được trả lời: Visa? Khách sạn? Chi phí tổng? Chuẩn bị gì?<br/>
+        <strong>Triển khai:</strong>
+        <ul class="compact">
+          <li>Visa guide per passport: PH miễn visa · SG e-visa $45 · IN e-visa step-by-step.</li>
+          <li>Budget breakdown thật: $99 vé + $60-120 hotel × 2 đêm + $120 flight = ~$400-500. Context: 1 khóa AI tốn $500-2K.</li>
+          <li>Preparation checklist T-14 cho confirmed: mang gì, app gì, kết nối ai trên LI trước.</li>
+          <li>FAQ series từ DM/comments — câu hỏi thật + trả lời thật. 2 posts/tuần P2.</li>
+          <li>"Lấy gì về từ ShopX" cụ thể: "Sau Track C: 1 AI workflow landing page, 3 prompts dùng ngay, số ĐT người làm $5M/năm."</li>
+        </ul>
+        <strong>Codes:</strong> <span class="badge muted">SX_GUIDE</span> <span class="badge muted">SX_FAQ</span> <span class="badge muted">SX_PREP</span><br/>
+        <strong>Kênh:</strong> Email (primary) · FB · LI · Landing FAQ · WhatsApp Q&A
+      </div>
+    </div>
+  </div>
+
+  <h3>Format Code Glossary (20 codes)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Code</th><th>Mô tả</th><th>Pillar</th></tr></thead>
+      <tbody>
+        <tr><td><strong>SX_STORY</strong></td><td>Brand story, hành trình, hậu trường xây event</td><td>P1</td></tr>
+        <tr><td><strong>SX_BTS</strong></td><td>Behind the scenes — raw, unpolished, humanize brand</td><td>P1, P7</td></tr>
+        <tr><td><strong>SX_INSIGHT</strong></td><td>AI observation ngắn từ Chris — data-backed</td><td>P2</td></tr>
+        <tr><td><strong>SX_TREND</strong></td><td>Newsjack khi AI/ecom news liên quan ShopX theme</td><td>P2</td></tr>
+        <tr><td><strong>SX_SPEAKER</strong></td><td>Announce diễn giả, personal endorsement từ Chris</td><td>P3</td></tr>
+        <tr><td><strong>SX_TRACK</strong></td><td>Reveal track/session theo outcome</td><td>P3</td></tr>
+        <tr><td><strong>SX_SPONSOR</strong></td><td>Announce hoặc spotlight sponsor</td><td>P4</td></tr>
+        <tr><td><strong>SX_PARTNER</strong></td><td>Content partnership (ShopOS, Shopify APAC...)</td><td>P4</td></tr>
+        <tr><td><strong>SX_EDU</strong></td><td>Education how-to, không mention event</td><td>P5</td></tr>
+        <tr><td><strong>SX_DEMO</strong></td><td>Preview session demo — outcome cụ thể</td><td>P5</td></tr>
+        <tr><td><strong>SX_HOWTO</strong></td><td>Step-by-step tutorial (carousel hoặc video)</td><td>P5</td></tr>
+        <tr><td><strong>SX_SOCIAL</strong></td><td>Social proof — country flags, attendee stats, testimonials</td><td>P6</td></tr>
+        <tr><td><strong>SX_FOMO</strong></td><td>Scarcity thật, milestone spots filled</td><td>P6</td></tr>
+        <tr><td><strong>SX_PROOF</strong></td><td>2025 testimonials, case study, ROI proof</td><td>P6</td></tr>
+        <tr><td><strong>SX_SAIGON</strong></td><td>Lifestyle, venue, city content</td><td>P7</td></tr>
+        <tr><td><strong>SX_TRAVEL</strong></td><td>Travel guide per market — visa, flight, hotel</td><td>P7, P8</td></tr>
+        <tr><td><strong>SX_GUIDE</strong></td><td>Practical guide — budget, prep, FAQ</td><td>P8</td></tr>
+        <tr><td><strong>SX_FAQ</strong></td><td>Q&A thật từ audience</td><td>P8</td></tr>
+        <tr><td><strong>SX_PREP</strong></td><td>Preparation checklist cho approved attendees</td><td>P8</td></tr>
+        <tr><td><strong>SX_RECAP</strong></td><td>Post-event recap, recordings, highlights</td><td>P5, P6, P7</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 10 FUNNEL ============ -->
+<section id="funnel">
+  <h2><span class="ord">10</span>Ticket Funnel (6 Stages)</h2>
+  <p class="lead">6 giai đoạn từ Awareness → Sold Out → 2027 pipeline.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Stage</th><th>Period</th><th>Giá</th><th>Target</th><th>Cơ chế + Key Message</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>AWARENESS</strong> <span class="badge muted">Pre-buzz</span></td>
+          <td>28/05 – 15/06</td>
+          <td>—</td>
+          <td>500+ engaged</td>
+          <td>No ticket. Build desire + name recognition. Recall 2025 → Chris Koh personal → Community seeding.<br/><em>"ShopX is back — and this year AI changes everything"</em></td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>WAITLIST</strong></td>
+          <td>16/06 – 30/06</td>
+          <td>FREE</td>
+          <td>500+ signups</td>
+          <td>Register interest. Email + profile. Landing live 16/6 + Social + Email to GemPages users + Community admin.<br/><em>"Be first to know when applications open — 250 spots only"</em></td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>EARLY BIRD FREE APPLY</strong></td>
+          <td>01/07 – 31/07</td>
+          <td>FREE</td>
+          <td>150 approved</td>
+          <td>Apply → curated review → approved. Email 1 (1/7) + Speaker announce + Community admin push + Chris personal.<br/><em>A/B: "Your free pass to ShopX" vs "250 spots. Apply free."</em></td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>PAID TICKET</strong></td>
+          <td>01/08 – 31/08</td>
+          <td>$49 VN<br/>$99 Intl</td>
+          <td>50-100 paid</td>
+          <td>Remaining slots paid. Purchased = confirmed. Email T-45 (3/8) + Social urgency + Retargeting ads.<br/><em>"What $99 gets you: 12 speakers, 5 live AI demos, Saigon River cruise, 250 curated connections"</em></td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>LAST CALL</strong></td>
+          <td>01/09 – 10/09</td>
+          <td>$49 / $99</td>
+          <td>Fill to 250</td>
+          <td>Final scarcity. <strong>Real numbers only.</strong> Daily countdown T-30→T-1 + Email T-7 + All-partner push simultaneously.<br/><em>"X spots left. BFCM 2026 is in 6 weeks. Are you ready?"</em></td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>SOLD OUT</strong></td>
+          <td>~10/09</td>
+          <td>—</td>
+          <td>2027 pipeline 300+</td>
+          <td>Announce sold out — <strong>PR moment</strong>. All channels + Chris personal + Open 2027 interest page immediately.<br/><em>"ShopX 2026 is sold out. We'll see you in 2027."</em></td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 11 RISK ============ -->
+<section id="risk">
+  <h2><span class="ord">11</span>Risk Register (20)</h2>
+  <p class="lead">20 rủi ro chia 6 nhóm với XS×TĐ scoring. <strong>Nhóm 4 (Team & Ops)</strong> được thêm mới từ rà soát logic.</p>
+
+  <div class="gap-flag">
+    <strong>⚠ Bổ sung mới:</strong> Risk Register gốc skip Nhóm 4 (đi từ 1,2,3 → 5,6). Dashboard này thêm R12-R14 vào Nhóm 4 — Team & Operations Risk, dựa trên crisis quick-response "Team burnout P3".
+  </div>
+
+  <h3>Nhóm 1 — Content & Channel Performance</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Rủi ro</th><th>XS</th><th>TĐ</th><th>Điểm</th><th>Warning Signs</th><th>Phòng ngừa (rút gọn)</th><th>Xử lý (rút gọn)</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>R01</strong></td>
+          <td>FB organic reach &lt;300/bài</td>
+          <td class="num">4</td><td class="num">4</td><td class="center"><span class="score score-16">16</span></td>
+          <td>Avg reach &lt;300 sau 3 posts · Engagement &lt;1% · 0 organic shares 7 ngày</td>
+          <td>Content batch 2 tuần trước · Chris Koh share 30 phút đầu · Pre-test creative formats $10-20</td>
+          <td>Chris share + comment 24h · Activate Arvind + 1 speaker post cùng tuần · Boost $50-100 top 2 posts · Nếu vẫn &lt;300 sau 14 ngày → pivot pure Education</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R02</strong></td>
+          <td>Email open &lt;25% 2 lần liên tiếp</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>Open &lt;25% · CTR &lt;3% · Unsubscribe &gt;1% · Spam flag &gt;0.1%</td>
+          <td>SPF/DKIM/DMARC verified · chris@gempages.net (không noreply) · A/B subject mọi send · Clean list quarterly</td>
+          <td>New subject angle · Re-check authentication · Re-segment loại non-openers · Nếu vẫn &lt;25% → switch plain text 1 sentence + link</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R03</strong></td>
+          <td>YouTube recordings &lt;50 views</td>
+          <td class="num">3</td><td class="num">2</td><td class="center"><span class="score score-6">6</span></td>
+          <td>Pre-event preview &lt;100 views · Post-event &lt;50/recording trong 2 tuần</td>
+          <td>Title format: [Speaker] [Topic] ShopX 2026 · Thumbnail headshot+dark bg+yellow title · Speaker nhận link + caption gợi ý</td>
+          <td>Review thumbnail+title · Create Shorts từ 60s moments · Dedicated email top 3 must-watch</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R04</strong></td>
+          <td>Landing CVR &lt;2%</td>
+          <td class="num">3</td><td class="num">5</td><td class="center"><span class="score score-15">15</span></td>
+          <td>CVR &lt;2% trong 7 ngày · Bounce &gt;75% · Time on page &lt;60s · CTA click &lt;5%</td>
+          <td>Mobile-first &lt;3s loading · Hotjar/Clarity từ launch · A/B CTA copy từ ngày 1 · Social proof above the fold</td>
+          <td>UX review value prop &lt;5s mobile · A/B CTA · Compress images &gt;200KB · Add scarcity counter hero</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nhóm 2 — Application & Conversion</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Rủi ro</th><th>XS</th><th>TĐ</th><th>Điểm</th><th>Warning Signs</th><th>Phòng ngừa (rút gọn)</th><th>Xử lý (rút gọn)</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>R05</strong></td>
+          <td>Apply thấp đáng kể</td>
+          <td class="num">3</td><td class="num">5</td><td class="center"><span class="score score-15">15</span></td>
+          <td>&lt;50 apps 2 tuần sau launch · &lt;125 vào 15/8 (50% target) · Traffic 1K+/tuần nhưng CVR &lt;3%</td>
+          <td>Community admin relationships P1 · GemPages users prioritized Email 1 · Paid A/B P2 trước scale P3 · Chris+Arvind networks pre-identified</td>
+          <td>15/8 emergency: Chris+Arvind WhatsApp 20 tier-1 brands personal · Double paid budget retargeting · Extend Free đến 31/8 · Nếu vẫn &lt;60% sau 22/8 → downscale 250→180</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R06</strong></td>
+          <td>Vé phí không chuyển đổi</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>0 paid 7 ngày sau 1/8 · CVR drop &gt;60% vs free · High bounce pricing page</td>
+          <td>Email T-45 itemize value $99 · Value calculator landing · 2025 testimonials trên pricing page</td>
+          <td>Shift to opportunity cost framing BFCM · Add testimonials 24h · Email waitlist BFCM urgency · Limited 48h VIP offer 1:1 session</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R07</strong></td>
+          <td>Đăng ký quốc tế &lt;30% tổng</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>Intl &lt;25% by 1/8 · CN&amp;PH &lt;5 apps mỗi by 15/7 · VN &gt;70% (event trở thành VN-only)</td>
+          <td>Market-specific content P2 · PH visa-free feature · WeChat active P2 · Arvind activate IN P2</td>
+          <td>Personal outreach mỗi market · Chris/Arvind/ShopOS message networks underperforming · CN pivot Xiaohongshu nếu WeChat chưa active · Consider $99→$79 intl · Activate WhatsApp delegate groups</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nhóm 3 — Partner & Stakeholder</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Rủi ro</th><th>XS</th><th>TĐ</th><th>Điểm</th><th>Warning Signs</th><th>Phòng ngừa (rút gọn)</th><th>Xử lý (rút gọn)</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>R08</strong></td>
+          <td>Speaker confirm &lt;4 trước 10/7</td>
+          <td class="num">4</td><td class="num">4</td><td class="center"><span class="score score-16">16</span></td>
+          <td>&lt;4 confirmed by 10/7 · Tier-2 no response sau D14 · Landing "TBA" &gt;4 tuần</td>
+          <td>Tier-1 (Steve+Arvind) confirm trước P1 · Tier-2 outreach in waves · Tier-3 bench 10+ ready · Chris personal invite cho high-priority</td>
+          <td>Announce 2 confirmed ngay (đủ 2 tuần content) · Fill gap Education pillar · Post "More speakers coming" · Activate Tier-3 bench cold pitch simultaneous</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>R09</strong></td>
+          <td>Sponsor không ký đúng tiến độ</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>&lt;3 LOI end July · Foreign app sponsors no response sau D14 · 0 signed by 15/8</td>
+          <td>Outreach P1 (May) · Founder-to-founder Chris reach CEO · 2025 ROI proof trong deck · VN ecosystem backup (Avada, Secomapps, PageFly, Mageplaza)</td>
+          <td>Chris personal call tier-1 sponsors · Activate VN backup ngay · Tạo micro-sponsorship $1.5-3K · Nếu &lt;3 contract by 15/8 → budget realistic theo confirmed revenue</td>
+          <td>Chris (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>R10</strong></td>
+          <td>ShopOS thất bại alignment</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>Alignment meeting chưa happen by 1/6 · ShopOS channels 0 post 4 tuần · Posting conflict information</td>
+          <td>Alignment meeting before 31/5 HARD · Written list deliverables + named PIC + posting calendar · All ShopOS items labeled "request-to-confirm"</td>
+          <td>Escalate Chris founder-to-founder · Nếu chưa confirm by 15/6 → treat ShopOS logo partner only · Wrong info post → contact &lt;2h</td>
+          <td>Chris (escalate)</td>
+        </tr>
+        <tr>
+          <td><strong>R11</strong></td>
+          <td>Partner không đăng All-Hands</td>
+          <td class="num">4</td><td class="num">3</td><td class="center"><span class="score score-12">12</span></td>
+          <td>&lt;50% partners posted by Day 3 of All-Hands Week · Wrong date/hashtag/co-tag</td>
+          <td>Brief 11/8 (14 ngày trước) · Ready-to-paste caption customize per partner · Designed visual + exact hashtag + co-tag · Confirmation receipt by 14/8</td>
+          <td>Day 3 personal WhatsApp mỗi partner chưa post · Urgency incentive: featured trong recap · Boost partner content paid nếu organic thấp</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nhóm 4 — Team & Operations (BỔ SUNG MỚI)</h3>
+  <div class="gap-flag"><strong>Nhóm 4 này được thêm trong dashboard.</strong> Sheet gốc skip từ Nhóm 3 sang Nhóm 5. Crisis quick-response có mục "Team burnout P3" gợi ý đây là gap chưa được codify thành risk register entries.</div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Rủi ro</th><th>XS</th><th>TĐ</th><th>Điểm</th><th>Warning Signs</th><th>Phòng ngừa</th><th>Xử lý</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>R12</strong></td>
+          <td>Team burnout P3 daily content</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>Repetitive captions không angle mới · Design inconsistency · Approval delay &gt;24h · 2+ consecutive missed deadlines</td>
+          <td>Batch-create ALL P3 content by 1/8 · Tú Vân 30-template set complete · Approval SLA Jessi 4h · Backup freelance designer ready</td>
+          <td>Scale down 4 posts/tuần vs 5 nếu quality dropping · Outsource freelance designer · Jessi self-approve minor edits sau 4h</td>
+          <td>Jessi (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>R13</strong></td>
+          <td>Key person dependency (Chris bottleneck)</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>Chris approval queue &gt;5 items · Email/social waiting Chris &gt;24h · Speaker outreach stalled</td>
+          <td>Christine giữ Chris content calendar 2 tuần trước · Pre-draft templates cho mọi email type · Delegate non-strategic approvals Jessi</td>
+          <td>Triage queue Chris vs Jessi · Time-block 2h/day Chris cho ShopX · Backup voice: Jessi cho ops, Christine cho B2B copy</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><strong>R14</strong></td>
+          <td>Approval flow bottleneck</td>
+          <td class="num">3</td><td class="num">3</td><td class="center"><span class="score score-9">9</span></td>
+          <td>Content sit in approval &gt;48h · Designer Tú Vân blocked &gt;1 day · Cross-team confusion who-approves-what</td>
+          <td>RACI matrix documented · SLA approval: Jessi minor 4h, Chris strategic 24h · Self-approve rules cho team trong scope</td>
+          <td>Escalate after SLA breach · Jessi default approval P3 unless Chris flagged · Pre-approved template library</td>
+          <td>Jessi (gợi ý)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nhóm 5 — Reputation & Crisis</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Rủi ro</th><th>XS</th><th>TĐ</th><th>Điểm</th><th>Warning Signs</th><th>Phòng ngừa (rút gọn)</th><th>Xử lý (rút gọn)</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>R15</strong></td>
+          <td>Negative PR lan truyền</td>
+          <td class="num">2</td><td class="num">5</td><td class="center"><span class="score score-10">10</span></td>
+          <td>Negative comment &gt;50 reshares 2h · Media wrong info · Speaker/sponsor public cancel</td>
+          <td>Response templates 3 scenarios trước P1 · Only Chris + Jessi speak publicly · Social monitoring alerts</td>
+          <td>Chris respond personally &lt;2h transparent · Never delete (Streisand) trừ harassment · Media wrong info: contact editor 24h · Factual public statement nếu cần</td>
+          <td>Chris + Jessi</td>
+        </tr>
+        <tr>
+          <td><strong>R16</strong></td>
+          <td>Speaker hủy sát ngày</td>
+          <td class="num">2</td><td class="num">4</td><td class="center"><span class="score score-8">8</span></td>
+          <td>Speaker request cancel · Stop responding 3+ tuần before · Posts publicly về conflicts</td>
+          <td>Speaker brief + logistics 6 tuần before (5/8) · Named logistics contact per speaker · Cancellation clause · Tier-3 bench maintained P2+P3</td>
+          <td>Chris call canceling speaker &lt;24h · Explore remote delivery, panel format, recording · Không announce publicly · Activate Tier-3 bench ngay</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R17</strong></td>
+          <td>Venue/operations event day</td>
+          <td class="num">2</td><td class="num">5</td><td class="center"><span class="score score-10">10</span></td>
+          <td>Venue contract chưa sign by 1/8 · AV/internet chưa test before 17/9 · Backup plan missing</td>
+          <td>Contract before 1/6 với force majeure · Technical rehearsal T-48h · Backup 4G hotspot · Catering confirm 2 tuần before · All presentations downloaded locally</td>
+          <td>WhatsApp = real-time channel 17/9 · AV failure → mobile phone streaming · Catering issue → Grab Food 30 phút · Evacuation → pre-designated backup</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R18</strong></td>
+          <td>Thông điệp sai trên partner channels</td>
+          <td class="num">3</td><td class="num">3</td><td class="center"><span class="score score-9">9</span></td>
+          <td>Partner post wrong date · Wrong price · Missing apply link / old URL</td>
+          <td>Brief có fact check box: Date 17/9 / Price $99 / Link · Partners use GemPages caption hoặc share draft Christine · Review post &lt;30 phút</td>
+          <td>WhatsApp partner contact + correct info + request edit/delete · Never publicly correct · GemPages clarification post "just to confirm correct details..."</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Nhóm 6 — Paid Media Performance</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ID</th><th>Rủi ro</th><th>XS</th><th>TĐ</th><th>Điểm</th><th>Warning Signs</th><th>Phòng ngừa (rút gọn)</th><th>Xử lý (rút gọn)</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>R19</strong></td>
+          <td>Paid ads CTR &lt;1% mọi variants</td>
+          <td class="num">3</td><td class="num">4</td><td class="center"><span class="score score-12">12</span></td>
+          <td>CTR &lt;1% 4 variants sau 7 ngày · CPL &gt;$15 · 0 apply paid 14 ngày</td>
+          <td>4 creative variants test P2 · Kill threshold 1% CTR D7 không exception · Geo targeting narrow VN+SG first</td>
+          <td>Kill underperformers D7 · Redesign concept (image→text-heavy, benefit→narrative) · Shift budget retargeting (CPL 3-5x lower)</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><strong>R20</strong></td>
+          <td>Media không pickup PR</td>
+          <td class="num">4</td><td class="num">2</td><td class="center"><span class="score score-8">8</span></td>
+          <td>0 journalist response 5 ngày · 0 outlet confirm by 15/7</td>
+          <td>Personalized pitch per outlet · Vietcetera pitch first · Offer exclusivity Chris interview</td>
+          <td>Pivot hook: Meta/TikTok confirm → lead story · CN+SEA+IN crossover angle · Backup Chris LI long-form article</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 12 CRISIS ============ -->
+<section id="crisis">
+  <h2><span class="ord">12</span>Crisis Quick-Response Table</h2>
+  <p class="lead">10 kịch bản xử lý nhanh với severity, early warning, 5 giải pháp ưu tiên, trigger point.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Risk</th><th>Severity</th><th>Dấu hiệu sớm</th><th>5 giải pháp (priority order)</th><th>Trigger</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Social organic = zero reach</td>
+          <td><span class="badge danger">HIGH</span></td>
+          <td>Avg reach &lt;300 sau 3 posts · Engagement &lt;1% · 0 organic shares 1 tuần</td>
+          <td>1. Chris share+comment personal mỗi bài → organic lift immediate · 2. Boost $50-100 vào 1-2 best posts · 3. Pivot content: STOP event → pure Education · 4. Activate Arvind+1 speaker post same week · 5. Nếu FB organic dead: shift LI+Email, FB paid only</td>
+          <td>Sau 3 posts avg reach &lt;300 → Emergency Chris+Jessi today</td>
+        </tr>
+        <tr>
+          <td>Apply target off track</td>
+          <td><span class="badge danger">HIGH</span></td>
+          <td>T+2 tuần sau landing: &lt;50 apps · Bounce landing &gt;80% · 15/8: apply &lt;125 (50%)</td>
+          <td>1. Chris+Arvind 1-1 WhatsApp 20 tier-1 brands personal · 2. Double paid budget retargeting · 3. Extend Early Bird Free đến 31/8 · 4. Email GemPages users round 2 angle khác · 5. All community admins push same week · 6. Nếu vẫn miss 15/8 → downscale 250→180 maintain quality</td>
+          <td>15/8: Apply &lt;125 → Emergency · 1/8: Apply &lt;100 → Warning mode</td>
+        </tr>
+        <tr>
+          <td>Speaker confirms delayed</td>
+          <td><span class="badge danger">HIGH</span></td>
+          <td>10/7: &lt;4 confirmed · Lớp 2 no response sau D14 · Landing "TBA"</td>
+          <td>1. Announce Steve+Arvind ngay (đủ 2 tuần content) · 2. Fill gap Education pillar · 3. Post "More speakers coming" anticipation · 4. Activate full Lớp 3 bench (10+) cold pitch simultaneous · 5. Sponsor exec speaker slot từ contract</td>
+          <td>10/7: &lt;4 → Activate Plan B immediately</td>
+        </tr>
+        <tr>
+          <td>Paid ads ineffective</td>
+          <td><span class="badge warn">MEDIUM</span></td>
+          <td>CTR &lt;1% sau 7 ngày · CPL &gt;$15 · 0 apply paid 2 tuần</td>
+          <td>1. Kill ALL ads CTR &lt;1% sau 7 ngày NO exception · 2. Refresh creative: KV→speaker face, benefit→FOMO · 3. Narrow target VN+SG before full APAC · 4. Shift FB→LI nếu B2B convert better · 5. Increase retargeting → 70% budget</td>
+          <td>D7: CTR &lt;1% → Pause + rebuild</td>
+        </tr>
+        <tr>
+          <td>Media no pickup</td>
+          <td><span class="badge warn">MEDIUM</span></td>
+          <td>15/7: 0 responses · LI pitch ignored · Email no reply sau 5 ngày</td>
+          <td>1. Change hook: Meta/TikTok confirmed = tier-1 immediately · 2. Target Vietcetera first (VN EN, responds well to Saigon) · 3. Personalize: research journalist + recent article · 4. Offer exclusive: fireside chat recording before public · 5. Backup: Chris LI long-form article</td>
+          <td>15/7: 0 response → Pivot pitch next day</td>
+        </tr>
+        <tr>
+          <td>Partners don't post / post wrong</td>
+          <td><span class="badge warn">MEDIUM</span></td>
+          <td>All-hands week: &lt;50% post by Day 3 · Wrong message/hashtag · Speaker "forgets"</td>
+          <td>1. Brief 14 ngày before (11/8) never last-minute · 2. Caption+visual ready-paste zero friction · 3. WhatsApp 1-1 morning of posting day · 4. Incentive: social feature/landing spotlight cho on-time · 5. Boost partner content paid nếu organic low — week cannot fail</td>
+          <td>11/8: Not confirmed to post → 1-1 call today</td>
+        </tr>
+        <tr>
+          <td>Paid ticket doesn't convert</td>
+          <td><span class="badge danger">HIGH</span></td>
+          <td>1/8 live: 0 purchases sau 7 ngày · CVR drop &gt;60% vs free · High bounce pricing</td>
+          <td>1. Messaging shift NOW: "What $99 gets you" itemize · 2. Add 2025 testimonials + ROI stories landing 24h · 3. Email: "Real cost of missing BFCM 2026 unprepared" · 4. Consider extend free tier 2 tuần limit 50 (maintain scarcity feel) · 5. VIP 48h offer: 1:1 30min với speaker</td>
+          <td>1/8: 0 purchases sau 7 ngày → Pivot messaging</td>
+        </tr>
+        <tr>
+          <td>Team burnout P3 daily content</td>
+          <td><span class="badge warn">MEDIUM</span></td>
+          <td>Repetitive captions · Design inconsistency · Approval delay &gt;24h · 2+ missed deadlines</td>
+          <td>1. Batch-create ALL P3 content by 1/8 never day-by-day · 2. Tú Vân 30-template set → Chloe fills text &lt;15min/post · 3. Approval SLA Jessi 4h; sau 4h Chloe self-approve minor · 4. Scale down 4 posts/tuần vs 5 (quality &gt; quantity) · 5. Outsource freelance designer nếu Tú Vân overload</td>
+          <td>2 consecutive missed deadlines → Jessi meeting same day</td>
+        </tr>
+        <tr>
+          <td>Crisis / Negative PR</td>
+          <td><span class="badge danger">HIGH</span></td>
+          <td>Negative comment viral &gt;50 reshares 2h · Media wrong info · Public complaint</td>
+          <td>1. Chris respond personally &lt;2h transparent not defensive · 2. Do NOT delete (Streisand) only remove spam/hate · 3. Short statement nếu cần factual no emotion · 4. Media wrong info: contact editor + fact sheet 24h · 5. Unified voice: ONLY Chris+Jessi speak</td>
+          <td>Any negative viral → Chris responds &lt;2h</td>
+        </tr>
+        <tr>
+          <td>Facebook organic near zero</td>
+          <td><span class="badge warn">MEDIUM</span></td>
+          <td>Avg reach &lt;200 cho 2 tuần · Boost CPL &gt;$20 · Engagement &lt;0.5%</td>
+          <td>1. Stop organic FB posts không worth team time · 2. Move effort LI (B2B) + Email (highest ROI) · 3. FB = paid ads only + community group seeding · 4. Chris personal FB replace brand page</td>
+          <td>Sau 4 posts: Avg reach &lt;200 → Pivot strategy</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 13 KPI ============ -->
+<section id="kpi">
+  <h2><span class="ord">13</span>KPI Dashboard</h2>
+  <p class="lead">14 KPI theo category + phase target + action nếu miss.</p>
+
+  <div class="gap-flag">
+    <strong>⚠ Note:</strong> NPS metric (cuối bảng) bị truncate trong sheet gốc ("IF MIS..."). Dashboard này đề xuất full text: <em>"P5: NPS &gt;50. IF MISS: &lt;30 → focused interviews top 10 dissatisfied, root cause analysis trước 2027 planning."</em>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>KPI</th><th>P1</th><th>P2</th><th>P3</th><th>P4/P5 + Action if miss</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge info">AWARENESS</span></td>
+          <td>Social avg reach/post</td>
+          <td>500+</td><td>1,000+</td><td>2,000+</td>
+          <td>P4: 5,000+ day-of · IF MISS &lt;300 sau 3 posts → Chris share same day</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge info">AWARENESS</span></td>
+          <td>Email open rate</td>
+          <td>—</td><td>&gt;38%</td><td>&gt;42%</td>
+          <td>P5: &gt;50% thank-you · IF MISS &lt;25% → A/B subject ngay</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge info">APPLICATION</span></td>
+          <td>Waitlist signups</td>
+          <td>200+</td><td>500+</td><td>—</td>
+          <td>P5: 300+ 2027 waitlist · IF MISS &lt;100 T+2wks → double community seeding</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge info">APPLICATION</span></td>
+          <td>Apply submissions</td>
+          <td>—</td><td>300+ total</td><td>250 confirmed</td>
+          <td>P4: SOLD OUT · IF MISS 15/8 &lt;125 → emergency Chris+Jessi protocol</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge info">APPLICATION</span></td>
+          <td>Landing CVR</td>
+          <td>—</td><td>&gt;3%</td><td>&gt;5%</td>
+          <td>IF MISS &lt;2% → UX review + CTA A/B test</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge warn">PAID ADS</span></td>
+          <td>CTR paid ads</td>
+          <td>—</td><td>&gt;2%</td><td>&gt;3%</td>
+          <td>IF MISS &lt;1% sau 7 ngày → kill + rebuild creative NOW</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge warn">PAID ADS</span></td>
+          <td>Cost per Lead</td>
+          <td>—</td><td>&lt;$5</td><td>&lt;$8</td>
+          <td>IF MISS CPL &gt;$15 → narrow targeting, shift retargeting</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge medium">PARTNERSHIP</span></td>
+          <td>Sponsors signed</td>
+          <td>—</td><td>3 LOI</td><td>5 contracts</td>
+          <td>P5: Renew 4+ · IF MISS &lt;3 LOI end Jul → activate VN ecosystem backup</td>
+          <td>Chris (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><span class="badge medium">PARTNERSHIP</span></td>
+          <td>Speaker confirmed</td>
+          <td>—</td><td>4 (30%)</td><td>12 (100%)</td>
+          <td>IF MISS &lt;4 by 30/6 → activate Lớp 3 bench immediately</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><span class="badge medium">PARTNERSHIP</span></td>
+          <td>Partner posts All-Hands</td>
+          <td>—</td><td>5+ posts</td><td>15+ (25-31/8)</td>
+          <td>IF MISS &lt;50% by 11/8 → 1-1 WhatsApp each partner</td>
+          <td>Christine (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><span class="badge danger">EVENT DAY</span></td>
+          <td>UGC #ShopX2026</td>
+          <td>—</td><td>—</td><td>—</td>
+          <td>P4: 50+ posts day-of · IF MISS &lt;20 by 2pm → MC re-announce hashtag</td>
+          <td>Chloe (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><span class="badge danger">EVENT DAY</span></td>
+          <td>Stories views</td>
+          <td>—</td><td>—</td><td>—</td>
+          <td>P4: 500+/story</td>
+          <td>Chloe (gợi ý)</td>
+        </tr>
+        <tr>
+          <td><span class="badge success">POST-EVENT</span></td>
+          <td>Recap video views</td>
+          <td>—</td><td>—</td><td>—</td>
+          <td>P5: 10K in 7 days · IF MISS &lt;3K → paid boost $300 immediately</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+        <tr>
+          <td><span class="badge success">POST-EVENT</span></td>
+          <td>NPS score <em>(đề xuất full text)</em></td>
+          <td>—</td><td>—</td><td>—</td>
+          <td>P5: &gt;50 · IF MISS &lt;30 → focused interviews top 10 dissatisfied, root cause analysis trước 2027 planning</td>
+          <td><span class="no-owner">NEEDS OWNER</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 14 RACI ============ -->
+<section id="raci">
+  <h2><span class="ord">14</span>Team RACI (Bổ sung mới)</h2>
+  <p class="lead">Đề xuất phân vai trò — <strong>cần team confirm + điền PIC chính thức</strong>. Đây là gợi ý dựa trên tên đã có trong sheet (Chloe, Chris, Christine, Jessi, Kallie, Sunny, Tú Vân).</p>
+
+  <div class="info-box">
+    <div class="info-box-title">RACI Matrix là gì?</div>
+    <div class="info-box-body"><strong>R</strong> = Responsible (làm) · <strong>A</strong> = Accountable (chịu trách nhiệm cuối, 1 người) · <strong>C</strong> = Consulted (góp ý trước khi quyết) · <strong>I</strong> = Informed (được thông báo)</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Area</th><th>Chris (Founder)</th><th>Jessi (Head Marketing)</th><th>Chloe (Marketing)</th><th>Christine (Content/B2B)</th><th>Kallie (Ops)</th><th>Sunny (CN/ZH)</th><th>Tú Vân (Design)</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Strategy + Messaging</td>
+          <td class="center"><strong>A/R</strong></td><td class="center">C</td><td class="center">C</td><td class="center">C</td><td class="center">I</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Email Marketing (12 emails)</td>
+          <td class="center">R (draft)</td><td class="center">A</td><td class="center">R (ops)</td><td class="center">R (draft assist)</td><td class="center">I</td><td class="center">I</td><td class="center">C</td>
+        </tr>
+        <tr>
+          <td>FB/IG Brand Channels</td>
+          <td class="center">C</td><td class="center">A</td><td class="center"><strong>R</strong></td><td class="center">C</td><td class="center">I</td><td class="center">I</td><td class="center">R (visual)</td>
+        </tr>
+        <tr>
+          <td>LinkedIn Brand + Event</td>
+          <td class="center">C</td><td class="center">A</td><td class="center">R</td><td class="center"><strong>R</strong></td><td class="center">I</td><td class="center">I</td><td class="center">C</td>
+        </tr>
+        <tr>
+          <td>Chris Koh Personal Content</td>
+          <td class="center"><strong>A/R</strong></td><td class="center">I</td><td class="center">I</td><td class="center"><strong>R</strong> (calendar/draft)</td><td class="center">I</td><td class="center">I</td><td class="center">C</td>
+        </tr>
+        <tr>
+          <td>Speaker Outreach + Confirm</td>
+          <td class="center"><strong>R</strong> (Tier-1)</td><td class="center">A</td><td class="center">I</td><td class="center"><strong>R</strong> (Tier-2/3 + logistics)</td><td class="center">I</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Sponsor Outreach + Sign</td>
+          <td class="center"><strong>A/R</strong></td><td class="center">C</td><td class="center">I</td><td class="center">R (deck + InMail)</td><td class="center">I</td><td class="center">I</td><td class="center">C</td>
+        </tr>
+        <tr>
+          <td>PR + Media Pitch</td>
+          <td class="center">C</td><td class="center"><strong>A/R</strong></td><td class="center">R (assist)</td><td class="center">C</td><td class="center">I</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Paid Ads (Meta/LI)</td>
+          <td class="center">C</td><td class="center">A</td><td class="center"><strong>R</strong></td><td class="center">C</td><td class="center">I</td><td class="center">I</td><td class="center">R (creative)</td>
+        </tr>
+        <tr>
+          <td>Landing Page (build + A/B)</td>
+          <td class="center">C</td><td class="center">A</td><td class="center"><strong>R</strong></td><td class="center">C (copy)</td><td class="center">I</td><td class="center">I</td><td class="center">R (visual)</td>
+        </tr>
+        <tr>
+          <td>WeChat + Xiaohongshu (CN/MY ZH)</td>
+          <td class="center">C</td><td class="center">A</td><td class="center">I</td><td class="center">I</td><td class="center">I</td><td class="center"><strong>R</strong></td><td class="center">C</td>
+        </tr>
+        <tr>
+          <td>WhatsApp Groups (event day)</td>
+          <td class="center">I</td><td class="center">A</td><td class="center">I</td><td class="center">I</td><td class="center"><strong>R</strong> (full-time 17/9)</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Community Seeding (admins)</td>
+          <td class="center">C</td><td class="center">A</td><td class="center"><strong>R</strong> (VN)</td><td class="center">R (intl)</td><td class="center">I</td><td class="center">R (CN/MY ZH)</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Design Templates + Visuals</td>
+          <td class="center">I</td><td class="center">A</td><td class="center">C</td><td class="center">C</td><td class="center">I</td><td class="center">I</td><td class="center"><strong>R</strong></td>
+        </tr>
+        <tr>
+          <td>Country Lead VN</td>
+          <td class="center">C</td><td class="center">A</td><td class="center"><strong>R</strong></td><td class="center">I</td><td class="center">R (assist)</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Country Lead SG/IN</td>
+          <td class="center">C (intro)</td><td class="center">A</td><td class="center">I</td><td class="center">C</td><td class="center">I</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Country Lead CN/HK</td>
+          <td class="center">C</td><td class="center">A</td><td class="center">I</td><td class="center">I</td><td class="center">I</td><td class="center"><strong>R</strong></td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Country Lead MY</td>
+          <td class="center">C</td><td class="center">A</td><td class="center">I</td><td class="center">I</td><td class="center">I</td><td class="center"><strong>R</strong></td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Country Lead PH</td>
+          <td class="center">C</td><td class="center">A</td><td class="center"><strong>R</strong></td><td class="center">I</td><td class="center">I</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+        <tr>
+          <td>Crisis Response (public statement)</td>
+          <td class="center"><strong>A/R</strong></td><td class="center">R (co-spokesperson)</td><td class="center">I</td><td class="center">I</td><td class="center">I</td><td class="center">I</td><td class="center">I</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box warn">
+    <div class="info-box-title">Gap: Vai trò chưa rõ ai làm</div>
+    <div class="info-box-body">
+      • <strong>PR retainer agency?</strong> Hiện đề xuất Jessi nhưng Jessi đang là head — có cần freelance PR người riêng?<br/>
+      • <strong>Designer backup</strong> nếu Tú Vân overload (đã flag trong crisis quick-response) — chưa có name<br/>
+      • <strong>Photographer/videographer event day 17/9</strong> — chưa thấy trong plan<br/>
+      • <strong>YouTube editor</strong> (trim sessions, captions, lower-third) — chưa có name
+    </div>
+  </div>
+</section>
+
+<!-- ============ 15 BUDGET ============ -->
+<section id="budget">
+  <h2><span class="ord">15</span>Budget Rollup (Bổ sung mới)</h2>
+  <p class="lead">Template tổng budget — sheet gốc chỉ có spend per market. <strong>Số liệu dưới là placeholder đề xuất — cần Jessi + Chris confirm số thật.</strong></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Category</th><th>Item</th><th>Estimate (USD)</th><th>Phase</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="6"><strong>Paid Media</strong></td><td>Meta Ads VN</td><td class="num">$300–400</td><td>P1-P3</td><td>Per sheet gốc</td></tr>
+        <tr><td>Meta+LI Ads SG</td><td class="num">$200–300</td><td>P2</td><td>SG-specific</td></tr>
+        <tr><td>Meta Ads MY + Xiaohongshu</td><td class="num">$100–150</td><td>P3</td><td>POD angle</td></tr>
+        <tr><td>Meta Ads PH</td><td class="num">$100</td><td>P3</td><td>PH-specific</td></tr>
+        <tr><td>WeChat + Xiaohongshu CN</td><td class="num">$500–800</td><td>P3</td><td>ZH total</td></tr>
+        <tr><td>LinkedIn Ads IN</td><td class="num">$150–200</td><td>P2-P3</td><td>App builders</td></tr>
+        <tr style="background: var(--surface-3);"><td></td><td><strong>Paid Media Subtotal</strong></td><td class="num"><strong>$1,350–$1,950</strong></td><td></td><td>Per sheet</td></tr>
+
+        <tr><td rowspan="3"><strong>Boosts + Emergency</strong></td><td>Top post boost (per post)</td><td class="num">$30–50</td><td>P2-P3</td><td>Top 2/tuần</td></tr>
+        <tr><td>Emergency boost contingency</td><td class="num">$50–100</td><td>P3</td><td>Per use</td></tr>
+        <tr><td>Recap video boost (P5)</td><td class="num">$200–300</td><td>P5</td><td>10K/7 ngày target</td></tr>
+
+        <tr><td rowspan="2"><strong>Design / Creative</strong></td><td>Tú Vân in-house</td><td class="num">$0</td><td>P1-P5</td><td>Đã có headcount</td></tr>
+        <tr><td>Freelance designer backup</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P3</td><td>R12 mitigation</td></tr>
+
+        <tr><td rowspan="2"><strong>PR / Media</strong></td><td>PR retainer/freelance</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P2-P4</td><td>TechInAsia, e27, Vietcetera</td></tr>
+        <tr><td>Press kit + media gifts</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P3</td><td>2 phóng viên on-site</td></tr>
+
+        <tr><td rowspan="3"><strong>KOL / Speakers</strong></td><td>KOL gifts (VIP+cruise, không cash)</td><td class="num">$0</td><td>P2-P3</td><td>VIP đủ deal</td></tr>
+        <tr><td>Speaker travel/accom (12 speakers)</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P3-P4</td><td>Flight + hotel + per diem</td></tr>
+        <tr><td>Speaker swag/welcome kit</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P3</td><td>Quality matters</td></tr>
+
+        <tr><td rowspan="3"><strong>Event Day Ops</strong></td><td>Venue (Gem Center)</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P4</td><td>Contract before 1/6</td></tr>
+        <tr><td>Catering 250 attendees</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P4</td><td>Confirm 2 tuần before</td></tr>
+        <tr><td>Saigon River Cruise (VIP)</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P4</td><td>Premium experience</td></tr>
+
+        <tr><td rowspan="4"><strong>Attendee Experience</strong></td><td>Welcome kit (250 sets)</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P3-P4</td><td>Hashtag visible</td></tr>
+        <tr><td>Photo wall + signage</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P4</td><td>ROI cao nhất UGC</td></tr>
+        <tr><td>UGC gamification prize</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P4</td><td>Announce tại cruise</td></tr>
+        <tr><td>Photographer/videographer</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P4</td><td>1-2 ngày shoot</td></tr>
+
+        <tr><td rowspan="2"><strong>Tech / Tools</strong></td><td>Landing page hosting + analytics (Hotjar/Clarity FREE)</td><td class="num">$0–50</td><td>P1-P5</td><td>Per sheet</td></tr>
+        <tr><td>Email service provider</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>P1-P5</td><td>GemPages có sẵn?</td></tr>
+
+        <tr style="background: #fef3c7;"><td><strong>Contingency</strong></td><td>10% buffer cho overspend</td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td>All</td><td>Standard for events</td></tr>
+
+        <tr style="background: var(--primary-soft); font-weight: 700;"><td><strong>TỔNG ƯỚC TÍNH</strong></td><td></td><td class="num"><span class="no-owner">CẦN CONFIRM</span></td><td></td><td>Sau khi điền các "cần confirm"</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">💡 Gợi ý cách bóc tách budget</div>
+    <div class="info-box-body">
+      1. <strong>Direct cost</strong>: vật liệu, hosting, ads — số cụ thể<br/>
+      2. <strong>Indirect cost</strong>: team time × hourly rate (không tính nếu in-house headcount)<br/>
+      3. <strong>Opportunity cost</strong>: vé VIP đổi seeding/KOL (không cash nhưng có giá)<br/>
+      4. <strong>Contingency</strong>: 10% cho events, 15% cho events có nhiều unknowns
+    </div>
+  </div>
+</section>
+
+<!-- ============ 16 CALENDAR ============ -->
+<section id="calendar">
+  <h2><span class="ord">16</span>Weekly Content Calendar (Bổ sung mới)</h2>
+  <p class="lead">Template content calendar tuần — <strong>cần Christine + Chloe điền cụ thể trước 19/6</strong>. Đây là khung gợi ý.</p>
+
+  <h3>Mẫu tuần — P2 Blooming (tuần 16–22/6)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Day</th><th>FB Brand</th><th>LinkedIn Brand</th><th>Chris Koh Personal</th><th>Instagram</th><th>Email</th><th>Other</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Mon 16/6</strong></td>
+          <td><span class="badge muted">SX_BTS</span> Landing live announce</td>
+          <td><span class="badge muted">SX_STORY</span> Landing live B2B angle</td>
+          <td><span class="badge muted">SX_STORY</span> Founder letter LI 800-1000 words</td>
+          <td><span class="badge muted">SX_BTS</span> KV reveal IG post</td>
+          <td>—</td>
+          <td>LinkedIn Event Page tạo</td>
+        </tr>
+        <tr>
+          <td><strong>Tue 17/6</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge muted">SX_INSIGHT</span> Threads daily AI obs</td>
+          <td><span class="badge muted">SX_SAIGON</span> Reels venue BTS 30s</td>
+          <td>—</td>
+          <td>WeChat application status check</td>
+        </tr>
+        <tr>
+          <td><strong>Wed 18/6</strong></td>
+          <td><span class="badge muted">SX_EDU</span> AI how-to carousel #1</td>
+          <td><span class="badge muted">SX_EDU</span> LI how-to #1</td>
+          <td><span class="badge muted">SX_INSIGHT</span> Threads</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Thu 19/6</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge muted">SX_INSIGHT</span> Threads</td>
+          <td><span class="badge muted">SX_BTS</span> IG Stories Q&A "AI tool nào bạn muốn hiểu"</td>
+          <td>—</td>
+          <td>Speaker Wave 1 brief (Steve + Arvind)</td>
+        </tr>
+        <tr>
+          <td><strong>Fri 20/6</strong></td>
+          <td><span class="badge muted">SX_SPEAKER</span> Wave 1 announce Steve Miguel</td>
+          <td><span class="badge muted">SX_SPEAKER</span> Wave 1 announce Steve Miguel B2B</td>
+          <td><span class="badge muted">SX_SPEAKER</span> Chris personal endorsement Steve</td>
+          <td><span class="badge muted">SX_SPEAKER</span> IG carousel headshot+quote</td>
+          <td>—</td>
+          <td>Steve cross-tag posts</td>
+        </tr>
+        <tr>
+          <td><strong>Sat 21/6</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="badge muted">SX_INSIGHT</span> Threads</td>
+          <td><span class="badge muted">SX_SAIGON</span> Stories Saigon food</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Sun 22/6</strong></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Review tuần · Plan tuần sau</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Cadence theo phase (gợi ý)</h3>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="card-title"><span class="phase-pill phase-p1">P1</span> Warming Up · 28/5–15/6</div>
+      <div class="card-body">
+        <ul class="compact">
+          <li><strong>FB:</strong> 1 post/tuần (BTS, recap 2025)</li>
+          <li><strong>LI Brand:</strong> 1 post/tuần</li>
+          <li><strong>Chris Personal:</strong> LI 2/tuần · Threads 3-4/tuần</li>
+          <li><strong>IG:</strong> 1 post + Stories 2-3 ngày/tuần</li>
+          <li><strong>Email:</strong> Setup, không gửi</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="phase-pill phase-p2">P2</span> Blooming · 16/6–31/7</div>
+      <div class="card-body">
+        <ul class="compact">
+          <li><strong>FB:</strong> 2-3 posts/tuần (Edu carousel 2x, speaker)</li>
+          <li><strong>LI Brand:</strong> 3 posts/tuần (Edu how-to)</li>
+          <li><strong>Chris Personal:</strong> LI 2-3/tuần · Threads daily</li>
+          <li><strong>IG:</strong> 2 posts + Stories daily</li>
+          <li><strong>YouTube:</strong> 1 tutorial / 2 tuần · Mini doc 5"</li>
+          <li><strong>Email:</strong> 3 emails (1/7, 15/7, 28/7)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="phase-pill phase-p3">P3</span> Peak · 1/8–16/9</div>
+      <div class="card-body">
+        <ul class="compact">
+          <li><strong>FB:</strong> 4-5 posts/tuần (scarcity, countdown, sponsor)</li>
+          <li><strong>LI Brand:</strong> 3-4 posts/tuần</li>
+          <li><strong>Chris Personal:</strong> LI 3/tuần · Threads daily</li>
+          <li><strong>IG:</strong> Daily posts + Stories countdown T-30</li>
+          <li><strong>YouTube:</strong> Speaker preview 3" per speaker</li>
+          <li><strong>Email:</strong> 5 emails (3/8, 18/8, 3/9, 10/9, 16/9)</li>
+          <li><strong>All-Hands Week:</strong> 25-31/8 (full org activation)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 17 SPEAKER TRACKER ============ -->
+<section id="speaker-tracker">
+  <h2><span class="ord">17</span>Speaker Tracker (Bổ sung mới)</h2>
+  <p class="lead">Bảng theo dõi 12+ speaker targets — sheet gốc không có. <strong>Cần Christine điền + cập nhật weekly.</strong></p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tier</th><th>Speaker</th><th>Track</th><th>Status</th><th>Outreach by</th><th>Date contacted</th><th>Last follow-up</th><th>Confirmed by</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge danger">Tier 1</span></td>
+          <td>Steve Miguel</td>
+          <td>TBD</td>
+          <td><span class="badge success">CONFIRMED</span></td>
+          <td>Chris</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Per sheet — Wave 1 announce</td>
+        </tr>
+        <tr>
+          <td><span class="badge danger">Tier 1</span></td>
+          <td>Arvind Subramanian</td>
+          <td>Track E (IN App)</td>
+          <td><span class="badge success">CONFIRMED</span></td>
+          <td>Chris</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Co-host signal IN community</td>
+        </tr>
+        <tr>
+          <td><span class="badge warn">Tier 2</span></td>
+          <td><em>[Tên target 1]</em></td>
+          <td>Track A</td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>Chris (personal)</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Wave 2 target</td>
+        </tr>
+        <tr>
+          <td><span class="badge warn">Tier 2</span></td>
+          <td><em>[Tên target 2]</em></td>
+          <td>Track B</td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>Christine</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Wave 2 target</td>
+        </tr>
+        <tr>
+          <td><span class="badge warn">Tier 2</span></td>
+          <td><em>[Tên target 3]</em></td>
+          <td>Track C</td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>Christine</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Wave 2 target</td>
+        </tr>
+        <tr>
+          <td><span class="badge warn">Tier 2</span></td>
+          <td><em>[Tên target 4]</em></td>
+          <td>Track D (POD)</td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>Sunny (CN/MY ZH)</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>MY POD angle</td>
+        </tr>
+        <tr>
+          <td><span class="badge muted">Tier 3 Bench</span></td>
+          <td colspan="8"><em>10+ backup candidates — fill bench trước 10/7 để activate nếu Tier 2 không respond sau D14. <strong>Trigger R08:</strong> &lt;4 confirmed by 10/7 → activate full bench cold pitch simultaneous.</em></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Status legend</h3>
+  <p style="font-size:13px;color:var(--text-soft);">
+    <span class="badge muted">TBD</span> chưa outreach ·
+    <span class="badge info">INVITED</span> đã gửi invite, chưa response ·
+    <span class="badge warn">IN-DISCUSSION</span> đang trao đổi detail ·
+    <span class="badge success">CONFIRMED</span> đã ký commit ·
+    <span class="badge danger">DECLINED</span> từ chối · <span class="badge muted">NO-RESPONSE</span> không phản hồi sau D14
+  </p>
+</section>
+
+<!-- ============ 18 SPONSOR PIPELINE ============ -->
+<section id="sponsor-pipeline">
+  <h2><span class="ord">18</span>Sponsor Pipeline (Bổ sung mới)</h2>
+  <p class="lead">Bảng theo dõi sponsors — sheet gốc chưa có. <strong>Cần Chris + Jessi điền + review weekly.</strong></p>
+
+  <div class="info-box">
+    <div class="info-box-title">Sponsor strategy snapshot</div>
+    <div class="info-box-body">
+      <strong>Target:</strong> 3 LOI by end July · 5 contracts signed by P3 · Renew 4+ for 2027<br/>
+      <strong>Tiers đề xuất:</strong> Headline ($15-30K) · Track Partner ($8-15K) · Booth ($3-8K) · Micro ($1.5-3K logo + 2 social)<br/>
+      <strong>Outreach:</strong> Founder-to-founder Chris Koh personal — không qua account manager<br/>
+      <strong>VN backup:</strong> Avada, Secomapps, PageFly, Mageplaza (existing GemPages relationships)
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Sponsor target</th><th>Tier</th><th>Contact (decision-maker)</th><th>Status</th><th>LOI date</th><th>Contract date</th><th>Activation</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><em>Klaviyo</em></td>
+          <td>Headline</td>
+          <td><em>[CEO/VP Partnerships]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Booth + 30min keynote</td>
+          <td>Customers = Shopify sellers exact target</td>
+        </tr>
+        <tr>
+          <td><em>Triple Whale</em></td>
+          <td>Track Partner</td>
+          <td><em>[Founder]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Track A AI Analytics</td>
+          <td>Analytics + AI overlap</td>
+        </tr>
+        <tr>
+          <td><em>Postscript</em></td>
+          <td>Track Partner</td>
+          <td><em>[Founder]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>SMS + AI track</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><em>Judge.me</em></td>
+          <td>Booth</td>
+          <td><em>[CEO]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Booth + IN community amplifier</td>
+          <td>BLR-based, warm via Arvind</td>
+        </tr>
+        <tr>
+          <td><em>CJ Dropshipping</em></td>
+          <td>Booth</td>
+          <td><em>[CN team]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>Booth + CN community amplifier</td>
+          <td>CN cross-border angle</td>
+        </tr>
+        <tr style="background: #fef9c3;">
+          <td colspan="8"><strong>VN Ecosystem Backup</strong> — activate nếu &lt;3 LOI by end July (per R09)</td>
+        </tr>
+        <tr>
+          <td><em>Avada</em></td>
+          <td>Booth</td>
+          <td><em>[Founder]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>VN ecosystem, existing GP relationship</td>
+        </tr>
+        <tr>
+          <td><em>PageFly</em></td>
+          <td>Booth</td>
+          <td><em>[Founder]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>VN ecosystem</td>
+        </tr>
+        <tr>
+          <td><em>Secomapps</em></td>
+          <td>Micro</td>
+          <td><em>[Founder]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>VN ecosystem</td>
+        </tr>
+        <tr>
+          <td><em>Mageplaza</em></td>
+          <td>Micro</td>
+          <td><em>[Founder]</em></td>
+          <td><span class="badge muted">TBD</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>VN ecosystem</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="footer">
+  <strong>ShopX 2026 — Master Communication Plan Dashboard</strong><br/>
+  Version 1.0 · Cập nhật 02/06/2026 · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
+  Maintained by: Chloe Dinh · <a href="https://github.com/chloedinh-create/shopx-2026-master-plan" style="color: var(--primary);">GitHub</a><br/>
+  <em>Tài liệu mật nội bộ. Không chia sẻ ra ngoài team.</em>
+</div>
+
+</main>
+</div>
+
+<!-- Sidebar active state on scroll -->
+<script>
+(function(){
+  var links = document.querySelectorAll('.sidebar .nav-link');
+  var sections = Array.from(document.querySelectorAll('section[id]'));
+  function onScroll(){
+    var y = window.scrollY + 100;
+    var active = sections[0];
+    for (var i = 0; i < sections.length; i++) {
+      if (sections[i].offsetTop <= y) active = sections[i];
+    }
+    links.forEach(function(l){
+      l.classList.toggle('active', l.getAttribute('href') === '#' + active.id);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
