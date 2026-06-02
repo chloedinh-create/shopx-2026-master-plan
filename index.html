@@ -259,6 +259,36 @@
   .action-item .ai-desc { font-size: 13px; color: var(--text-soft); margin: 0 0 4px; line-height: 1.5; }
   .action-item .ai-meta { font-size: 11.5px; color: var(--text-muted); }
 
+  /* Channel cards (merged with Task Tracker + Phase Matrix) */
+  .channel-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 14px; box-shadow: var(--shadow-sm); overflow: hidden; }
+  .channel-card.cc-highlight { border-color: #fde68a; box-shadow: 0 0 0 1px #fde68a; }
+  .channel-head { background: var(--surface-3); padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .channel-name { font-weight: 800; font-size: 14px; color: var(--text); }
+  .channel-name small { font-weight: 500; font-size: 11.5px; color: var(--text-muted); }
+  .channel-meta { display: flex; gap: 16px; font-size: 11.5px; color: var(--text-soft); flex-wrap: wrap; }
+  .channel-meta strong { color: var(--text); }
+  .channel-mission { padding: 8px 14px; font-size: 12.5px; color: var(--text-soft); border-bottom: 1px solid var(--border); background: var(--surface-2); line-height: 1.5; }
+  .channel-phases { padding: 0; }
+  .channel-phase-row { display: grid; grid-template-columns: 50px 1fr 320px; gap: 14px; padding: 10px 14px; border-top: 1px solid #f1f5f9; align-items: flex-start; }
+  .channel-phase-row:first-child { border-top: 0; }
+  .channel-phase-row:hover { background: var(--surface-2); }
+  .cpr-phase { font-weight: 800; font-size: 11px; letter-spacing: .4px; padding: 4px 6px; border-radius: 4px; text-align: center; align-self: flex-start; height: fit-content; }
+  .cpr-activities { font-size: 12.5px; color: var(--text-soft); line-height: 1.55; }
+  .cpr-activities ul { margin: 0; padding-left: 16px; }
+  .cpr-activities li { margin-bottom: 2px; }
+  .cpr-side { font-size: 11.5px; line-height: 1.5; }
+  .cpr-task-list { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 4px; }
+  .cpr-task-pill { padding: 2px 6px; border-radius: 3px; font-size: 10.5px; font-weight: 600; }
+  .cpr-task-pill.t-p1 { background: #ede9fe; color: #5b21b6; }
+  .cpr-task-pill.t-p2 { background: #dbeafe; color: #1e40af; }
+  .cpr-task-pill.t-p3 { background: #fee2e2; color: #991b1b; }
+  .cpr-task-pill.t-p4 { background: #fef3c7; color: #92400e; }
+  .cpr-task-pill.t-p5 { background: #d1fae5; color: #065f46; }
+  .cpr-task-pill .owner { opacity: .75; font-weight: 500; margin-left: 2px; }
+  .cpr-msg { color: var(--text-muted); font-style: italic; font-size: 11px; line-height: 1.4; padding-top: 4px; border-top: 1px dashed #e3e6f0; margin-top: 4px; }
+  .cpr-no-activity { color: var(--text-muted); font-size: 11.5px; font-style: italic; }
+  @media (max-width: 900px) { .channel-phase-row { grid-template-columns: 1fr; gap: 8px; } .cpr-phase { display: inline-block; } }
+
   /* Master Tracker status pills */
   .status-pill { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .3px; }
   .status-not-started { background: #f1f5f9; color: #475569; }
@@ -318,7 +348,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan</div>
-    <div class="brand-meta">v1.2 · Cập nhật 02/06/2026 (chiều)</div>
+    <div class="brand-meta">v1.3 · Cập nhật 02/06/2026 (tối)</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -389,9 +419,9 @@
   </div>
 
   <div class="info-box">
-    <div class="info-box-title">🆕 v1.2 sync với sheet update (02/06 chiều)</div>
+    <div class="info-box-title">🆕 v1.3 sync với sheet update (02/06 tối)</div>
     <div class="info-box-body">
-      3 sections mới từ sheet v2: <a href="#phase-plan" style="color:var(--primary);font-weight:700;">19 Phase Plan (7 phases)</a> · <a href="#phase-comms" style="color:var(--primary);font-weight:700;">20 Phase Comm Plan</a> · <a href="#master-tracker" style="color:var(--primary);font-weight:700;">21 Master Execution Tracker (42 tasks với Start/End/Priority/Dependency/KPI/Status)</a>. Status hôm nay: 1 task IN PROGRESS, 41 NOT STARTED. <strong>Có 5 ownership conflicts giữa sheet v2 và RACI user-defined</strong> — cần align với team. Xem chi tiết trong section 21.
+      <a href="#channels" style="color:var(--primary);font-weight:700;">08 Bản đồ kênh truyền thông</a> restructure thành 23 channel cards · merge với Task Tracker + Phase Matrix + Gantt (task pills mã hoá phase màu). Bỏ Risk Heatmap, Owner workload distribution, Owner data note. Update Gaps & Action items theo state mới. <strong>Tasks chỉ log theo sheet "02. Task Tracker"</strong> — đây là source of truth.
     </div>
   </div>
 
@@ -418,73 +448,35 @@
     </div>
   </div>
 
-  <h3>Phân bổ rủi ro theo điểm XS×TĐ</h3>
-  <div class="heatmap">
-    <div class="heatmap-cell heatmap-label">XS\TĐ</div>
-    <div class="heatmap-cell heatmap-label">1</div>
-    <div class="heatmap-cell heatmap-label">2</div>
-    <div class="heatmap-cell heatmap-label">3</div>
-    <div class="heatmap-cell heatmap-label">4</div>
-    <div class="heatmap-cell heatmap-label">5</div>
-
-    <div class="heatmap-cell heatmap-label">5</div>
-    <div class="heatmap-cell h-low">5</div>
-    <div class="heatmap-cell h-med">10</div>
-    <div class="heatmap-cell h-hi">15</div>
-    <div class="heatmap-cell h-hi">20</div>
-    <div class="heatmap-cell h-hi">25</div>
-
-    <div class="heatmap-cell heatmap-label">4</div>
-    <div class="heatmap-cell h-low">4</div>
-    <div class="heatmap-cell h-med">8</div>
-    <div class="heatmap-cell h-med">12</div>
-    <div class="heatmap-cell h-hi">R01, R08</div>
-    <div class="heatmap-cell h-hi">20</div>
-
-    <div class="heatmap-cell heatmap-label">3</div>
-    <div class="heatmap-cell h-low">3</div>
-    <div class="heatmap-cell h-med">R03</div>
-    <div class="heatmap-cell h-med">R18</div>
-    <div class="heatmap-cell h-med">R02,R06,R07,R09,R10,R11,R19</div>
-    <div class="heatmap-cell h-hi">R04, R05</div>
-
-    <div class="heatmap-cell heatmap-label">2</div>
-    <div class="heatmap-cell h-low">2</div>
-    <div class="heatmap-cell h-low">4</div>
-    <div class="heatmap-cell h-low">6</div>
-    <div class="heatmap-cell h-med">R16, R20</div>
-    <div class="heatmap-cell h-med">R15, R17</div>
-
-    <div class="heatmap-cell heatmap-label">1</div>
-    <div class="heatmap-cell h-low">1</div>
-    <div class="heatmap-cell h-low">2</div>
-    <div class="heatmap-cell h-low">3</div>
-    <div class="heatmap-cell h-low">4</div>
-    <div class="heatmap-cell h-low">5</div>
-  </div>
-  <p class="lead" style="font-size:12px;margin-top:8px;">XS = Xác suất · TĐ = Tác động · Đỏ ≥12, vàng 7–11, xanh ≤6</p>
 </section>
 
 <!-- ============ 01 GAPS ============ -->
 <section id="gaps">
   <h2><span class="ord">01</span>Gaps & Action Items</h2>
-  <p class="lead">10 hành động ưu tiên — bổ sung từ rà soát logic. Sắp xếp theo prio (đỏ = blocker phải làm trong 7 ngày).</p>
+  <p class="lead">Hành động ưu tiên còn lại sau khi sync với sheet v2. Sắp xếp theo prio (đỏ = phải làm trong 7 ngày).</p>
+
+  <div class="info-box success">
+    <div class="info-box-title">✅ Đã resolved trong v1.2</div>
+    <div class="info-box-body">
+      Owner cho 42 tasks trong Task Tracker đã được sheet điền · Timeline phase đã được sheet chuẩn hoá thành 7 phases · Phase Matrix đã có Key Message + Channels + Assets + KPI per phase · Content Calendar đã có 16 bài đầu (15/06–29/07).
+    </div>
+  </div>
 
   <div class="action-item">
     <div class="ai-prio">1</div>
     <div class="ai-body">
-      <div class="ai-title">Gán PIC/Owner cho 100% items đang trống</div>
-      <div class="ai-desc">Risk Register (20), KPI Dashboard (14), Ticket Funnel (6 stages), 23 Channels. Đề xuất dùng RACI template ở section 14 → mỗi item có Responsible + Accountable rõ.</div>
-      <div class="ai-meta">⏱ Deadline: 09/06 · Owner: Chloe (consolidate) + scope leads xác nhận từng người</div>
+      <div class="ai-title">ShopOS Alignment Meeting (đã quá deadline 31/5)</div>
+      <div class="ai-desc">Task T1.6 "ShopOS communication alignment" (Maria, 16/6–30/6) đang Not Started. Risk R10 vẫn open. Escalate founder Chris Koh nếu chưa có meeting. Nếu không confirm deliverables trước 15/6 → treat ShopOS as logo partner only, GemPages chạy plan độc lập.</div>
+      <div class="ai-meta">⏱ Deadline: 06/06 · Owner: Maria (drive) + escalate founder Chris Koh</div>
     </div>
   </div>
 
   <div class="action-item">
     <div class="ai-prio">2</div>
     <div class="ai-body">
-      <div class="ai-title">Reconcile timeline phase</div>
-      <div class="ai-desc">Chọn 1 hệ thống dating thống nhất. Đề xuất chuẩn: <span class="phase-pill phase-p1">P1 28/5–15/6 Warming Up</span> · <span class="phase-pill phase-p2">P2 16/6–31/7 Blooming</span> · <span class="phase-pill phase-p3">P3 1/8–16/9 Peak</span> · <span class="phase-pill phase-p4">P4 17/9 Event Day</span> · <span class="phase-pill phase-p5">P5 18/9–17/10 Afterglow</span>. (Khớp với Funnel + Channel map.)</div>
-      <div class="ai-meta">⏱ Deadline: 05/06 · Owner: Chloe</div>
+      <div class="ai-title">Điền PIC cho 15 bài Content Calendar còn trống</div>
+      <div class="ai-desc">Sheet đã có 16 bài lên lịch (15/06–29/07) nhưng chỉ 15/06 có PIC = Kallie. 15 bài còn lại cần fill PIC theo content type (Event info → Kallie · Edu → Sunny/Chloe · Speaker → Maria+Christine · Experience → Sunny). Xem section 16.</div>
+      <div class="ai-meta">⏱ Deadline: 09/06 · Owner: Kallie + Sunny + Chloe consolidate</div>
     </div>
   </div>
 
@@ -492,22 +484,31 @@
     <div class="ai-prio">3</div>
     <div class="ai-body">
       <div class="ai-title">Confirm Country Lead CN + PH</div>
-      <div class="ai-desc">CN: cần native ZH speaker — Sunny đảm nhận ZH channel nhưng vẫn cần CN local lead. PH: đang là Chloe outreach + PH alumni 2025 (xác nhận lại). Điền vào Market Target table.</div>
-      <div class="ai-meta">⏱ Deadline: 09/06 (sớm hơn deadline gốc 30/6) · Owner: Chloe (coordinate) + escalate founder confirm</div>
+      <div class="ai-desc">Cell COUNTRY LEAD trong Market KPI Summary vẫn trống. Bảng playbook chi tiết ghi CN = Sunny (ZH) + CN local lead TBD; PH = Chloe + alumni 2025. Cần điền chính thức vào sheet và sync lại.</div>
+      <div class="ai-meta">⏱ Deadline: 09/06 (sớm hơn deadline gốc 30/6) · Owner: Chloe coordinate · escalate founder</div>
     </div>
   </div>
 
   <div class="action-item">
     <div class="ai-prio">4</div>
     <div class="ai-body">
-      <div class="ai-title">ShopOS Alignment Meeting (đã quá deadline 31/5)</div>
-      <div class="ai-desc">Escalate ngay — Chris founder-to-founder. Nếu không confirm deliverables trước 15/6 → treat ShopOS as logo partner only, GemPages chạy plan độc lập.</div>
-      <div class="ai-meta">⏱ Deadline: 06/06 · Owner: Escalate founder (Chris Koh) — strategic decision</div>
+      <div class="ai-title">Fill PIC cho Risk Register 20 risks + KPI Dashboard 14 metrics</div>
+      <div class="ai-desc">Sheet Task Tracker đã có owner per task nhưng Risk Register + KPI Dashboard trong sheet vẫn để trống cột PIC. Dashboard đã suggest owner theo team scope — cần team confirm và sync ngược vào sheet.</div>
+      <div class="ai-meta">⏱ Deadline: 12/06 · Owner: Chloe consolidate · scope leads xác nhận</div>
     </div>
   </div>
 
   <div class="action-item med">
     <div class="ai-prio">5</div>
+    <div class="ai-body">
+      <div class="ai-title">Resolve 3 entity tên mới trong Task Tracker</div>
+      <div class="ai-desc">Sheet ghi 3 owners chưa rõ trong team scope: <strong>Media team</strong> (event day capture, recordings edit — Troy + freelance photographer?), <strong>Dev</strong> (Landing page work — ai trong team?), <strong>Team Chinese</strong> (CN/MY ZH co-owner — external team riêng?). Cần clarify để recruit/assign.</div>
+      <div class="ai-meta">⏱ Deadline: 12/06 · Owner: Chloe</div>
+    </div>
+  </div>
+
+  <div class="action-item med">
+    <div class="ai-prio">6</div>
     <div class="ai-body">
       <div class="ai-title">Bóc tách Budget tổng</div>
       <div class="ai-desc">Hiện chỉ có spend per market (~$1.5K paid ads). Cần thêm: PR retainer, design freelance backup (Lily Team), KOL gifts, welcome kit, travel reimburse (sponsors/speakers), contingency 10%. Xem template ở section 15.</div>
@@ -516,38 +517,29 @@
   </div>
 
   <div class="action-item med">
-    <div class="ai-prio">6</div>
-    <div class="ai-body">
-      <div class="ai-title">Thêm Risk Group 4 — Team & Operations</div>
-      <div class="ai-desc">Hiện có Nhóm 1,2,3,5,6 — thiếu 4. Đề xuất R12 Team burnout P3, R13 Key person dependency (Chris bottleneck), R14 Approval flow chậm. Crisis quick-response đã có "Team burnout P3" — chuyển vào register chính.</div>
-      <div class="ai-meta">⏱ Deadline: 12/06 · Owner: Chloe (consolidate từ team feedback)</div>
-    </div>
-  </div>
-
-  <div class="action-item med">
     <div class="ai-prio">7</div>
     <div class="ai-body">
-      <div class="ai-title">Tạo Weekly Content Calendar</div>
-      <div class="ai-desc">Plan hiện theo Phase × Pillar nhưng thiếu Mon/Tue/Wed schedule. Jimmy + Tuấn Anh không thể batch design 30 templates nếu không có calendar. Template ở section 16.</div>
-      <div class="ai-meta">⏱ Deadline: 19/06 · Owner: Kallie (social cal) + Sunny (email cal) + Chloe (consolidate)</div>
+      <div class="ai-title">Document Plan A/B cho Meta + TikTok confirm</div>
+      <div class="ai-desc">Internal check 15/6. Cần 2 messaging draft sẵn: (A) Confirmed → Meta/TikTok = primary PR hook; (B) Not confirmed → East-West crossover = primary hook. Tránh kẹt khi tin về sát ngày.</div>
+      <div class="ai-meta">⏱ Deadline: 15/06 · Owner: Maria (PR scope) — escalate founder confirm</div>
     </div>
   </div>
 
   <div class="action-item med">
     <div class="ai-prio">8</div>
     <div class="ai-body">
-      <div class="ai-title">Document Plan A/B cho Meta + TikTok confirm</div>
-      <div class="ai-desc">Internal check 15/6. Cần 2 messaging draft sẵn: (A) Confirmed → Meta/TikTok = primary PR hook; (B) Not confirmed → East-West crossover = primary hook. Tránh kẹt khi tin về sát ngày.</div>
-      <div class="ai-meta">⏱ Deadline: 15/06 · Owner: Chloe (draft 2 messaging) — escalate founder confirm</div>
+      <div class="ai-title">Fill Content Calendar tháng 8–10 (P3 Peak + P4 + P5)</div>
+      <div class="ai-desc">Calendar mới fill đến 29/07. Từ 1/8 trở đi (toàn bộ P3 + P4 + P5) chưa có bài cụ thể. P3 là phase Peak với nhiều scarcity posts + All-Hands Week 25-31/8 — cần plan kỹ.</div>
+      <div class="ai-meta">⏱ Deadline: 30/06 · Owner: Kallie + Sunny + Chloe consolidate</div>
     </div>
   </div>
 
   <div class="action-item low">
     <div class="ai-prio">9</div>
     <div class="ai-body">
-      <div class="ai-title">Speaker Tracker + Sponsor Pipeline (bảng riêng)</div>
-      <div class="ai-desc">Plan hiện không có bảng theo dõi 12 speaker targets (status: invited/confirmed/declined/no-response) và sponsor LOI status. Template sẵn ở section 17+18.</div>
-      <div class="ai-meta">⏱ Deadline: 16/06 · Owner: Maria (speaker tracker) + Christine (sponsor pipeline)</div>
+      <div class="ai-title">Speaker Tracker + Sponsor Pipeline (bảng riêng trong sheet)</div>
+      <div class="ai-desc">Dashboard có template ở section 17+18 nhưng sheet chưa có. Cần Maria điền speaker tracker (12 targets, current 2 confirmed: Steve + Arvind) và Christine điền sponsor pipeline (target 3 LOI by end July, 5 contracts by P3).</div>
+      <div class="ai-meta">⏱ Deadline: 16/06 · Owner: Maria + Christine</div>
     </div>
   </div>
 
@@ -1208,176 +1200,795 @@
 
 <!-- ============ 08 CHANNELS ============ -->
 <section id="channels">
-  <h2><span class="ord">08</span>Channels (23)</h2>
-  <p class="lead">Bản đồ 23 kênh — Owned + Internal · Paid Media · Earned Media · Partnership.</p>
+  <h2><span class="ord">08</span>Bản đồ kênh truyền thông (23 kênh)</h2>
+  <p class="lead">Channel Map merged với <a href="#master-tracker" style="color:var(--primary);font-weight:600;">Task Tracker (42 tasks)</a> + <a href="#phase-comms" style="color:var(--primary);font-weight:600;">Phase Matrix</a> + <a href="#timeline" style="color:var(--primary);font-weight:600;">Gantt</a>. Mỗi kênh hiển thị: activities per phase · task IDs từ Task Tracker (mã hoá phase màu) · key message excerpt.</p>
+
+  <div class="info-box">
+    <div class="info-box-title">Cách đọc card kênh</div>
+    <div class="info-box-body">
+      Mỗi kênh = 1 card với header (PIC + KPI) và 5 dòng phase (P1-P5). Cột trái mỗi dòng = activities cụ thể trên kênh này theo phase. Cột phải = <strong>task pills</strong> liên kết với Task Tracker (vd: <span class="cpr-task-pill t-p2">T2.5</span> = task số 5 của P2) + key message excerpt từ Phase Matrix.<br/>
+      <strong>Quy ước task ID:</strong> T1.x = P1 Warming Up · T2.x = P2 Blooming · T3.x = P3 Peak · T4.x = P4 Event Day · T5.x = P5 After Glow.
+    </div>
+  </div>
 
   <h3>OWNED + INTERNAL — Nền tảng toàn bộ chiến dịch</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Kênh</th><th>Mục tiêu</th><th>KPI</th><th>PIC</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Facebook Page</strong> · GemPages Brand · 4K followers</td>
-          <td>Mass reach VN + APAC ecom community. Content 40% edu / 30% social proof / 20% event / 10% BTS. Không promotion trước education.</td>
-          <td>Reach 1K+ P2 / 2K+ P3 · Apply 150+ · Stories views 800+</td>
-          <td>Kallie</td>
-        </tr>
-        <tr>
-          <td><strong>LinkedIn Page</strong> · 1K+ followers · LinkedIn Event</td>
-          <td>B2B, sponsors, founders IN/SG/AU. Thought leadership. LinkedIn Event Page tạo 16/6.</td>
-          <td>Reach 2K+/bài · Engagement &gt;4% · LI Event RSVPs 500+ · Apply LI 80+</td>
-          <td>Kallie</td>
-        </tr>
-        <tr>
-          <td><strong>Instagram</strong> · GemPages Brand</td>
-          <td>Visual + Saigon Experience. Primary cho MY/PH audience.</td>
-          <td>Stories 400+ views · Reels 1K+ views · Speaker collab posts = free cross-reach</td>
-          <td>Kallie</td>
-        </tr>
-        <tr>
-          <td><strong>X / Twitter + Threads</strong> · Brand</td>
-          <td>Real-time AI commentary + builder. Brand account amplify Chris Koh trong 30 phút.</td>
-          <td>5K+ impressions/bài · Brand = amplifier</td>
-          <td>Kallie</td>
-        </tr>
-        <tr>
-          <td><strong>YouTube</strong> · GemPages Channel</td>
-          <td>SEO asset 12+ tháng. Title format: [Tên speaker] [Topic cụ thể] ShopX 2026.</td>
-          <td>Pre-event 500+ · Recordings 300+/session · SEO compound 12+ tháng</td>
-          <td>Kallie (channel) + Troy (video edit)</td>
-        </tr>
-        <tr style="background: #fef3c7;">
-          <td><strong>📧 Email Marketing</strong><br/><span class="badge danger">ROI CAO NHẤT (3-8x social)</span></td>
-          <td>Gửi từ <strong>chris@gempages.net</strong> (không phải noreply). 12 emails từ Email 1 (1/7) đến Email 12 (17/10). A/B subject test BẮT BUỘC mọi send. 6 segments: GemPages users · 2025 attendees · Waitlist · Approved · Sponsors · Speakers.</td>
-          <td><strong>Open &gt;38% · CTR &gt;9% · Apply 200+ · Unsubscribe &lt;1%</strong></td>
-          <td><strong>Sunny</strong> (toàn bộ scope, xuyên suốt mọi phase)</td>
-        </tr>
-        <tr>
-          <td><strong>WeChat + Xiaohongshu</strong> · CN/MY ZH</td>
-          <td>Bắt buộc cho CN cross-border + MY ZH community. <strong>Nộp WeChat application TUẦN ĐẦU — không trì hoãn.</strong></td>
-          <td>Traffic 500+/tuần P2, 1K+/tuần P3 · Conversion &gt;5%</td>
-          <td>Sunny (ZH content) + Kallie (community side)</td>
-        </tr>
-        <tr>
-          <td><strong>WhatsApp Groups</strong> · 4 groups</td>
-          <td>Partner/Sponsor Brief · Speaker Logistics · Attendees · VIP Delegates. <strong>Kênh DUY NHẤT ngày 17/9.</strong> Kallie monitor 7:30am–10pm.</td>
-          <td>Join rate 95%+</td>
-          <td>Kallie (primary) + Maria (speaker group) + Christine (sponsor group)</td>
-        </tr>
-        <tr style="background: #fef3c7;">
-          <td><strong>👤 Chris Koh Personal</strong> · LI/FB/X/Threads<br/><span class="badge danger">REACH CAO NHẤT</span></td>
-          <td>Kênh uy tín + engagement <strong>CAO NHẤT toàn kế hoạch</strong>. Quy trình: Kallie/Chloe draft → Chris Koh chỉnh/approve → Chris đăng. LI 2+/tuần · Threads 3+/tuần.</td>
-          <td><strong>Reach P1-P5: 60K+ · LI engagement &gt;6% (avg industry 2%)</strong></td>
-          <td>Chris Koh (founder, owner) + Kallie (content calendar + draft)</td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">📘 FACEBOOK PAGE · GemPages Brand <small>(4K followers)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie</span><span><strong>KPI:</strong> Reach 1K+ P2 / 2K+ P3 · Apply 150+ · Stories 800+</span></div>
+    </div>
+    <div class="channel-mission">Mass reach VN + APAC ecom community. Content mix 40% edu / 30% social proof / 20% event / 10% BTS. Không promotion trước education.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Post recap ShopX 2025 (carousel slides + stats + quotes)</li><li>BTS team scouting Gem Center (60s raw video)</li><li>"Tại sao Saigon 2026" 2 posts ngắn · Chris Koh share + comment mỗi bài</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.2 ShopX 2025 recap <span class="owner">Kallie</span></span></div><div class="cpr-msg">Msg P1: "ShopX 2025 prove room quality, 2026 = AI ecommerce direction mới"</div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Education carousel 2x/tuần — AI how-to thật, không mention event</li><li>Speaker Wave 1: Steve + Arvind (carousel announce)</li><li>Announce landing page live (16/6) · Tease 5 tracks 1/tuần</li><li>Boost top 2 bài/tuần $30-50</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.5 AI how-to <span class="owner">Kallie</span></span><span class="cpr-task-pill t-p2">T2.6 Speaker W1 <span class="owner">Christine+Design</span></span><span class="cpr-task-pill t-p2">T2.7 Track reveal <span class="owner">Christine+Design</span></span></div><div class="cpr-msg">Msg P2: "See real AI ecommerce workflows before your competitors turn them into an advantage"</div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Reveal full agenda (carousel 12 slides, 1/8)</li><li>Scarcity posts 50/80/95% capacity</li><li>Countdown T-30 → T-1 (rotate angle mỗi tuần)</li><li>All-Hands Week 25-31/8: repost mọi partner posts</li><li>Scale paid boost top posts</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.2 Agenda reveal <span class="owner">Maria</span></span><span class="cpr-task-pill t-p3">T3.4 Speaker W2 <span class="owner">Christine+Design</span></span><span class="cpr-task-pill t-p3">T3.6 All-Hands <span class="owner">All partners</span></span><span class="cpr-task-pill t-p3">T3.8 Scarcity <span class="owner">Kallie</span></span></div><div class="cpr-msg">Msg P3: "250 curated operators. 6 APAC markets. One room in Saigon before BFCM 2026"</div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Stories mỗi 30-60 phút — raw không edit</li><li>Repost mọi bài tag #ShopX2026 trong 15 phút</li><li>Kallie 100% social, không làm ops</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.1 Real-time social <span class="owner">Kallie</span></span><span class="cpr-task-pill t-p4">T4.2 Repost UGC <span class="owner">Kallie</span></span></div><div class="cpr-msg">Msg P4: "ShopX 2026 is happening now. This is the room."</div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>T+1 carousel cảm ơn tag mọi speakers</li><li>Quote cards 1 bài/ngày × 14 ngày</li><li>Recap video 60s — boost $200-300</li><li>T+30 tease ShopX 2027</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.1 Thank-you + E9 <span class="owner">Christine</span></span><span class="cpr-task-pill t-p5">T5.3 Recap video <span class="owner">Kallie+Media+Design</span></span><span class="cpr-task-pill t-p5">T5.4 Quote cards <span class="owner">Sunny+Design</span></span></div><div class="cpr-msg">Msg P5: "What happened at ShopX should not stay in one room"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">💼 LINKEDIN PAGE · GemPages Brand <small>(1K+ followers + LI Event)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie</span><span><strong>KPI:</strong> Reach 2K+/bài · Engagement &gt;4% · LI Event RSVPs 500+ · Apply 80+</span></div>
+    </div>
+    <div class="channel-mission">B2B, sponsors, founders IN/SG/AU, agency ecosystem. Thought leadership + speaker authority. LinkedIn Event Page tạo 16/6.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Announce ShopX 2026 với credentials 2025 (professional tone)</li><li>Tạo LinkedIn Event Page + mời connections</li><li>Post ShopX 2025 proof: stats + country breakdown</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.2 Recap content <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Speaker announce B2B angle (credential + business outcome)</li><li>Thought leadership 3 bài — AI thay đổi APAC ecommerce</li><li>Sponsor co-tag posts khi ký hợp đồng</li><li>InMail decision-makers (Christine sponsor scope)</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.5 LI insight <span class="owner">Kallie</span></span><span class="cpr-task-pill t-p2">T2.6 Speaker W1 B2B <span class="owner">Christine+Design</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Reveal full agenda format chuyên nghiệp</li><li>All-Hands Week: GemPages + speakers post cùng tuần</li><li>Sponsor amplification posts</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.2 Agenda <span class="owner">Maria</span></span><span class="cpr-task-pill t-p3">T3.4 Speaker W2 <span class="owner">Christine+Design</span></span><span class="cpr-task-pill t-p3">T3.6 All-Hands <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Sáng: ShopX live, X sellers, Y nước — 1 ảnh</li><li>Chiều: Best keynote quote card</li><li>Tối: Cruise closing shot</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.1 Live updates <span class="owner">Kallie</span></span><span class="cpr-task-pill t-p4">T4.5 Cruise <span class="owner">Media</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Chris Koh LI article T+3 (1,500 từ, reflection thật)</li><li>Sponsor case study posts</li><li>Session recording links + key takeaway</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.3 Recap <span class="owner">Kallie+Media+Design</span></span><span class="cpr-task-pill t-p5">T5.4 Quote cards <span class="owner">Sunny+Design</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">📷 INSTAGRAM · GemPages Brand</div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie</span><span><strong>KPI:</strong> Stories 400+ views · Reels 1K+ views</span></div>
+    </div>
+    <div class="channel-mission">Visual storytelling + Saigon Experience. Primary cho MY và PH audience.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Key Visual reveal (1 ảnh, tối giản)</li><li>BTS Reels 30s · Saigon lifestyle (venue, đồ ăn, river view)</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.2 KV+BTS <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Speaker carousel (headshot + quote + topic)</li><li>Venue reveal chính thức</li><li>Stories Q&amp;A "AI tool nào bạn muốn hiểu hơn?"</li><li>Collab posts với speakers có IG</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.6 Speaker W1 <span class="owner">Christine+Design</span></span><span class="cpr-task-pill t-p2">T2.7 Track reveal <span class="owner">Christine+Design</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Daily Stories countdown T-30 → T-1</li><li>Cruise teaser Reel 45s (golden hour)</li><li>Hotel + travel tip cho international</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.4 Speaker W2 <span class="owner">Christine+Design</span></span><span class="cpr-task-pill t-p3">T3.8 Stories countdown <span class="owner">Kallie</span></span><span class="cpr-task-pill t-p3">T3.9 Cruise teaser <span class="owner">Sunny</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Stories mỗi 30-60 phút — raw</li><li>Reels: best 60s clip keynote, post trước 3pm</li><li>Cruise: ảnh hoàng hôn đăng live 7pm</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.1 Stories <span class="owner">Kallie</span></span><span class="cpr-task-pill t-p4">T4.5 Cruise live <span class="owner">Media</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Recap Reel 90s (ambient audio, không voiceover)</li><li>Carousel 10 ảnh đẹp nhất trong ngày</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.3 Recap <span class="owner">Kallie+Media+Design</span></span><span class="cpr-task-pill t-p5">T5.4 Quote cards <span class="owner">Sunny+Design</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">🐦 X / TWITTER + THREADS · Brand Account</div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie</span><span><strong>KPI:</strong> 5K+ impressions/bài (amplifier cho Chris Koh)</span></div>
+    </div>
+    <div class="channel-mission">Real-time AI commentary + builder audience. Brand account amplify Chris Koh trong 30 phút.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Thread: "5 AI trends đang thay đổi ecommerce APAC"</li><li>Tag speakers khi confirm để build thread engagement</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">via Chris Koh personal</span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Speaker tease — text only, sharp (không cần ảnh)</li><li>Amplify mọi thread Chris trong 30 phút</li><li>Quick takes về AI ecommerce news</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.5 amplify <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Countdown micro-content 1 bài/ngày</li><li>Amplify Chris threads</li><li>Mention event trong bio + pinned post</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.8 countdown <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Live thread: 1 quote hay nhất/session trong 5 phút</li><li>Repost Chris Koh live coverage</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.1 Live thread <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Quote thread: 10 best quotes ShopX trong 1 thread</li><li>Recording links + context</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.4 Quote thread <span class="owner">Sunny+Design</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">▶ YOUTUBE · GemPages Channel</div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie (channel) + Troy (video edit)</span><span><strong>KPI:</strong> Pre-event 500+ · Recordings 300+/session · SEO compound 12+ tháng</span></div>
+    </div>
+    <div class="channel-mission">SEO asset 12+ tháng. Title format: [Tên speaker] [Topic cụ thể] ShopX 2026.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Optimize channel: banner, keywords, playlist ShopX 2026</li><li>Chuẩn bị thumbnail + lower-third template</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">Setup</span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Mini doc 5": "Road to ShopX 2026 — Tại sao Saigon, tại sao AI"</li><li>Speaker preview 30s/speaker</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.6 Speaker preview <span class="owner">Troy+Design</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Full speaker preview 3": who + problem + demo</li><li>Share trong email T-30 để drive apply</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.9 Cruise/Saigon B-roll <span class="owner">Sunny+Troy</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Chỉ capture raw footage — không livestream</li><li>Tất cả presentations download local (không cloud)</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.4 Capture <span class="owner">Media</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Edit toàn bộ sessions: trim, EN captions, lower-third, thumbnail</li><li>Release attendees-only 14 ngày, sau đó public</li><li>SEO: thumbnail + title = 90% views</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.3 Recap video <span class="owner">Kallie+Media+Design</span></span><span class="cpr-task-pill t-p5">T5.5 Recordings edit <span class="owner">Media+Christine</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card cc-highlight">
+    <div class="channel-head">
+      <div class="channel-name">📧 EMAIL MARKETING <small>(12 emails từ chris@gempages.net)</small> <span class="badge danger">ROI 3-8x social</span></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Sunny</span><span><strong>KPI:</strong> Open &gt;38% · CTR &gt;9% · Apply 200+ · Unsubscribe &lt;1%</span></div>
+    </div>
+    <div class="channel-mission">Gửi từ chris@gempages.net không phải noreply. 6 segments: GemPages users · 2025 attendees · Waitlist · Approved · Sponsors · Speakers. A/B subject test BẮT BUỘC.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Setup domain auth (SPF, DKIM, DMARC)</li><li>Build segments + master template</li><li>Chuẩn bị 12 emails trước P2</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.5 Partner toolkit <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li><strong>E1 (1/7):</strong> Apply Free — A/B subject</li><li><strong>E2 (15/7):</strong> Speaker lineup teaser (Steve+Arvind)</li><li><strong>E3 (28/7):</strong> Free apply closing in 3 days</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.2 E1 <span class="owner">Christine</span></span><span class="cpr-task-pill t-p2">T2.3 E2 <span class="owner">Christine</span></span><span class="cpr-task-pill t-p2">T2.4 E3 <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li><strong>E4 (3/8) T-45:</strong> Paid ticket open — itemize $99</li><li><strong>E5 (18/8) T-30:</strong> Full agenda live</li><li><strong>E6 (3/9) T-14:</strong> Prep checklist</li><li><strong>E7 (10/9) T-7:</strong> X people, Y countries</li><li><strong>E8 (16/9) T-1:</strong> Logistics only, no selling</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.3 E4-8 <span class="owner">Christine+Kallie</span></span><span class="cpr-task-pill t-p3">T3.10 Prep guides <span class="owner">Sunny</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">WhatsApp only ngày 17/9 — không gửi email event day</div></div>
+        <div class="cpr-side"><div class="cpr-msg">Ngày event WhatsApp = kênh duy nhất</div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li><strong>E9 (18/9):</strong> Cảm ơn + recap video</li><li><strong>E10 (20/9):</strong> NPS survey 2 phút</li><li><strong>E11 (30/9):</strong> Recordings ready</li><li><strong>E12 (17/10) T+30:</strong> "Bạn đang áp dụng gì?"</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.1 E9 <span class="owner">Christine</span></span><span class="cpr-task-pill t-p5">T5.2 E10 NPS <span class="owner">Kallie+Christine</span></span><span class="cpr-task-pill t-p5">T5.5 E11 <span class="owner">Media+Christine</span></span><span class="cpr-task-pill t-p5">T5.8 E12 <span class="owner">Kallie+Christine</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">🇨🇳 WECHAT + XIAOHONGSHU <small>(CN/MY ZH)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Sunny (ZH content) + Kallie (community) + Team Chinese</span><span><strong>KPI:</strong> Traffic 500+/tuần P2, 1K+/tuần P3 · CVR &gt;5%</span></div>
+    </div>
+    <div class="channel-mission">Bắt buộc cho CN cross-border + MY ZH community. Nộp WeChat application TUẦN ĐẦU — không trì hoãn.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Nộp WeChat Official Account application (tuần đầu)</li><li>Setup Xiaohongshu account</li><li>First organic ZH posts: giới thiệu ShopX brand</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">Setup ZH channels</span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Organic ZH content: announce ShopX, highlight Mandarin translation</li><li>Xiaohongshu: ảnh Saigon đẹp + event context</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.10 ZH setup + organic <span class="owner">Kallie+Team Chinese</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Paid WeChat Ads: 仅限250人 · 9月17日 · 胡志明市</li><li>Xiaohongshu sponsored posts — Saigon lifestyle angle</li><li>Retarget ZH visitors landing page</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.7 Scale ZH ads <span class="owner">Kallie+Team Chinese</span></span><span class="cpr-task-pill t-p3">T3.9 ZH travel <span class="owner">Sunny</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a (live coverage qua channels khác)</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Trang recordings với SEO titles ZH đầy đủ</li><li>Form đăng ký interest ShopX 2027</li><li>Quote cards ZH</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.4 Recap blog ZH <span class="owner">Sunny+Design</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">💬 WHATSAPP GROUPS <small>(4 groups)</small> <span class="badge danger">EVENT DAY PRIMARY</span></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie (primary, full-time 17/9) + Maria (speaker group) + Christine (sponsor group)</span><span><strong>KPI:</strong> Join rate 95%+</span></div>
+    </div>
+    <div class="channel-mission">4 groups: Partner/Sponsor Brief · Speaker Logistics · Attendees · VIP Delegates. KÊNH DUY NHẤT ngày 17/9. Kallie monitor 7:30am–10pm.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Launch Partner/Sponsor group</li><li>Gửi partner toolkit + posting calendar</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.5 Partner toolkit <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Launch VIP Delegate group (30/6)</li><li>Thu thập flight info qua form</li><li>Speaker logistics group active</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Launch Attendee group (1/8)</li><li>Weekly value drops: 1 AI tip/tuần</li><li>T-14: venue map, hotel, Grab</li><li>T-7: emoji poll chọn track</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.10 Attendee prep <span class="owner">Sunny</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li><strong>Kênh DUY NHẤT 17/9</strong></li><li>Cập nhật real-time: schedule, room, cruise boarding</li><li>Kallie monitor 7:30am–10pm</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.3 WhatsApp logistics <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Migrate sang ShopX Year-Round APAC Community</li><li>Monthly value drops duy trì cộng đồng</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.7 Migrate Year-Round <span class="owner">Kallie</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card cc-highlight">
+    <div class="channel-head">
+      <div class="channel-name">👤 CHRIS KOH PERSONAL <small>(LI/FB/X/Threads)</small> <span class="badge danger">REACH 60K+ P1-P5</span></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Chris Koh (founder) + Kallie (calendar + draft)</span><span><strong>KPI:</strong> Reach 60K+ · LI engagement &gt;6%</span></div>
+    </div>
+    <div class="channel-mission">Kênh uy tín + engagement CAO NHẤT toàn kế hoạch. Quy trình: Kallie draft → Chris chỉnh/approve → Chris đăng. LI 2+/tuần · Threads 3+/tuần.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Founder letter: "Tại sao tôi build ShopX 2026 tại Saigon" (LI 800-1000 từ)</li><li>Threads daily AI obs: 1 điều thật vừa test</li><li>Tag Arvind trong founder letter → chain IN/SG</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.3 Founder letter <span class="owner">Sunny draft</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Speaker personal endorsements: "Tôi muốn kể lý do tôi mời [Tên]..."</li><li>Threads daily AI ecommerce observation</li><li>Tối đa 1 post/ngày — quality &gt; volume</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>FOMO post chỉ Chris viết được: honest, cụ thể, không bán</li><li>All-Hands Week anchor post: thread tất cả speakers + sponsors</li><li>T-7: personal reflection</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.6 All-Hands anchor <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Live X thread: 1 quote hay nhất/session trong 5 phút</li><li>LI story mid-day: 1 ảnh, 1 câu</li><li>Tối từ cruise: 1 câu. "Year 2. Done."</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>LI article T+3: "Tôi học được gì khi build ShopX Year 2" (1500 từ)</li><li>Threads: "ShopX 2027 planning. Bạn muốn thấy gì?"</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.9 2027 reflection <span class="owner">Chris Koh</span></span></div></div>
+      </div>
+    </div>
   </div>
 
   <h3>PAID MEDIA — Khuếch đại organic, retarget warm leads</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Kênh</th><th>Mục tiêu + Strategy</th><th>KPI</th><th>PIC</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Meta Ads</strong> · FB + IG</td>
-          <td>P2 soft launch VN+SG, A/B test 4 creative variants: (A) KV artwork (B) Speaker face (C) Social proof (D) FOMO copy. Kill CTR &lt;1% sau 7 ngày. P3 scale winners + mở full APAC, 70% retarget / 30% cold.</td>
-          <td>P2 CTR &gt;2% · P3 CTR &gt;3% · CPL &lt;$8 · Apply 120+</td>
-          <td>Chloe</td>
-        </tr>
-        <tr>
-          <td><strong>LinkedIn Ads</strong></td>
-          <td>P2 soft launch SG+IN. Speaker face creative. LI Event page boost. P3 mở AU. Retarget LI visitors chưa apply.</td>
-          <td>CTR &gt;2% · CPL &lt;$12 · Apply LI Ads 50+</td>
-          <td>Chloe</td>
-        </tr>
-        <tr>
-          <td><strong>Landing Page</strong></td>
-          <td>Hub conversion mọi kênh đều dẫn về. Build + QA P1 (speed &lt;3s, SSL, Hotjar/Clarity). Live 16/6 với Waitlist → Apply Free 1/7. A/B test CTA P2. Đổi paid CTA 1/8. Scarcity counter real-time P3.</td>
-          <td>P2 CVR &gt;3% · P3 CVR &gt;5%</td>
-          <td><strong>Chloe</strong> (toàn bộ scope theo phase)</td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">💰 META ADS · FB + IG</div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Chloe (RACI) / Hellen (sheet v2 P2)</span><span><strong>KPI:</strong> P2 CTR &gt;2% · P3 CTR &gt;3% · CPL &lt;$8 · Apply 120+</span></div>
+    </div>
+    <div class="channel-mission">P2 soft launch VN+SG, A/B 4 creatives. Kill CTR &lt;1% sau 7 ngày. P3 scale + full APAC, 70% retarget / 30% cold.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a — không chạy paid P1</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Soft launch VN + SG only</li><li>A/B test 4 creative variants đồng thời: KV / Speaker face / Social proof / FOMO copy</li><li>Kill CTR &lt;1% sau 7 ngày · Scale winners vào P3</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.8 Soft Meta+LI Ads <span class="owner">Hellen</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Scale winner creative 3-4x budget · Mở full APAC: VN, SG, MY, PH</li><li>Urgency creative: "X spots còn lại — 17/9 Saigon"</li><li>Retargeting: landing visitors chưa apply → BFCM angle</li><li>P3 allocation: 70% retarget / 30% cold</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.7 Scale ads <span class="owner">Kallie+Team Chinese</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Boost recap video $200-300 (target 10K views/7 ngày)</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.3 Recap video boost</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">💼 LINKEDIN ADS</div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Chloe (RACI) / Hellen (sheet v2 P2)</span><span><strong>KPI:</strong> CTR &gt;2% · CPL &lt;$12 · Apply LI Ads 50+</span></div>
+    </div>
+    <div class="channel-mission">P2 soft launch SG+IN. Speaker face creative. LI Event page boost. P3 mở AU. Retarget LI visitors chưa apply.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Soft launch SG + IN · Speaker face creative</li><li>LI Event page boost → second-degree connections</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.8 Soft LI Ads <span class="owner">Hellen</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Mở thêm AU</li><li>Creative: "Join 200+ curated APAC sellers — 17/9 Saigon"</li><li>Retarget LI visitors chưa apply</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.7 Scale ads <span class="owner">Kallie+Team Chinese</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card cc-highlight">
+    <div class="channel-head">
+      <div class="channel-name">🌐 LANDING PAGE <small>(Hub conversion)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Chloe (toàn bộ scope theo phase) + Dev (build/QA)</span><span><strong>KPI:</strong> P2 CVR &gt;3% · P3 CVR &gt;5%</span></div>
+    </div>
+    <div class="channel-mission">Hub conversion mọi kênh đều dẫn về. Build + QA P1 (speed &lt;3s, SSL, Hotjar/Clarity). Live 16/6.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Build + QA: form, analytics, speed &lt;3s, SSL</li><li>Heatmap (Hotjar/Clarity miễn phí) cài từ launch</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.4 LP QA + tracking <span class="owner">Chloe+Dev</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Live 16/6: Waitlist → Apply Free từ 1/7</li><li>Thêm speakers + sponsors khi confirm</li><li>A/B test CTA button copy</li><li>2 SEO blog: announcement + "what to expect"</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.1 LP live + Apply Free <span class="owner">Chloe+Dev</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Đổi CTA sang paid ticket (1/8)</li><li>Scarcity counter real-time: X/250 spots</li><li>Thêm full agenda page · Social proof: country flags, testimonials</li><li>Countdown timer trên hero</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.1 Switch paid CTA <span class="owner">Chloe+Dev</span></span><span class="cpr-task-pill t-p3">T3.10 FAQ <span class="owner">Sunny</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Banner: "ShopX 2026 đang diễn ra hôm nay"</li><li>Social feed embed nếu feasible</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Đổi CTA sang "Xem Recap"</li><li>Trang recordings với SEO titles</li><li>Form đăng ký interest ShopX 2027</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.9 2027 interest form <span class="owner">Chris Koh</span></span></div></div>
+      </div>
+    </div>
   </div>
 
   <h3>EARNED MEDIA — Không trả tiền, earned qua chất lượng</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Kênh</th><th>Strategy</th><th>KPI</th><th>PIC</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>PR + Media</strong> · TechInAsia, e27, Vietcetera, The Drum APAC</td>
-          <td>Primary hooks ưu tiên: (1) Meta/TikTok confirm (2) First AI-native ecom summit APAC (3) East-West crossover. Personalized pitch per outlet. Vietcetera pitched first (lowest barrier). Offer exclusivity Chris Koh interview.</td>
-          <td>Ít nhất 1 bài trước 17/9 · On-site 2 phóng viên · Nếu zero by 15/7 → Chris Koh LI article thay</td>
-          <td><span class="no-owner">NEEDS OWNER (PR scope chưa gán)</span></td>
-        </tr>
-        <tr>
-          <td><strong>Speaker UGC</strong> · 12+ speakers</td>
-          <td>12+ speakers × avg 3K followers = <strong>36,000+ reach miễn phí</strong>. Hệ thống 3 sóng: Wave 1 (Steve+Arvind) · Wave 2 (giữa P2) · All-Hands Week (P3). GemPages chuẩn bị caption + visual ready-to-paste.</td>
-          <td>100% speakers post · Reach 36K+ · Apply spike +30% sau All-Hands Week</td>
-          <td>Maria (speaker side) + Kallie (visual coord)</td>
-        </tr>
-        <tr>
-          <td><strong>Attendee UGC</strong> · #ShopX2026</td>
-          <td>250 attendees × 200 followers = <strong>50,000 impressions</strong>. 4 elements: photo wall + MC announce + gamification + welcome kit brief.</td>
-          <td>UGC 50+ posts · Hashtag reach 20K+ · Photo wall = ROI cao nhất</td>
-          <td>Kallie</td>
-        </tr>
-        <tr>
-          <td><strong>Community Seeding</strong> · EFE, Shopify VN, KL/PH/CN/IN groups</td>
-          <td>Model: 1 vé VIP đổi 1 pinned + 1 personal post + 1 urgency follow-up. <strong>QUY TẮC VÀNG: viết riêng từng message cho từng group — copy-paste = phá hủy mối quan hệ vĩnh viễn.</strong></td>
-          <td>Groups seeded 8+ · Apply referral 80+</td>
-          <td>Kallie (toàn bộ scope community)</td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">📰 PR + MEDIA <small>(TechInAsia, e27, Vietcetera, The Drum APAC)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Maria</span><span><strong>KPI:</strong> ≥1 bài trước 17/9 · 2 phóng viên on-site</span></div>
+    </div>
+    <div class="channel-mission">Primary hooks ưu tiên: (1) Meta/TikTok confirm (2) First AI-native ecom summit APAC (3) East-West crossover. Personalized pitch per outlet. Vietcetera pitched first.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a (chuẩn bị pitch deck)</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Gửi personalized pitch — từng outlet 1 angle riêng</li><li>TechInAsia: APAC angle · Vietcetera: Saigon + VN tech · e27: startup + Shopify app</li><li>Offer exclusivity: first outlet nhận Chris Koh interview</li><li>Follow up bằng call sau 5 business days</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.11 PR pitch r1 <span class="owner">Maria</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Pitch preview article</li><li>Nếu Meta/TikTok confirm → gửi press release mới ngay</li><li>Offer press pass + speaker interview slots</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.11 Press preview <span class="owner">Maria</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>2 phóng viên on-site với full access</li><li>Pre-arranged 15" interview với 3 speakers</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Pitch post-event story: "What happened at the first AI ecom summit in APAC"</li><li>Case study pitch per major sponsor</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">🗣 SPEAKER UGC <small>(12+ speakers)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Maria (speaker side) + Kallie (visual coord)</span><span><strong>KPI:</strong> 100% speakers post · Reach 36K+ · Apply spike +30% sau All-Hands</span></div>
+    </div>
+    <div class="channel-mission">12+ speakers × avg 3K followers = 36,000+ reach miễn phí. Hệ thống 3 sóng: Wave 1 (Steve+Arvind) · Wave 2 · All-Hands Week. GemPages chuẩn bị caption + visual ready-to-paste.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Wave 1: Steve Miguel + Arvind post (caption + visual chuẩn bị)</li><li>Wave 2: toàn bộ speakers confirmed còn lại</li><li>Stagger 2-3 ngày giữa mỗi announce</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.6 Speaker Wave 1 <span class="owner">Christine+Design</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li><strong>All-Hands Week 25-31/8:</strong> MỌI speakers post cùng 1 tuần</li><li>Brief gửi ngày 11/8 với: caption sẵn + visual sẵn + lịch đăng</li><li>Maria/Christine confirm từng người trước 14/8</li><li>GemPages repost trong 30 phút</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.4 Speaker Wave 2 <span class="owner">Christine+Design</span></span><span class="cpr-task-pill t-p3">T3.5 All-Hands prep <span class="owner">Team Lily</span></span><span class="cpr-task-pill t-p3">T3.6 All-Hands activation <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Speakers post live từ stage sau session</li><li>GemPages cung cấp lower-third graphic template</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.4 Capture <span class="owner">Media</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Quote card series: 1 bài/ngày × 14 ngày — tag speaker reshare</li><li>Gửi recording link cho từng speaker + gợi ý caption</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.4 Quote cards 14d <span class="owner">Sunny+Design</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">📸 ATTENDEE UGC <small>(#ShopX2026)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie</span><span><strong>KPI:</strong> 50+ posts · Hashtag reach 20K+ · Photo wall = ROI cao nhất</span></div>
+    </div>
+    <div class="channel-mission">250 attendees × 200 followers = 50,000 impressions miễn phí. 4 elements: photo wall + MC announce + gamification + welcome kit brief.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Thiết kế welcome kit brief: tag GemPages + hashtag</li><li>Confirm gamification prize</li><li>Design photo wall</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Photo wall tại điểm traffic cao nhất (check-in)</li><li>MC announce hashtag: khai mạc + mỗi giờ nghỉ</li><li>Repost mọi tag trong 15 phút</li><li>Announce winner gamification tại cruise</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p4">T4.2 Repost UGC 15min <span class="owner">Kallie</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Compile best UGC → thank you carousel</li><li>Collect testimonials cho social proof 2027</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.1 Thank-you carousel <span class="owner">Christine</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">🌱 COMMUNITY SEEDING <small>(EFE, Shopify VN, KL/PH/CN/IN networks)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie</span><span><strong>KPI:</strong> Groups seeded 8+ · Apply referral 80+</span></div>
+    </div>
+    <div class="channel-mission">Model: 1 vé VIP đổi 1 pinned + 1 personal post + 1 urgency follow-up. QUY TẮC VÀNG: viết riêng từng message — copy-paste = phá hủy mối quan hệ.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Build quan hệ cá nhân với admins trước khi xin gì</li><li>Gửi partner toolkit — không ask promotion lần đầu</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.5 Partner toolkit <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Negotiate VIP ticket trade với từng admin</li><li>Deploy customized announcements theo thứ tự: EFE VN newsletter → Shopify VN admins → KL Shopify, PH TikTok</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.9 Community announce <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Round 2 urgency: số spots thật, không fake</li><li>Admin DM top members chưa apply</li><li>Sunny coordinate CN WeChat push</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.6 All-Hands community <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Mời admins vào ShopX Year-Round APAC Community</li><li>Admins post recap trong group của họ</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.7 Migrate Year-Round <span class="owner">Kallie</span></span></div></div>
+      </div>
+    </div>
   </div>
 
   <h3>PARTNERSHIP CHANNELS — Mạng lưới bên ngoài kích hoạt thay mặt ShopX</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Partner</th><th>Status + Strategy</th><th>KPI / Notes</th><th>PIC</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>ShopOS</strong> · Co-Organizer</td>
-          <td>Đồng tổ chức — reach audience GemPages không tự làm được. Mọi action là <strong>yêu cầu cần confirm</strong>, không phải giả định. Alignment meeting <strong>trước 31/5 — hard deadline</strong>.</td>
-          <td><span class="badge danger">⚠ ĐÃ QUÁ DEADLINE</span> · Cập nhật section này sau meeting</td>
-          <td>Chloe (coordinate) — escalate founder</td>
-        </tr>
-        <tr>
-          <td><strong>Shopify APAC</strong> · Official support target</td>
-          <td>Endorsement = highest credibility signal. Warm intro qua Avada/PageFly/Arvind. <strong>Deadline confirm/decline: 30/6.</strong> Custom pitch deck 2 selling points: (1) CN community access (2) 6-market APAC reach.</td>
-          <td>Nếu confirm → PR headline: "First AI ecom summit supported by Shopify APAC"</td>
-          <td>Christine (deck) — escalate founder outreach</td>
-        </tr>
-        <tr style="background: #fef3c7;">
-          <td><strong>Meta + TikTok</strong> · Via EFE outreach</td>
-          <td>EFE outreach ongoing. <strong>Tuyệt đối không announce cho đến khi confirm chính thức.</strong> Internal status check 15/6. Nếu confirm trước 1/7 → primary PR hook, changes media strategy entirely.</td>
-          <td><strong>⚠ Cần Plan A/B documented</strong> · Internal check 15/6 · Announce deadline: chỉ sau official confirm</td>
-          <td>Chloe (Plan A/B doc) — escalate founder</td>
-        </tr>
-        <tr>
-          <td><strong>KOL Ecommerce</strong> · 5+ KOL</td>
-          <td>KOL VN/MY/SG/PH ecom = cộng đồng sellers engaged tin hơn brand post. Outreach P2 với VIP offer. <strong>VIP + cruise đủ làm deal — không add cash.</strong></td>
-          <td>KOL posts 5+ · Collective reach 50K+</td>
-          <td>Kallie (community angle)</td>
-        </tr>
-        <tr>
-          <td><strong>EFE Vietnam</strong> · Community partner</td>
-          <td>Cộng đồng ecommerce lớn nhất VN — warm audience không paid ads nào thay được. Value trade: vé VIP độc quyền cho EFE members. Xử lý như partnership year-round, không one-time activation.</td>
-          <td>Referral apply 50+ · Begin 2027 conversation trong P5</td>
-          <td>Kallie (community) + Hellen (VIP ticket allocation)</td>
-        </tr>
-        <tr>
-          <td><strong>Named Community Admins</strong> · 6+ targets</td>
-          <td>Phú (Shopify VN), Vinh (AE Shopify VN), Linh Thạch, Quang (GEC), admin KL Shopify, admin PH TikTok. Model: 2-3 vé VIP đổi 1 pinned + 1 personal + 1 urgency. <strong>Mỗi tin nhắn viết riêng cho từng group.</strong></td>
-          <td>Groups seeded 8+ · Referral apply 80+</td>
-          <td>Kallie (community) + Hellen (VIP ticket allocation)</td>
-        </tr>
-      </tbody>
-    </table>
+
+  <div class="channel-card cc-highlight">
+    <div class="channel-head">
+      <div class="channel-name">🤝 SHOPOS <small>(Co-Organizer)</small> <span class="badge danger">⚠ QUÁ DEADLINE 31/5</span></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Maria (drive) — escalate founder</span><span><strong>KPI:</strong> Reach: xác nhận sau alignment meeting</span></div>
+    </div>
+    <div class="channel-mission">Đồng tổ chức — reach audience GemPages không tự làm được. Mọi action là yêu cầu cần confirm. Alignment meeting trước 31/5 — đã quá hạn.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li><strong>GemPages làm:</strong> Brief ShopOS full comm plan + assets + posting calendar</li><li><strong>ShopOS cần confirm:</strong> Đầu mối comms · Danh sách kênh + follower count · Tần suất posting</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.6 ShopOS alignment <span class="owner">Maria</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Cung cấp assets Wave 1, coordinate announce chung 16/6</li><li><strong>ShopOS confirm:</strong> Co-host announce · Share apply link · Co-founder mời 20 contacts tier-1</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Include ShopOS trong All-Hands Week, gửi brief + assets</li><li><strong>ShopOS confirm:</strong> Tham gia All-Hands Week 25-31/8 · Co-founder post cá nhân 1 lần</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.6 All-Hands <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>ShopOS branding trên on-site materials</li><li><strong>ShopOS confirm:</strong> Team post từ event · Co-founder lên stage joint credibility</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>ShopOS trong recap + sponsor deck</li><li>Begin 2027 scope alignment</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
   </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">🛍 SHOPIFY APAC <small>(Official support target)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Christine (deck) — escalate founder outreach</span><span><strong>KPI:</strong> Nếu confirm → PR headline tier-1</span></div>
+    </div>
+    <div class="channel-mission">Endorsement = highest credibility signal. Warm intro qua Avada/PageFly/Arvind. Deadline confirm/decline: 30/6.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Build custom pitch deck cho Shopify APAC</li><li>Pursue warm intro qua Avada / PageFly / Arvind</li><li>Request meeting</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.5 Pitch deck prep <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Present pitch deck</li><li>2 selling points: (1) CN community access (2) 6-market APAC reach</li><li>Deadline confirm/decline: 30/6</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Nếu confirm: logo trên tất cả materials, mention trong mọi communication</li><li>Không announce sớm nếu chưa confirm chính thức</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>Nếu confirm: mention trong khai mạc</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Nếu confirm: trong recap content · Begin 2027 relationship</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card cc-highlight">
+    <div class="channel-head">
+      <div class="channel-name">📱 META + TIKTOK <small>(Via EFE outreach)</small> <span class="badge warn">PENDING confirm</span></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Maria (Plan A/B doc) — escalate founder</span><span><strong>KPI:</strong> Internal check 15/6 · Announce chỉ sau official confirm</span></div>
+    </div>
+    <div class="channel-mission">EFE outreach ongoing. Tuyệt đối không announce cho đến khi confirm chính thức. Nếu confirm trước 1/7 → primary PR hook.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>EFE continues outreach</li><li>Internal status check 15/6 update từ EFE</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>If confirmed by 30/6: announce same day</li><li>Resend press release với này là lead hook → tier-1 media story</li><li>Update tất cả assets</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>If confirmed: full co-marketing activation</li><li>Platform logo trên P3 materials</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>If confirmed: platform rep at event · logo on stage</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>If confirmed: co-branded recap + case study</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">⭐ KOL ECOMMERCE <small>(5+ KOL VN+APAC)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie (community angle)</span><span><strong>KPI:</strong> KOL posts 5+ · Collective reach 50K+</span></div>
+    </div>
+    <div class="channel-mission">KOL ecom VN/MY/SG/PH = cộng đồng sellers engaged tin hơn brand post. VIP + cruise đủ làm deal — không add cash.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Identify 5-10 KOL targets phù hợp</li><li>Outreach với VIP offer</li><li>Negotiate deliverables rõ ràng bằng văn bản</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>KOL posts "Tôi sẽ có mặt tại ShopX 2026"</li><li>Story mention + link apply</li><li>Content về AI ecommerce theo niche</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.6 All-Hands <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>KOL coverage live: booth, demo, audience reactions</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>KOL post review thật: "Trải nghiệm của tôi tại ShopX 2026"</li><li>Recording share + personal commentary</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">🇻🇳 EFE VIETNAM <small>(Community partner)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie (community) + Hellen (VIP ticket allocation)</span><span><strong>KPI:</strong> Referral apply 50+ · Begin 2027 P5</span></div>
+    </div>
+    <div class="channel-mission">EFE = cộng đồng ecommerce lớn nhất VN. Value trade: vé VIP độc quyền EFE members. Year-round partnership, không one-time.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><ul><li>Build personal relationship trước khi xin gì</li><li>Gửi partner toolkit</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p1">T1.5 Partner toolkit <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>EFE newsletter feature</li><li>Community announce trong EFE groups</li><li>EFE social posts với link apply</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.9 EFE announce <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>EFE Round 2 urgency push với số spots thật</li><li>Admin DM top members chưa apply</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.6 All-Hands <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><ul><li>EFE members welcome tại event</li><li>EFE logo trên partner wall</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>EFE post recap</li><li>Begin 2027 conversation ngay khi sentiment cao nhất</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p5">T5.7 Migrate Year-Round <span class="owner">Kallie</span></span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="channel-card">
+    <div class="channel-head">
+      <div class="channel-name">👥 NAMED COMMUNITY ADMINS <small>(6+ targets)</small></div>
+      <div class="channel-meta"><span><strong>PIC:</strong> Kallie + Hellen (VIP allocation)</span><span><strong>KPI:</strong> Groups seeded 8+ · Referral apply 80+</span></div>
+    </div>
+    <div class="channel-mission">Phú (Shopify VN), Vinh (AE Shopify VN), Linh Thạch, Quang (GEC), admin KL Shopify, admin PH TikTok ecom. Model: 2-3 vé VIP đổi 1 pinned + 1 personal + 1 urgency. Mỗi tin nhắn viết riêng.</div>
+    <div class="channel-phases">
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p1">P1</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">Build relationship (qua Community Seeding)</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p2">P2</div>
+        <div class="cpr-activities"><ul><li>Negotiate VIP ticket trade</li><li>Deploy customized announce theo thứ tự từng group</li><li>Offer thêm: Q&amp;A session hoặc early access cho members</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p2">T2.9 Admin trade <span class="owner">Christine</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p3">P3</div>
+        <div class="cpr-activities"><ul><li>Round 2 urgency với số thật</li><li>Admin DM trực tiếp top members chưa apply</li></ul></div>
+        <div class="cpr-side"><div class="cpr-task-list"><span class="cpr-task-pill t-p3">T3.6 All-Hands <span class="owner">All partners</span></span></div></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p4">P4</div>
+        <div class="cpr-activities"><div class="cpr-no-activity">n/a</div></div>
+        <div class="cpr-side"></div>
+      </div>
+      <div class="channel-phase-row">
+        <div class="cpr-phase phase-p5">P5</div>
+        <div class="cpr-activities"><ul><li>Admin groups nhận recap post</li><li>Invite admins vào ShopX Year-Round Community làm founding members</li></ul></div>
+        <div class="cpr-side"></div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <!-- ============ 09 PILLARS ============ -->
@@ -2969,17 +3580,6 @@
   <h2><span class="ord">21</span>Master Execution Tracker — 42 tasks (v2 sheet)</h2>
   <p class="lead">Bảng tracker chi tiết từ Google Sheet v2 — 42 tasks với <strong>Owner + Start/End + Duration + Priority + Dependency + KPI + Status</strong>. Đây là <strong>operational layer</strong> để team track tiến độ.</p>
 
-  <div class="gap-flag">
-    <strong>⚠ Owner data note:</strong> Sheet v2 dùng cross-team co-ownership ở task level (vd: "Christine + Design", "Kallie + Team Chinese"). Có vài chỗ khác với <a href="#raci" style="color:var(--primary);font-weight:600;">RACI scope (section 14)</a> user đã confirm — cần align lại với team:
-    <ul style="margin: 6px 0 0 20px;">
-      <li>Email Marketing: sheet ghi <strong>Christine + Kallie</strong> co-own; RACI user-defined ghi <strong>Sunny</strong> primary</li>
-      <li>WeChat + Xiaohongshu (ZH): sheet ghi <strong>Kallie + Team Chinese</strong>; RACI user-defined ghi <strong>Sunny</strong></li>
-      <li>Founder letter (Chris Koh personal): sheet ghi <strong>Sunny</strong>; RACI user-defined ghi <strong>Kallie</strong> (calendar+draft)</li>
-      <li>Paid Ads: sheet ghi <strong>Hellen</strong>; RACI user-defined ghi <strong>Chloe</strong></li>
-      <li>Speaker Wave 1+2: sheet ghi <strong>Christine + Design</strong>; RACI user-defined ghi <strong>Maria</strong></li>
-    </ul>
-  </div>
-
   <h3>Status snapshot (hôm nay 02/06/2026)</h3>
   <div class="stats">
     <div class="stat warning"><div class="v">1</div><div class="l">In Progress</div></div>
@@ -3075,46 +3675,13 @@
     </table>
   </div>
 
-  <h3>Owner workload distribution (theo sheet v2)</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Owner</th><th>Tasks</th><th>Workload note</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Kallie</strong></td><td class="num">14</td><td><span class="badge danger">OVERLOADED</span> Social + ZH (mới) + Event day + Recap + Community migration + NPS. Cần cân nhắc share load với team.</td></tr>
-        <tr><td><strong>Christine</strong></td><td class="num">12</td><td><span class="badge warn">HEAVY</span> Email 1–3 + 9 + sponsor reporting + Speaker Wave 1+2 + Track reveal + community announce. Theo RACI user-defined, Email lẽ ra Sunny.</td></tr>
-        <tr><td><strong>Sunny</strong></td><td class="num">5</td><td>Founder letter + Cruise + Saigon travel + Attendee prep + Quote cards 3 langs. Theo RACI user, Sunny lẽ ra primary Email.</td></tr>
-        <tr><td><strong>Chloe</strong></td><td class="num">4</td><td>Key message + Landing QA + Landing live + Switch CTA. Strategic + comm plan owner.</td></tr>
-        <tr><td><strong>Maria</strong></td><td class="num">4</td><td>ShopOS comm + PR pitch + Agenda reveal + Press preview. <strong>Sheet không assign Speaker scope</strong> — khác RACI.</td></tr>
-        <tr><td><strong>Hellen</strong></td><td class="num">1</td><td>Paid Ads P2 only. Sheet chưa reflect ticket sales scope (RACI user nói Hellen primary cho ticket + payment).</td></tr>
-        <tr><td><strong>Chris Koh</strong></td><td class="num">1</td><td>2027 interest form + founder reflection (only owner of this one).</td></tr>
-        <tr><td><strong>Media team</strong></td><td class="num">4</td><td>Event day capture + cruise + recap video + recordings edit. <strong>Sheet mới — không có trong RACI user-defined</strong> (RACI có Troy = Video, Media chưa rõ team gì khác).</td></tr>
-        <tr><td><strong>Design team</strong></td><td class="num">5</td><td>Co-owner trên Speaker Wave 1+2, Track reveal, Recap video, Quote cards. Sheet không tách rõ Jimmy/Tuấn Anh/Lily.</td></tr>
-        <tr><td><strong>Dev</strong></td><td class="num">3</td><td>Co-owner trên Landing QA + Landing live + Switch CTA. <strong>Sheet mới — không có trong RACI user-defined</strong> (RACI không list Dev).</td></tr>
-        <tr><td><strong>Team Chinese</strong></td><td class="num">2</td><td>Co-owner WeChat/Xiaohongshu setup + Scale ZH ads. <strong>Sheet mới — không có trong RACI</strong> — có thể là team external cho ZH market.</td></tr>
-        <tr><td><strong>Team Lily</strong></td><td class="num">1</td><td>All-Hands Week prep kits. Khớp với RACI = Lily Team remote backup.</td></tr>
-        <tr><td><strong>All partners</strong></td><td class="num">1</td><td>All-Hands Week activation (25-31/8). Collective activation, không 1 owner.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="info-box warn">
-    <div class="info-box-title">⚠ Action: Cần align Owner data</div>
-    <div class="info-box-body">
-      Sheet v2 có 3 entity mới chưa rõ thuộc ai trong team: <strong>Media team</strong>, <strong>Dev</strong>, <strong>Team Chinese</strong>. Đề xuất Chloe coordinate buổi sync với scope leads để:
-      <ul style="margin: 6px 0 0 20px;">
-        <li>Xác nhận Media team = Troy + freelance photographer? Hay là team riêng?</li>
-        <li>Dev = ai? (Landing page work)</li>
-        <li>Team Chinese = ai? (CN/MY ZH support — có overlap với Sunny scope cũ?)</li>
-        <li>Resolve 5 ownership conflicts giữa sheet v2 và RACI user-defined (xem list ở đầu section)</li>
-      </ul>
-    </div>
-  </div>
 </section>
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan Dashboard</strong><br/>
-  Version 1.2 · Cập nhật 02/06/2026 (chiều) · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
-  v1.2 changes: Sync với sheet v2 — thêm Phase Plan (7 phases), Phase Communication Plan, Master Execution Tracker (42 tasks với Start/End/Priority/Dependency/KPI/Status)<br/>
+  Version 1.3 · Cập nhật 02/06/2026 (tối) · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
+  v1.3 changes: Channel Map (08) restructure thành 23 cards · merge Task Tracker + Phase Matrix + Gantt · Bỏ Risk Heatmap + Owner workload distribution · Update Gaps theo state mới<br/>
+  v1.2 changes: Sync với sheet v2 — thêm Phase Plan (7 phases), Phase Communication Plan, Master Execution Tracker (42 tasks)<br/>
   v1.1 changes: Gantt chart timeline · RACI rebuild với team scope thực tế<br/>
   Maintained by: Chloe Dinh · <a href="https://github.com/chloedinh-create/shopx-2026-master-plan" style="color: var(--primary);">GitHub</a><br/>
   <em>Tài liệu mật nội bộ. Không chia sẻ ra ngoài team.</em>
