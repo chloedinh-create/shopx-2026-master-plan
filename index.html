@@ -259,6 +259,37 @@
   .action-item .ai-desc { font-size: 13px; color: var(--text-soft); margin: 0 0 4px; line-height: 1.5; }
   .action-item .ai-meta { font-size: 11.5px; color: var(--text-muted); }
 
+  /* Master Tracker status pills */
+  .status-pill { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .3px; }
+  .status-not-started { background: #f1f5f9; color: #475569; }
+  .status-in-progress { background: #dbeafe; color: #1e40af; }
+  .status-done { background: #d1fae5; color: #065f46; }
+  .status-blocked { background: #fee2e2; color: #991b1b; }
+  .prio-pill { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; }
+  .prio-high { background: #fee2e2; color: #991b1b; }
+  .prio-medium { background: #fef3c7; color: #92400e; }
+  .prio-low { background: #e0e7ff; color: #3730a3; }
+
+  /* Phase plan card grid */
+  .phase-plan-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 14px 0; }
+  .phase-plan-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--primary); }
+  .phase-plan-card.phc-p1 { border-left-color: #6b46ff; }
+  .phase-plan-card.phc-p2 { border-left-color: #3b82f6; }
+  .phase-plan-card.phc-p3 { border-left-color: #ef4444; }
+  .phase-plan-card.phc-p4 { border-left-color: #f59e0b; }
+  .phase-plan-card.phc-p5 { border-left-color: #16a085; }
+  .phase-plan-card.phc-p6 { border-left-color: #d946ef; }
+  .phase-plan-card.phc-p7 { border-left-color: #06b6d4; }
+  .phc-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .phc-name { font-weight: 800; font-size: 14px; color: var(--text); }
+  .phc-date { font-size: 11.5px; color: var(--text-muted); font-weight: 600; }
+  .phc-role { font-size: 12.5px; color: var(--text-soft); margin: 4px 0 8px; font-style: italic; }
+  .phc-goal { font-size: 12.5px; color: var(--text); font-weight: 600; margin-bottom: 6px; }
+  .phc-output { font-size: 12px; color: var(--text-soft); line-height: 1.5; }
+  .phc-output ul { padding-left: 16px; margin: 4px 0; }
+  .phc-output li { margin-bottom: 2px; }
+  @media (max-width: 900px) { .phase-plan-grid { grid-template-columns: 1fr; } }
+
   /* Footer */
   .footer { padding: 32px 0; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 12.5px; margin-top: 40px; }
 
@@ -287,7 +318,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan</div>
-    <div class="brand-meta">v1.1 · Cập nhật 02/06/2026</div>
+    <div class="brand-meta">v1.2 · Cập nhật 02/06/2026 (chiều)</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -318,6 +349,11 @@
   <a href="#calendar" class="nav-link"><span class="num">16</span> Weekly Content Cal.</a>
   <a href="#speaker-tracker" class="nav-link"><span class="num">17</span> Speaker Tracker</a>
   <a href="#sponsor-pipeline" class="nav-link"><span class="num">18</span> Sponsor Pipeline</a>
+
+  <div class="nav-section-title">v1.2 từ Sheet update</div>
+  <a href="#phase-plan" class="nav-link"><span class="num">19</span> Phase Plan (7 phases)</a>
+  <a href="#phase-comms" class="nav-link"><span class="num">20</span> Phase Comm Plan</a>
+  <a href="#master-tracker" class="nav-link"><span class="num">21</span> Master Tracker (42)</a>
 </aside>
 
 <!-- ============ MAIN ============ -->
@@ -345,11 +381,18 @@
     <div class="stat info"><div class="v">250</div><div class="l">Confirmed attendees</div></div>
     <div class="stat info"><div class="v">6</div><div class="l">Markets APAC</div></div>
     <div class="stat info"><div class="v">12+</div><div class="l">Speakers target</div></div>
-    <div class="stat info"><div class="v">5</div><div class="l">Phases (P1→P5)</div></div>
+    <div class="stat info"><div class="v">7</div><div class="l">Phases (v2 sheet)</div></div>
     <div class="stat success"><div class="v">23</div><div class="l">Kênh truyền thông</div></div>
     <div class="stat success"><div class="v">8</div><div class="l">Content pillars</div></div>
     <div class="stat warning"><div class="v">20</div><div class="l">Risks identified</div></div>
-    <div class="stat danger"><div class="v">60+</div><div class="l">Ô owner đang TRỐNG</div></div>
+    <div class="stat warning"><div class="v">42</div><div class="l">Master Tracker tasks</div></div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">🆕 v1.2 sync với sheet update (02/06 chiều)</div>
+    <div class="info-box-body">
+      3 sections mới từ sheet v2: <a href="#phase-plan" style="color:var(--primary);font-weight:700;">19 Phase Plan (7 phases)</a> · <a href="#phase-comms" style="color:var(--primary);font-weight:700;">20 Phase Comm Plan</a> · <a href="#master-tracker" style="color:var(--primary);font-weight:700;">21 Master Execution Tracker (42 tasks với Start/End/Priority/Dependency/KPI/Status)</a>. Status hôm nay: 1 task IN PROGRESS, 41 NOT STARTED. <strong>Có 5 ownership conflicts giữa sheet v2 và RACI user-defined</strong> — cần align với team. Xem chi tiết trong section 21.
+    </div>
   </div>
 
   <div class="info-box danger">
@@ -2380,10 +2423,52 @@
 
 <!-- ============ 16 CALENDAR ============ -->
 <section id="calendar">
-  <h2><span class="ord">16</span>Weekly Content Calendar (Bổ sung mới)</h2>
-  <p class="lead">Template content calendar tuần — <strong>cần Kallie (social) + Sunny (email) + Chloe consolidate trước 19/6</strong>. Đây là khung gợi ý.</p>
+  <h2><span class="ord">16</span>Weekly Content Calendar</h2>
+  <p class="lead">Calendar đã được điền 16 bài đầu (15/06 → 29/07) trong sheet v2. Mỗi bài có Pillar + Angle + Format + Ngày. <strong>PIC mới chỉ điền cho 1 bài đầu (Kallie 15/06) — cần fill PIC cho 15 bài còn lại.</strong></p>
 
-  <h3>Mẫu tuần — P2 Blooming (tuần 16–22/6)</h3>
+  <h3>Calendar từ sheet v2 — 16 bài đã có ngày + pillar</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Ngày</th><th>Pillar (mới — 5 categories)</th><th>Angle</th><th>Nội dung bài đăng</th><th>Định dạng</th><th>PIC</th></tr></thead>
+      <tbody>
+        <tr><td><strong>15/06</strong></td><td><span class="badge muted">Other</span></td><td>Setup kênh</td><td>Tối ưu toàn bộ ảnh cover/bio các kênh sang ShopX 2026</td><td>Visual</td><td><strong>Kallie</strong></td></tr>
+        <tr><td><strong>17/06</strong></td><td><span class="badge success">Experience</span></td><td>Experience from event</td><td>Recap sự kiện ShopX 2025 (carousel slides + stats + quotes)</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>22/06</strong></td><td><span class="badge info">Ecommerce &amp; AI knowledge</span></td><td>AI Insight</td><td>"5 xu hướng AI đang định hình ecommerce APAC"</td><td>Carousel + thread</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>25/06</strong></td><td><span class="badge warn">Event information</span></td><td>Event details</td><td>Soft announce ShopX 2026 — Save the date, Saigon 2026</td><td>Key visual + post</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>29/06</strong></td><td><span class="badge warn">Event information</span></td><td>Event details</td><td>Reveal full agenda — 12 slide carousel</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>01/07</strong></td><td><span class="badge warn">Event information</span></td><td>Event details</td><td>Mở đăng ký Free Apply, apply free</td><td>Post + CTA</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>03/07</strong></td><td><span class="badge info">Ecommerce &amp; AI knowledge</span></td><td>Ecommerce knowledge</td><td>Education carousel #1 — AI thực chiến cho seller</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>06/07</strong></td><td><span class="badge danger">Credibility, Authority</span></td><td>From GemPages</td><td>Speaker Wave 1 — công bố Steve &amp; Arvind</td><td>Carousel + quote card</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>09/07</strong></td><td><span class="badge success">Experience</span></td><td>Experience from event</td><td>Visa &amp; chuyến bay tới Saigon — hướng dẫn</td><td>Carousel + story</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>10/07</strong></td><td><span class="badge info">Ecommerce &amp; AI knowledge</span></td><td>Ecommerce knowledge</td><td>Education carousel #2 — Shopify update</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>13/07</strong></td><td><span class="badge warn">Event information</span></td><td>Event details</td><td>Công bố lineup speaker đầy đủ</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>16/07</strong></td><td><span class="badge danger">Credibility, Authority</span></td><td>External sharing</td><td>Social proof — speaker/sponsor endorsement quote card</td><td>Quote card</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>20/07</strong></td><td><span class="badge info">Ecommerce &amp; AI knowledge</span></td><td>AI Insight</td><td>Education carousel #3 — AI scale business</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>24/07</strong></td><td><span class="badge warn">Event information</span></td><td>Event details</td><td>Đếm ngược deadline Free Apply — scarcity suất còn lại</td><td>Post + countdown</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>27/07</strong></td><td><span class="badge success">Experience</span></td><td>Experience from event</td><td>Saigon food &amp; city guide cho khách</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+        <tr><td><strong>29/07</strong></td><td><span class="badge info">Ecommerce &amp; AI knowledge</span></td><td>Ecommerce knowledge</td><td>Tổng hợp ecommerce trends nửa năm</td><td>Carousel</td><td><span class="no-owner">CẦN ĐIỀN PIC</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Pillar legend (mới — sheet v2 dùng 5 categories thay vì 8 pillars P1-P8)</h3>
+  <div class="grid grid-3">
+    <div class="card"><div class="card-title"><span class="badge info">Ecommerce &amp; AI knowledge</span></div><div class="card-body">Education content: AI insight, AI how-to, Shopify update, ecommerce trends. Tỉ lệ ~40% calendar.</div></div>
+    <div class="card"><div class="card-title"><span class="badge warn">Event information</span></div><div class="card-body">Event details: announce, agenda, lineup, deadline countdown. Tỉ lệ ~30%.</div></div>
+    <div class="card"><div class="card-title"><span class="badge danger">Credibility, Authority</span></div><div class="card-body">From GemPages + External sharing: speaker spotlight, sponsor endorsement, social proof. Tỉ lệ ~15%.</div></div>
+    <div class="card"><div class="card-title"><span class="badge success">Experience</span></div><div class="card-body">Saigon experience: recap 2025, visa + flight guide, food + city. Tỉ lệ ~10%.</div></div>
+    <div class="card"><div class="card-title"><span class="badge muted">Other</span></div><div class="card-body">Setup kênh, BTS, internal ops. Tỉ lệ ~5%.</div></div>
+  </div>
+
+  <div class="info-box warn">
+    <div class="info-box-title">📝 Calendar gaps cần fill</div>
+    <div class="info-box-body">
+      <strong>PIC:</strong> 15 bài chưa có PIC (chỉ 15/06 = Kallie). Suggest: Event info → Kallie · Ecom/AI knowledge → Sunny + Chloe · Credibility (speaker) → Maria + Christine · Experience → Sunny.<br/>
+      <strong>Tháng 8–10 (P3 Peak + P4 + P5):</strong> Calendar chưa fill bài cụ thể từ 1/8 trở đi. Cần Kallie + Sunny + Chloe consolidate trong section RACI.
+    </div>
+  </div>
+
+  <h3>Mẫu tuần — P2 Blooming (tuần 16–22/6) — đề xuất ban đầu v1.1</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Day</th><th>FB Brand</th><th>LinkedIn Brand</th><th>Chris Koh Personal</th><th>Instagram</th><th>Email</th><th>Other</th></tr></thead>
@@ -2710,10 +2795,327 @@
   </div>
 </section>
 
+<!-- ============ 19 PHASE PLAN ============ -->
+<section id="phase-plan">
+  <h2><span class="ord">19</span>Phase Plan — 7 Phases (v2 sheet)</h2>
+  <p class="lead">Strategic narrative cấp cao từ Google Sheet v2 cập nhật. <strong>7 phases</strong> (mở rộng từ 5 phase Timeline) — thêm Phase 1 Kickoff (01/05–31/05, đã pass) và split P4+P5 thành Event Day + 3 sub-phases After Glow.</p>
+
+  <div class="info-box warn">
+    <div class="info-box-title">⚠ Phase 1 Kickoff đã pass deadline 31/05</div>
+    <div class="info-box-body">
+      Phase 1 (01/05–31/05) là phase nội bộ chốt nền tảng. Outputs cần check status: Final tagline ✓ (đã có), sponsor one-liner, landing page brief, speaker outreach copy, social warm-up angle, ShopOS comm alignment (R10 risk vẫn open).
+    </div>
+  </div>
+
+  <div class="phase-plan-grid">
+    <div class="phase-plan-card phc-p1">
+      <div class="phc-head"><div class="phc-name">Phase 1 · Kickoff / Internal Alignment</div><div class="phc-date">01/05 – 31/05</div></div>
+      <div class="phc-role">Chốt nền tảng truyền thông trước khi bắt đầu campaign external</div>
+      <div class="phc-goal">Mục tiêu: Final key message + tagline + sponsor narrative</div>
+      <div class="phc-output">
+        <ul>
+          <li>Final tagline: <strong>"The Future of AI-Powered Ecommerce"</strong> ✓</li>
+          <li>Sponsor one-liner / pitch narrative</li>
+          <li>Landing page Phase 1 brief</li>
+          <li>Speaker outreach copy direction</li>
+          <li>Social warm-up angle: "ShopX is coming back / From CRO &amp; Retention to AI-powered ecommerce"</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-plan-card phc-p1">
+      <div class="phc-head"><div class="phc-name">Phase 2 · Foundation / Warm-up</div><div class="phc-date">01/06 – 30/06</div></div>
+      <div class="phc-role">Mở nhận diện ban đầu, không bán mạnh</div>
+      <div class="phc-goal">Mục tiêu: 500+ landing visits · 100+ waitlist · 5+ admin conversations</div>
+      <div class="phc-output">
+        <ul>
+          <li>Landing page Phase 1 sponsor-focused</li>
+          <li>Sponsor deck + Shopify pitch deck</li>
+          <li>Announce ShopX 2026 direction</li>
+          <li>ShopX 2025 recap content</li>
+          <li>Partner/community outreach kit</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-plan-card phc-p2">
+      <div class="phc-head"><div class="phc-name">Phase 3 · Public Launch / Demand Gen</div><div class="phc-date">01/07 – 31/07</div></div>
+      <div class="phc-role">Chính thức đẩy truyền thông — Apply Free opens</div>
+      <div class="phc-goal">Mục tiêu: 100–150 applications · 8+ communities seeded · 5+ speaker/sponsor posts</div>
+      <div class="phc-output">
+        <ul>
+          <li>Launch announcement + agenda v1</li>
+          <li>Speaker spotlight series</li>
+          <li>Sponsor / partner posts</li>
+          <li>APAC ads creative per market (VN/SG/MY/CN/IN/PH)</li>
+          <li>Email campaign 1-3 (Apply Free)</li>
+          <li>Social series: AI workflows, BFCM readiness</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-plan-card phc-p3">
+      <div class="phc-head"><div class="phc-name">Phase 4 · Conversion / Lock &amp; Final Prep</div><div class="phc-date">01/08 – 31/08</div></div>
+      <div class="phc-role">Chốt attendee + sponsor + agenda — Paid ticket conversion</div>
+      <div class="phc-goal">Mục tiêu: 200–250 approved attendees · 150 intl confirmations</div>
+      <div class="phc-output">
+        <ul>
+          <li>Final agenda + final speaker lineup</li>
+          <li>"Why attend" series</li>
+          <li>Market-specific posts (SG/MY/CN/IN/VN)</li>
+          <li>Confirmed attendee email flow + welcome kit</li>
+          <li>Sponsor highlight series</li>
+          <li>Community partner amplification kit (All-Hands Week 25–31/8)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-plan-card phc-p3">
+      <div class="phc-head"><div class="phc-name">Phase 5 · Final Push / Logistics Comm</div><div class="phc-date">01/09 – 16/09</div></div>
+      <div class="phc-role">Điều phối trước event — countdown to sold out</div>
+      <div class="phc-goal">Mục tiêu: SOLD OUT ~10/9 · 2027 pipeline 300+ · Sponsor activation locked</div>
+      <div class="phc-output">
+        <ul>
+          <li>Final reminder emails</li>
+          <li>Travel guide per market + airport pickup comm</li>
+          <li>WhatsApp pinned logistics</li>
+          <li>Speaker briefing doc + sponsor activation checklist</li>
+          <li>On-site agenda one-pager</li>
+          <li>Social countdown T-30 → T-1 + press/media note</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-plan-card phc-p4">
+      <div class="phc-head"><div class="phc-name">Phase 6 · Event Day</div><div class="phc-date">17/09</div></div>
+      <div class="phc-role">Điều phối trong event + capture live proof</div>
+      <div class="phc-goal">Mục tiêu: 50+ UGC posts · 20+ clips · 30+ photos · 800+ stories</div>
+      <div class="phc-output">
+        <ul>
+          <li>Live social posts every 30-60 min</li>
+          <li>Stories / Reels real-time</li>
+          <li>Speaker quotes capture</li>
+          <li>Sponsor booth photos (5+/sponsor)</li>
+          <li>Attendee interview clips</li>
+          <li>Daily recap post + internal live issue tracker</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-plan-card phc-p5">
+      <div class="phc-head"><div class="phc-name">Phase 7 · Post-event (3 sub-phases)</div><div class="phc-date">18/09 – 17/10</div></div>
+      <div class="phc-role">Khuếch đại impact + retention + 2027 pipeline</div>
+      <div class="phc-goal">Mục tiêu: NPS 30%+ · Community 60%+ active · 2027 interest 100+</div>
+      <div class="phc-output">
+        <strong>7.1 Recap (18/9–24/9):</strong> Recap video 60s + 3-min long cut · Recordings delivery email · Recap blog EN/VI/中文 · Curated intro list<br/>
+        <strong>7.2 Reporting (25/9–8/10):</strong> Sponsor reporting deck per sponsor · Social tracking · Case studies<br/>
+        <strong>7.3 Survey + Retain (9/10–17/10):</strong> NPS · Workflow adoption · 30-day survey · Migrate WhatsApp → ShopX Year-Round APAC
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 20 PHASE COMMUNICATION PLAN ============ -->
+<section id="phase-comms">
+  <h2><span class="ord">20</span>Phase Communication Plan (v2 sheet)</h2>
+  <p class="lead">Strategic messaging per phase — Key message, Core angle, Channels, Assets, KPI. Đây là <strong>messaging layer</strong> giữa Phase Plan (strategy) và Master Tracker (execution).</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Timeline</th><th>Key Message (insight)</th><th>Core Angle</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-pill phase-p1">P1 Warming Up</span></td>
+          <td>15–30 Jun</td>
+          <td>"ShopX is coming back, bigger and more international. Vì giai đoạn này chưa nên bán vé mạnh => ShopX 2025 đã prove được room quality, 2026 quay lại với direction mới: AI-powered ecommerce, practical demos, curated APAC community."</td>
+          <td><em>"From CRO &amp; retention to AI-powered ecommerce. ShopX 2026 is where APAC sellers start preparing for the next growth wave."</em></td>
+          <td>500+ landing visits · 100+ waitlist · 5+ admin conversations</td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p2">P2 Blooming</span></td>
+          <td>16 Jun – 31 Jul</td>
+          <td>"Learn before you apply. Build credibility before selling. AI ecommerce không còn là trend để đọc chơi. Sellers cần hiểu cách áp dụng AI vào store, ads, landing page, ops và BFCM prep."</td>
+          <td><em>"See real AI ecommerce workflows before your competitors turn them into an advantage."</em></td>
+          <td>100–150 applications by 31/7 · 50%+ qualified · 8+ communities seeded · 5+ speaker/sponsor posts</td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
+          <td>1 Aug – 16 Sep</td>
+          <td>"The room is forming. Don't miss the AI ecommerce summit APAC sellers are flying to."</td>
+          <td><em>"250 curated ecommerce operators. 6 APAC markets. Live AI demos. One room in Saigon before BFCM 2026."</em></td>
+          <td>250 curated apps · 200–250 approved · <strong>150 confirmed international</strong> · ≥1 PR/media before event</td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p4">P4 Event Day</span></td>
+          <td>17 Sep</td>
+          <td>"ShopX 2026 is happening now. This is the room."</td>
+          <td><em>"The future of AI-powered ecommerce is live in Saigon today."</em></td>
+          <td><strong>10+ strong quotes · 20+ usable short clips · 30+ event photos · 5+ sponsor activation proof shots per sponsor</strong></td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p5">P5 After Glow</span></td>
+          <td>18 Sep – 17 Oct</td>
+          <td>"The event ended, but the community continues. ShopX không phải event một lần. Đây là starting point của AI ecommerce community APAC."</td>
+          <td><em>"What happened at ShopX 2026 should not stay in one room. Here's what APAC ecommerce operators are taking forward."</em></td>
+          <td>Recap video by T+7 · Sponsor decks T+2-3 weeks · NPS 30%+ · Workflow adoption 20%+ · Community 60%+ active · 2027 list 100+ · 100% sponsors get deck · 3+ sponsor renewal convos T+30</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ 21 MASTER TRACKER ============ -->
+<section id="master-tracker">
+  <h2><span class="ord">21</span>Master Execution Tracker — 42 tasks (v2 sheet)</h2>
+  <p class="lead">Bảng tracker chi tiết từ Google Sheet v2 — 42 tasks với <strong>Owner + Start/End + Duration + Priority + Dependency + KPI + Status</strong>. Đây là <strong>operational layer</strong> để team track tiến độ.</p>
+
+  <div class="gap-flag">
+    <strong>⚠ Owner data note:</strong> Sheet v2 dùng cross-team co-ownership ở task level (vd: "Christine + Design", "Kallie + Team Chinese"). Có vài chỗ khác với <a href="#raci" style="color:var(--primary);font-weight:600;">RACI scope (section 14)</a> user đã confirm — cần align lại với team:
+    <ul style="margin: 6px 0 0 20px;">
+      <li>Email Marketing: sheet ghi <strong>Christine + Kallie</strong> co-own; RACI user-defined ghi <strong>Sunny</strong> primary</li>
+      <li>WeChat + Xiaohongshu (ZH): sheet ghi <strong>Kallie + Team Chinese</strong>; RACI user-defined ghi <strong>Sunny</strong></li>
+      <li>Founder letter (Chris Koh personal): sheet ghi <strong>Sunny</strong>; RACI user-defined ghi <strong>Kallie</strong> (calendar+draft)</li>
+      <li>Paid Ads: sheet ghi <strong>Hellen</strong>; RACI user-defined ghi <strong>Chloe</strong></li>
+      <li>Speaker Wave 1+2: sheet ghi <strong>Christine + Design</strong>; RACI user-defined ghi <strong>Maria</strong></li>
+    </ul>
+  </div>
+
+  <h3>Status snapshot (hôm nay 02/06/2026)</h3>
+  <div class="stats">
+    <div class="stat warning"><div class="v">1</div><div class="l">In Progress</div></div>
+    <div class="stat"><div class="v">41</div><div class="l">Not Started</div></div>
+    <div class="stat info"><div class="v">42</div><div class="l">Total tasks</div></div>
+    <div class="stat danger"><div class="v">26</div><div class="l">High Priority</div></div>
+  </div>
+
+  <h3>P1 Warming Up — 6 tasks · Start 15/06</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>Workstream</th><th>Owner (sheet)</th><th>Start</th><th>End</th><th>Days</th><th>Prio</th><th>Dependency</th><th>KPI</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Finalize key message + comm narrative</td><td>Strategy</td><td>Chloe</td><td>15/06</td><td>22/06</td><td class="num">8</td><td><span class="prio-pill prio-high">HIGH</span></td><td>—</td><td>Narrative approved</td><td><span class="status-pill status-in-progress">IN PROGRESS</span></td></tr>
+        <tr><td>ShopX 2025 recap carousel / proof content</td><td>Content</td><td>Kallie</td><td>15/06</td><td>24/06</td><td class="num">10</td><td><span class="prio-pill prio-high">HIGH</span></td><td>2025 proof assets</td><td>1 recap carousel published</td><td><span class="status-pill status-not-started">NOT STARTED</span></td></tr>
+        <tr><td>Founder letter: why ShopX 2026 / Saigon / AI</td><td>Founder-led</td><td>Sunny</td><td>15/06</td><td>27/06</td><td class="num">13</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Narrative approved</td><td>1 founder letter post</td><td><span class="status-pill status-not-started">NOT STARTED</span></td></tr>
+        <tr><td>Landing page QA + tracking setup</td><td>Landing</td><td>Chloe + Dev</td><td>15/06</td><td>30/06</td><td class="num">16</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Landing draft</td><td>Analytics + tracking ready</td><td><span class="status-pill status-not-started">NOT STARTED</span></td></tr>
+        <tr><td>Partner toolkit draft (ShopOS/EFE/admins)</td><td>Partnership</td><td>Christine</td><td>17/06</td><td>30/06</td><td class="num">14</td><td><span class="prio-pill prio-medium">MED</span></td><td>Message approved</td><td>Toolkit shared with key partners</td><td><span class="status-pill status-not-started">NOT STARTED</span></td></tr>
+        <tr><td>ShopOS communication alignment</td><td>Partnership</td><td>Maria</td><td>16/06</td><td>30/06</td><td class="num">15</td><td><span class="prio-pill prio-high">HIGH</span></td><td>ShopOS meeting</td><td>Owner &amp; posting cadence confirmed</td><td><span class="status-pill status-not-started">NOT STARTED</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>P2 Blooming — 11 tasks · 16/06–31/07</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>Workstream</th><th>Owner (sheet)</th><th>Start</th><th>End</th><th>Days</th><th>Prio</th><th>Dependency</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Landing page live + Apply Free campaign</td><td>Landing</td><td>Chloe + Dev</td><td>16/06</td><td>31/07</td><td class="num">46</td><td><span class="prio-pill prio-high">HIGH</span></td><td>P1 QA</td><td>Landing conversion tracked</td></tr>
+        <tr><td>Email 1: Apply Free</td><td>CRM</td><td>Christine</td><td>01/07</td><td>01/07</td><td class="num">1</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Email segments ready</td><td>Open &gt;38%, CTR &gt;9%</td></tr>
+        <tr><td>Email 2: Speaker lineup teaser</td><td>CRM</td><td>Christine</td><td>08/07</td><td>15/07</td><td class="num">8</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Speaker Wave 1</td><td>Open &gt;38%, CTR &gt;9%</td></tr>
+        <tr><td>Email 3: Free apply closing soon</td><td>CRM</td><td>Christine</td><td>22/07</td><td>28/07</td><td class="num">7</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Apply Free live</td><td>Application spike before 31/7</td></tr>
+        <tr><td>AI how-to carousels + LinkedIn AI insight</td><td>Education</td><td>Kallie</td><td>16/06</td><td>31/07</td><td class="num">46</td><td><span class="prio-pill prio-medium">MED</span></td><td>Content pillars</td><td>Saves, shares, apply traffic</td></tr>
+        <tr><td>Speaker Wave 1: Steve + Arvind</td><td>Speaker</td><td>Christine + Design</td><td>20/06</td><td>07/07</td><td class="num">18</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Speaker confirm</td><td>Speaker UGC live</td></tr>
+        <tr><td>Track reveal by outcome — 5 tracks</td><td>Track</td><td>Christine + Design</td><td>01/07</td><td>31/07</td><td class="num">31</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Track descriptions</td><td>Track engagement + apply clicks</td></tr>
+        <tr><td>Soft Meta Ads VN+SG / LinkedIn Ads SG+IN</td><td>Paid</td><td>Hellen</td><td>20/06</td><td>31/07</td><td class="num">42</td><td><span class="prio-pill prio-medium">MED</span></td><td>Landing live</td><td>Meta CTR &gt;2%, LI CTR &gt;2%</td></tr>
+        <tr><td>EFE + community announcement / admin trade</td><td>Community</td><td>Christine</td><td>01/07</td><td>31/07</td><td class="num">31</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Partner toolkit</td><td>8+ groups seeded</td></tr>
+        <tr><td>WeChat / Xiaohongshu setup + ZH organic</td><td>International</td><td>Kallie + Team Chinese</td><td>16/06</td><td>31/07</td><td class="num">46</td><td><span class="prio-pill prio-medium">MED</span></td><td>ZH messaging</td><td>ZH traffic growth</td></tr>
+        <tr><td>Personalized media pitch round 1</td><td>PR</td><td>Maria</td><td>08/07</td><td>31/07</td><td class="num">24</td><td><span class="prio-pill prio-medium">MED</span></td><td>PR hooks ready</td><td>1 media opportunity</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>P3 Peak — 11 tasks · 01/08–16/09</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>Workstream</th><th>Owner (sheet)</th><th>Start</th><th>End</th><th>Days</th><th>Prio</th><th>Dependency</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Switch landing CTA to paid + scarcity counter</td><td>Landing</td><td>Chloe + Dev</td><td>01/08</td><td>16/09</td><td class="num">47</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Apply Free closed</td><td>Confirmed attendee conversion</td></tr>
+        <tr><td>Full agenda reveal</td><td>Content</td><td>Maria</td><td>01/08</td><td>07/08</td><td class="num">7</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Agenda v1 approved</td><td>Apply lift after reveal</td></tr>
+        <tr><td>Email 4–8: paid ticket, agenda, prep, social proof, logistics</td><td>CRM</td><td>Christine + Kallie</td><td>03/08</td><td>16/09</td><td class="num">45</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Segments ready</td><td>Open &gt;38%, CTR &gt;9%</td></tr>
+        <tr><td>Speaker Wave 2 + full lineup reveal</td><td>Speaker</td><td>Christine + Design</td><td>01/08</td><td>31/08</td><td class="num">31</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Speaker confirms</td><td>100% speaker posts by All-Hands</td></tr>
+        <tr><td>All-Hands Week prep: caption + visual kits</td><td>All-Hands</td><td>Team Lily</td><td>11/08</td><td>24/08</td><td class="num">14</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Confirmed speaker/sponsor list</td><td>100% kits delivered</td></tr>
+        <tr><td>All-Hands Week activation</td><td>All-Hands</td><td>All partners</td><td>25/08</td><td>31/08</td><td class="num">7</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Kits delivered</td><td>+30% application spike</td></tr>
+        <tr><td>Scale Meta / LI / WeChat / Xiaohongshu ads</td><td>Paid</td><td>Kallie + Team Chinese</td><td>01/08</td><td>16/09</td><td class="num">47</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Winning creatives</td><td>Meta CTR &gt;3%, CPL &lt;$8</td></tr>
+        <tr><td>Scarcity posts 50/80/95% + country flag posts</td><td>Proof</td><td>Kallie</td><td>01/08</td><td>16/09</td><td class="num">47</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Real apply/confirm data</td><td>Milestone engagement + conversion</td></tr>
+        <tr><td>Cruise teaser + Saigon travel content</td><td>Experience</td><td>Sunny</td><td>15/08</td><td>16/09</td><td class="num">33</td><td><span class="prio-pill prio-medium">MED</span></td><td>Cruise info</td><td>Intl conversion support</td></tr>
+        <tr><td>Attendee prep guides: visa, hotel, travel, WhatsApp</td><td>Logistics</td><td>Sunny</td><td>01/08</td><td>16/09</td><td class="num">47</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Approved attendee list</td><td>95%+ WhatsApp join rate</td></tr>
+        <tr><td>Press invite + preview article pitch</td><td>PR</td><td>Maria</td><td>01/08</td><td>10/09</td><td class="num">41</td><td><span class="prio-pill prio-medium">MED</span></td><td>Media pitch list</td><td>≥1 pre-event article</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>P4 Event Day — 5 tasks · 17/09</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>Workstream</th><th>Owner (sheet)</th><th>Prio</th><th>Dependency</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Real-time social coverage every 30–60 min</td><td>Live Coverage</td><td>Kallie</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Event-day plan</td><td>800+ story views</td></tr>
+        <tr><td>Repost all tagged UGC within 15 mins</td><td>UGC</td><td>Kallie</td><td><span class="prio-pill prio-high">HIGH</span></td><td>UGC setup</td><td>50+ attendee UGC posts</td></tr>
+        <tr><td>WhatsApp-only day-of logistics updates</td><td>Ops Comms</td><td>Kallie</td><td><span class="prio-pill prio-high">HIGH</span></td><td>WhatsApp groups</td><td>No major comms gaps</td></tr>
+        <tr><td>Capture speaker quotes, demos, sponsor booth</td><td>Proof Capture</td><td>Media team</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Shot list</td><td>20+ clips, 30+ photos</td></tr>
+        <tr><td>Cruise live coverage + VIP networking proof</td><td>VIP</td><td>Media team</td><td><span class="prio-pill prio-medium">MED</span></td><td>Cruise run-sheet</td><td>Cruise assets for recap</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>P5 After Glow — 9 tasks · 18/09–17/10</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Task</th><th>Workstream</th><th>Owner (sheet)</th><th>Start</th><th>End</th><th>Days</th><th>Prio</th><th>Dependency</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr><td>Thank-you carousel + Email 9</td><td>Recap</td><td>Christine</td><td>18/09</td><td>18/09</td><td class="num">1</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Event assets</td><td>High engagement + tags</td></tr>
+        <tr><td>NPS survey + Email 10</td><td>Survey</td><td>Kallie + Christine</td><td>20/09</td><td>20/09</td><td class="num">1</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Survey form</td><td>30%+ response rate</td></tr>
+        <tr><td>60s recap video + 3-min long cut</td><td>Video</td><td>Kallie + Media + Design</td><td>18/09</td><td>08/10</td><td class="num">21</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Raw footage</td><td>60s video by T+7</td></tr>
+        <tr><td>Quote cards 14 days + recap blog EN/VI/中文</td><td>Content</td><td>Sunny + Design</td><td>18/09</td><td>08/10</td><td class="num">21</td><td><span class="prio-pill prio-medium">MED</span></td><td>Quotes + session notes</td><td>14 cards, 3-language blog</td></tr>
+        <tr><td>Session recordings edit + Email 11</td><td>Recordings</td><td>Media + Christine</td><td>18/09</td><td>30/09</td><td class="num">13</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Raw recordings</td><td>Recordings delivered captioned EN</td></tr>
+        <tr><td>Sponsor reporting deck per sponsor</td><td>Sponsor</td><td>Christine</td><td>25/09</td><td>08/10</td><td class="num">14</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Event proof</td><td>100% sponsors receive deck</td></tr>
+        <tr><td>Migrate WhatsApp → ShopX Year-Round APAC</td><td>Community</td><td>Kallie</td><td>18/09</td><td>17/10</td><td class="num">30</td><td><span class="prio-pill prio-high">HIGH</span></td><td>WhatsApp group</td><td>60%+ active after 30 days</td></tr>
+        <tr><td>30-day workflow adoption survey + Email 12</td><td>Retention</td><td>Kallie + Christine</td><td>09/10</td><td>17/10</td><td class="num">9</td><td><span class="prio-pill prio-high">HIGH</span></td><td>Survey design</td><td>20%+ response rate</td></tr>
+        <tr><td>ShopX 2027 interest form + founder reflection</td><td>2027</td><td>Chris Koh</td><td>25/09</td><td>17/10</td><td class="num">23</td><td><span class="prio-pill prio-medium">MED</span></td><td>P5 proof</td><td>100+ interest signups</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Owner workload distribution (theo sheet v2)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Owner</th><th>Tasks</th><th>Workload note</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Kallie</strong></td><td class="num">14</td><td><span class="badge danger">OVERLOADED</span> Social + ZH (mới) + Event day + Recap + Community migration + NPS. Cần cân nhắc share load với team.</td></tr>
+        <tr><td><strong>Christine</strong></td><td class="num">12</td><td><span class="badge warn">HEAVY</span> Email 1–3 + 9 + sponsor reporting + Speaker Wave 1+2 + Track reveal + community announce. Theo RACI user-defined, Email lẽ ra Sunny.</td></tr>
+        <tr><td><strong>Sunny</strong></td><td class="num">5</td><td>Founder letter + Cruise + Saigon travel + Attendee prep + Quote cards 3 langs. Theo RACI user, Sunny lẽ ra primary Email.</td></tr>
+        <tr><td><strong>Chloe</strong></td><td class="num">4</td><td>Key message + Landing QA + Landing live + Switch CTA. Strategic + comm plan owner.</td></tr>
+        <tr><td><strong>Maria</strong></td><td class="num">4</td><td>ShopOS comm + PR pitch + Agenda reveal + Press preview. <strong>Sheet không assign Speaker scope</strong> — khác RACI.</td></tr>
+        <tr><td><strong>Hellen</strong></td><td class="num">1</td><td>Paid Ads P2 only. Sheet chưa reflect ticket sales scope (RACI user nói Hellen primary cho ticket + payment).</td></tr>
+        <tr><td><strong>Chris Koh</strong></td><td class="num">1</td><td>2027 interest form + founder reflection (only owner of this one).</td></tr>
+        <tr><td><strong>Media team</strong></td><td class="num">4</td><td>Event day capture + cruise + recap video + recordings edit. <strong>Sheet mới — không có trong RACI user-defined</strong> (RACI có Troy = Video, Media chưa rõ team gì khác).</td></tr>
+        <tr><td><strong>Design team</strong></td><td class="num">5</td><td>Co-owner trên Speaker Wave 1+2, Track reveal, Recap video, Quote cards. Sheet không tách rõ Jimmy/Tuấn Anh/Lily.</td></tr>
+        <tr><td><strong>Dev</strong></td><td class="num">3</td><td>Co-owner trên Landing QA + Landing live + Switch CTA. <strong>Sheet mới — không có trong RACI user-defined</strong> (RACI không list Dev).</td></tr>
+        <tr><td><strong>Team Chinese</strong></td><td class="num">2</td><td>Co-owner WeChat/Xiaohongshu setup + Scale ZH ads. <strong>Sheet mới — không có trong RACI</strong> — có thể là team external cho ZH market.</td></tr>
+        <tr><td><strong>Team Lily</strong></td><td class="num">1</td><td>All-Hands Week prep kits. Khớp với RACI = Lily Team remote backup.</td></tr>
+        <tr><td><strong>All partners</strong></td><td class="num">1</td><td>All-Hands Week activation (25-31/8). Collective activation, không 1 owner.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box warn">
+    <div class="info-box-title">⚠ Action: Cần align Owner data</div>
+    <div class="info-box-body">
+      Sheet v2 có 3 entity mới chưa rõ thuộc ai trong team: <strong>Media team</strong>, <strong>Dev</strong>, <strong>Team Chinese</strong>. Đề xuất Chloe coordinate buổi sync với scope leads để:
+      <ul style="margin: 6px 0 0 20px;">
+        <li>Xác nhận Media team = Troy + freelance photographer? Hay là team riêng?</li>
+        <li>Dev = ai? (Landing page work)</li>
+        <li>Team Chinese = ai? (CN/MY ZH support — có overlap với Sunny scope cũ?)</li>
+        <li>Resolve 5 ownership conflicts giữa sheet v2 và RACI user-defined (xem list ở đầu section)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan Dashboard</strong><br/>
-  Version 1.1 · Cập nhật 02/06/2026 · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
-  v1.1 changes: Gantt chart timeline · RACI rebuild với team scope thực tế (Chloe/Christine/Maria/Kallie/Sunny/Hellen + Design Jimmy+Tuấn Anh, Troy video, Lily team remote)<br/>
+  Version 1.2 · Cập nhật 02/06/2026 (chiều) · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
+  v1.2 changes: Sync với sheet v2 — thêm Phase Plan (7 phases), Phase Communication Plan, Master Execution Tracker (42 tasks với Start/End/Priority/Dependency/KPI/Status)<br/>
+  v1.1 changes: Gantt chart timeline · RACI rebuild với team scope thực tế<br/>
   Maintained by: Chloe Dinh · <a href="https://github.com/chloedinh-create/shopx-2026-master-plan" style="color: var(--primary);">GitHub</a><br/>
   <em>Tài liệu mật nội bộ. Không chia sẻ ra ngoài team.</em>
 </div>
