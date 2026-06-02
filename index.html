@@ -289,43 +289,6 @@
   .cpr-no-activity { color: var(--text-muted); font-size: 11.5px; font-style: italic; }
   @media (max-width: 900px) { .channel-phase-row { grid-template-columns: 1fr; gap: 8px; } .cpr-phase { display: inline-block; } }
 
-  /* Phase Communication cards */
-  .phase-comm-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 16px; box-shadow: var(--shadow-sm); overflow: hidden; border-left: 5px solid var(--primary); }
-  .phase-comm-card.phc-bar-p1 { border-left-color: #6b46ff; }
-  .phase-comm-card.phc-bar-p2 { border-left-color: #3b82f6; }
-  .phase-comm-card.phc-bar-p3 { border-left-color: #ef4444; }
-  .phase-comm-card.phc-bar-p4 { border-left-color: #f59e0b; }
-  .phase-comm-card.phc-bar-p5 { border-left-color: #16a085; }
-  .pcc-head { padding: 12px 18px; background: var(--surface-3); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
-  .pcc-phase { font-size: 14px; font-weight: 800; }
-  .pcc-date { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-left: 8px; }
-  .pcc-kpi { font-size: 12px; color: var(--text-soft); max-width: 60%; text-align: right; line-height: 1.45; }
-  .pcc-body { padding: 14px 18px; }
-  .pcc-section { padding: 8px 0; border-top: 1px dashed var(--border); }
-  .pcc-section:first-child { border-top: 0; padding-top: 0; }
-  .pcc-label { font-size: 11px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
-  .pcc-text { font-size: 13.5px; color: var(--text-soft); line-height: 1.55; }
-  .pcc-reaction { background: linear-gradient(135deg, #fef9c3, #fef3c7); border-radius: 6px; padding: 10px 12px; margin: 8px 0; border-top: 0; }
-  .pcc-reaction .pcc-label { color: #92400e; }
-  .pcc-react-list { margin: 4px 0 0; padding-left: 18px; font-size: 12.5px; color: var(--text); line-height: 1.55; }
-  .pcc-react-list li { margin-bottom: 3px; }
-  @media (max-width: 900px) { .pcc-head { flex-direction: column; align-items: flex-start; } .pcc-kpi { max-width: 100%; text-align: left; } }
-
-  /* VIP Target Tracker */
-  .vip-tier { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 800; letter-spacing: .3px; }
-  .vip-tier.t1 { background: #fee2e2; color: #991b1b; }
-  .vip-tier.t2 { background: #fef3c7; color: #92400e; }
-  .vip-tier.t3 { background: #dbeafe; color: #1e40af; }
-  .vip-group-header { background: linear-gradient(135deg, var(--surface-3), var(--surface-2)); padding: 12px 16px; border-radius: 8px 8px 0 0; border: 1px solid var(--border); border-bottom: 0; margin-top: 20px; }
-  .vip-group-title { font-size: 15px; font-weight: 800; color: var(--text); margin: 0 0 4px; }
-  .vip-group-desc { font-size: 12.5px; color: var(--text-soft); }
-  .vip-table { margin-top: 0 !important; border-radius: 0 0 8px 8px; }
-  .angle-matrix { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow-x: auto; box-shadow: var(--shadow-sm); margin: 12px 0; }
-  .angle-matrix table { font-size: 12px; }
-  .angle-matrix td { line-height: 1.45; vertical-align: top; padding: 8px 10px; }
-  .angle-matrix th:first-child { background: var(--surface-3); font-weight: 800; }
-  .angle-matrix td:first-child { font-weight: 700; background: var(--surface-2); white-space: nowrap; }
-
   /* Master Tracker status pills */
   .status-pill { display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: .3px; }
   .status-not-started { background: #f1f5f9; color: #475569; }
@@ -385,7 +348,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan</div>
-    <div class="brand-meta">v1.7 · Cập nhật 03/06/2026</div>
+    <div class="brand-meta">v1.6 · Cập nhật 03/06/2026</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -413,9 +376,6 @@
   <a href="#crisis" class="nav-link"><span class="num">13</span> Crisis Quick-Response</a>
   <a href="#kpi" class="nav-link"><span class="num">14</span> KPI Dashboard</a>
   <a href="#raci" class="nav-link"><span class="num">15</span> Team RACI</a>
-
-  <div class="nav-section-title">Strategic Targets</div>
-  <a href="#vip-targets" class="nav-link"><span class="num">16</span> VIP Target Tracker (30)</a>
 </aside>
 
 <!-- ============ MAIN ============ -->
@@ -926,107 +886,49 @@
 <!-- ============ 06 PHASE COMMUNICATION PLAN ============ -->
 <section id="phase-comms">
   <h2><span class="ord">06</span>Phase Communication Plan</h2>
-  <p class="lead">Messaging layer per phase: Key Message · Core Angle · <strong>Target Audience Reaction</strong> (theo 5 nhóm trong <a href="#vip-targets" style="color:var(--primary);font-weight:600;">VIP Target Tracker</a>) · KPI.</p>
+  <p class="lead">Strategic messaging per phase — Key message, Core angle, Channels, Assets, KPI. Đây là <strong>messaging layer</strong> giữa Phase Plan (strategy) và Master Tracker (execution).</p>
 
-  <div class="phase-comm-card phc-bar-p1">
-    <div class="pcc-head">
-      <div class="pcc-phase"><span class="phase-pill phase-p1">P1 Warming Up</span> <span class="pcc-date">15–30 Jun</span></div>
-      <div class="pcc-kpi">500+ landing visits · 100+ waitlist · 5+ admin conversations</div>
-    </div>
-    <div class="pcc-body">
-      <div class="pcc-section"><div class="pcc-label">Key Message</div><div class="pcc-text">"ShopX is coming back, bigger and more international. Vì giai đoạn này chưa nên bán vé mạnh ⇒ ShopX 2025 đã prove được room quality, 2026 quay lại với direction mới: AI-powered ecommerce, practical demos, curated APAC community."</div></div>
-      <div class="pcc-section"><div class="pcc-label">Core Angle</div><div class="pcc-text"><em>"From CRO &amp; retention to AI-powered ecommerce. ShopX 2026 is where APAC sellers start preparing for the next growth wave."</em></div></div>
-      <div class="pcc-section pcc-reaction"><div class="pcc-label">🎯 Target audience reaction</div>
-        <ul class="pcc-react-list">
-          <li><strong>🛍 Shopify Team:</strong> "ShopX 2025 có 50+ APAC brands. Worth a partnership conversation?"</li>
-          <li><strong>🔧 App/Builder Founders:</strong> "AI summit APAC = customer audience overlap. Sponsor opportunity?"</li>
-          <li><strong>👥 Alumni 2025:</strong> "Memory triggered bởi recap. Year 2 — tôi nên quay lại?"</li>
-          <li><strong>🎯 CRO Agencies:</strong> "AI focus = họ finally đang address pain của tôi?"</li>
-          <li><strong>📰 PR/Media:</strong> "Year 2 of ShopX = potential APAC tech story arc"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="phase-comm-card phc-bar-p2">
-    <div class="pcc-head">
-      <div class="pcc-phase"><span class="phase-pill phase-p2">P2 Blooming</span> <span class="pcc-date">16 Jun – 31 Jul</span></div>
-      <div class="pcc-kpi">100–150 applications by 31/7 · 50%+ qualified · 8+ communities seeded · 5+ speaker/sponsor posts</div>
-    </div>
-    <div class="pcc-body">
-      <div class="pcc-section"><div class="pcc-label">Key Message</div><div class="pcc-text">"Learn before you apply. Build credibility before selling. AI ecommerce không còn là trend để đọc chơi. Sellers cần hiểu cách áp dụng AI vào store, ads, landing page, ops và BFCM prep."</div></div>
-      <div class="pcc-section"><div class="pcc-label">Core Angle</div><div class="pcc-text"><em>"See real AI ecommerce workflows before your competitors turn them into an advantage."</em></div></div>
-      <div class="pcc-section pcc-reaction"><div class="pcc-label">🎯 Target audience reaction</div>
-        <ul class="pcc-react-list">
-          <li><strong>🛍 Shopify Team:</strong> "Custom deck reviewed. Strategic value clear. Internal alignment ongoing."</li>
-          <li><strong>🔧 App/Builder Founders:</strong> "LOI negotiation. ROI calc: 250 curated buyers × CPL = worth $X."</li>
-          <li><strong>👥 Alumni 2025:</strong> "Email arrived. One-click Apply. Submitted trong 2 phút."</li>
-          <li><strong>🎯 CRO Agencies:</strong> "Edu content SHOWS AI workflows replacing my CRO services. Existential threat → MUST attend."</li>
-          <li><strong>📰 PR/Media:</strong> "Pitch reviewed. Cần exclusive angle: Meta/TikTok confirm?"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="phase-comm-card phc-bar-p3">
-    <div class="pcc-head">
-      <div class="pcc-phase"><span class="phase-pill phase-p3">P3 Peak</span> <span class="pcc-date">1 Aug – 16 Sep</span></div>
-      <div class="pcc-kpi">250 curated apps · 200–250 approved · <strong>150 confirmed international</strong> · ≥1 PR/media before event</div>
-    </div>
-    <div class="pcc-body">
-      <div class="pcc-section"><div class="pcc-label">Key Message</div><div class="pcc-text">"The room is forming. Don't miss the AI ecommerce summit APAC sellers are flying to."</div></div>
-      <div class="pcc-section"><div class="pcc-label">Core Angle</div><div class="pcc-text"><em>"250 curated ecommerce operators. 6 APAC markets. Live AI demos. One room in Saigon before BFCM 2026."</em></div></div>
-      <div class="pcc-section pcc-reaction"><div class="pcc-label">🎯 Target audience reaction</div>
-        <ul class="pcc-react-list">
-          <li><strong>🛍 Shopify Team:</strong> (nếu confirm) "Activate logo + team attendance. All-Hands Week amplify."</li>
-          <li><strong>🔧 App/Builder Founders:</strong> "All-Hands Week — sponsor team posts. Booth + activation prep. Best leads coming."</li>
-          <li><strong>👥 Alumni 2025:</strong> (đã approved early) "Logistics confirmed. Bringing 1-2 colleagues."</li>
-          <li><strong>🎯 CRO Agencies:</strong> "Agenda confirms 'AI brief→landing 20 min demo'. MUST attend. Apply ngay."</li>
-          <li><strong>📰 PR/Media:</strong> "Press preview + on-site interview slot confirmed. Ready cho Sept coverage."</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="phase-comm-card phc-bar-p4">
-    <div class="pcc-head">
-      <div class="pcc-phase"><span class="phase-pill phase-p4">P4 Event Day</span> <span class="pcc-date">17 Sep</span></div>
-      <div class="pcc-kpi"><strong>10+ strong quotes · 20+ usable short clips · 30+ event photos · 5+ sponsor activation proof shots per sponsor</strong></div>
-    </div>
-    <div class="pcc-body">
-      <div class="pcc-section"><div class="pcc-label">Key Message</div><div class="pcc-text">"ShopX 2026 is happening now. This is the room."</div></div>
-      <div class="pcc-section"><div class="pcc-label">Core Angle</div><div class="pcc-text"><em>"The future of AI-powered ecommerce is live in Saigon today."</em></div></div>
-      <div class="pcc-section pcc-reaction"><div class="pcc-label">🎯 Target audience reaction</div>
-        <ul class="pcc-react-list">
-          <li><strong>🛍 Shopify Team:</strong> "Direct merchant feedback day. Strategic insights cho APAC."</li>
-          <li><strong>🔧 App/Builder Founders:</strong> "Best leads của năm. Demo + connect non-stop."</li>
-          <li><strong>👥 Alumni 2025:</strong> "Year-on-year better. Photo wall + cruise — proud to belong."</li>
-          <li><strong>🎯 CRO Agencies:</strong> "NOW tôi see workflow. Take detailed notes → repackage plan."</li>
-          <li><strong>📰 PR/Media:</strong> "Real-time content cho tomorrow's article. Story angles confirmed."</li>
-          <li><strong>Audience không có mặt (FOMO):</strong> "Live posts everywhere. Should I have gone?"</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-
-  <div class="phase-comm-card phc-bar-p5">
-    <div class="pcc-head">
-      <div class="pcc-phase"><span class="phase-pill phase-p5">P5 After Glow</span> <span class="pcc-date">18 Sep – 17 Oct</span></div>
-      <div class="pcc-kpi">Recap video by T+7 · Sponsor decks T+2-3 weeks · NPS 30%+ · Workflow adoption 20%+ · Community 60%+ active · 2027 list 100+ · 100% sponsors get deck · 3+ sponsor renewal convos T+30</div>
-    </div>
-    <div class="pcc-body">
-      <div class="pcc-section"><div class="pcc-label">Key Message</div><div class="pcc-text">"The event ended, but the community continues. ShopX không phải event một lần. Đây là starting point của AI ecommerce community APAC."</div></div>
-      <div class="pcc-section"><div class="pcc-label">Core Angle</div><div class="pcc-text"><em>"What happened at ShopX 2026 should not stay in one room. Here's what APAC ecommerce operators are taking forward."</em></div></div>
-      <div class="pcc-section pcc-reaction"><div class="pcc-label">🎯 Target audience reaction</div>
-        <ul class="pcc-react-list">
-          <li><strong>🛍 Shopify Team:</strong> "2027 relationship conversation opens. Schedule recurring sync."</li>
-          <li><strong>🔧 App/Builder Founders:</strong> "Sponsor reporting deck received T+2-3 weeks. Renewal conversation 2027."</li>
-          <li><strong>👥 Alumni 2025:</strong> "Applied X từ event. Going 2027 + bringing 2 friends."</li>
-          <li><strong>🎯 CRO Agencies:</strong> "LinkedIn post: 'Launching AI-augmented CRO service'. ShopX = pivot moment."</li>
-          <li><strong>📰 PR/Media:</strong> "Year-end recap stories pitched. Case study coverage."</li>
-        </ul>
-      </div>
-    </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Timeline</th><th>Key Message (insight)</th><th>Core Angle</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="phase-pill phase-p1">P1 Warming Up</span></td>
+          <td>15–30 Jun</td>
+          <td>"ShopX is coming back, bigger and more international. Vì giai đoạn này chưa nên bán vé mạnh => ShopX 2025 đã prove được room quality, 2026 quay lại với direction mới: AI-powered ecommerce, practical demos, curated APAC community."</td>
+          <td><em>"From CRO &amp; retention to AI-powered ecommerce. ShopX 2026 is where APAC sellers start preparing for the next growth wave."</em></td>
+          <td>500+ landing visits · 100+ waitlist · 5+ admin conversations</td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p2">P2 Blooming</span></td>
+          <td>16 Jun – 31 Jul</td>
+          <td>"Learn before you apply. Build credibility before selling. AI ecommerce không còn là trend để đọc chơi. Sellers cần hiểu cách áp dụng AI vào store, ads, landing page, ops và BFCM prep."</td>
+          <td><em>"See real AI ecommerce workflows before your competitors turn them into an advantage."</em></td>
+          <td>100–150 applications by 31/7 · 50%+ qualified · 8+ communities seeded · 5+ speaker/sponsor posts</td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
+          <td>1 Aug – 16 Sep</td>
+          <td>"The room is forming. Don't miss the AI ecommerce summit APAC sellers are flying to."</td>
+          <td><em>"250 curated ecommerce operators. 6 APAC markets. Live AI demos. One room in Saigon before BFCM 2026."</em></td>
+          <td>250 curated apps · 200–250 approved · <strong>150 confirmed international</strong> · ≥1 PR/media before event</td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p4">P4 Event Day</span></td>
+          <td>17 Sep</td>
+          <td>"ShopX 2026 is happening now. This is the room."</td>
+          <td><em>"The future of AI-powered ecommerce is live in Saigon today."</em></td>
+          <td><strong>10+ strong quotes · 20+ usable short clips · 30+ event photos · 5+ sponsor activation proof shots per sponsor</strong></td>
+        </tr>
+        <tr>
+          <td><span class="phase-pill phase-p5">P5 After Glow</span></td>
+          <td>18 Sep – 17 Oct</td>
+          <td>"The event ended, but the community continues. ShopX không phải event một lần. Đây là starting point của AI ecommerce community APAC."</td>
+          <td><em>"What happened at ShopX 2026 should not stay in one room. Here's what APAC ecommerce operators are taking forward."</em></td>
+          <td>Recap video by T+7 · Sponsor decks T+2-3 weeks · NPS 30%+ · Workflow adoption 20%+ · Community 60%+ active · 2027 list 100+ · 100% sponsors get deck · 3+ sponsor renewal convos T+30</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -2997,187 +2899,11 @@
 
 </section>
 
-<!-- ============ 16 VIP TARGET TRACKER ============ -->
-<section id="vip-targets">
-  <h2><span class="ord">16</span>VIP Target Tracker — 30 strategic relationships</h2>
-  <p class="lead">ShopX 2026 không phải về 250 attendees nói chung — event được build để tạo <strong>30 strategic relationships</strong> cụ thể này. Mỗi target có psychology journey + connection path + owner driving the relationship. Status update weekly.</p>
-
-  <div class="info-box">
-    <div class="info-box-title">Tier legend + Owner approach</div>
-    <div class="info-box-body">
-      <span class="vip-tier t1">TIER 1</span> = Must-have, escalate founder Chris Koh nếu cần · <span class="vip-tier t2">TIER 2</span> = High-value, dedicated outreach từ scope owner · <span class="vip-tier t3">TIER 3</span> = Nice-to-have, opportunistic activation<br/>
-      <strong>Phân bổ 30 targets:</strong> 6 Shopify Team (anchor) · 8 App/Builder Ecosystem (sponsor) · 7 Alumni 2025 (community core) · 6 CRO Agencies (audience expansion) · 3 PR/Media (amplifier)<br/>
-      <strong>Status legend:</strong> Not contacted · Pitch sent · In discussion · LOI / Verbal commit · Confirmed · Declined
-    </div>
-  </div>
-
-  <div class="vip-group-header">
-    <div class="vip-group-title">🛍 Group A · Shopify Team (6 targets)</div>
-    <div class="vip-group-desc">Anchor + credibility. Endorsement = tier-1 PR signal. Warm intro qua Avada/PageFly/Arvind. Decision cycle 3-6 tháng. Strategic value: APAC market intelligence + 2027 partnership pipeline.</div>
-  </div>
-  <div class="table-wrap vip-table">
-    <table>
-      <thead><tr><th>Target</th><th>Tier</th><th>Why important</th><th>Connection path</th><th>Owner</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td>Shopify APAC Head of Partnerships</td><td><span class="vip-tier t1">T1</span></td><td>Tier-1 PR moment nếu confirm support. Logo on materials.</td><td>Warm intro via Arvind + custom pitch deck</td><td>Maria → escalate founder</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td>Shopify SEA Market Lead</td><td><span class="vip-tier t1">T1</span></td><td>Regional decision-maker for partnership scope</td><td>Via Arvind network</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td>Shopify Vietnam Country Manager</td><td><span class="vip-tier t1">T1</span></td><td>VN-specific GemPages partnership + home market strategic</td><td>Direct outreach Chloe + founder backup</td><td>Chloe</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td>Shopify India Partner Manager</td><td><span class="vip-tier t2">T2</span></td><td>App ecosystem connect + Arvind validation</td><td>Via Arvind (warm intro)</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td>Shopify Plus APAC Lead</td><td><span class="vip-tier t2">T2</span></td><td>Premium merchant tier connections</td><td>Warm intro via PageFly/Avada</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td>Shopify App Store APAC team</td><td><span class="vip-tier t2">T2</span></td><td>App partnerships intel + ecosystem visibility</td><td>Via Judge.me / PushOwl warm intro</td><td>Christine</td><td><span class="no-owner">Not contacted</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="vip-group-header">
-    <div class="vip-group-title">🔧 Group B · App / Page Builder Ecosystem (8 targets)</div>
-    <div class="vip-group-desc">Sponsor pipeline + reach amplification. Founder-to-founder cold outreach. Customers = perfect ShopX audience (Shopify sellers APAC). Decision cycle 3-6 tháng. ROI calc: $X sponsorship for 250 curated buyers.</div>
-  </div>
-  <div class="table-wrap vip-table">
-    <table>
-      <thead><tr><th>Target</th><th>Tier</th><th>Why important</th><th>Connection path</th><th>Owner</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Klaviyo</strong> (CEO Andrew Bialecki)</td><td><span class="vip-tier t1">T1</span></td><td>Headline sponsor. Klaviyo customers = exact ShopX audience.</td><td>Cold founder-to-founder (Chris Koh)</td><td>Christine + founder</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Triple Whale</strong> (CEO AJ Orbach)</td><td><span class="vip-tier t1">T1</span></td><td>Headline. AI analytics + ecom overlap mạnh nhất với ShopX theme.</td><td>Cold founder-to-founder</td><td>Christine + founder</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Postscript</strong> (SMS for Shopify)</td><td><span class="vip-tier t2">T2</span></td><td>Track Partner. SMS marketing pivot to AI.</td><td>Cold outreach</td><td>Christine</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Recharge</strong> (subscription apps)</td><td><span class="vip-tier t2">T2</span></td><td>Track Partner. Subscription + AI overlap.</td><td>Cold outreach (Bangalore eng team via Arvind)</td><td>Christine</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Yotpo</strong> (CEO Tomer Tagrin)</td><td><span class="vip-tier t2">T2</span></td><td>Track Partner. Reviews + AI content overlap.</td><td>Cold outreach</td><td>Christine</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Judge.me</strong> (Bangalore)</td><td><span class="vip-tier t1">T1</span></td><td>Booth tier + IN community amplifier. Bangalore native.</td><td>Warm via Arvind</td><td>Christine</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>PageFly</strong> (VN ecosystem)</td><td><span class="vip-tier t2">T2</span></td><td>VN backup if foreign sponsors miss target. Existing GemPages relationship.</td><td>Direct (existing relationship)</td><td>Chris Koh direct</td><td><span class="badge muted">Existing relationship</span></td></tr>
-        <tr><td><strong>Avada</strong> (Marketplaces, VN)</td><td><span class="vip-tier t2">T2</span></td><td>VN ecosystem backup + warm intro multiplier for Shopify APAC</td><td>Direct (existing relationship)</td><td>Chris Koh direct</td><td><span class="badge muted">Existing relationship</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="vip-group-header">
-    <div class="vip-group-title">👥 Group C · ShopX 2025 Alumni VIPs (7 targets)</div>
-    <div class="vip-group-desc">Community core. Đã trust format → dễ activate. Multiplier effect: bring 2-3 colleagues mỗi alumni. <strong>Pull list 2025 actual attendees from Hellen + Chloe để verify names.</strong></div>
-  </div>
-  <div class="table-wrap vip-table">
-    <table>
-      <thead><tr><th>Target</th><th>Tier</th><th>Why important</th><th>Connection path</th><th>Owner</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Coolmate</strong> (VN — Trí Phạm)</td><td><span class="vip-tier t1">T1</span></td><td>~$10M+ GMV apparel. AI-curious. Multiplier potential cao.</td><td>Direct DM via Chris Koh</td><td>Chloe</td><td><span class="badge warn">Verify 2025 attendance</span></td></tr>
-        <tr><td><strong>Yody</strong> (VN apparel)</td><td><span class="vip-tier t1">T1</span></td><td>Large multi-channel apparel. AI workflows relevant cho operation scale.</td><td>Direct DM</td><td>Chloe</td><td><span class="badge warn">Verify 2025</span></td></tr>
-        <tr><td><strong>Couple TX</strong> (VN DTC)</td><td><span class="vip-tier t2">T2</span></td><td>DTC fashion mid-size. AI for content scaling.</td><td>Direct DM</td><td>Chloe</td><td><span class="badge warn">Verify 2025</span></td></tr>
-        <tr><td><strong>Routine</strong> (VN apparel)</td><td><span class="vip-tier t2">T2</span></td><td>Growing brand. AI for ad creative.</td><td>Direct DM</td><td>Chloe</td><td><span class="badge warn">Verify 2025</span></td></tr>
-        <tr><td><strong>Love Bonito</strong> (SG fashion — Rachel Lim)</td><td><span class="vip-tier t1">T1</span></td><td>High profile SG founder. PR multiplier + APAC credibility.</td><td>Via Arvind / SG agency partner</td><td>Maria</td><td><span class="badge warn">Verify 2025</span></td></tr>
-        <tr><td><strong>The Editor's Market</strong> (SG fashion)</td><td><span class="vip-tier t2">T2</span></td><td>SG DTC fashion. APAC expansion AI use case.</td><td>Direct outreach</td><td>Maria</td><td><span class="badge warn">Verify 2025</span></td></tr>
-        <tr><td><strong>Levents</strong> (VN streetwear)</td><td><span class="vip-tier t3">T3</span></td><td>Young brand, growth-stage. Bring colleague potential.</td><td>Direct DM</td><td>Chloe</td><td><span class="badge warn">Verify 2025</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="vip-group-header">
-    <div class="vip-group-title">🎯 Group D · CRO Agencies (AI-threatened) — 6 targets</div>
-    <div class="vip-group-desc">Audience expansion + urgency cao nhất. Pain: AI thật sự đang đe dọa CRO agencies — clients hỏi "tại sao trả $X/tháng khi AI làm trong giờ?". Họ NEED ShopX để repackage service. Decision cycle 1 tháng. ShopX 2026 = pivot moment cho họ.</div>
-  </div>
-  <div class="table-wrap vip-table">
-    <table>
-      <thead><tr><th>Target</th><th>Tier</th><th>Why important</th><th>Connection path</th><th>Owner</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Eastside Co</strong> (UK with APAC)</td><td><span class="vip-tier t1">T1</span></td><td>Major Shopify agency, prime existential threat case study.</td><td>LinkedIn outreach + thought leadership content</td><td>Maria (PR scope)</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Underwaterpistol</strong> (UK with AU)</td><td><span class="vip-tier t2">T2</span></td><td>Major Shopify agency. APAC presence.</td><td>LinkedIn</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Common Thread Collective</strong> (US, APAC clients)</td><td><span class="vip-tier t1">T1</span></td><td>Strategic agency, large following. Founder peer-to-peer outreach.</td><td>Founder-to-founder Chris Koh direct</td><td>Chris Koh direct + Maria coordinate</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>The Good</strong> (US, CRO-specific)</td><td><span class="vip-tier t2">T2</span></td><td>CRO-specific agency = most directly threatened.</td><td>LinkedIn + provocative content</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Locomote</strong> (SG)</td><td><span class="vip-tier t2">T2</span></td><td>SG Shopify agency. Regional reach.</td><td>Direct LinkedIn outreach</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Akcelo</strong> (AU performance marketing)</td><td><span class="vip-tier t3">T3</span></td><td>AU performance marketing agency. AI adoption case.</td><td>LinkedIn outreach</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="vip-group-header">
-    <div class="vip-group-title">📰 Group E · PR / Media / Influencers (3 targets)</div>
-    <div class="vip-group-desc">Amplifier — reach 100K+/người. Personalized pitch + exclusive angle (Meta/TikTok confirm = tier-1 hook). Decision cycle 2 tuần.</div>
-  </div>
-  <div class="table-wrap vip-table">
-    <table>
-      <thead><tr><th>Target</th><th>Tier</th><th>Why important</th><th>Connection path</th><th>Owner</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr><td><strong>TechInAsia</strong> (APAC ecom editor)</td><td><span class="vip-tier t1">T1</span></td><td>Tier-1 APAC tech coverage. Largest reach.</td><td>Personalized pitch + offer exclusive Chris Koh interview</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>e27</strong> (SEA tech)</td><td><span class="vip-tier t2">T2</span></td><td>SEA startup + ecom coverage.</td><td>Personalized pitch</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-        <tr><td><strong>Vietcetera</strong> (VN ecosystem)</td><td><span class="vip-tier t1">T1</span></td><td>VN home market PR moment. Vietcetera pitched first (lowest barrier).</td><td>Personalized pitch with Saigon angle</td><td>Maria</td><td><span class="no-owner">Not contacted</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>Content Angles Matrix — 5 groups × 5 phases</h3>
-  <p class="lead" style="font-size:13px;">Mỗi cell = content angle cụ thể nhắm vào nhóm đó trong phase đó. Dùng đi kèm <a href="#calendar" style="color:var(--primary);font-weight:600;">Weekly Content Calendar (section 11)</a> để craft content per touchpoint.</p>
-
-  <div class="angle-matrix">
-    <table>
-      <thead>
-        <tr>
-          <th>Group</th>
-          <th><span class="phase-pill phase-p1">P1 Warming Up</span><br/><small>15-30 Jun</small></th>
-          <th><span class="phase-pill phase-p2">P2 Blooming</span><br/><small>16/6-31/7</small></th>
-          <th><span class="phase-pill phase-p3">P3 Peak</span><br/><small>1/8-16/9</small></th>
-          <th><span class="phase-pill phase-p4">P4 Event Day</span><br/><small>17/9</small></th>
-          <th><span class="phase-pill phase-p5">P5 After Glow</span><br/><small>18/9-17/10</small></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>🛍 Shopify Team</td>
-          <td>"ShopX 2025 metric proof" — 50+ APAC brands · stats post · request meeting (Maria via Arvind)</td>
-          <td>Custom pitch deck w/ 2 selling points: (1) CN community access (2) 6-market APAC reach · Deadline confirm 30/6</td>
-          <td>(if confirmed) "Top APAC merchants confirmed for ShopX" — featured logo placement on materials</td>
-          <td>Brand visibility moment: platform rep at event, logo on stage, joint keynote opener</td>
-          <td>Joint case study T+2-3 weeks + begin 2027 relationship conversation (Maria)</td>
-        </tr>
-        <tr>
-          <td>🔧 App/Builder Ecosystem</td>
-          <td>Founder-to-founder cold outreach: pitch deck + 2025 ROI proof · Christine drives</td>
-          <td>"250 curated buyers ROI calc" — itemized value · LOI negotiation · Target 3 LOI by 31/7</td>
-          <td>"All-Hands Week amplification kit" — caption + visual ready-to-paste · 25-31/8 sponsor team posts</td>
-          <td>"Best leads of the year" experience — booth + demo + 5+ proof shots per sponsor</td>
-          <td>Sponsor reporting deck T+2-3 weeks (Christine) → renewal conversation 2027</td>
-        </tr>
-        <tr>
-          <td>👥 Alumni 2025</td>
-          <td>Recall 2025 carousel + personal DM từ Chris Koh cho top 7 VIPs</td>
-          <td>Email 1 (1/7): "You're invited — claim your $99 seat" · easy 2-min Apply</td>
-          <td>(already approved early) Logistics email + WhatsApp delegate group invite</td>
-          <td>VIP welcome + photo wall + cruise — "I belong here" moment</td>
-          <td>Migrate vào ShopX Year-Round APAC Community → founding members</td>
-        </tr>
-        <tr>
-          <td>🎯 CRO Agencies</td>
-          <td>LinkedIn provocative: <em>"AI replacing CRO? 5 tasks AI làm tốt hơn agency 60%"</em> (Maria thought leadership)</td>
-          <td>Edu carousel: <em>"AI workflow that's about to win — what your clients will ask"</em> · Track C demo preview</td>
-          <td>Full agenda reveals: <em>"Track C: AI brief→landing 20 min. Live demo."</em> · Existential threat → MUST attend</td>
-          <td>Live workflow demo capture → notes → repackage planning</td>
-          <td>LinkedIn case post: <em>"After ShopX I'm launching AI-augmented CRO service"</em> · 2027 ambassadors</td>
-        </tr>
-        <tr>
-          <td>📰 PR/Media</td>
-          <td>(Internal: PR pitch deck prep + outlet research) · No public content</td>
-          <td>Personalized pitch per outlet với angle riêng (Maria) · Offer exclusive Chris interview</td>
-          <td>Press preview article pitch + Meta/TikTok confirm as tier-1 hook (if confirmed)</td>
-          <td>2 reporters on-site full access + pre-arranged speaker interview slots</td>
-          <td>Post-event story pitch: "What happened at first AI ecom summit APAC" + case study per major sponsor</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="info-box warn">
-    <div class="info-box-title">⚠ Owner action — week 1 (03–09/06)</div>
-    <div class="info-box-body">
-      <strong>Maria:</strong> Build pitch deck cho Shopify APAC (deadline 30/6 confirm) + research/list specific names cho Group A 6 targets + Group D 6 CRO agencies + Group E 3 outlets.<br/>
-      <strong>Christine:</strong> Build sponsor pitch deck cho Group B (Klaviyo, Triple Whale, Postscript ưu tiên) + cold founder-to-founder outreach.<br/>
-      <strong>Chloe + Hellen:</strong> Pull list 2025 attendees từ data → verify Group C 7 names. Add real names + GMV size.<br/>
-      <strong>Chris Koh:</strong> Personal DM Group C top 7 alumni VIPs + founder-to-founder reach Klaviyo + Triple Whale + Common Thread Collective.
-    </div>
-  </div>
-</section>
-
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan Dashboard</strong><br/>
-  Version 1.7 · Cập nhật 03/06/2026 · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
-  v1.7 changes: Phase Comm Plan restructured to cards với "🎯 Target audience reaction" per phase × 5 nhóm · Add section 16 VIP Target Tracker (30 strategic relationships): 6 Shopify Team + 8 App/Builder + 7 Alumni 2025 + 6 CRO Agencies + 3 PR/Media · Content Angles Matrix 5 groups × 5 phases<br/>
-  v1.6 changes: Bỏ Ticket Funnel section · Renumber 12-15: Risk/Crisis/KPI/RACI<br/>
+  Version 1.6 · Cập nhật 03/06/2026 · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
+  v1.6 changes: Bỏ Ticket Funnel section — Hellen sẽ triển khai plan bán vé riêng (giá chưa chốt) · Renumber 12-15: Risk/Crisis/KPI/RACI<br/>
   v1.5 changes: LP live deadline 15/06 · Paid Media PIC = Hellen only · Bỏ Format Code Glossary · RACI redistributed: SG+IN→Maria, CN+MY→Sunny, PH→Kallie · Calendar moved into Execution Detail (section 11)<br/>
   v1.4 changes: Cleanup — bỏ Gaps + Budget + Speaker Tracker + Sponsor Pipeline + Phase Plan 7 phases · Restructure 17 sections<br/>
   v1.3 changes: Channel Map (08) restructure thành 23 cards · merge Task Tracker + Phase Matrix + Gantt<br/>
