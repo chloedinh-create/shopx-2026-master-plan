@@ -1,39 +1,50 @@
-# ShopX 2026 — Master Communication Plan
+# ShopX 2026 — Master Communication Plan v3
 
-Interactive dashboard cho Master Communication Plan của event **ShopX 2026** — AI Ecommerce Summit · 17 Sept 2026 · Saigon.
+Interactive dashboard cho **Master Communication Plan v3** của event **ShopX 2026** — AI Ecommerce Summit · 17 Sept 2026 · Gem Center · HCM Saigon.
 
 🌐 **Live dashboard**: https://shopx-2026-master-plan-gray.vercel.app (password gated)
 
-## 📊 Source sheets (click để mở trực tiếp)
+## 📊 Source sheet
 
-- 📊 [**Master Sheets — Source of Truth**](https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit) (toàn bộ tabs)
-- 📅 [**Social Content Gantt Chart**](https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit?gid=404683974#gid=404683974) — Weekly content schedule (134-day Gantt, daily granularity)
-- ✅ [**Task Tracker (Sheet 02)**](https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit?gid=840458236#gid=840458236) — 42 tasks với Owner/Start/End/Priority/Dependency/KPI/Status
+📊 [**Master Communication Plan v3 — Google Sheets**](https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit) (source of truth)
+
+Owner: chloe.dinh@gempages.help
+
+## 🎯 KPI Logic (v3 Revamped)
+
+- **1,000,000 impressions** (60% organic/earned = 600K · 40% paid = 400K)
+- **1,000 register pool** (60% organic = 600 · 40% paid = 400)
+- **300 minimum qualified attendees** = 80 invited/VIP/speaker/sponsor + 220 acquired
+- **22% conversion rate** guardrail (220 / 1,000)
 
 ## 🔒 Bảo mật
 
 Site có password gate. Tài liệu mật nội bộ — chỉ chia sẻ trong team Marketing Gem Commerce.
 
-## 📋 Nội dung dashboard (16 sections)
+## 📋 Nội dung dashboard (14 sections)
 
-**Strategy** (00–04): Executive Summary · Cơ sở đề xuất · 3 mục tiêu · 3 audience · Tagline + 5 Hooks
+**Overview** (00–01): Executive Summary · Objectives + Funnel Logic
 
-**Phase Planning** (05–07): Phase Timeline + Gantt · Phase Communication Plan · Master Task Tracker (42 tasks)
+**Channel KPI** (02–03): Channel KPI Breakdown (6 groups) · Markets Activation (VN/SG/CN/AU)
 
-**Execution Detail** (08–11): Markets (6) · Bản đồ kênh (23 channels) · Content Pillars (8) · Weekly Content Calendar (16 posts + 5-pillar mapping)
+**Earned Media** (04–06): Influencer + Community Map (4 tiers) · PR + Media Partners · Shopify Apps Cross-promo (25 apps)
 
-**Operations** (12–15): Risk Register (20) · Crisis Quick-Response · KPI Dashboard · Team RACI
+**Content** (07–08): Content Pillars + FOMO Strategy (8 pillars) · Pre-event Seller Interviews (25 across 5 segments)
+
+**Acquisition** (09–11): Strategic Audience Curation · Execution Timeline + Gantt (16 weeks) · Mention Scoring Framework
+
+**Operations** (12–13): Risk Register (6 risks) · Team RACI
 
 ## ✨ Features
 
 - 💬 **Live notes/comments** — click 💬 next to any section header để add personal note (saved localStorage, export JSON to share)
-- 📊 **Sheet links** — buttons trên hero + section 11 + footer mở trực tiếp Google Sheets source
+- 📊 **Sheet links** — buttons trên hero mở trực tiếp Google Sheets source
 - 🎨 **Dark sidebar + cards** — Mobile responsive, print-friendly
 - 🔍 **Auto-active sidebar** — track section đang xem khi scroll
 
 ## 🚀 Tech
 
-Static HTML/CSS/JS · Single file · Deploy Vercel auto on push to main. Không có build step.
+Static HTML/CSS/JS · Single file · Deploy Vercel auto on push to main.
 
 ## 📝 Maintainer
 
@@ -41,12 +52,5 @@ Chloe Dinh · Marketing Gem Commerce
 
 ## 📜 Changelog
 
-- **v1.8** — Google Sheets links integration (hero buttons + section 11 + footer)
-- **v1.7** — 💬 Live comments/notes feature (localStorage based)
-- **v1.6** — Bỏ Ticket Funnel section (Hellen plan riêng)
-- **v1.5** — LP live deadline 15/06 · Paid Media → Hellen · RACI redistributed
-- **v1.4** — Major cleanup + restructure 17→16 sections
-- **v1.3** — Channel Map merge với Task Tracker + Phase Matrix
-- **v1.2** — Sync với sheet v2: Phase Plan + Phase Comm Plan + Master Tracker
-- **v1.1** — Gantt chart + RACI rebuild với team scope thực tế
-- **v1.0** — Initial dashboard from Google Sheets
+- **v2.0** (03/06/2026) — **Fresh start** từ Master Communication Plan v3 sheet (KPI revamped: 1M impressions · 1,000 register pool · 300 qualified · 60/40 split · 4 markets AU mới · &gt;10K influencer threshold · 25 apps · 25 interviews · 6 channel groups). Previous content from old sheet cleared.
+- **v1.0 – v1.9** — Previous iterations (archived in git history)
