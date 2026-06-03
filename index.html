@@ -348,7 +348,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan</div>
-    <div class="brand-meta">v1.6 · Cập nhật 03/06/2026</div>
+    <div class="brand-meta">v1.7 · Cập nhật 03/06/2026 · 💬 Notes feature live</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -2902,8 +2902,9 @@
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan Dashboard</strong><br/>
-  Version 1.6 · Cập nhật 03/06/2026 · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
-  v1.6 changes: Bỏ Ticket Funnel section — Hellen sẽ triển khai plan bán vé riêng (giá chưa chốt) · Renumber 12-15: Risk/Crisis/KPI/RACI<br/>
+  Version 1.7 · Cập nhật 03/06/2026 · Dashboard build từ Google Sheets gốc của team Marketing GemCommerce<br/>
+  v1.7 changes: 💬 Live comments/notes feature — click 💬 next to any section header để add note · Floating FAB bottom-right show count · Panel slide-in từ phải (filter / edit inline / export JSON / import / clear) · Notes lưu localStorage per-browser · Alt+N toggle panel · Ctrl+Enter save<br/>
+  v1.6 changes: Bỏ Ticket Funnel section — Hellen sẽ triển khai plan bán vé riêng<br/>
   v1.5 changes: LP live deadline 15/06 · Paid Media PIC = Hellen only · Bỏ Format Code Glossary · RACI redistributed: SG+IN→Maria, CN+MY→Sunny, PH→Kallie · Calendar moved into Execution Detail (section 11)<br/>
   v1.4 changes: Cleanup — bỏ Gaps + Budget + Speaker Tracker + Sponsor Pipeline + Phase Plan 7 phases · Restructure 17 sections<br/>
   v1.3 changes: Channel Map (08) restructure thành 23 cards · merge Task Tracker + Phase Matrix + Gantt<br/>
@@ -2935,5 +2936,328 @@
   onScroll();
 })();
 </script>
+
+<!-- ============ LIVE COMMENTS / NOTES FEATURE ============ -->
+<style>
+  .notes-fab { position: fixed; bottom: 24px; right: 24px; background: #6b46ff; color: white; border: 0; border-radius: 100px; padding: 12px 20px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(107,70,255,.4); cursor: pointer; z-index: 1000; display: inline-flex; align-items: center; gap: 8px; transition: all .2s ease; font-family: inherit; }
+  .notes-fab:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(107,70,255,.55); }
+  .notes-fab .count { background: rgba(255,255,255,.25); padding: 2px 10px; border-radius: 100px; font-size: 12px; min-width: 18px; text-align: center; }
+  .notes-panel { position: fixed; top: 0; right: -420px; width: 420px; max-width: 95vw; height: 100vh; background: white; box-shadow: -10px 0 40px rgba(0,0,0,.15); z-index: 1001; transition: right .25s ease; display: flex; flex-direction: column; }
+  .notes-panel.open { right: 0; }
+  .notes-panel-header { padding: 16px 20px; border-bottom: 1px solid #e3e6f0; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #6b46ff, #b06bff); color: white; }
+  .notes-panel-header h3 { margin: 0; font-size: 15px; font-weight: 700; }
+  .notes-panel-close { background: rgba(255,255,255,.2); border: 0; cursor: pointer; font-size: 18px; color: white; width: 32px; height: 32px; border-radius: 6px; line-height: 1; font-family: inherit; }
+  .notes-panel-close:hover { background: rgba(255,255,255,.35); }
+  .notes-toolbar { padding: 10px 14px; border-bottom: 1px solid #e3e6f0; display: flex; flex-wrap: wrap; gap: 6px; background: #f7f8fc; align-items: center; }
+  .notes-toolbar select, .notes-toolbar button { padding: 6px 10px; font-size: 12px; border: 1px solid #e3e6f0; background: white; border-radius: 5px; cursor: pointer; font-family: inherit; color: #1a1d2e; font-weight: 500; }
+  .notes-toolbar select { flex: 1; min-width: 140px; }
+  .notes-toolbar button:hover { background: #eef0f8; }
+  .notes-toolbar button.danger { color: #991b1b; border-color: #fecaca; }
+  .notes-toolbar button.danger:hover { background: #fee2e2; }
+  .notes-list { flex: 1; overflow-y: auto; padding: 12px; background: #f7f8fc; }
+  .notes-empty { text-align: center; color: #6b7090; font-size: 13px; padding: 50px 20px; line-height: 1.6; }
+  .note-item { background: white; border: 1px solid #e3e6f0; border-radius: 8px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  .note-meta { display: flex; justify-content: space-between; font-size: 11px; color: #6b7090; margin-bottom: 6px; gap: 8px; flex-wrap: wrap; }
+  .note-meta a { color: #6b46ff; text-decoration: none; font-weight: 600; }
+  .note-meta a:hover { text-decoration: underline; }
+  .note-text { font-size: 13px; line-height: 1.5; color: #1a1d2e; white-space: pre-wrap; word-break: break-word; padding: 6px 8px; border-radius: 4px; min-height: 24px; }
+  .note-text[contenteditable="true"]:focus { background: #fff9e6; outline: 2px solid #f59e0b; outline-offset: 0; }
+  .note-actions { display: flex; gap: 6px; margin-top: 6px; justify-content: flex-end; }
+  .note-delete { font-size: 11px; background: white; border: 1px solid #fecaca; color: #991b1b; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: inherit; }
+  .note-delete:hover { background: #fee2e2; }
+  .notes-footer { padding: 10px 14px; border-top: 1px solid #e3e6f0; font-size: 11px; color: #6b7090; background: #f7f8fc; line-height: 1.4; }
+  .note-add-btn { background: none; border: 1px dashed #e3e6f0; color: #6b7090; border-radius: 4px; padding: 2px 8px; font-size: 13px; cursor: pointer; margin-left: 12px; vertical-align: middle; opacity: .6; font-family: inherit; line-height: 1; }
+  .note-add-btn:hover { opacity: 1; border-color: #6b46ff; color: #6b46ff; border-style: solid; }
+  .note-count-badge { background: #6b46ff; color: white; padding: 1px 8px; border-radius: 100px; font-size: 11px; margin-left: 6px; font-weight: 700; vertical-align: middle; line-height: 1.6; }
+  .note-modal { position: fixed; inset: 0; background: rgba(11,13,23,.6); z-index: 1002; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .note-modal.open { display: flex; }
+  .note-modal-content { background: white; border-radius: 12px; padding: 24px; width: 540px; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+  .note-modal-content h3 { margin: 0 0 14px; font-size: 16px; color: #1a1d2e; }
+  .note-modal-content textarea { width: 100%; padding: 12px; border: 1px solid #e3e6f0; border-radius: 6px; font-family: inherit; font-size: 14px; line-height: 1.5; resize: vertical; box-sizing: border-box; min-height: 140px; }
+  .note-modal-content textarea:focus { outline: 2px solid #6b46ff; border-color: transparent; }
+  .note-modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; align-items: center; }
+  .note-modal-hint { flex: 1; font-size: 11px; color: #6b7090; }
+  .note-modal-actions button { padding: 8px 18px; font-size: 13px; border: 1px solid #e3e6f0; background: white; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: inherit; color: #1a1d2e; }
+  .note-modal-actions button:hover { background: #f7f8fc; }
+  .note-modal-actions button.primary { background: #6b46ff; color: white; border-color: #6b46ff; }
+  .note-modal-actions button.primary:hover { background: #4a2dd4; }
+  @media (max-width: 600px) { .notes-fab { bottom: 16px; right: 16px; padding: 10px 14px; font-size: 13px; } }
+  @media print { .notes-fab, .notes-panel, .note-modal, .note-add-btn, .note-count-badge { display: none !important; } }
+</style>
+
+<button id="notes-fab" class="notes-fab" title="My notes (Alt+N)">
+  💬 Notes <span class="count" id="notes-count">0</span>
+</button>
+
+<div id="notes-panel" class="notes-panel" role="dialog" aria-label="Notes panel">
+  <div class="notes-panel-header">
+    <h3>📝 My Notes</h3>
+    <button class="notes-panel-close" id="notes-close" title="Close (Esc)">×</button>
+  </div>
+  <div class="notes-toolbar">
+    <select id="notes-filter" title="Filter by section">
+      <option value="">All sections</option>
+    </select>
+    <button id="notes-export" title="Download notes as JSON">📤 Export</button>
+    <button id="notes-import-btn" title="Import notes from JSON file">📥 Import</button>
+    <input type="file" id="notes-import-file" accept=".json,application/json" style="display:none" />
+    <button id="notes-clear" class="danger" title="Delete all notes">🗑 Clear</button>
+  </div>
+  <div class="notes-list" id="notes-list"></div>
+  <div class="notes-footer">
+    💾 Notes saved in your browser (localStorage). Export JSON để share/backup. Mỗi browser/device có notes riêng.
+  </div>
+</div>
+
+<div id="note-modal" class="note-modal" role="dialog" aria-label="Add note">
+  <div class="note-modal-content">
+    <h3 id="note-modal-title">Add note</h3>
+    <textarea id="note-modal-text" placeholder="Type your note here... (Ctrl+Enter to save, Esc to cancel)"></textarea>
+    <div class="note-modal-actions">
+      <span class="note-modal-hint">Ctrl+Enter to save · Esc to cancel</span>
+      <button id="note-modal-cancel">Cancel</button>
+      <button class="primary" id="note-modal-save">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var STORAGE_KEY = 'shopx-notes-v1';
+  var currentSid = null;
+  var currentTitle = null;
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      var data = JSON.parse(raw);
+      return Array.isArray(data.notes) ? data.notes : [];
+    } catch (e) { return []; }
+  }
+
+  function save(notes) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ notes: notes, savedAt: new Date().toISOString() }));
+  }
+
+  function uid() {
+    return 'n_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  }
+
+  function add(sid, title, text) {
+    var notes = load();
+    var now = new Date().toISOString();
+    notes.push({ id: uid(), sectionId: sid, sectionTitle: title, text: text, createdAt: now, updatedAt: now });
+    save(notes);
+    renderAll();
+  }
+
+  function update(id, newText) {
+    var notes = load();
+    var n = notes.find(function(x) { return x.id === id; });
+    if (n) {
+      n.text = newText;
+      n.updatedAt = new Date().toISOString();
+      save(notes);
+      document.getElementById('notes-count').textContent = notes.length;
+    }
+  }
+
+  function del(id) {
+    save(load().filter(function(n) { return n.id !== id; }));
+    renderAll();
+  }
+
+  function clearAll() {
+    if (confirm('Clear ALL notes? Export trước nếu muốn giữ.')) {
+      save([]);
+      renderAll();
+    }
+  }
+
+  function exportJSON() {
+    var notes = load();
+    var data = { exportedAt: new Date().toISOString(), version: 'v1', count: notes.length, notes: notes };
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'shopx-notes-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function importJSON(file) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        var data = JSON.parse(e.target.result);
+        if (!Array.isArray(data.notes)) throw new Error('Invalid format (expected { notes: [...] })');
+        var existing = load();
+        var existingIds = new Set(existing.map(function(n) { return n.id; }));
+        var merged = existing.concat(data.notes.filter(function(n) { return !existingIds.has(n.id); }));
+        save(merged);
+        renderAll();
+        alert('Imported ' + data.notes.length + ' notes. Total: ' + merged.length);
+      } catch (err) {
+        alert('Import failed: ' + err.message);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function(c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function inject() {
+    var filter = document.getElementById('notes-filter');
+    document.querySelectorAll('section[id]').forEach(function(section) {
+      var h2 = section.querySelector('h2');
+      if (!h2 || section.querySelector('.note-add-btn')) return;
+      var sid = section.id;
+      var title = h2.textContent.replace(/^\s*\d+\s+/, '').trim();
+      var opt = document.createElement('option');
+      opt.value = sid;
+      opt.textContent = title;
+      filter.appendChild(opt);
+      var wrap = document.createElement('span');
+      wrap.style.cssText = 'display: inline-flex; align-items: center; vertical-align: middle;';
+      var btn = document.createElement('button');
+      btn.className = 'note-add-btn';
+      btn.type = 'button';
+      btn.textContent = '💬';
+      btn.title = 'Add note';
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal(sid, title);
+      });
+      var badge = document.createElement('span');
+      badge.className = 'note-count-badge';
+      badge.dataset.section = sid;
+      badge.style.display = 'none';
+      wrap.appendChild(btn);
+      wrap.appendChild(badge);
+      h2.appendChild(wrap);
+    });
+  }
+
+  function openModal(sid, title) {
+    currentSid = sid;
+    currentTitle = title;
+    document.getElementById('note-modal-title').textContent = '📝 Note · ' + title;
+    document.getElementById('note-modal-text').value = '';
+    document.getElementById('note-modal').classList.add('open');
+    setTimeout(function() { document.getElementById('note-modal-text').focus(); }, 50);
+  }
+
+  function closeModal() {
+    document.getElementById('note-modal').classList.remove('open');
+    currentSid = null;
+    currentTitle = null;
+  }
+
+  function saveModal() {
+    var t = document.getElementById('note-modal-text').value.trim();
+    if (!t || !currentSid) { closeModal(); return; }
+    add(currentSid, currentTitle, t);
+    closeModal();
+  }
+
+  function renderAll() {
+    var notes = load();
+    document.getElementById('notes-count').textContent = notes.length;
+    var counts = {};
+    notes.forEach(function(n) { counts[n.sectionId] = (counts[n.sectionId] || 0) + 1; });
+    document.querySelectorAll('.note-count-badge').forEach(function(el) {
+      var c = counts[el.dataset.section] || 0;
+      el.textContent = c;
+      el.style.display = c > 0 ? 'inline-block' : 'none';
+    });
+    var filter = document.getElementById('notes-filter').value;
+    var list = filter ? notes.filter(function(n) { return n.sectionId === filter; }) : notes;
+    list = list.slice().sort(function(a, b) { return b.createdAt.localeCompare(a.createdAt); });
+    var container = document.getElementById('notes-list');
+    if (list.length === 0) {
+      container.innerHTML = '<div class="notes-empty">Chưa có notes.<br/><br/>Click <strong>💬</strong> kế bên tiêu đề section để add note đầu tiên.<br/><br/>Notes lưu trong browser này — Export JSON để backup hoặc share.</div>';
+      return;
+    }
+    container.innerHTML = list.map(function(n) {
+      return '<div class="note-item">' +
+        '<div class="note-meta">' +
+          '<a href="#' + esc(n.sectionId) + '" class="note-section-link">📍 ' + esc(n.sectionTitle) + '</a>' +
+          '<span>' + new Date(n.createdAt).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + '</span>' +
+        '</div>' +
+        '<div class="note-text" contenteditable="true" data-id="' + esc(n.id) + '" spellcheck="false">' + esc(n.text) + '</div>' +
+        '<div class="note-actions">' +
+          '<button class="note-delete" data-id="' + esc(n.id) + '">Delete</button>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+    container.querySelectorAll('.note-delete').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        if (confirm('Delete note?')) del(btn.dataset.id);
+      });
+    });
+    container.querySelectorAll('.note-text').forEach(function(el) {
+      el.addEventListener('blur', function() {
+        var t = el.textContent.trim();
+        if (t) update(el.dataset.id, t);
+      });
+    });
+    container.querySelectorAll('.note-section-link').forEach(function(a) {
+      a.addEventListener('click', function() {
+        document.getElementById('notes-panel').classList.remove('open');
+      });
+    });
+  }
+
+  function togglePanel() {
+    var p = document.getElementById('notes-panel');
+    p.classList.toggle('open');
+    if (p.classList.contains('open')) renderAll();
+  }
+
+  function init() {
+    inject();
+    document.getElementById('notes-fab').addEventListener('click', togglePanel);
+    document.getElementById('notes-close').addEventListener('click', togglePanel);
+    document.getElementById('notes-filter').addEventListener('change', renderAll);
+    document.getElementById('notes-export').addEventListener('click', exportJSON);
+    document.getElementById('notes-import-btn').addEventListener('click', function() {
+      document.getElementById('notes-import-file').click();
+    });
+    document.getElementById('notes-import-file').addEventListener('change', function(e) {
+      if (e.target.files[0]) importJSON(e.target.files[0]);
+      e.target.value = '';
+    });
+    document.getElementById('notes-clear').addEventListener('click', clearAll);
+    document.getElementById('note-modal-cancel').addEventListener('click', closeModal);
+    document.getElementById('note-modal-save').addEventListener('click', saveModal);
+    document.getElementById('note-modal').addEventListener('click', function(e) {
+      if (e.target.id === 'note-modal') closeModal();
+    });
+    document.getElementById('note-modal-text').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); saveModal(); }
+      if (e.key === 'Escape') closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.altKey && (e.key === 'n' || e.key === 'N')) { e.preventDefault(); togglePanel(); }
+    });
+    renderAll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
 </body>
 </html>
