@@ -348,7 +348,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v2.2 · Cập nhật 03/06/2026 · Owner cleanup</div>
+    <div class="brand-meta">v2.3 · Cập nhật 03/06/2026 · Annotation toolkit</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -1444,9 +1444,10 @@
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 2.2 · Cập nhật 03/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  Version 2.3 · Cập nhật 03/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  v2.3 changes: Annotation toolkit port từ shopx-2026/lp.html — toolbar 3 nút (Export · List · Comment) ở bottom-right, side panel List, resolve/reopen workflow, markdown export, toast notifications. Hotkeys: <kbd>C</kbd> toggle Comment mode · <kbd>H</kbd> hide/show pins · <kbd>Esc</kbd> exit · <kbd>Ctrl/Cmd+Enter</kbd> save. Migrate 1-shot từ shopx-notes-v1 (convert relX/relY pins sang absolute coords). Storage key mới: <code>shopx-master-plan-annotations</code><br/>
   v2.2 changes: Owner cleanup theo pin comments (03/06) — bỏ block "Why &gt;10K" (info box trong Influencer section) · Influencer Owner col → "Listing / Outreach": Kallie phụ trách listing, outreach TBD · Seller Interviews 25 rows → tất cả Owner = TBD · Strategic Audience Curation: bỏ cột Owner · Markets Activation: bỏ cột Owner<br/>
-  v2.1 changes: 📍 Pin Comment Mode — toggle FAB "Pin Comment" → click bất kỳ đâu trên page → popover comment hiện ra anchor tại vị trí click. Pin markers persist trên page, click pin để edit/delete. Anchor data lưu relative %  trong section. Alt+P toggle · Esc thoát<br/>
+  v2.1 changes: 📍 Pin Comment Mode — replaced bởi v2.3 annotation toolkit<br/>
   v2.0 fresh start: Mới KPI logic (1M impressions · 1,000 register pool · 300 qualified) · 60/40 organic-earned vs paid split · 6 channel groups · 4 markets (VN/SG/CN/AU) · 4-tier influencer map (&gt;10K threshold) · 25 Shopify apps · 8 content pillars · 25 seller interviews · Mention scoring framework · 6 risks · Team RACI<br/>
   Sheet owner: chloe.dinh@gempages.help · Maintained by: Chloe Dinh · <a href="https://github.com/chloedinh-create/shopx-2026-master-plan" style="color: var(--primary);">GitHub</a><br/>
   <em>Tài liệu mật nội bộ. Không chia sẻ ra ngoài team.</em>
@@ -1473,652 +1474,615 @@
 })();
 </script>
 
-<!-- ============ LIVE COMMENTS / NOTES FEATURE ============ -->
+<!-- ============================================================
+     Annotation toolkit (internal review) — port from shopx-2026/lp.html
+     ============================================================ -->
 <style>
-  .notes-fab { position: fixed; bottom: 24px; right: 24px; background: #6b46ff; color: white; border: 0; border-radius: 100px; padding: 12px 20px; font-size: 14px; font-weight: 700; box-shadow: 0 10px 30px rgba(107,70,255,.4); cursor: pointer; z-index: 1000; display: inline-flex; align-items: center; gap: 8px; transition: all .2s ease; font-family: inherit; }
-  .notes-fab:hover { transform: translateY(-2px); box-shadow: 0 14px 40px rgba(107,70,255,.55); }
-  .notes-fab .count { background: rgba(255,255,255,.25); padding: 2px 10px; border-radius: 100px; font-size: 12px; min-width: 18px; text-align: center; }
-  .notes-panel { position: fixed; top: 0; right: -420px; width: 420px; max-width: 95vw; height: 100vh; background: white; box-shadow: -10px 0 40px rgba(0,0,0,.15); z-index: 1001; transition: right .25s ease; display: flex; flex-direction: column; }
-  .notes-panel.open { right: 0; }
-  .notes-panel-header { padding: 16px 20px; border-bottom: 1px solid #e3e6f0; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #6b46ff, #b06bff); color: white; }
-  .notes-panel-header h3 { margin: 0; font-size: 15px; font-weight: 700; }
-  .notes-panel-close { background: rgba(255,255,255,.2); border: 0; cursor: pointer; font-size: 18px; color: white; width: 32px; height: 32px; border-radius: 6px; line-height: 1; font-family: inherit; }
-  .notes-panel-close:hover { background: rgba(255,255,255,.35); }
-  .notes-toolbar { padding: 10px 14px; border-bottom: 1px solid #e3e6f0; display: flex; flex-wrap: wrap; gap: 6px; background: #f7f8fc; align-items: center; }
-  .notes-toolbar select, .notes-toolbar button { padding: 6px 10px; font-size: 12px; border: 1px solid #e3e6f0; background: white; border-radius: 5px; cursor: pointer; font-family: inherit; color: #1a1d2e; font-weight: 500; }
-  .notes-toolbar select { flex: 1; min-width: 140px; }
-  .notes-toolbar button:hover { background: #eef0f8; }
-  .notes-toolbar button.danger { color: #991b1b; border-color: #fecaca; }
-  .notes-toolbar button.danger:hover { background: #fee2e2; }
-  .notes-list { flex: 1; overflow-y: auto; padding: 12px; background: #f7f8fc; }
-  .notes-empty { text-align: center; color: #6b7090; font-size: 13px; padding: 50px 20px; line-height: 1.6; }
-  .note-item { background: white; border: 1px solid #e3e6f0; border-radius: 8px; padding: 12px; margin-bottom: 10px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
-  .note-meta { display: flex; justify-content: space-between; font-size: 11px; color: #6b7090; margin-bottom: 6px; gap: 8px; flex-wrap: wrap; }
-  .note-meta a { color: #6b46ff; text-decoration: none; font-weight: 600; }
-  .note-meta a:hover { text-decoration: underline; }
-  .note-text { font-size: 13px; line-height: 1.5; color: #1a1d2e; white-space: pre-wrap; word-break: break-word; padding: 6px 8px; border-radius: 4px; min-height: 24px; }
-  .note-text[contenteditable="true"]:focus { background: #fff9e6; outline: 2px solid #f59e0b; outline-offset: 0; }
-  .note-actions { display: flex; gap: 6px; margin-top: 6px; justify-content: flex-end; }
-  .note-delete { font-size: 11px; background: white; border: 1px solid #fecaca; color: #991b1b; padding: 3px 8px; border-radius: 4px; cursor: pointer; font-family: inherit; }
-  .note-delete:hover { background: #fee2e2; }
-  .notes-footer { padding: 10px 14px; border-top: 1px solid #e3e6f0; font-size: 11px; color: #6b7090; background: #f7f8fc; line-height: 1.4; }
-  .note-add-btn { background: none; border: 1px dashed #e3e6f0; color: #6b7090; border-radius: 4px; padding: 2px 8px; font-size: 13px; cursor: pointer; margin-left: 12px; vertical-align: middle; opacity: .6; font-family: inherit; line-height: 1; }
-  .note-add-btn:hover { opacity: 1; border-color: #6b46ff; color: #6b46ff; border-style: solid; }
-  .note-count-badge { background: #6b46ff; color: white; padding: 1px 8px; border-radius: 100px; font-size: 11px; margin-left: 6px; font-weight: 700; vertical-align: middle; line-height: 1.6; }
-  .note-modal { position: fixed; inset: 0; background: rgba(11,13,23,.6); z-index: 1002; display: none; align-items: center; justify-content: center; padding: 20px; }
-  .note-modal.open { display: flex; }
-  .note-modal-content { background: white; border-radius: 12px; padding: 24px; width: 540px; max-width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.4); }
-  .note-modal-content h3 { margin: 0 0 14px; font-size: 16px; color: #1a1d2e; }
-  .note-modal-content textarea { width: 100%; padding: 12px; border: 1px solid #e3e6f0; border-radius: 6px; font-family: inherit; font-size: 14px; line-height: 1.5; resize: vertical; box-sizing: border-box; min-height: 140px; }
-  .note-modal-content textarea:focus { outline: 2px solid #6b46ff; border-color: transparent; }
-  .note-modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 14px; align-items: center; }
-  .note-modal-hint { flex: 1; font-size: 11px; color: #6b7090; }
-  .note-modal-actions button { padding: 8px 18px; font-size: 13px; border: 1px solid #e3e6f0; background: white; border-radius: 6px; cursor: pointer; font-weight: 600; font-family: inherit; color: #1a1d2e; }
-  .note-modal-actions button:hover { background: #f7f8fc; }
-  .note-modal-actions button.primary { background: #6b46ff; color: white; border-color: #6b46ff; }
-  .note-modal-actions button.primary:hover { background: #4a2dd4; }
-  @media (max-width: 600px) { .notes-fab { bottom: 16px; right: 16px; padding: 10px 14px; font-size: 13px; } }
-  @media print { .notes-fab, .notes-panel, .note-modal, .note-add-btn, .note-count-badge, .notes-pin-fab, .comment-pin, .comment-popover, .comment-mode-hint { display: none !important; } }
+  /* Toolbar (fixed bottom-right) */
+  .an-toolbar {
+    position: fixed; bottom: 18px; right: 18px; z-index: 1002;
+    display: flex; gap: 6px; padding: 6px; border-radius: 100px;
+    background: rgba(13,13,30,.96); border: 1px solid rgba(255,255,255,.10);
+    box-shadow: 0 12px 28px rgba(0,0,0,.45);
+    font-family: inherit;
+  }
+  .an-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px; border-radius: 100px; cursor: pointer;
+    background: rgba(255,255,255,.04); color: #fff;
+    border: 1px solid rgba(255,255,255,.10);
+    font-size: 12px; font-weight: 600; letter-spacing: .02em;
+    font-family: inherit; transition: all .15s ease;
+  }
+  .an-btn:hover { background: rgba(255,255,255,.10); transform: translateY(-1px); }
+  .an-btn .ic {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: rgba(255,255,255,.12); font-size: 12px; font-weight: 700;
+  }
+  .an-btn[data-state="on"] .ic { background: #6b46ff; box-shadow: 0 0 0 3px rgba(107,70,255,.22); }
+  .an-btn[data-state="on"] { border-color: rgba(107,70,255,.36); }
+  .an-btn .count {
+    background: rgba(107,70,255,.20); color: #d9cffd; padding: 1px 8px;
+    border-radius: 100px; font-size: 11px; font-weight: 700;
+    border: 1px solid rgba(107,70,255,.34);
+  }
+  .an-btn .count[data-empty="1"] { display: none; }
 
-  /* === Pin Comment Mode === */
-  .notes-pin-fab { position: fixed; bottom: 80px; right: 24px; background: linear-gradient(135deg, #ec4899, #f59e0b); color: white; border: 0; border-radius: 100px; padding: 10px 16px; font-size: 13px; font-weight: 700; box-shadow: 0 8px 24px rgba(236,72,153,.4); cursor: pointer; z-index: 1000; display: inline-flex; align-items: center; gap: 6px; transition: all .2s ease; font-family: inherit; }
-  .notes-pin-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(236,72,153,.55); }
-  .notes-pin-fab.active { background: linear-gradient(135deg, #16a085, #059669); box-shadow: 0 10px 30px rgba(22,160,133,.5); animation: pin-fab-pulse 1.5s ease-in-out infinite; }
-  @keyframes pin-fab-pulse { 0%, 100% { box-shadow: 0 10px 30px rgba(22,160,133,.5); } 50% { box-shadow: 0 12px 36px rgba(22,160,133,.7); } }
-  body.comment-mode { cursor: crosshair !important; }
-  body.comment-mode section[id], body.comment-mode section[id] *:not(.note-add-btn):not(.note-count-badge) { cursor: crosshair !important; }
-  body.comment-mode .notes-fab, body.comment-mode .notes-pin-fab, body.comment-mode .notes-panel, body.comment-mode .notes-panel *, body.comment-mode .note-modal, body.comment-mode .note-modal *, body.comment-mode .comment-popover, body.comment-mode .comment-popover *, body.comment-mode .comment-pin, body.comment-mode .comment-mode-hint, body.comment-mode .comment-mode-hint * { cursor: pointer !important; }
-  body.comment-mode .sidebar, body.comment-mode .sidebar * { cursor: default !important; }
+  /* Crosshair when in dropping mode */
+  body.an-dropping { cursor: crosshair; }
+  body.an-dropping * { cursor: crosshair !important; }
+  body.an-dropping .an-toolbar, body.an-dropping .an-toolbar *,
+  body.an-dropping .an-pin, body.an-dropping .an-popup, body.an-dropping .an-popup *,
+  body.an-dropping .an-panel, body.an-dropping .an-panel *,
+  body.an-dropping .an-hint, body.an-dropping .sidebar, body.an-dropping .sidebar * { cursor: pointer !important; }
+  body.an-dropping .sidebar, body.an-dropping .sidebar * { cursor: default !important; }
 
-  .comment-mode-hint { position: fixed; top: 60px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #1a1d2e, #50556f); color: white; padding: 10px 18px; border-radius: 100px; font-size: 12.5px; font-weight: 600; z-index: 1004; box-shadow: 0 8px 24px rgba(0,0,0,.25); display: none; align-items: center; gap: 10px; max-width: 92vw; }
-  .comment-mode-hint kbd { background: rgba(255,255,255,.2); padding: 2px 7px; border-radius: 3px; font-size: 11px; font-family: ui-monospace, Menlo, monospace; }
-  body.comment-mode .comment-mode-hint { display: inline-flex; }
+  /* Hint banner (top) */
+  .an-hint {
+    position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+    background: #0d0d1e; color: #fff;
+    padding: 8px 16px; border-radius: 100px;
+    font-size: 12px; font-weight: 600;
+    box-shadow: 0 10px 24px rgba(0,0,0,.30);
+    border: 1px solid rgba(107,70,255,.34);
+    z-index: 1004; display: none; max-width: 92vw;
+  }
+  body.an-dropping .an-hint { display: inline-block; animation: hintPulse 2s ease-in-out infinite; }
+  @keyframes hintPulse { 0%, 100% { box-shadow: 0 10px 24px rgba(0,0,0,.30); } 50% { box-shadow: 0 10px 30px rgba(107,70,255,.45); } }
 
-  .comment-pin { position: absolute; width: 26px; height: 26px; border-radius: 50% 50% 50% 0; background: linear-gradient(135deg, #6b46ff, #ec4899); border: 2.5px solid white; transform: translate(-50%, -100%) rotate(-45deg); cursor: pointer; box-shadow: 0 4px 14px rgba(0,0,0,.3); z-index: 999; display: flex; align-items: center; justify-content: center; transition: transform .15s ease; }
-  .comment-pin span { color: white; font-size: 10px; font-weight: 800; transform: rotate(45deg); line-height: 1; }
-  .comment-pin:hover { transform: translate(-50%, -100%) rotate(-45deg) scale(1.2); z-index: 1000; }
+  /* Pins */
+  .an-pin {
+    position: absolute; z-index: 1000;
+    width: 26px; height: 26px;
+    border-radius: 50% 50% 50% 0;
+    background: linear-gradient(135deg, #6b46ff 0%, #b06bff 100%);
+    border: 2.5px solid #fff;
+    transform: translate(-50%, -100%) rotate(-45deg);
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(107,70,255,.40), 0 0 0 3px rgba(255,255,255,.92);
+    transition: transform .15s ease, box-shadow .15s ease;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-weight: 800; font-size: 11px; font-family: inherit;
+  }
+  .an-pin span { transform: rotate(45deg); display: inline-block; }
+  .an-pin:hover { transform: translate(-50%, -100%) rotate(-45deg) scale(1.12); box-shadow: 0 12px 28px rgba(107,70,255,.55), 0 0 0 3px rgba(255,255,255,.95); }
+  .an-pin.solved {
+    background: linear-gradient(135deg, #16a085 0%, #4a5bff 100%);
+    box-shadow: 0 8px 22px rgba(22,160,133,.40), 0 0 0 3px rgba(255,255,255,.92);
+  }
 
-  .comment-popover { position: absolute; background: white; border: 1px solid #e3e6f0; border-radius: 10px; padding: 12px; width: 320px; max-width: 90vw; box-shadow: 0 12px 36px rgba(0,0,0,.25); z-index: 1003; }
-  .comment-popover-snippet { font-size: 11px; color: #6b7090; margin-bottom: 8px; font-style: italic; padding: 5px 8px; background: #f7f8fc; border-radius: 4px; border-left: 3px solid #6b46ff; max-height: 60px; overflow: hidden; line-height: 1.4; }
-  .comment-popover textarea { width: 100%; border: 1px solid #e3e6f0; padding: 8px 10px; border-radius: 6px; font: inherit; font-size: 13px; resize: vertical; min-height: 70px; box-sizing: border-box; line-height: 1.5; }
-  .comment-popover textarea:focus { outline: 2px solid #6b46ff; border-color: transparent; }
-  .comment-popover-meta { font-size: 11px; color: #6b7090; margin-top: 6px; }
-  .comment-popover-actions { display: flex; justify-content: flex-end; gap: 6px; margin-top: 8px; align-items: center; }
-  .comment-popover-actions .hint { flex: 1; font-size: 10.5px; color: #6b7090; }
-  .comment-popover-actions button { padding: 6px 12px; font-size: 12px; border: 1px solid #e3e6f0; border-radius: 5px; background: white; cursor: pointer; font-family: inherit; font-weight: 600; color: #1a1d2e; }
-  .comment-popover-actions button:hover { background: #f7f8fc; }
-  .comment-popover-actions button.primary { background: #6b46ff; color: white; border-color: #6b46ff; }
-  .comment-popover-actions button.primary:hover { background: #4a2dd4; }
-  .comment-popover-actions button.danger { color: #991b1b; border-color: #fecaca; }
-  .comment-popover-actions button.danger:hover { background: #fee2e2; }
+  /* Popup near pin */
+  .an-popup {
+    position: absolute; z-index: 1003;
+    transform: translate(20px, 8px);
+    width: 320px; max-width: 92vw;
+    background: #0d0d1e; color: #fff;
+    border: 1px solid rgba(255,255,255,.10); border-radius: 12px;
+    box-shadow: 0 24px 60px rgba(0,0,0,.50);
+    padding: 12px; font-family: inherit;
+  }
+  .an-popup .ph {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px; padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  .an-popup .ph .num {
+    font-size: 11px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase; color: #b06bff;
+  }
+  .an-popup .ph .ts {
+    font-size: 10.5px; color: rgba(255,255,255,.55);
+    font-family: ui-monospace, Menlo, monospace;
+  }
+  .an-popup textarea {
+    width: 100%; box-sizing: border-box;
+    background: rgba(255,255,255,.04); color: #fff;
+    border: 1px solid rgba(255,255,255,.12); border-radius: 8px;
+    padding: 8px 10px; font: inherit; font-size: 13px;
+    line-height: 1.5; min-height: 90px; resize: vertical;
+  }
+  .an-popup textarea:focus { outline: 0; border-color: #6b46ff; background: rgba(255,255,255,.06); }
+  .an-popup textarea::placeholder { color: rgba(255,255,255,.40); }
+  .an-popup .actions {
+    display: flex; gap: 6px; margin-top: 10px; align-items: center;
+  }
+  .an-popup .actions .left { display: flex; gap: 6px; }
+  .an-popup .actions button {
+    padding: 6px 12px; font-size: 11.5px; font-weight: 600; font-family: inherit;
+    border: 1px solid rgba(255,255,255,.12); border-radius: 6px;
+    background: transparent; color: rgba(255,255,255,.80); cursor: pointer;
+    transition: all .15s ease;
+  }
+  .an-popup .actions button:hover { background: rgba(255,255,255,.06); color: #fff; }
+  .an-popup .actions .save {
+    margin-left: auto;
+    background: linear-gradient(135deg, #6b46ff, #b06bff); color: #fff;
+    border-color: transparent;
+  }
+  .an-popup .actions .save:hover { filter: brightness(1.15); }
+  .an-popup .actions .del { color: #ff8888; border-color: rgba(255,107,107,.30); }
+  .an-popup .actions .del:hover { background: rgba(255,107,107,.10); color: #ffaaaa; }
+
+  /* Side panel */
+  .an-panel {
+    position: fixed; top: 0; right: 0; height: 100vh; width: 380px; max-width: 95vw;
+    z-index: 1003;
+    background: #0d0d1e; color: #fff;
+    border-left: 1px solid rgba(255,255,255,.10);
+    box-shadow: -20px 0 60px rgba(0,0,0,.40);
+    transform: translateX(100%); transition: transform .25s ease;
+    display: flex; flex-direction: column;
+    font-family: inherit;
+  }
+  .an-panel.open { transform: translateX(0); }
+  .an-panel .ph {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  .an-panel .ph .t { font-weight: 700; font-size: 16px; }
+  .an-panel .ph .meta { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 2px; font-family: ui-monospace, Menlo, monospace; }
+  .an-panel .ph button {
+    background: transparent; border: 0; color: rgba(255,255,255,.65);
+    font-size: 22px; cursor: pointer; padding: 0 6px; border-radius: 6px;
+    font-family: inherit; line-height: 1;
+  }
+  .an-panel .ph button:hover { color: #fff; background: rgba(255,255,255,.06); }
+  .an-panel .toolbar {
+    display: flex; gap: 6px; padding: 10px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  .an-panel .toolbar button {
+    flex: 1; padding: 6px 10px; font-size: 11px; font-weight: 600; font-family: inherit;
+    background: transparent; color: rgba(255,255,255,.70);
+    border: 1px solid rgba(255,255,255,.12); border-radius: 6px;
+    cursor: pointer; transition: all .15s ease;
+  }
+  .an-panel .toolbar button:hover { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.20); }
+  .an-panel .list { flex: 1; overflow-y: auto; padding: 12px 16px; }
+  .an-panel .empty {
+    text-align: center; padding: 40px 20px; color: rgba(255,255,255,.55);
+    font-size: 13px; line-height: 1.6;
+  }
+  .an-panel .empty .ic { font-size: 32px; display: block; margin-bottom: 12px; opacity: .5; }
+  .an-panel .item {
+    padding: 12px; border-radius: 10px; cursor: pointer;
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    margin-bottom: 8px; transition: all .15s ease;
+  }
+  .an-panel .item:hover { background: rgba(255,255,255,.06); border-color: rgba(107,70,255,.36); }
+  .an-panel .item .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .an-panel .item .num {
+    font-size: 11px; font-weight: 700; color: #b06bff;
+    letter-spacing: .06em; text-transform: uppercase;
+  }
+  .an-panel .item.solved .num { color: #7BFF8A; }
+  .an-panel .item .ts {
+    font-family: ui-monospace, Menlo, monospace; font-size: 10.5px;
+    color: rgba(255,255,255,.55);
+  }
+  .an-panel .item .txt {
+    font-size: 13px; color: rgba(255,255,255,.92);
+    line-height: 1.45; word-break: break-word; white-space: pre-wrap;
+  }
+  .an-panel .item .txt.placeholder { color: rgba(255,255,255,.50); font-style: italic; }
+  .an-panel .item .ctx {
+    margin-top: 6px; font-size: 10.5px; color: rgba(255,255,255,.55);
+    font-family: ui-monospace, Menlo, monospace;
+  }
+
+  /* Toast */
+  .an-toast {
+    position: fixed; bottom: 72px; left: 50%; transform: translateX(-50%) translateY(8px);
+    background: #0d0d1e; color: #fff;
+    border: 1px solid rgba(107,70,255,.34);
+    padding: 8px 16px; border-radius: 100px;
+    font-size: 12px; font-weight: 600;
+    box-shadow: 0 10px 24px rgba(0,0,0,.40);
+    opacity: 0; transition: opacity .2s ease, transform .2s ease;
+    z-index: 1005; pointer-events: none;
+  }
+  .an-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* Presentation/hidden mode */
+  body.an-hidden .an-pin,
+  body.an-hidden .an-popup,
+  body.an-hidden .an-panel,
+  body.an-hidden .an-hint { display: none !important; }
+
+  /* Print */
+  @media print {
+    .an-toolbar, .an-pin, .an-popup, .an-panel, .an-hint, .an-toast { display: none !important; }
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .an-toolbar { bottom: 14px; right: 14px; }
+    .an-btn { padding: 7px 11px; font-size: 11.5px; }
+    .an-popup { width: 280px; }
+  }
 </style>
 
-<button id="notes-fab" class="notes-fab" title="My notes (Alt+N)">
-  💬 Notes <span class="count" id="notes-count">0</span>
-</button>
-
-<button id="notes-pin-fab" class="notes-pin-fab" title="Pin Comment Mode — click bất kỳ đâu để comment (Alt+P)">
-  📍 Pin Comment
-</button>
-
-<div id="comment-mode-hint" class="comment-mode-hint">
-  📍 Pin Mode active — Click bất kỳ đâu để add comment · <kbd>Esc</kbd> để thoát
+<div class="an-hint">Click anywhere to drop a comment · ESC to cancel</div>
+<div class="an-toolbar" id="anToolbar">
+  <button class="an-btn" id="anExport" title="Copy all comments as markdown">
+    <span class="ic">↓</span> Export
+  </button>
+  <button class="an-btn" id="anList" title="Show comments list">
+    <span class="ic">≡</span> List <span class="count" id="anCount" data-empty="1">0</span>
+  </button>
+  <button class="an-btn" id="anToggle" data-state="off" title="Toggle comment-drop mode (or press C)">
+    <span class="ic">+</span> Comment
+  </button>
 </div>
 
-<div id="notes-panel" class="notes-panel" role="dialog" aria-label="Notes panel">
-  <div class="notes-panel-header">
-    <h3>📝 My Notes</h3>
-    <button class="notes-panel-close" id="notes-close" title="Close (Esc)">×</button>
-  </div>
-  <div class="notes-toolbar">
-    <select id="notes-filter" title="Filter by section">
-      <option value="">All sections</option>
-    </select>
-    <button id="notes-export" title="Download notes as JSON">📤 Export</button>
-    <button id="notes-import-btn" title="Import notes from JSON file">📥 Import</button>
-    <input type="file" id="notes-import-file" accept=".json,application/json" style="display:none" />
-    <button id="notes-clear" class="danger" title="Delete all notes">🗑 Clear</button>
-  </div>
-  <div class="notes-list" id="notes-list"></div>
-  <div class="notes-footer">
-    💾 Notes saved in your browser (localStorage). Export JSON để share/backup. Mỗi browser/device có notes riêng.
-  </div>
-</div>
-
-<div id="note-modal" class="note-modal" role="dialog" aria-label="Add note">
-  <div class="note-modal-content">
-    <h3 id="note-modal-title">Add note</h3>
-    <textarea id="note-modal-text" placeholder="Type your note here... (Ctrl+Enter to save, Esc to cancel)"></textarea>
-    <div class="note-modal-actions">
-      <span class="note-modal-hint">Ctrl+Enter to save · Esc to cancel</span>
-      <button id="note-modal-cancel">Cancel</button>
-      <button class="primary" id="note-modal-save">Save</button>
+<aside class="an-panel" id="anPanel" aria-hidden="true">
+  <div class="ph">
+    <div>
+      <div class="t">Annotations</div>
+      <div class="meta" id="anPanelMeta">0 comments · saved locally</div>
     </div>
+    <button id="anPanelClose" title="Close (Esc)">×</button>
   </div>
-</div>
+  <div class="toolbar">
+    <button id="anHide" title="Hide pins/panel (press H to toggle)">Hide all</button>
+    <button id="anClear" title="Delete every comment (irreversible)">Clear all</button>
+    <button id="anCopyJson" title="Copy JSON to clipboard">Copy JSON</button>
+  </div>
+  <div class="list" id="anList_"></div>
+</aside>
+
+<div class="an-toast" id="anToast">Saved</div>
 
 <script>
-(function() {
-  var STORAGE_KEY = 'shopx-notes-v1';
-  var currentSid = null;
-  var currentTitle = null;
+/* ============================================================
+   ShopX 2026 Master Plan — annotation toolkit
+   Port from shopx-2026/lp.html · Storage: shopx-master-plan-annotations
+   Each annotation: {id, x, y, text, ts, solved, section}
+   Migrates old shopx-notes-v1 once on first load.
+   ============================================================ */
+(function(){
+  var STORAGE_KEY = 'shopx-master-plan-annotations';
+  var LEGACY_KEY  = 'shopx-notes-v1';
+  var MIGRATED_FLAG = STORAGE_KEY + ':migrated';
 
-  function load() {
-    try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
-      var data = JSON.parse(raw);
-      return Array.isArray(data.notes) ? data.notes : [];
-    } catch (e) { return []; }
-  }
-
-  function save(notes) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ notes: notes, savedAt: new Date().toISOString() }));
-  }
-
-  function uid() {
-    return 'n_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
-  }
-
-  function add(sid, title, text) {
-    var notes = load();
-    var now = new Date().toISOString();
-    notes.push({ id: uid(), sectionId: sid, sectionTitle: title, text: text, createdAt: now, updatedAt: now });
-    save(notes);
-    renderAll();
-  }
-
-  function update(id, newText) {
-    var notes = load();
-    var n = notes.find(function(x) { return x.id === id; });
-    if (n) {
-      n.text = newText;
-      n.updatedAt = new Date().toISOString();
-      save(notes);
-      document.getElementById('notes-count').textContent = notes.length;
-    }
-  }
-
-  function del(id) {
-    save(load().filter(function(n) { return n.id !== id; }));
-    renderAll();
-  }
-
-  function clearAll() {
-    if (confirm('Clear ALL notes? Export trước nếu muốn giữ.')) {
-      save([]);
-      renderAll();
-    }
-  }
-
-  function exportJSON() {
-    var notes = load();
-    var data = { exportedAt: new Date().toISOString(), version: 'v1', count: notes.length, notes: notes };
-    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'shopx-notes-' + new Date().toISOString().slice(0, 10) + '.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  }
-
-  function importJSON(file) {
-    var reader = new FileReader();
-    reader.onload = function(e) {
-      try {
-        var data = JSON.parse(e.target.result);
-        if (!Array.isArray(data.notes)) throw new Error('Invalid format (expected { notes: [...] })');
-        var existing = load();
-        var existingIds = new Set(existing.map(function(n) { return n.id; }));
-        var merged = existing.concat(data.notes.filter(function(n) { return !existingIds.has(n.id); }));
-        save(merged);
-        renderAll();
-        alert('Imported ' + data.notes.length + ' notes. Total: ' + merged.length);
-      } catch (err) {
-        alert('Import failed: ' + err.message);
-      }
-    };
-    reader.readAsText(file);
-  }
-
-  function esc(s) {
-    return String(s).replace(/[&<>"']/g, function(c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-
-  function inject() {
-    var filter = document.getElementById('notes-filter');
-    document.querySelectorAll('section[id]').forEach(function(section) {
-      var h2 = section.querySelector('h2');
-      if (!h2 || section.querySelector('.note-add-btn')) return;
-      var sid = section.id;
-      var title = h2.textContent.replace(/^\s*\d+\s+/, '').trim();
-      var opt = document.createElement('option');
-      opt.value = sid;
-      opt.textContent = title;
-      filter.appendChild(opt);
-      var wrap = document.createElement('span');
-      wrap.style.cssText = 'display: inline-flex; align-items: center; vertical-align: middle;';
-      var btn = document.createElement('button');
-      btn.className = 'note-add-btn';
-      btn.type = 'button';
-      btn.textContent = '💬';
-      btn.title = 'Add note';
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        openModal(sid, title);
-      });
-      var badge = document.createElement('span');
-      badge.className = 'note-count-badge';
-      badge.dataset.section = sid;
-      badge.style.display = 'none';
-      wrap.appendChild(btn);
-      wrap.appendChild(badge);
-      h2.appendChild(wrap);
-    });
-  }
-
-  function openModal(sid, title) {
-    currentSid = sid;
-    currentTitle = title;
-    document.getElementById('note-modal-title').textContent = '📝 Note · ' + title;
-    document.getElementById('note-modal-text').value = '';
-    document.getElementById('note-modal').classList.add('open');
-    setTimeout(function() { document.getElementById('note-modal-text').focus(); }, 50);
-  }
-
-  function closeModal() {
-    document.getElementById('note-modal').classList.remove('open');
-    currentSid = null;
-    currentTitle = null;
-  }
-
-  function saveModal() {
-    var t = document.getElementById('note-modal-text').value.trim();
-    if (!t || !currentSid) { closeModal(); return; }
-    add(currentSid, currentTitle, t);
-    closeModal();
-  }
-
-  function renderAll() {
-    var notes = load();
-    document.getElementById('notes-count').textContent = notes.length;
-    var counts = {};
-    notes.forEach(function(n) { counts[n.sectionId] = (counts[n.sectionId] || 0) + 1; });
-    document.querySelectorAll('.note-count-badge').forEach(function(el) {
-      var c = counts[el.dataset.section] || 0;
-      el.textContent = c;
-      el.style.display = c > 0 ? 'inline-block' : 'none';
-    });
-    var filter = document.getElementById('notes-filter').value;
-    var list = filter ? notes.filter(function(n) { return n.sectionId === filter; }) : notes;
-    list = list.slice().sort(function(a, b) { return b.createdAt.localeCompare(a.createdAt); });
-    var container = document.getElementById('notes-list');
-    if (list.length === 0) {
-      container.innerHTML = '<div class="notes-empty">Chưa có notes.<br/><br/>Click <strong>💬</strong> kế bên tiêu đề section để add note đầu tiên.<br/><br/>Notes lưu trong browser này — Export JSON để backup hoặc share.</div>';
+  // ---------- migration (once) ----------
+  function migrateLegacy(){
+    if (localStorage.getItem(MIGRATED_FLAG)) return;
+    if (localStorage.getItem(STORAGE_KEY)) {
+      localStorage.setItem(MIGRATED_FLAG, '1');
       return;
     }
-    container.innerHTML = list.map(function(n) {
-      return '<div class="note-item">' +
-        '<div class="note-meta">' +
-          '<a href="#' + esc(n.sectionId) + '" class="note-section-link">📍 ' + esc(n.sectionTitle) + '</a>' +
-          '<span>' + new Date(n.createdAt).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) + '</span>' +
-        '</div>' +
-        '<div class="note-text" contenteditable="true" data-id="' + esc(n.id) + '" spellcheck="false">' + esc(n.text) + '</div>' +
-        '<div class="note-actions">' +
-          '<button class="note-delete" data-id="' + esc(n.id) + '">Delete</button>' +
-        '</div>' +
-      '</div>';
-    }).join('');
-    container.querySelectorAll('.note-delete').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        if (confirm('Delete note?')) del(btn.dataset.id);
-      });
-    });
-    container.querySelectorAll('.note-text').forEach(function(el) {
-      el.addEventListener('blur', function() {
-        var t = el.textContent.trim();
-        if (t) update(el.dataset.id, t);
-      });
-    });
-    container.querySelectorAll('.note-section-link').forEach(function(a) {
-      a.addEventListener('click', function() {
-        document.getElementById('notes-panel').classList.remove('open');
-      });
-    });
-  }
-
-  function togglePanel() {
-    var p = document.getElementById('notes-panel');
-    p.classList.toggle('open');
-    if (p.classList.contains('open')) renderAll();
-  }
-
-  function init() {
-    inject();
-    document.getElementById('notes-fab').addEventListener('click', togglePanel);
-    document.getElementById('notes-close').addEventListener('click', togglePanel);
-    document.getElementById('notes-filter').addEventListener('change', renderAll);
-    document.getElementById('notes-export').addEventListener('click', exportJSON);
-    document.getElementById('notes-import-btn').addEventListener('click', function() {
-      document.getElementById('notes-import-file').click();
-    });
-    document.getElementById('notes-import-file').addEventListener('change', function(e) {
-      if (e.target.files[0]) importJSON(e.target.files[0]);
-      e.target.value = '';
-    });
-    document.getElementById('notes-clear').addEventListener('click', clearAll);
-    document.getElementById('note-modal-cancel').addEventListener('click', closeModal);
-    document.getElementById('note-modal-save').addEventListener('click', saveModal);
-    document.getElementById('note-modal').addEventListener('click', function(e) {
-      if (e.target.id === 'note-modal') closeModal();
-    });
-    document.getElementById('note-modal-text').addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); saveModal(); }
-      if (e.key === 'Escape') closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.altKey && (e.key === 'n' || e.key === 'N')) { e.preventDefault(); togglePanel(); }
-    });
-    renderAll();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
-</script>
-
-<!-- ============ PIN COMMENT MODE ============ -->
-<script>
-(function() {
-  var STORAGE_KEY = 'shopx-notes-v1';
-  var inMode = false;
-  var activePopover = null;
-
-  function loadNotes() {
     try {
-      var raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return [];
+      var raw = localStorage.getItem(LEGACY_KEY);
+      if (!raw) { localStorage.setItem(MIGRATED_FLAG, '1'); return; }
       var data = JSON.parse(raw);
-      return Array.isArray(data.notes) ? data.notes : [];
-    } catch (e) { return []; }
+      var legacy = Array.isArray(data.notes) ? data.notes : [];
+      var migrated = [];
+      legacy.forEach(function(n){
+        var sec = n.sectionId ? document.getElementById(n.sectionId) : null;
+        var x, y;
+        if (sec && n.anchor && typeof n.anchor.relX === 'number' && typeof n.anchor.relY === 'number') {
+          var r = sec.getBoundingClientRect();
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+          x = r.left + scrollLeft + (n.anchor.relX / 100) * r.width;
+          y = r.top + scrollTop + (n.anchor.relY / 100) * r.height;
+        } else if (sec) {
+          var r2 = sec.getBoundingClientRect();
+          var scrollTop2 = window.pageYOffset || document.documentElement.scrollTop;
+          x = r2.left + 80;
+          y = r2.top + scrollTop2 + 60;
+        } else {
+          return;
+        }
+        migrated.push({
+          id: n.id || ('a_' + Math.random().toString(36).slice(2,8)),
+          x: x, y: y,
+          text: n.text || '',
+          ts: n.createdAt || new Date().toISOString(),
+          solved: false,
+          section: n.sectionId || 'page'
+        });
+      });
+      if (migrated.length) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      }
+      localStorage.setItem(MIGRATED_FLAG, '1');
+    } catch(e) {
+      localStorage.setItem(MIGRATED_FLAG, '1');
+    }
   }
 
-  function saveNotes(notes) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ notes: notes, savedAt: new Date().toISOString() }));
+  // ---------- state ----------
+  function load(){
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+    catch(e){ return []; }
   }
-
-  function uid() {
-    return 'p_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  function save(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
+    refreshUI();
   }
-
-  function escapeHtml(s) {
-    return String(s || '').replace(/[&<>"']/g, function(c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
+  function uid(){ return 'a_' + Math.random().toString(36).slice(2,8) + Date.now().toString(36).slice(-4); }
+  function nowISO(){ return new Date().toISOString(); }
+  function fmtRel(iso){
+    var ms = Date.now() - new Date(iso).getTime();
+    var s = Math.round(ms/1000);
+    if (s < 60) return s + 's ago';
+    var m = Math.round(s/60); if (m < 60) return m + 'm ago';
+    var h = Math.round(m/60); if (h < 24) return h + 'h ago';
+    var d = Math.round(h/24); return d + 'd ago';
   }
-
-  function getSnippet(target, maxLen) {
-    maxLen = maxLen || 100;
-    if (!target) return '';
-    // Try to get meaningful text from clicked element or its closest text-bearing ancestor
-    var el = target;
-    var txt = '';
-    while (el && el !== document.body) {
-      var t = (el.innerText || el.textContent || '').trim();
-      if (t && t.length > 5) { txt = t; break; }
+  function sectionAt(x, y){
+    var el = document.elementFromPoint(x - window.scrollX, y - window.scrollY);
+    while (el && el !== document.body){
+      if (el.tagName === 'SECTION' && el.id){
+        return el.id;
+      }
       el = el.parentElement;
     }
-    txt = txt.replace(/\s+/g, ' ').trim();
-    if (txt.length > maxLen) txt = txt.slice(0, maxLen) + '…';
-    return txt;
+    return 'page';
   }
-
-  function findNearestSection(target) {
-    var section = target && target.closest ? target.closest('section[id]') : null;
-    if (!section) return null;
-    var h2 = section.querySelector('h2');
-    var title = h2 ? h2.textContent.replace(/^\s*\d+\s+/, '').trim() : section.id;
-    return { id: section.id, title: title, el: section };
+  function toast(msg){
+    var t = document.getElementById('anToast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toast._tm);
+    toast._tm = setTimeout(function(){ t.classList.remove('show'); }, 1600);
   }
-
-  function toggleMode(force) {
-    var next = (typeof force === 'boolean') ? force : !inMode;
-    inMode = next;
-    document.body.classList.toggle('comment-mode', inMode);
-    var fab = document.getElementById('notes-pin-fab');
-    if (fab) fab.classList.toggle('active', inMode);
-    if (fab) fab.textContent = inMode ? '✕ Exit Pin Mode' : '📍 Pin Comment';
-    if (!inMode) closePopover();
-  }
-
-  function closePopover() {
-    if (activePopover && activePopover.parentNode) {
-      activePopover.parentNode.removeChild(activePopover);
-    }
-    activePopover = null;
-  }
-
-  function openCreatePopover(clickEvent) {
-    closePopover();
-    var target = clickEvent.target;
-    var section = findNearestSection(target);
-    if (!section) {
-      return; // ignore clicks outside any section
-    }
-    var snippet = getSnippet(target, 100);
-    var rect = section.el.getBoundingClientRect();
-    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-    var pageX = clickEvent.pageX;
-    var pageY = clickEvent.pageY;
-    var relX = ((pageX - (rect.left + scrollLeft)) / rect.width) * 100;
-    var relY = ((pageY - (rect.top + scrollTop)) / rect.height) * 100;
-    if (relX < 0) relX = 2;
-    if (relX > 100) relX = 98;
-    if (relY < 0) relY = 2;
-
-    var pop = document.createElement('div');
-    pop.className = 'comment-popover';
-    var popLeft = Math.max(10, Math.min(window.innerWidth - 340, pageX - 30 - scrollLeft));
-    var popTop = pageY + 18 - scrollTop;
-    if (popTop + 220 > window.innerHeight + scrollTop) popTop = pageY - 230 - scrollTop;
-    pop.style.left = popLeft + 'px';
-    pop.style.top = popTop + 'px';
-    pop.style.position = 'fixed';
-    pop.innerHTML =
-      (snippet ? '<div class="comment-popover-snippet">📍 ' + escapeHtml(section.title) + ' · "' + escapeHtml(snippet) + '"</div>' : '') +
-      '<textarea placeholder="Type your comment here..."></textarea>' +
-      '<div class="comment-popover-actions">' +
-        '<span class="hint">Ctrl+Enter save · Esc cancel</span>' +
-        '<button class="cancel">Cancel</button>' +
-        '<button class="primary save">Save</button>' +
-      '</div>';
-    document.body.appendChild(pop);
-    activePopover = pop;
-
-    var ta = pop.querySelector('textarea');
-    setTimeout(function() { ta.focus(); }, 30);
-
-    var pinData = {
-      sectionId: section.id,
-      sectionTitle: section.title,
-      relX: relX,
-      relY: relY,
-      snippet: snippet
-    };
-
-    pop.querySelector('.cancel').onclick = function(e) { e.stopPropagation(); closePopover(); };
-    pop.querySelector('.save').onclick = function(e) {
-      e.stopPropagation();
-      var text = ta.value.trim();
-      if (!text) { closePopover(); return; }
-      var notes = loadNotes();
-      var now = new Date().toISOString();
-      notes.push({
-        id: uid(),
-        sectionId: pinData.sectionId,
-        sectionTitle: pinData.sectionTitle,
-        text: text,
-        createdAt: now,
-        updatedAt: now,
-        anchor: { type: 'pin', relX: pinData.relX, relY: pinData.relY, snippet: pinData.snippet }
-      });
-      saveNotes(notes);
-      closePopover();
-      toggleMode(false); // exit mode after save
-      renderPins();
-      // Trigger notes panel refresh by updating count
-      var countEl = document.getElementById('notes-count');
-      if (countEl) countEl.textContent = notes.length;
-      // Re-render per-section count badges
-      var counts = {};
-      notes.forEach(function(n) { counts[n.sectionId] = (counts[n.sectionId] || 0) + 1; });
-      document.querySelectorAll('.note-count-badge').forEach(function(el) {
-        var c = counts[el.dataset.section] || 0;
-        el.textContent = c;
-        el.style.display = c > 0 ? 'inline-block' : 'none';
-      });
-    };
-    ta.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); pop.querySelector('.save').click(); }
-      if (e.key === 'Escape') { e.preventDefault(); closePopover(); }
+  function escapeHTML(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[c];
     });
-    // prevent click inside popover from closing
-    pop.addEventListener('click', function(e) { e.stopPropagation(); });
   }
 
-  function openViewPopover(note, pinEl) {
-    closePopover();
-    var rect = pinEl.getBoundingClientRect();
-    var pop = document.createElement('div');
-    pop.className = 'comment-popover';
-    pop.style.position = 'fixed';
-    var popLeft = Math.max(10, Math.min(window.innerWidth - 340, rect.left - 30));
-    var popTop = rect.top + rect.height + 8;
-    if (popTop + 220 > window.innerHeight) popTop = rect.top - 230;
-    pop.style.left = popLeft + 'px';
-    pop.style.top = popTop + 'px';
-    var when = new Date(note.createdAt).toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
-    pop.innerHTML =
-      (note.anchor && note.anchor.snippet ? '<div class="comment-popover-snippet">📍 ' + escapeHtml(note.sectionTitle) + ' · "' + escapeHtml(note.anchor.snippet) + '"</div>' : '') +
-      '<textarea>' + escapeHtml(note.text) + '</textarea>' +
-      '<div class="comment-popover-meta">📅 ' + when + '</div>' +
-      '<div class="comment-popover-actions">' +
-        '<button class="danger delete">Delete</button>' +
-        '<button class="cancel">Close</button>' +
-        '<button class="primary save">Save edit</button>' +
-      '</div>';
-    document.body.appendChild(pop);
-    activePopover = pop;
-
-    var ta = pop.querySelector('textarea');
-    pop.querySelector('.cancel').onclick = function(e) { e.stopPropagation(); closePopover(); };
-    pop.querySelector('.delete').onclick = function(e) {
-      e.stopPropagation();
-      if (!confirm('Delete this comment?')) return;
-      var notes = loadNotes().filter(function(n) { return n.id !== note.id; });
-      saveNotes(notes);
-      closePopover();
-      renderPins();
-      var countEl = document.getElementById('notes-count');
-      if (countEl) countEl.textContent = notes.length;
-    };
-    pop.querySelector('.save').onclick = function(e) {
-      e.stopPropagation();
-      var newText = ta.value.trim();
-      if (!newText) return;
-      var notes = loadNotes();
-      var n = notes.find(function(x) { return x.id === note.id; });
-      if (n) {
-        n.text = newText;
-        n.updatedAt = new Date().toISOString();
-        saveNotes(notes);
-      }
-      closePopover();
-    };
-    ta.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); pop.querySelector('.save').click(); }
-      if (e.key === 'Escape') { e.preventDefault(); closePopover(); }
-    });
-    pop.addEventListener('click', function(e) { e.stopPropagation(); });
-  }
-
-  function renderPins() {
-    // Remove existing pins
-    document.querySelectorAll('.comment-pin').forEach(function(el) { el.parentNode.removeChild(el); });
-    var notes = loadNotes().filter(function(n) { return n.anchor && n.anchor.type === 'pin'; });
-    // Group by section + sequence number
-    var bySection = {};
-    notes.forEach(function(n) {
-      bySection[n.sectionId] = bySection[n.sectionId] || [];
-      bySection[n.sectionId].push(n);
-    });
-    notes.forEach(function(n) {
-      var section = document.getElementById(n.sectionId);
-      if (!section) return;
-      if (getComputedStyle(section).position === 'static') section.style.position = 'relative';
-      var pin = document.createElement('div');
-      pin.className = 'comment-pin';
-      pin.title = (n.anchor.snippet ? '"' + n.anchor.snippet + '"\n— ' : '') + n.text.slice(0, 80) + (n.text.length > 80 ? '…' : '');
-      pin.style.left = n.anchor.relX + '%';
-      pin.style.top = (n.anchor.relY || 5) + '%';
-      var idx = bySection[n.sectionId].indexOf(n);
+  // ---------- rendering ----------
+  function renderPins(){
+    document.querySelectorAll('.an-pin').forEach(function(n){ n.remove(); });
+    state.items.forEach(function(it, idx){
+      var pin = document.createElement('button');
+      pin.className = 'an-pin' + (it.solved ? ' solved' : '');
+      pin.setAttribute('data-id', it.id);
+      pin.style.left = it.x + 'px';
+      pin.style.top  = it.y + 'px';
       pin.innerHTML = '<span>' + (idx + 1) + '</span>';
-      pin.addEventListener('click', function(e) {
+      pin.title = (it.text || '(no text yet)') + ' · ' + fmtRel(it.ts);
+      pin.addEventListener('click', function(e){
         e.stopPropagation();
-        e.preventDefault();
-        openViewPopover(n, pin);
+        openPopup(it.id);
       });
-      section.appendChild(pin);
+      document.body.appendChild(pin);
     });
   }
-
-  function onClick(e) {
-    if (!inMode) return;
-    // Ignore clicks on the FABs / panel / modal / popover / hint / sidebar / pins
-    var t = e.target;
-    if (t.closest('.notes-fab') || t.closest('.notes-pin-fab') || t.closest('.notes-panel') || t.closest('.note-modal') || t.closest('.comment-popover') || t.closest('.comment-pin') || t.closest('.comment-mode-hint') || t.closest('.sidebar')) {
-      return;
+  function renderList(){
+    var box = document.getElementById('anList_');
+    var meta = document.getElementById('anPanelMeta');
+    if (!state.items.length){
+      box.innerHTML = '<div class="empty"><span class="ic">✦</span>No comments yet. Toggle <b>Comment</b> mode (or press <b>C</b>) and click anywhere on the page.</div>';
+    } else {
+      box.innerHTML = state.items.map(function(it, idx){
+        var t = (it.text || '').trim();
+        var txtClass = t ? '' : ' placeholder';
+        var label = t || '(empty — click pin to write)';
+        return '<div class="item' + (it.solved ? ' solved' : '') + '" data-id="' + it.id + '">' +
+          '<div class="row"><span class="num">#' + (idx + 1) + (it.solved ? ' · resolved' : '') + '</span>' +
+          '<span class="ts">' + fmtRel(it.ts) + '</span></div>' +
+          '<div class="txt' + txtClass + '">' + escapeHTML(label) + '</div>' +
+          '<div class="ctx">→ ' + escapeHTML(it.section || 'page') + '</div>' +
+        '</div>';
+      }).join('');
+      box.querySelectorAll('.item').forEach(function(el){
+        el.addEventListener('click', function(){
+          var id = el.getAttribute('data-id');
+          var it = state.items.find(function(x){ return x.id === id; });
+          if (!it) return;
+          window.scrollTo({ top: it.y - 200, behavior: 'smooth' });
+          setTimeout(function(){ openPopup(id); }, 350);
+        });
+      });
     }
-    e.preventDefault();
-    e.stopPropagation();
-    openCreatePopover(e);
+    var n = state.items.length;
+    meta.textContent = n + ' comment' + (n === 1 ? '' : 's') + ' · saved locally';
+    var cn = document.getElementById('anCount');
+    cn.textContent = n;
+    cn.setAttribute('data-empty', n === 0 ? '1' : '0');
+  }
+  function refreshUI(){ renderPins(); renderList(); }
+
+  // ---------- popup ----------
+  function closePopup(){
+    if (state.activePopup){ state.activePopup.remove(); state.activePopup = null; }
+  }
+  function openPopup(id){
+    closePopup();
+    var it = state.items.find(function(x){ return x.id === id; });
+    if (!it) return;
+    var idx = state.items.indexOf(it);
+    var p = document.createElement('div');
+    p.className = 'an-popup';
+    p.style.left = it.x + 'px';
+    p.style.top  = it.y + 'px';
+    p.innerHTML =
+      '<div class="ph">' +
+        '<span class="num">Comment #' + (idx + 1) + (it.solved ? ' · resolved' : '') + '</span>' +
+        '<span class="ts">' + fmtRel(it.ts) + ' · ' + escapeHTML(it.section || 'page') + '</span>' +
+      '</div>' +
+      '<textarea placeholder="Type your note... (Cmd/Ctrl + Enter to save)"></textarea>' +
+      '<div class="actions">' +
+        '<div class="left">' +
+          '<button class="solve">' + (it.solved ? '↺ Reopen' : '✓ Resolve') + '</button>' +
+          '<button class="del">Delete</button>' +
+        '</div>' +
+        '<button class="save">Save</button>' +
+      '</div>';
+    document.body.appendChild(p);
+    state.activePopup = p;
+
+    var ta = p.querySelector('textarea');
+    ta.value = it.text || '';
+    setTimeout(function(){ ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }, 60);
+
+    function doSave(){
+      it.text = ta.value;
+      save();
+      toast('Comment saved');
+      closePopup();
+    }
+    p.querySelector('.save').addEventListener('click', doSave);
+    p.querySelector('.del').addEventListener('click', function(){
+      state.items = state.items.filter(function(x){ return x.id !== it.id; });
+      save();
+      toast('Comment deleted');
+      closePopup();
+    });
+    p.querySelector('.solve').addEventListener('click', function(){
+      it.solved = !it.solved;
+      save();
+      toast(it.solved ? 'Marked resolved' : 'Reopened');
+      closePopup();
+    });
+    ta.addEventListener('keydown', function(e){
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter'){ e.preventDefault(); doSave(); }
+      if (e.key === 'Escape'){ closePopup(); }
+    });
+
+    // click outside to close (but not on pin / toolbar / panel)
+    setTimeout(function(){
+      document.addEventListener('click', outsideClose, { once:true });
+    }, 100);
+    function outsideClose(e){
+      if (p.contains(e.target) || e.target.closest('.an-pin, .an-toolbar, .an-panel')) {
+        setTimeout(function(){ document.addEventListener('click', outsideClose, { once:true }); }, 0);
+        return;
+      }
+      closePopup();
+    }
   }
 
-  function init() {
-    var fab = document.getElementById('notes-pin-fab');
-    if (!fab) return;
-    fab.addEventListener('click', function(e) {
-      e.stopPropagation();
-      toggleMode();
+  // ---------- mode toggle ----------
+  function setMode(m){
+    state.mode = m;
+    var btn = document.getElementById('anToggle');
+    btn.setAttribute('data-state', m === 'dropping' ? 'on' : 'off');
+    document.body.classList.toggle('an-dropping', m === 'dropping');
+    btn.innerHTML = '<span class="ic">' + (m === 'dropping' ? '×' : '+') + '</span> ' + (m === 'dropping' ? 'Cancel' : 'Comment');
+  }
+
+  // ---------- drop pin ----------
+  function dropAt(clientX, clientY){
+    var x = clientX + window.scrollX;
+    var y = clientY + window.scrollY;
+    var it = { id: uid(), x: x, y: y, text: '', ts: nowISO(), solved: false, section: sectionAt(x, y) };
+    state.items.push(it);
+    save();
+    setMode('off');
+    setTimeout(function(){ openPopup(it.id); }, 50);
+  }
+
+  // ---------- export ----------
+  function exportMD(){
+    if (!state.items.length){ toast('Nothing to export'); return; }
+    var lines = [
+      '# ShopX 2026 Master Plan — Annotations',
+      '',
+      'Page: ' + location.href,
+      'Exported: ' + new Date().toISOString(),
+      'Total: ' + state.items.length + ' comment(s)',
+      ''
+    ];
+    state.items.forEach(function(it, idx){
+      lines.push('## #' + (idx + 1) + (it.solved ? ' — resolved' : ''));
+      lines.push('- Section: `' + (it.section || 'page') + '`');
+      lines.push('- Position: (' + Math.round(it.x) + ', ' + Math.round(it.y) + ')');
+      lines.push('- Created: ' + it.ts);
+      lines.push('');
+      lines.push((it.text || '_(empty)_').split('\n').map(function(l){ return '> ' + l; }).join('\n'));
+      lines.push('');
     });
-    document.addEventListener('click', onClick, true);
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        if (activePopover) { closePopover(); return; }
-        if (inMode) toggleMode(false);
-      }
-      if (e.altKey && (e.key === 'p' || e.key === 'P')) {
-        e.preventDefault();
-        toggleMode();
-      }
-    });
-    renderPins();
-    // Re-render pins after window resize (relative positions)
-    window.addEventListener('resize', function() {
-      clearTimeout(window.__pinResizeTimer);
-      window.__pinResizeTimer = setTimeout(renderPins, 150);
+    var md = lines.join('\n');
+    copyText(md).then(function(){ toast('Copied ' + state.items.length + ' comment(s) as markdown'); });
+  }
+  function exportJSON(){
+    if (!state.items.length){ toast('Nothing to copy'); return; }
+    copyText(JSON.stringify(state.items, null, 2)).then(function(){ toast('Copied JSON'); });
+  }
+  function copyText(s){
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      return navigator.clipboard.writeText(s);
+    }
+    return new Promise(function(res){
+      var ta = document.createElement('textarea'); ta.value = s; document.body.appendChild(ta);
+      ta.select(); try { document.execCommand('copy'); } catch(e){} document.body.removeChild(ta); res();
     });
   }
 
+  // ---------- init ----------
+  function init(){
+    migrateLegacy();
+
+    window.__anState = state = {
+      items: load(),
+      mode: 'off',
+      activePopup: null,
+    };
+
+    // Wiring
+    document.getElementById('anToggle').addEventListener('click', function(){
+      setMode(state.mode === 'dropping' ? 'off' : 'dropping');
+    });
+    document.getElementById('anList').addEventListener('click', function(){
+      document.getElementById('anPanel').classList.toggle('open');
+    });
+    document.getElementById('anPanelClose').addEventListener('click', function(){
+      document.getElementById('anPanel').classList.remove('open');
+    });
+    document.getElementById('anHide').addEventListener('click', function(){
+      document.body.classList.toggle('an-hidden');
+      toast(document.body.classList.contains('an-hidden') ? 'Pins hidden (presentation mode)' : 'Pins visible');
+    });
+    document.getElementById('anClear').addEventListener('click', function(){
+      if (!state.items.length){ toast('Already empty'); return; }
+      if (!confirm('Delete ALL ' + state.items.length + ' comment(s)? This cannot be undone.')) return;
+      state.items = []; save(); toast('All comments cleared');
+    });
+    document.getElementById('anExport').addEventListener('click', exportMD);
+    document.getElementById('anCopyJson').addEventListener('click', exportJSON);
+
+    document.addEventListener('click', function(e){
+      if (state.mode !== 'dropping') return;
+      if (e.target.closest('.an-toolbar, .an-panel, .an-popup, .an-pin, .an-hint, .an-toast, .sidebar')) return;
+      e.preventDefault(); e.stopPropagation();
+      dropAt(e.clientX, e.clientY);
+    }, true);
+
+    document.addEventListener('keydown', function(e){
+      var tag = (e.target.tagName || '').toLowerCase();
+      if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+      if (e.key === 'Escape'){
+        if (state.mode === 'dropping') setMode('off');
+        closePopup();
+        document.getElementById('anPanel').classList.remove('open');
+      }
+      if (e.key === 'c' || e.key === 'C'){
+        setMode(state.mode === 'dropping' ? 'off' : 'dropping');
+      }
+      if (e.key === 'h' || e.key === 'H'){
+        document.body.classList.toggle('an-hidden');
+      }
+    });
+
+    if (!localStorage.getItem(STORAGE_KEY + ':seen')){
+      setTimeout(function(){
+        toast('Press C to comment · H to hide · Esc to cancel');
+        localStorage.setItem(STORAGE_KEY + ':seen', '1');
+      }, 1200);
+    }
+
+    refreshUI();
+  }
+
+  var state;
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
