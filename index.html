@@ -183,51 +183,132 @@
   .timeline-phase .ph-goal { font-size: 12px; color: var(--text-soft); line-height: 1.5; }
   @media (max-width: 1000px) { .timeline { grid-template-columns: 1fr 1fr; } }
 
-  /* ===== Gantt Chart ===== */
-  .gantt-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin: 16px 0 24px; box-shadow: var(--shadow-sm); overflow-x: auto; }
-  .gantt { min-width: 980px; }
-  .gantt-header-row { display: grid; grid-template-columns: 200px 1fr; align-items: end; margin-bottom: 4px; }
-  .gantt-months { display: grid; grid-template-columns: repeat(21, 1fr); gap: 0; }
-  .gantt-month { text-align: center; font-size: 11px; font-weight: 700; color: var(--text-soft); text-transform: uppercase; letter-spacing: .5px; padding: 4px 2px; border-bottom: 1px solid var(--border); }
-  .gantt-phase-bg { display: grid; grid-template-columns: 200px 1fr; margin-bottom: 6px; }
-  .gantt-phase-bg-spacer { background: transparent; }
-  .gantt-phase-track { display: grid; grid-template-columns: repeat(21, 1fr); gap: 2px; }
-  .gantt-phase-bar { padding: 5px 8px; font-size: 10.5px; font-weight: 800; letter-spacing: .3px; text-transform: uppercase; text-align: center; border-radius: 3px; color: white; white-space: nowrap; overflow: hidden; }
-  .gantt-phase-p1 { background: #6b46ff; }
-  .gantt-phase-p2 { background: #3b82f6; }
-  .gantt-phase-p3 { background: #ef4444; }
-  .gantt-phase-p4 { background: #f59e0b; }
-  .gantt-phase-p5 { background: #16a085; }
+  /* ===== Visual Gantt Chart (v2.4 — color-coded by phase) ===== */
+  .gantt-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 0; margin: 16px 0 24px; box-shadow: var(--shadow-sm); overflow-x: auto; }
+  .gantt-chart { min-width: 1180px; }
+  .gantt-row {
+    display: grid;
+    grid-template-columns: 220px repeat(18, minmax(50px, 1fr));
+    min-height: 38px;
+    border-bottom: 1px solid #f1f5f9;
+    align-items: center;
+  }
+  .gantt-row:hover:not(.header) { background: #fafbff; }
+  .gantt-row.header {
+    background: #f7f8fc;
+    min-height: 48px;
+    border-bottom: 2px solid #e3e6f0;
+    position: sticky; top: 0; z-index: 3;
+  }
+  .gantt-row.event-week { background: linear-gradient(90deg, #fff7ed, #fffbf2); }
+  .gantt-task-cell {
+    padding: 8px 12px;
+    background: inherit;
+    border-right: 2px solid #e3e6f0;
+    font-size: 12px;
+    line-height: 1.3;
+    position: sticky; left: 0; z-index: 1;
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .gantt-row.header .gantt-task-cell { background: #f7f8fc; font-weight: 700; font-size: 11.5px; color: var(--text-soft); text-transform: uppercase; letter-spacing: .4px; }
+  .gantt-row:hover .gantt-task-cell { background: #fafbff; }
+  .gantt-task-cell .gantt-task-name { font-weight: 600; color: var(--text); font-size: 12.5px; }
+  .gantt-task-cell .gantt-task-owner { font-size: 10.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+  .gantt-week-cell {
+    padding: 6px 2px;
+    text-align: center;
+    border-left: 1px dashed #eef0f8;
+    font-size: 10px; color: var(--text-muted);
+    height: 100%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+  }
+  .gantt-week-cell .wk-num { display: block; font-size: 11.5px; font-weight: 700; color: var(--text); }
+  .gantt-week-cell .wk-date { display: block; font-size: 9.5px; color: var(--text-muted); font-weight: 600; margin-top: 1px; }
+  .gantt-week-cell.event-w { background: #fff7ed; }
+  .gantt-week-cell.event-w .wk-date { color: #ea580c; font-weight: 800; }
 
-  .gantt-row { display: grid; grid-template-columns: 200px 1fr; align-items: center; padding: 3px 0; border-bottom: 1px solid #f1f5f9; }
-  .gantt-row:hover { background: var(--surface-2); }
-  .gantt-row-label { font-size: 12px; padding-right: 10px; line-height: 1.3; }
-  .gantt-row-label .gantt-owner { display: block; font-size: 10.5px; color: var(--text-muted); font-weight: 600; margin-top: 1px; }
-  .gantt-row-label .gantt-task { font-weight: 600; color: var(--text); }
-  .gantt-track { display: grid; grid-template-columns: repeat(21, 1fr); gap: 2px; position: relative; min-height: 22px; align-items: center; }
-  .gantt-bar { height: 16px; border-radius: 3px; font-size: 9.5px; color: white; font-weight: 700; padding: 0 5px; display: flex; align-items: center; white-space: nowrap; overflow: hidden; }
-  .gantt-bar.b-chloe { background: #6366f1; }
-  .gantt-bar.b-christine { background: #ec4899; }
-  .gantt-bar.b-maria { background: #f97316; }
-  .gantt-bar.b-kallie { background: #14b8a6; }
-  .gantt-bar.b-sunny { background: #8b5cf6; }
-  .gantt-bar.b-hellen { background: #eab308; color: #422006; }
-  .gantt-bar.b-design { background: #06b6d4; }
-  .gantt-bar.b-troy { background: #d946ef; }
-  .gantt-bar.b-lily { background: #0ea5e9; }
-  .gantt-bar.b-multi { background: linear-gradient(90deg, #6366f1, #ec4899, #14b8a6); }
-  .gantt-bar.b-paid { background: #dc2626; }
-  .gantt-bar.b-pr { background: #64748b; }
+  .gantt-bar {
+    height: 22px;
+    border-radius: 5px;
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8px;
+    margin: 0 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.12);
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: .2px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.15);
+  }
+  .gantt-bar.p1   { background: linear-gradient(135deg, #6b46ff, #8b5cf6); }
+  .gantt-bar.p1p2 { background: linear-gradient(90deg, #6b46ff 0%, #6b46ff 40%, #3b82f6 60%, #3b82f6 100%); }
+  .gantt-bar.p2   { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .gantt-bar.p2p3 { background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 40%, #ef4444 60%, #ef4444 100%); }
+  .gantt-bar.p3   { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  .gantt-bar.p4   { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .gantt-bar.p5   { background: linear-gradient(135deg, #16a085, #0d9488); }
+  .gantt-bar.event-pin {
+    background: linear-gradient(135deg, #ea580c, #b91c1c);
+    justify-content: center; padding: 0;
+  }
 
-  .gantt-milestone { width: 12px; height: 12px; background: var(--danger); border: 2px solid white; border-radius: 50%; box-shadow: 0 0 0 1px var(--danger); justify-self: center; }
-  .gantt-milestone.warn { background: var(--warning); box-shadow: 0 0 0 1px var(--warning); }
-  .gantt-milestone.success { background: var(--success); box-shadow: 0 0 0 1px var(--success); }
+  /* ===== Phase Color Legend (v2.4) ===== */
+  .phase-legend-chart {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 12px 0 24px;
+    box-shadow: var(--shadow-sm);
+  }
+  .phase-leg-row {
+    display: grid;
+    grid-template-columns: 24px 1.4fr auto 1.2fr;
+    gap: 14px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .phase-leg-row:last-child { border-bottom: 0; }
+  .phase-leg-swatch { width: 22px; height: 22px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,.12); }
+  .phase-leg-swatch.p1   { background: linear-gradient(135deg, #6b46ff, #8b5cf6); }
+  .phase-leg-swatch.p1p2 { background: linear-gradient(90deg, #6b46ff 0%, #6b46ff 40%, #3b82f6 60%, #3b82f6 100%); }
+  .phase-leg-swatch.p2   { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .phase-leg-swatch.p2p3 { background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 40%, #ef4444 60%, #ef4444 100%); }
+  .phase-leg-swatch.p3   { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  .phase-leg-swatch.p4   { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .phase-leg-swatch.p5   { background: linear-gradient(135deg, #16a085, #0d9488); }
 
-  .gantt-section-label { background: var(--surface-3); padding: 6px 10px; font-size: 10.5px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--text-soft); margin: 8px 0 2px; border-radius: 4px; }
+  .phase-leg-info .phase-leg-name { font-weight: 700; font-size: 13.5px; color: var(--text); }
+  .phase-leg-info .phase-leg-desc { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
+  .phase-leg-stats { font-size: 11.5px; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
+  .phase-leg-stats strong { font-size: 16px; color: var(--text); font-weight: 800; }
+  .phase-leg-bar-track { height: 14px; background: #f1f5f9; border-radius: 4px; overflow: hidden; }
+  .phase-leg-bar { height: 100%; border-radius: 4px; }
+  .phase-leg-bar.p1   { background: linear-gradient(135deg, #6b46ff, #8b5cf6); }
+  .phase-leg-bar.p1p2 { background: linear-gradient(90deg, #6b46ff 0%, #6b46ff 40%, #3b82f6 60%, #3b82f6 100%); }
+  .phase-leg-bar.p2   { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+  .phase-leg-bar.p2p3 { background: linear-gradient(90deg, #3b82f6 0%, #3b82f6 40%, #ef4444 60%, #ef4444 100%); }
+  .phase-leg-bar.p3   { background: linear-gradient(135deg, #ef4444, #dc2626); }
+  .phase-leg-bar.p4   { background: linear-gradient(135deg, #f59e0b, #d97706); }
+  .phase-leg-bar.p5   { background: linear-gradient(135deg, #16a085, #0d9488); }
 
-  .gantt-legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 14px 0 4px; font-size: 11.5px; padding: 8px 10px; background: var(--surface-2); border-radius: 6px; }
-  .gantt-legend-item { display: flex; align-items: center; gap: 5px; }
-  .gantt-legend-dot { width: 12px; height: 12px; border-radius: 3px; }
+  .phase-leg-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+  .phase-leg-summary-card { padding: 8px 10px; border-radius: 8px; background: var(--surface-2); text-align: center; }
+  .phase-leg-summary-card .v { font-size: 18px; font-weight: 800; color: var(--text); }
+  .phase-leg-summary-card .l { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 
   /* Heatmap-style risk grid */
   .heatmap { display: grid; grid-template-columns: 60px repeat(5, 1fr); gap: 4px; margin: 16px 0; max-width: 700px; }
@@ -348,7 +429,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v2.3 · Cập nhật 03/06/2026 · Annotation toolkit</div>
+    <div class="brand-meta">v2.4 · Cập nhật 04/06/2026 · Visual Gantt chart</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -1095,9 +1176,245 @@
 
 <!-- ============ 10 EXECUTION TIMELINE ============ -->
 <section id="timeline">
-  <h2><span class="ord">10</span>Execution Timeline + Gantt — 16 weeks</h2>
-  <p class="lead">14 workstreams trải 16 tuần từ W1 15-21/6 đến W16 9-17/10. Status: 1 In Progress · 13 Not Started (như sheet hôm nay).</p>
+  <h2><span class="ord">10</span>Execution Timeline + Gantt — 18 weeks</h2>
+  <p class="lead">14 workstreams trải 18 tuần từ W1 (15-21/06) đến W18 (12-18/10). Event day ★ rơi vào W14 (17/09). Bars color-coded theo 5 phases · scroll ngang để xem hết timeline.</p>
 
+  <h3>📊 Visual Gantt — 18 weeks × 14 workstreams</h3>
+  <div class="gantt-wrap">
+    <div class="gantt-chart">
+      <!-- Header row: Workstream label + 18 week columns -->
+      <div class="gantt-row header">
+        <div class="gantt-task-cell">Workstream · Owner</div>
+        <div class="gantt-week-cell"><span class="wk-num">W1</span><span class="wk-date">15/06</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W2</span><span class="wk-date">22/06</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W3</span><span class="wk-date">29/06</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W4</span><span class="wk-date">06/07</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W5</span><span class="wk-date">13/07</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W6</span><span class="wk-date">20/07</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W7</span><span class="wk-date">27/07</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W8</span><span class="wk-date">03/08</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W9</span><span class="wk-date">10/08</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W10</span><span class="wk-date">17/08</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W11</span><span class="wk-date">24/08</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W12</span><span class="wk-date">31/08</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W13</span><span class="wk-date">07/09</span></div>
+        <div class="gantt-week-cell event-w"><span class="wk-num">W14</span><span class="wk-date">★ 17/09</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W15</span><span class="wk-date">21/09</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W16</span><span class="wk-date">28/09</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W17</span><span class="wk-date">05/10</span></div>
+        <div class="gantt-week-cell"><span class="wk-num">W18</span><span class="wk-date">12/10</span></div>
+      </div>
+
+      <!-- 1. KPI Planning · P1 · W1-W2 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">KPI Planning</div>
+          <div class="gantt-task-owner">Chloe · Kallie/Hellen support</div>
+        </div>
+        <div class="gantt-bar p1" style="grid-column: 2 / 4;" title="P1 · 15/06–22/06 · Dashboard approved">P1 · KPI v3</div>
+      </div>
+
+      <!-- 2. High audience channels · P1-P2 · W1-W4 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">High audience channels</div>
+          <div class="gantt-task-owner">Kallie · Hellen support</div>
+        </div>
+        <div class="gantt-bar p1p2" style="grid-column: 2 / 6;" title="P1-P2 · 15/06–07/07 · 30+ channels mapped">P1→P2 · Channel mapping</div>
+      </div>
+
+      <!-- 3. Paid Ads Planning · P1-P2 · W2-W4 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Paid Ads Planning</div>
+          <div class="gantt-task-owner">Hellen · Kallie support</div>
+        </div>
+        <div class="gantt-bar p1p2" style="grid-column: 3 / 6;" title="P1-P2 · 22/06–07/07 · 400K paid impressions plan">P1→P2 · 400K paid plan</div>
+      </div>
+
+      <!-- 4. Influencer Map · P2 · W3-W6 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Influencer Map</div>
+          <div class="gantt-task-owner">Kallie · Chloe support</div>
+        </div>
+        <div class="gantt-bar p2" style="grid-column: 4 / 8;" title="P2 · 01/07–21/07 · 30 KOLs + 20 admins + 20 cheerleaders">P2 · 70 influencer list</div>
+      </div>
+
+      <!-- 5. Influencer Outreach · P2-P3 · W5-W11 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Influencer Outreach</div>
+          <div class="gantt-task-owner">Chloe · Kallie support</div>
+        </div>
+        <div class="gantt-bar p2p3" style="grid-column: 6 / 13;" title="P2-P3 · 15/07–31/08 · 15–20 external posts secured">P2→P3 · 15–20 posts</div>
+      </div>
+
+      <!-- 6. PR / Press · P2-P3 · W4-W13 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">PR / Press</div>
+          <div class="gantt-task-owner">Maria · Celine · Chloe support</div>
+        </div>
+        <div class="gantt-bar p2p3" style="grid-column: 5 / 15;" title="P2-P3 · 08/07–10/09 · 10–15 mentions/articles">P2→P3 · 10–15 mentions</div>
+      </div>
+
+      <!-- 7. Shopify Apps · P2-P3 · W3-W11 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Shopify Apps Outreach</div>
+          <div class="gantt-task-owner">Christine · Celine · Maria</div>
+        </div>
+        <div class="gantt-bar p2p3" style="grid-column: 4 / 13;" title="P2-P3 · 01/07–31/08 · 25 apps · 3–5 strategic partners">P2→P3 · 25 apps</div>
+      </div>
+
+      <!-- 8. Content partners · P2-P3 · W4-W11 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Ecom Content Partners</div>
+          <div class="gantt-task-owner">Christine · Celine · Maria</div>
+        </div>
+        <div class="gantt-bar p2p3" style="grid-column: 5 / 13;" title="P2-P3 · 08/07–31/08 · 5–10 media/content partners">P2→P3 · 5–10 partners</div>
+      </div>
+
+      <!-- 9. Seller Interviews · P2-P3 · W3-W11 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Seller Interviews</div>
+          <div class="gantt-task-owner">TBD · Kallie assets support</div>
+        </div>
+        <div class="gantt-bar p2p3" style="grid-column: 4 / 13;" title="P2-P3 · 01/07–31/08 · 20 interviews + clips">P2→P3 · 20 interviews</div>
+      </div>
+
+      <!-- 10. Strategic Audience · P2-P3 · W3-W14 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Strategic Audience</div>
+          <div class="gantt-task-owner">Chloe · Christine + team</div>
+        </div>
+        <div class="gantt-bar p2p3" style="grid-column: 4 / 16;" title="P2-P3 · 01/07–16/09 · 165+ qualified attendees từ strategic groups">P2→P3 · 165+ qualified curation</div>
+      </div>
+
+      <!-- 11. FOMO Push · P3 · W7-W14 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">FOMO Push</div>
+          <div class="gantt-task-owner">Kallie · Chloe / Design</div>
+        </div>
+        <div class="gantt-bar p3" style="grid-column: 8 / 16;" title="P3 · 01/08–16/09 · Register spike + 300 qualified">P3 · FOMO + agenda reveal</div>
+      </div>
+
+      <!-- 12. All-hands · P3 · W10-W11 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">All-hands amplification</div>
+          <div class="gantt-task-owner">Team Lily · Kallie</div>
+        </div>
+        <div class="gantt-bar p3" style="grid-column: 11 / 13;" title="P3 · 22/08–31/08 · +30% registration spike">P3 · All-hands week</div>
+      </div>
+
+      <!-- 13. Event-day · P4 · W14 -->
+      <div class="gantt-row event-week">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">★ Event-day proof</div>
+          <div class="gantt-task-owner">Kallie + Media · whole team</div>
+        </div>
+        <div class="gantt-bar p4" style="grid-column: 15 / 16;" title="P4 · 17/09 · 50+ UGC · 20 clips · 30 photos">★ P4 · Event 17/09</div>
+      </div>
+
+      <!-- 14. Afterglow · P5 · W14-W18 -->
+      <div class="gantt-row">
+        <div class="gantt-task-cell">
+          <div class="gantt-task-name">Afterglow proof</div>
+          <div class="gantt-task-owner">Kallie · Christine · Maria</div>
+        </div>
+        <div class="gantt-bar p5" style="grid-column: 15 / 20;" title="P5 · 18/09–17/10 · Recap · sponsor report · 2027 interest 100+">P5 · Afterglow + recap</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>🎨 Phase color guide · workstream distribution</h3>
+  <div class="phase-legend-chart">
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p1"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P1 · Foundation</div>
+        <div class="phase-leg-desc">W1–W2 · KPI dashboard + planning kickoff</div>
+      </div>
+      <div class="phase-leg-stats"><strong>1</strong> workstream</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p1" style="width: 7%;"></div></div>
+    </div>
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p1p2"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P1→P2 · Foundation bridging into Build</div>
+        <div class="phase-leg-desc">W1–W4 · Channel mapping + paid ads framework</div>
+      </div>
+      <div class="phase-leg-stats"><strong>2</strong> workstreams</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p1p2" style="width: 14%;"></div></div>
+    </div>
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p2"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P2 · Build</div>
+        <div class="phase-leg-desc">W3–W6 · Influencer mapping · audience lists</div>
+      </div>
+      <div class="phase-leg-stats"><strong>1</strong> workstream</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p2" style="width: 7%;"></div></div>
+    </div>
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p2p3"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P2→P3 · Outreach (biggest cluster)</div>
+        <div class="phase-leg-desc">W3–W14 · Influencer/PR/Apps/Content/Interviews/Strategic Audience outreach</div>
+      </div>
+      <div class="phase-leg-stats"><strong>6</strong> workstreams</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p2p3" style="width: 43%;"></div></div>
+    </div>
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p3"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P3 · Push</div>
+        <div class="phase-leg-desc">W7–W14 · FOMO + All-hands amplification</div>
+      </div>
+      <div class="phase-leg-stats"><strong>2</strong> workstreams</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p3" style="width: 14%;"></div></div>
+    </div>
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p4"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P4 · Event-day ★</div>
+        <div class="phase-leg-desc">W14 (17/09) · Live capture · UGC · sponsor proof</div>
+      </div>
+      <div class="phase-leg-stats"><strong>1</strong> workstream</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p4" style="width: 7%;"></div></div>
+    </div>
+
+    <div class="phase-leg-row">
+      <div class="phase-leg-swatch p5"></div>
+      <div class="phase-leg-info">
+        <div class="phase-leg-name">P5 · Afterglow</div>
+        <div class="phase-leg-desc">W14–W18 · Recap + sponsor report + 2027 funnel build</div>
+      </div>
+      <div class="phase-leg-stats"><strong>1</strong> workstream</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p5" style="width: 7%;"></div></div>
+    </div>
+
+    <div class="phase-leg-summary">
+      <div class="phase-leg-summary-card"><div class="v">14</div><div class="l">Total workstreams</div></div>
+      <div class="phase-leg-summary-card"><div class="v">18</div><div class="l">Weeks (15/06→17/10)</div></div>
+      <div class="phase-leg-summary-card"><div class="v">6</div><div class="l">P2→P3 cluster (43% of work)</div></div>
+      <div class="phase-leg-summary-card"><div class="v">W7-W14</div><div class="l">Peak load (8 streams parallel)</div></div>
+    </div>
+  </div>
+
+  <h3>📋 Detail table — KPI · Owner · Status</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Phase</th><th>Workstream</th><th>Owner</th><th>Support</th><th>Start</th><th>End</th><th>KPI</th><th>Status</th></tr></thead>
@@ -1444,8 +1761,9 @@
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 2.3 · Cập nhật 03/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
-  v2.3 changes: Annotation toolkit port từ shopx-2026/lp.html — toolbar 3 nút (Export · List · Comment) ở bottom-right, side panel List, resolve/reopen workflow, markdown export, toast notifications. Hotkeys: <kbd>C</kbd> toggle Comment mode · <kbd>H</kbd> hide/show pins · <kbd>Esc</kbd> exit · <kbd>Ctrl/Cmd+Enter</kbd> save. Migrate 1-shot từ shopx-notes-v1 (convert relX/relY pins sang absolute coords). Storage key mới: <code>shopx-master-plan-annotations</code><br/>
+  Version 2.4 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  v2.4 changes: Section 10 Execution Timeline được rebuild thành Visual Gantt chart thật (không còn là table thường) — 18 weeks × 14 workstreams, mỗi bar color-coded theo 7 phases (P1 / P1→P2 / P2 / P2→P3 / P3 / P4 / P5). Sticky label column, event-week W14 highlighted. Thêm Phase color guide chart bên dưới với % distribution + summary cards (43% workstreams cluster trong P2→P3, peak load W7-W14). Detail table giữ lại bên dưới để reference KPI/Status.<br/>
+  v2.3 changes: Annotation toolkit port từ shopx-2026/lp.html — toolbar 3 nút (Export · List · Comment) · side panel List · resolve/reopen workflow · markdown export · hotkeys C/H/Esc · 1-shot migration từ shopx-notes-v1<br/>
   v2.2 changes: Owner cleanup theo pin comments (03/06) — bỏ block "Why &gt;10K" (info box trong Influencer section) · Influencer Owner col → "Listing / Outreach": Kallie phụ trách listing, outreach TBD · Seller Interviews 25 rows → tất cả Owner = TBD · Strategic Audience Curation: bỏ cột Owner · Markets Activation: bỏ cột Owner<br/>
   v2.1 changes: 📍 Pin Comment Mode — replaced bởi v2.3 annotation toolkit<br/>
   v2.0 fresh start: Mới KPI logic (1M impressions · 1,000 register pool · 300 qualified) · 60/40 organic-earned vs paid split · 6 channel groups · 4 markets (VN/SG/CN/AU) · 4-tier influencer map (&gt;10K threshold) · 25 Shopify apps · 8 content pillars · 25 seller interviews · Mention scoring framework · 6 risks · Team RACI<br/>
