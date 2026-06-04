@@ -406,7 +406,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v4.1 · Cập nhật 04/06/2026 · Sponsor removed (Christine presents separately)</div>
+    <div class="brand-meta">v4.2 · Cập nhật 04/06/2026 · Comment filter + hide resolved pins</div>
   </div>
 
   <a href="#decisions-stack" class="nav-link" style="background: linear-gradient(135deg, rgba(255,107,107,.15), rgba(245,158,11,.1)); color: #fff; border-left: 3px solid #ef4444;"><span class="num">⚡</span> Decisions Stack (W1-W3)</a>
@@ -2291,8 +2291,9 @@
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 4.1 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Plan v3</a> + <a href="https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit" target="_blank" style="color: var(--primary);">📊 Sunny's Plan</a> (Kallie content calendar)<br/>
-  v4.1 changes: Removed "KPI v3 changes vs cũ" info-box trong Section 00 · Removed Section 07 Sponsor Pipeline (Christine present separately) · renumber back 08-13 → 07-12.<br/>
+  Version 4.2 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Plan v3</a> + <a href="https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit" target="_blank" style="color: var(--primary);">📊 Sunny's Plan</a><br/>
+  v4.2 comment feature: <strong>Filter tabs</strong> trong panel (All / Open / Resolved) + counts per tab · <strong>Resolved comments không hiển thị pin số nữa</strong> trên page · pin số chỉ count cho OPEN comments (sequential renumber khi resolve). <strong>Open via List → Resolved tab</strong> để xem comments đã resolved.<br/>
+  v4.1: Removed KPI v3 changes info-box · Removed Sponsor Pipeline section.<br/>
   v4.0 cleanup: removed Section 02 detail cards · consolidated Founder Letter · trimmed Filters · compacted Saigon hooks · sidebar regrouped.<br/>
   <strong>Total</strong>: 12 sections · 13 workstreams · 5 pillars · 13 risks · 138 sub-channels · 7 ticketing stages.<br/>
   v2.7 changes: Tightened action items 9 sections sau Director audit · Markets Option B compact restructure<br/>
@@ -2493,6 +2494,21 @@
     cursor: pointer; transition: all .15s ease;
   }
   .an-panel .toolbar button:hover { background: rgba(255,255,255,.06); color: #fff; border-color: rgba(255,255,255,.20); }
+  .an-panel .filter-tabs {
+    display: flex; gap: 4px; padding: 8px 16px 10px;
+    border-bottom: 1px solid rgba(255,255,255,.10);
+  }
+  .an-panel .filter-tab {
+    flex: 1; padding: 6px 10px; font-size: 11px; font-weight: 600; font-family: inherit;
+    background: rgba(255,255,255,.04); color: rgba(255,255,255,.55);
+    border: 1px solid rgba(255,255,255,.10); border-radius: 6px;
+    cursor: pointer; transition: all .15s ease;
+    display: flex; align-items: center; justify-content: center; gap: 5px;
+  }
+  .an-panel .filter-tab:hover { background: rgba(255,255,255,.08); color: rgba(255,255,255,.85); }
+  .an-panel .filter-tab.active { background: linear-gradient(135deg, #6b46ff, #b06bff); color: #fff; border-color: transparent; }
+  .an-panel .filter-tab .ftc { background: rgba(255,255,255,.18); padding: 1px 6px; border-radius: 100px; font-size: 10px; font-weight: 700; }
+  .an-panel .filter-tab.active .ftc { background: rgba(0,0,0,.20); }
   .an-panel .list { flex: 1; overflow-y: auto; padding: 12px 16px; }
   .an-panel .empty {
     text-align: center; padding: 40px 20px; color: rgba(255,255,255,.55);
@@ -2583,6 +2599,11 @@
     <button id="anHide" title="Hide pins/panel (press H to toggle)">Hide all</button>
     <button id="anClear" title="Delete every comment (irreversible)">Clear all</button>
     <button id="anCopyJson" title="Copy JSON to clipboard">Copy JSON</button>
+  </div>
+  <div class="filter-tabs" id="anFilterTabs">
+    <button class="filter-tab active" data-filter="all">All <span class="ftc" id="anCountAll">0</span></button>
+    <button class="filter-tab" data-filter="open">Open <span class="ftc" id="anCountOpen">0</span></button>
+    <button class="filter-tab" data-filter="resolved">Resolved <span class="ftc" id="anCountResolved">0</span></button>
   </div>
   <div class="list" id="anList_"></div>
 </aside>
@@ -2694,13 +2715,17 @@
   // ---------- rendering ----------
   function renderPins(){
     document.querySelectorAll('.an-pin').forEach(function(n){ n.remove(); });
-    state.items.forEach(function(it, idx){
+    // Only render pins cho OPEN comments · resolved comments không show số thứ tự
+    var openIdx = 0;
+    state.items.forEach(function(it){
+      if (it.solved) return; // skip resolved — không hiển thị pin
+      openIdx++;
       var pin = document.createElement('button');
-      pin.className = 'an-pin' + (it.solved ? ' solved' : '');
+      pin.className = 'an-pin';
       pin.setAttribute('data-id', it.id);
       pin.style.left = it.x + 'px';
       pin.style.top  = it.y + 'px';
-      pin.innerHTML = '<span>' + (idx + 1) + '</span>';
+      pin.innerHTML = '<span>' + openIdx + '</span>';
       pin.title = (it.text || '(no text yet)') + ' · ' + fmtRel(it.ts);
       pin.addEventListener('click', function(e){
         e.stopPropagation();
@@ -2712,15 +2737,35 @@
   function renderList(){
     var box = document.getElementById('anList_');
     var meta = document.getElementById('anPanelMeta');
-    if (!state.items.length){
-      box.innerHTML = '<div class="empty"><span class="ic">✦</span>No comments yet. Toggle <b>Comment</b> mode (or press <b>C</b>) and click anywhere on the page.</div>';
+    var filter = state.filter || 'all';
+
+    // Filter items theo tab
+    var filtered = state.items.filter(function(it){
+      if (filter === 'open') return !it.solved;
+      if (filter === 'resolved') return it.solved;
+      return true; // all
+    });
+
+    if (!filtered.length){
+      var emptyMsg = filter === 'resolved'
+        ? '<div class="empty"><span class="ic">✓</span>No resolved comments yet.</div>'
+        : filter === 'open'
+        ? '<div class="empty"><span class="ic">✦</span>No open comments. All resolved or no comments yet.</div>'
+        : '<div class="empty"><span class="ic">✦</span>No comments yet. Toggle <b>Comment</b> mode (or press <b>C</b>) and click anywhere on the page.</div>';
+      box.innerHTML = emptyMsg;
     } else {
-      box.innerHTML = state.items.map(function(it, idx){
+      // Open items numbered sequentially (matches pin numbers); resolved labeled "Resolved"
+      var openCounter = 0;
+      box.innerHTML = state.items.map(function(it){
+        if (filter === 'open' && it.solved) return '';
+        if (filter === 'resolved' && !it.solved) return '';
+        if (!it.solved) openCounter++;
+        var displayLabel = it.solved ? '✓ Resolved' : '#' + openCounter;
         var t = (it.text || '').trim();
         var txtClass = t ? '' : ' placeholder';
         var label = t || '(empty — click pin to write)';
         return '<div class="item' + (it.solved ? ' solved' : '') + '" data-id="' + it.id + '">' +
-          '<div class="row"><span class="num">#' + (idx + 1) + (it.solved ? ' · resolved' : '') + '</span>' +
+          '<div class="row"><span class="num">' + displayLabel + '</span>' +
           '<span class="ts">' + fmtRel(it.ts) + '</span></div>' +
           '<div class="txt' + txtClass + '">' + escapeHTML(label) + '</div>' +
           '<div class="ctx">→ ' + escapeHTML(it.section || 'page') + '</div>' +
@@ -2736,13 +2781,33 @@
         });
       });
     }
+
     var n = state.items.length;
-    meta.textContent = n + ' comment' + (n === 1 ? '' : 's') + ' · saved locally';
+    var nOpen = state.items.filter(function(it){ return !it.solved; }).length;
+    var nResolved = n - nOpen;
+    meta.textContent = nOpen + ' open · ' + nResolved + ' resolved · saved locally';
+
+    // Update counters trong tabs
+    var cAll = document.getElementById('anCountAll');
+    var cOpen = document.getElementById('anCountOpen');
+    var cResolved = document.getElementById('anCountResolved');
+    if (cAll) cAll.textContent = n;
+    if (cOpen) cOpen.textContent = nOpen;
+    if (cResolved) cResolved.textContent = nResolved;
+
+    // Toolbar List button count = OPEN only (resolved không "ưu tiên hiển thị")
     var cn = document.getElementById('anCount');
-    cn.textContent = n;
-    cn.setAttribute('data-empty', n === 0 ? '1' : '0');
+    cn.textContent = nOpen;
+    cn.setAttribute('data-empty', nOpen === 0 ? '1' : '0');
   }
   function refreshUI(){ renderPins(); renderList(); }
+  function setFilter(f){
+    state.filter = f;
+    document.querySelectorAll('.an-panel .filter-tab').forEach(function(tab){
+      tab.classList.toggle('active', tab.getAttribute('data-filter') === f);
+    });
+    renderList();
+  }
 
   // ---------- popup ----------
   function closePopup(){
@@ -2752,14 +2817,22 @@
     closePopup();
     var it = state.items.find(function(x){ return x.id === id; });
     if (!it) return;
-    var idx = state.items.indexOf(it);
+    // Tính open-number (only count non-solved items before this one)
+    var openNum = 0;
+    for (var i = 0; i < state.items.length; i++) {
+      if (!state.items[i].solved) {
+        openNum++;
+        if (state.items[i].id === id) break;
+      }
+    }
+    var displayLabel = it.solved ? '✓ Resolved comment' : 'Comment #' + openNum;
     var p = document.createElement('div');
     p.className = 'an-popup';
     p.style.left = it.x + 'px';
     p.style.top  = it.y + 'px';
     p.innerHTML =
       '<div class="ph">' +
-        '<span class="num">Comment #' + (idx + 1) + (it.solved ? ' · resolved' : '') + '</span>' +
+        '<span class="num">' + displayLabel + '</span>' +
         '<span class="ts">' + fmtRel(it.ts) + ' · ' + escapeHTML(it.section || 'page') + '</span>' +
       '</div>' +
       '<textarea placeholder="Type your note... (Cmd/Ctrl + Enter to save)"></textarea>' +
@@ -2879,6 +2952,7 @@
       items: load(),
       mode: 'off',
       activePopup: null,
+      filter: 'all',
     };
 
     // Wiring
@@ -2887,6 +2961,12 @@
     });
     document.getElementById('anList').addEventListener('click', function(){
       document.getElementById('anPanel').classList.toggle('open');
+    });
+    // Filter tabs (All / Open / Resolved)
+    document.querySelectorAll('.an-panel .filter-tab').forEach(function(tab){
+      tab.addEventListener('click', function(){
+        setFilter(tab.getAttribute('data-filter'));
+      });
     });
     document.getElementById('anPanelClose').addEventListener('click', function(){
       document.getElementById('anPanel').classList.remove('open');
