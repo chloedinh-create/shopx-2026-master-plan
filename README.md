@@ -2,7 +2,7 @@
 
 Interactive dashboard cho **Master Communication Plan v3** của event **ShopX 2026** — AI Ecommerce Summit · 17 Sept 2026 · Gem Center · HCM Saigon.
 
-🌐 **Live dashboard**: https://shopx-2026-master-plan-gray.vercel.app (password gated)
+🌐 **Live dashboard**: https://shopx-2026-master-plan-gray.vercel.app (public)
 
 ## 📊 Source sheet
 
@@ -17,9 +17,9 @@ Owner: chloe.dinh@gempages.help
 - **300 minimum qualified attendees** = 80 invited/VIP/speaker/sponsor + 220 acquired
 - **22% conversion rate** guardrail (220 / 1,000)
 
-## 🔒 Bảo mật
+## 📢 Public
 
-Site có password gate. Tài liệu mật nội bộ — chỉ chia sẻ trong team Marketing Gem Commerce.
+Site public từ v2.5 (04/06/2026). Maintained bởi Marketing Gem Commerce.
 
 ## 📋 Nội dung dashboard (14 sections)
 

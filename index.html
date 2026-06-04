@@ -1,37 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<style id="mh-gate-style">body{visibility:hidden}#mh-gate{position:fixed;inset:0;display:grid;place-items:center;background:#0f172a;color:#fff;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;z-index:2147483647;visibility:visible}</style>
-<script>
-(function(){
-  if (sessionStorage.getItem('shopx-unlock') === '1') {
-    var s = document.getElementById('mh-gate-style'); if (s) s.remove();
-    return;
-  }
-  function mount(){
-    var g = document.createElement('div');
-    g.id = 'mh-gate';
-    g.innerHTML = '<div style="background:#1e293b;padding:32px;border-radius:12px;width:340px;max-width:90vw;box-shadow:0 10px 40px rgba(0,0,0,.5)"><h1 style="margin:0 0 8px;font-size:20px;font-weight:600">ShopX 2026 — Master Plan</h1><p style="margin:0 0 20px;color:#94a3b8;font-size:14px">Tài liệu nội bộ — nhập mật khẩu để xem</p><form id="mh-form"><input id="mh-pwd" type="password" autofocus placeholder="Mật khẩu" style="width:100%;padding:10px 12px;border-radius:6px;border:1px solid #334155;background:#0f172a;color:#fff;font-size:14px;margin-bottom:12px;box-sizing:border-box"/><button type="submit" style="width:100%;padding:10px;border:0;border-radius:6px;background:#3b82f6;color:#fff;font-size:14px;font-weight:600;cursor:pointer">Mở khóa</button></form></div>';
-    document.body.appendChild(g);
-    document.getElementById('mh-form').addEventListener('submit', function(e){
-      e.preventDefault();
-      var inp = document.getElementById('mh-pwd');
-      if (inp.value === 'ShopX@2026') {
-        sessionStorage.setItem('shopx-unlock','1');
-        var s = document.getElementById('mh-gate-style'); if (s) s.remove();
-        g.remove();
-      } else {
-        inp.value = '';
-        inp.placeholder = 'Sai mật khẩu, thử lại';
-      }
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mount);
-  } else { mount(); }
-})();
-</script>
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>ShopX 2026 — Master Communication Plan</title>
@@ -89,7 +58,7 @@
   .nav-link.active .num { color: var(--primary); }
 
   /* Confidential bar */
-  .conf-bar { background: linear-gradient(90deg, #fef2f2, #fff1f5); border-bottom: 1px solid #fecaca; color: #991b1b; font-size: 12px; padding: 7px 24px; text-align: center; font-weight: 600; letter-spacing: .2px; }
+  .conf-bar { background: linear-gradient(90deg, #efeaff, #eef0ff); border-bottom: 1px solid #d8d0ff; color: #4a2dd4; font-size: 12px; padding: 7px 24px; text-align: center; font-weight: 600; letter-spacing: .2px; }
 
   /* Main */
   .main { max-width: 1140px; margin: 0 auto; padding: 0 48px 80px; width: 100%; }
@@ -421,7 +390,7 @@
 </style>
 </head>
 <body>
-<div class="conf-bar">⚠ TÀI LIỆU MẬT NỘI BỘ — Không chia sẻ ra ngoài team Marketing Gem Commerce / ShopX 2026</div>
+<div class="conf-bar">📊 ShopX 2026 — Master Communication Plan v3 · public dashboard · maintained bởi Marketing Gem Commerce</div>
 <div class="app">
 
 <!-- ============ SIDEBAR ============ -->
@@ -429,7 +398,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v2.4 · Cập nhật 04/06/2026 · Visual Gantt chart</div>
+    <div class="brand-meta">v2.5 · Cập nhật 04/06/2026 · Public + concentration filters</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -457,6 +426,7 @@
   <div class="nav-section-title">Operations</div>
   <a href="#risks" class="nav-link"><span class="num">12</span> Risk Register</a>
   <a href="#raci" class="nav-link"><span class="num">13</span> Team RACI</a>
+  <a href="#concentration-filters" class="nav-link"><span class="num">14</span> Channel Concentration Filters</a>
 </aside>
 
 <!-- ============ MAIN ============ -->
@@ -464,7 +434,7 @@
 
 <!-- HERO -->
 <div class="hero">
-  <span class="tag">Internal · Marketing · Sept 17, 2026 · Saigon</span>
+  <span class="tag">Public · Marketing · Sept 17, 2026 · Saigon</span>
   <h1>ShopX 2026 — Master Communication Plan v3</h1>
   <p>Revamped KPI Model: <strong>1M impressions · 1,000 registers · 300 qualified attendees</strong> · 60/40 organic-earned/paid split · 6 channel groups · APAC focus (VN/SG/CN/AU)</p>
   <div class="meta">
@@ -667,6 +637,118 @@
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <h3>📋 Channel-by-channel breakdown · core action items</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Detail tactic + action items + owner cụ thể từng channel group. Mỗi action item có due window + deliverable rõ ràng để team execute tracked.</p>
+
+  <div class="card" style="border-left: 4px solid #16a085;">
+    <div class="card-title"><span class="badge success">Organic · 150K imp · 150 reg</span> &nbsp;1. Owned Channels</div>
+    <div class="card-body">
+      <strong>Sub-channels</strong>: LP (gempages.com/shopx) · email flows · GemPages in-app banner · founder/team posts (Chris LinkedIn) · ShopX 2025 recap assets.<br/>
+      <strong>Why</strong>: 100% controlled. Cheapest acquisition. Hero conversion channel cho warm audience.<br/>
+      <strong>Core action items</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
+        <li><strong>W1-W2 (15-28/06)</strong> · Chloe — Finalize LP copy + ShopX 2025 proof assets · LP live by 30/06</li>
+        <li><strong>W2-W3 (22/06-05/07)</strong> · Sunny — Email flow setup (4 emails × 6 weeks) cho GemPages user base · template approved</li>
+        <li><strong>W3 (29/06)</strong> · Chloe + Chris — Founder letter from Chris (FB + LinkedIn) · 1 post + 1 carousel</li>
+        <li><strong>W4 onwards</strong> · Kallie — Weekly LP traffic + register conversion report</li>
+        <li><strong>W7-W14</strong> · Sunny — In-app GemPages notification + countdown email cadence</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #6b46ff;">
+    <div class="card-title"><span class="badge info">Earned · 180K imp · 180 reg</span> &nbsp;2. Shopify Apps & Tool Partners</div>
+    <div class="card-body">
+      <strong>Sub-channels</strong>: 25 apps across Reviews/Email/Support/Loyalty/CRO/Analytics/Page Builder/Shipping/Search.<br/>
+      <strong>Why</strong>: Each app reach Shopify ecosystem buyers — overlap với ICP. P1 priority: Judge.me, Loox, Klaviyo, Omnisend, Gorgias, PageFly, Triple Whale.<br/>
+      <strong>Core action items</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
+        <li><strong>W3 (29/06)</strong> · Christine — Outreach list cho 7 P1 apps · warm intro via Chris/Judge.me network · sponsor package draft</li>
+        <li><strong>W4 (06/07)</strong> · Celine — Email template + co-marketing post brief cho all 25 apps · clustered into 5 batches by category</li>
+        <li><strong>W5-W8 (13/07-09/08)</strong> · Christine + Maria + Celine — Outreach + secure commitment từ 15+ apps · tracking codes assigned</li>
+        <li><strong>W9-W11 (10-30/08)</strong> · Christine — Asset delivery + co-marketing post publish (target 20+ posts)</li>
+        <li><strong>W12-W14 (31/08-20/09)</strong> · Maria — Sponsor conversion + in-app/newsletter mentions</li>
+        <li><strong>Min-bar</strong>: Drop apps không commit ≥ 3K impressions trong checkpoint W6 (xem section 14 prioritization filters)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #3b82f6;">
+    <div class="card-title"><span class="badge info">Earned · 100K imp · 110 reg</span> &nbsp;3. Ecommerce Communities</div>
+    <div class="card-body">
+      <strong>Sub-channels</strong>: VN FB groups (EFE, AE Shopify) · SG LinkedIn ecom community · CN WeChat/Xiaohongshu groups · AU Ecom Capital network.<br/>
+      <strong>Why</strong>: High-trust distribution với engaged audiences. Admin posts có credibility cao hơn paid ads.<br/>
+      <strong>Core action items</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
+        <li><strong>W1-W4 (15/06-12/07)</strong> · Kallie — Map 30+ high-audience community channels với audience size + admin contact</li>
+        <li><strong>W4-W5</strong> · Kallie — Outreach VN admins (EFE/AE Shopify) · pinned post + community code agreement</li>
+        <li><strong>W5-W7</strong> · Kallie + Hellen — SG LinkedIn community + Shopify SG admin outreach</li>
+        <li><strong>W6 onwards</strong> · CN lead TBD — WeChat/Xiaohongshu group seeding · ZH announcement</li>
+        <li><strong>W4-W6</strong> · Chloe — AU Steve Miguel intro + VIP student pass exchange</li>
+        <li><strong>W8-W14</strong> · Kallie — Weekly community proof post + register waves</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #ec4899;">
+    <div class="card-title"><span class="badge info">Earned · 120K imp · 110 reg</span> &nbsp;4. Influencers, Speakers & Community Leaders</div>
+    <div class="card-body">
+      <strong>Sub-channels</strong>: 4 tiers — Tier 1 (15 high-impact &gt;10K) · Tier 2 (15 niche KOL) · Tier 3 (20 community admins) · Internal LinkedIn squad (20).<br/>
+      <strong>Why</strong>: Borrow audience + peer credibility. Higher engagement vs broadcast channels.<br/>
+      <strong>Core action items</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
+        <li><strong>W3-W6 (01-21/07)</strong> · Kallie — Build 70 influencer list (HypeAuditor/Modash validation) · audience overlap check</li>
+        <li><strong>W5-W11 (15/07-31/08)</strong> · Owner TBD (outreach) — VIP/speaker pass exchange + tracking link · target 30+ secured posts</li>
+        <li><strong>W6 checkpoint</strong> · Kallie — Kill bottom 30% who chưa confirm slot · re-allocate effort vào top 50% performers</li>
+        <li><strong>W10-W11 (22-31/08)</strong> · Team Lily + Kallie — Activate Internal LinkedIn squad · ready-to-post visual kit + engagement squad</li>
+        <li><strong>W12-W14</strong> · Kallie — Speaker amplification waves + post compliance check</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #64748b;">
+    <div class="card-title"><span class="badge info">Earned · 50K imp · 50 reg</span> &nbsp;5. PR, Media & Content Partners</div>
+    <div class="card-body">
+      <strong>Sub-channels</strong>: Tech/business press · VN media (Vietcetera/CafeBiz-style) · ecommerce blogs · media partners · post-event PR.<br/>
+      <strong>Why</strong>: External validation + credibility — không phải acquisition primary. Make event feel "real" cho fence-sitters.<br/>
+      <strong>Core action items</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
+        <li><strong>W4 (06-12/07)</strong> · Maria + Celine — Press release v1 + founder quote + event fact sheet</li>
+        <li><strong>W5-W6 (13-26/07)</strong> · Maria — Outreach 4 tech press + 3 VN media · book interviews</li>
+        <li><strong>W6-W8</strong> · Christine + Celine — Outreach 5 ecommerce blog editors · thought leadership angle</li>
+        <li><strong>W7-W10</strong> · Maria + Celine — Media partner packages · 5 partner badges + tracked links signed</li>
+        <li><strong>W12-W13</strong> · Maria — Pre-event press push · 10-15 placements live by W13</li>
+        <li><strong>W15-W17 (sau event)</strong> · Maria + Celine — Post-event recap PR · 5 placements với photos + stats</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #dc2626;">
+    <div class="card-title"><span class="badge danger">Paid · 400K imp · 400 reg</span> &nbsp;6. Paid Channels</div>
+    <div class="card-body">
+      <strong>Sub-channels</strong>: Meta (VN/SG/AU) · LinkedIn (SG/AU ecom mgr) · WeChat/Xiaohongshu (CN) · retargeting · speaker/topic ads · final conversion push.<br/>
+      <strong>Why</strong>: Predictable + scalable. 40% của 1M impressions. Cần trước W3 để capture pre-launch search demand.<br/>
+      <strong>Core action items</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
+        <li><strong>W2-W4 (22/06-12/07)</strong> · Hellen — Calculate CPM/CPL benchmarks · validate 400K impressions plan · split allocation between Meta/LI/WeChat/XHS/retargeting</li>
+        <li><strong>W3 (29/06)</strong> · Hellen + Dev — Setup UTM mandatory tracking + pixel · ALL paid sources tagged</li>
+        <li><strong>W4-W6</strong> · Hellen — Awareness campaign launch (Meta VN/SG + LinkedIn SG ecom mgr targeting)</li>
+        <li><strong>W7-W10</strong> · Hellen — Mid-funnel retargeting kick-off (LP visitors + community visitors)</li>
+        <li><strong>W11-W14</strong> · Hellen + Kallie — Final conversion push · speaker/agenda ads · 50/80/95% scarcity creatives</li>
+        <li><strong>Weekly</strong> · Hellen — CPM/CPL report Friday · adjust budget allocation toward best-performing geo/creative</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box" style="background: #fffbeb; border-color: #fcd34d;">
+    <div class="info-box-title">⚠ Cross-channel guardrails</div>
+    <div class="info-box-body">
+      <strong>UTM mandatory</strong> — không kênh nào launch chưa có UTM. Without tracking, channel KPI là vanity number (xem Risk Register section 13).<br/>
+      <strong>Quality bar 3K imp/touchpoint</strong> — bất kỳ partner/influencer/app commit &lt; 3K thì drop ở W6 checkpoint. Tránh ops drag long-tail (xem section 14 Channel concentration filters).<br/>
+      <strong>Weekly tracker</strong> — Chloe maintain Master Tracker với KPI/Owner/Status/Drop-off rate per touchpoint. Review Monday standup.
+    </div>
   </div>
 </section>
 
@@ -949,6 +1031,15 @@
   <h2><span class="ord">07</span>Content Pillars + FOMO Strategy</h2>
   <p class="lead">8 content pillars · mỗi pillar có FOMO/behavior trigger riêng · distribution channels · output target · KPI.</p>
 
+  <div class="info-box" style="background: #fffbeb; border-color: #fcd34d;">
+    <div class="info-box-title">⏳ Pending consolidation — waiting for Kallie</div>
+    <div class="info-box-body">
+      8 pillars hiện tại sẽ được merge lại còn <strong>5 pillars chính</strong>. Kallie owns recategorization + consolidation logic.<br/>
+      <strong>Action</strong>: Kallie deliver mapping 8→5 trong W2 (22-28/06) · Sync với content calendar trong W3.<br/>
+      <em>Current 8-pillar view giữ lại để reference; sẽ replace khi Kallie xác nhận final 5.</em>
+    </div>
+  </div>
+
   <div class="table-wrap">
     <table>
       <thead><tr><th>Pillar</th><th>Purpose</th><th>Audience</th><th>FOMO / Behavior trigger</th><th>Distribution channels</th><th>Output target</th><th>Owner</th><th>Timing</th><th>KPI</th></tr></thead>
@@ -1042,6 +1133,34 @@
 <section id="interviews">
   <h2><span class="ord">08</span>Pre-event Seller Interviews — 25 interviews</h2>
   <p class="lead">Pre-event seller interviews → peer proof + video material cho social/paid content. Target: <strong>25 interviews</strong> across 5 segments × 5 interviews each. Output: 1 video/week + 3–5 clips/interview.</p>
+
+  <div class="info-box" style="background: #fef2f2; border-color: #fecaca;">
+    <div class="info-box-title">🚨 Open question — outreach owner cho 25 interviews</div>
+    <div class="info-box-body">
+      <strong>Vấn đề</strong>: Hiện tại nhân sự core team (Chloe/Kallie/Hellen/Christine/Celine/Maria/Sunny) đã full scope với 14 workstreams khác. Không ai có bandwidth cho 25 interview outreaches (5 segments × 5 sellers).<br/>
+      <strong>Đề xuất</strong>: Loop <strong>remote team</strong> vào in charge phần này — possible candidates:
+      <ul style="margin: 6px 0 0 18px;">
+        <li>Remote content writer / video editor (per-segment outreach)</li>
+        <li>Freelance APAC ecommerce researcher (sourcing leads)</li>
+        <li>Country lead delegates: AU (Steve Miguel network help) · CN (CN lead TBD) · SG (Arvind network)</li>
+      </ul>
+      <strong>Action items</strong>:
+      <ul style="margin: 6px 0 0 18px;">
+        <li><strong>W2 (22-28/06)</strong> · Chloe — Decide: hire remote PIC OR delegate segments to country leads</li>
+        <li><strong>W3 (29/06-05/07)</strong> · Owner TBD — Source lead list per segment (5 candidates × 5 segments = 25 leads)</li>
+        <li><strong>W4-W11</strong> · Owner TBD — Schedule + conduct interviews · 1-2/week pace</li>
+        <li><strong>W4 onwards</strong> · Kallie — Assets/clip production support (NOT outreach)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">📅 Daily calendar sync — waiting for Kallie</div>
+    <div class="info-box-body">
+      Daily calendar for social posts + community placements (per market × per channel) đang được Kallie build. Khi ready sẽ merge vào dashboard (link tới Social content_Gantt sheet) để team execute theo lịch hằng ngày.<br/>
+      <strong>Action</strong>: Kallie deliver daily calendar template trong W3 · sync với seller interview cadence (1 video/week) + influencer post waves.
+    </div>
+  </div>
 
   <div class="table-wrap">
     <table>
@@ -1756,19 +1875,115 @@
   </div>
 </section>
 
+<!-- ============ 14 CHANNEL CONCENTRATION FILTERS ============ -->
+<section id="concentration-filters">
+  <h2><span class="ord">14</span>Channel Concentration Filters — anti-fragmentation guards</h2>
+  <p class="lead">1M impressions hiện tại distribute qua ~127 touchpoints (25 apps + 70 influencers + 22 PR + 10 markets channels + 5 paid). Risk: ops drag từ long-tail + diluted unique reach. 5 filter dưới đây <strong>cắt 40-60% effort vào long-tail</strong> mà vẫn giữ defensibility của portfolio approach.</p>
+
+  <div class="stats">
+    <div class="stat danger"><div class="v">~127</div><div class="l">Touchpoints distinct (current)</div></div>
+    <div class="stat warning"><div class="v">2.1K</div><div class="l">Avg imp/influencer (Tier 3 + Internal &lt; 1.5K)</div></div>
+    <div class="stat info"><div class="v">~600-700K</div><div class="l">Effective unique reach (sau overlap dedup)</div></div>
+    <div class="stat success"><div class="v">3K</div><div class="l">Min-bar imp/touchpoint (proposed)</div></div>
+  </div>
+
+  <h3>Filter 1 · Min-bar 3K impressions per touchpoint</h3>
+  <div class="card">
+    <div class="card-body">
+      <strong>Rule</strong>: Bất kỳ partner / influencer / app commit &lt; 3K impressions thì drop ở W6 checkpoint. Apply <em>uniformly</em> across all channel groups.<br/>
+      <strong>Why</strong>: Touchpoint &lt; 3K = outreach ROI &lt; 1.5K imp/giờ. So với Tier 1 PR (4K imp/giờ) hoặc top app warm intro (2-3K imp/giờ) — long-tail không justify ops cost.<br/>
+      <strong>Expected drop</strong>: ~10 of 25 apps (bottom tier), ~30 of 70 influencers (chủ yếu Tier 3 + Internal LinkedIn squad), ~3 of 22 PR placements.<br/>
+      <strong>Net impact</strong>: Nominal impressions giảm 100-120K (15%), nhưng team capacity tăng 40-50%. Re-allocate capacity vào top performers → likely +50-80K từ deeper engagement.<br/>
+      <strong>Owner</strong>: Chloe (decide kill list at W6 checkpoint)
+    </div>
+  </div>
+
+  <h3>Filter 2 · Bundle outreach by audience cluster</h3>
+  <div class="card">
+    <div class="card-body">
+      <strong>Rule</strong>: 25 apps → <strong>5 batched conversations</strong> theo category (Reviews / Email · Loyalty · CRO · Analytics). 1 outreach lead per cluster. Same approach cho 70 influencers (cluster theo audience overlap).<br/>
+      <strong>Why</strong>: 25 individual conversations × ~4hrs each = 100hrs. 5 batched conversations × ~6hrs each = 30hrs. <strong>Cắt 70% ops time</strong>.<br/>
+      <strong>Risk caveat</strong>: Loox + Judge.me cùng cluster Reviews — có thể tế nhị (competitors). Skip cluster batch khi 2 partners trong cluster là direct competitors; outreach separately.<br/>
+      <strong>Owner</strong>: Christine (apps clustering) · Kallie (influencer clustering)
+    </div>
+  </div>
+
+  <h3>Filter 3 · Top-decile commitment lock (70% rule)</h3>
+  <div class="card">
+    <div class="card-body">
+      <strong>Rule</strong>: Lock <strong>10 sources cam kết bằng văn bản</strong> trước W6 (start of P2). These 10 sources = 70% target impressions:
+      <ul style="margin: 6px 0 0 18px;">
+        <li>5 Tier 1 influencers (signed VIP exchange agreement)</li>
+        <li>3 P1 apps (Judge.me + Klaviyo + PageFly — confirmed co-marketing post)</li>
+        <li>2 Tier 1 PR placements (1 tech press + 1 VN media — booked interview)</li>
+      </ul>
+      <strong>Why</strong>: Concentration trên signed commitments > volume trên cold outreach. If 10 sources lock by W6 → 700K nominal impressions secured (70% of 1M) trước khi peak load.<br/>
+      <strong>Without filter</strong>: Team chases 127 touchpoints với 30-40% drop-off mid-campaign → scramble for replacement at W10.<br/>
+      <strong>Owner</strong>: Chloe (Tier 1 + PR) · Christine (P1 apps)
+    </div>
+  </div>
+
+  <h3>Filter 4 · W6 triage checkpoint (07/07)</h3>
+  <div class="card">
+    <div class="card-body">
+      <strong>Rule</strong>: Tại W6 (end of Influencer Map + Audience channel mapping), do 1 day triage review:
+      <ul style="margin: 6px 0 0 18px;">
+        <li>Kill mọi channel chưa confirmed slot (apply Filter 1 min-bar)</li>
+        <li>Double-down vào top 50% performers (signed commitments)</li>
+        <li>Re-forecast impressions/registers từ current pipeline (NOT từ sheet target)</li>
+        <li>If forecast &lt; 70% of target → trigger paid budget reallocation (Filter 5)</li>
+      </ul>
+      <strong>Why</strong>: W6 = last chance để course-correct trước outreach push P2-P3 (W5-W14). Tránh sunk-cost trap với long-tail không scale.<br/>
+      <strong>Owner</strong>: Chloe (lead triage) · Kallie + Hellen + Christine (input forecast)
+    </div>
+  </div>
+
+  <h3>Filter 5 · UTM mandatory + unique-reach tracking</h3>
+  <div class="card">
+    <div class="card-body">
+      <strong>Rule</strong>: Trước W3 (29/06) — không kênh nào launch chưa có UTM. Apply tới TẤT CẢ paid + organic + earned sources.<br/>
+      <strong>Why</strong>: Without UTM, channel KPI là vanity number. 127 touchpoints × 0 attribution = decisions made on noise (xem Risk Register Risk #6).<br/>
+      <strong>Track unique-reach NOT sum-impressions</strong>: 1M impressions có thể chỉ là 600-700K unique do audience overlap (Shopify ecosystem = same buyers seeing Judge.me + Klaviyo + Triple Whale + PageFly posts). Audit overlap monthly via Kallie's HypeAuditor/Modash data.<br/>
+      <strong>Owner</strong>: Hellen (paid UTM) · Chloe (organic/earned UTM mandate) · Dev (pixel + tracking setup)
+    </div>
+  </div>
+
+  <div class="info-box" style="background: #efeaff; border-color: #d8d0ff;">
+    <div class="info-box-title">📊 Expected impact của 5 filters</div>
+    <div class="info-box-body">
+      <strong>Without filters</strong>: 127 touchpoints · 6 team members · ~40% drop-off mid-campaign · attribution noise · likely 60-70% of 1M target hit.<br/>
+      <strong>With filters</strong>: ~60-70 active touchpoints sau W6 cut · same team · 10 locked sources = 70% target guaranteed · tracked attribution · likely 85-100% of 1M target hit với higher unique reach.<br/>
+      <strong>Trade-off</strong>: Nominal "impressions count" giảm trên paper nhưng <strong>effective + tracked + qualified reach tăng</strong>.
+    </div>
+  </div>
+
+  <div class="info-box" style="background: #fffbeb; border-color: #fcd34d;">
+    <div class="info-box-title">🚦 Counter-arguments — vì sao vẫn giữ portfolio breadth</div>
+    <div class="info-box-body">
+      Không bỏ portfolio approach (chuyển sang top-5-only):<br/>
+      <strong>1. Defensibility</strong>: 1 mega-influencer fail = mất 200K. 70 influencers fail 10 vẫn còn 60K.<br/>
+      <strong>2. Compound FOMO</strong>: Pillar 4 "ecosystem is showing up" cần ≥15 visible partner mentions. Top-5-only không tạo được effect này.<br/>
+      <strong>3. ShopX 2026 = unbranded event</strong>: Không có brand equity để ride. Cần distribution-by-bundling cho first-time category leader positioning.<br/>
+      <strong>4. APAC community-first</strong>: WeChat groups + niche FB groups có high engagement không reflect được trong follower count.<br/>
+      <em>5 filters trên = giữ portfolio nhưng cut ops drag, không phải pivot sang concentration strategy.</em>
+    </div>
+  </div>
+</section>
+
 </main>
 </div>
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 2.4 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
-  v2.4 changes: Section 10 Execution Timeline được rebuild thành Visual Gantt chart thật (không còn là table thường) — 18 weeks × 14 workstreams, mỗi bar color-coded theo 7 phases (P1 / P1→P2 / P2 / P2→P3 / P3 / P4 / P5). Sticky label column, event-week W14 highlighted. Thêm Phase color guide chart bên dưới với % distribution + summary cards (43% workstreams cluster trong P2→P3, peak load W7-W14). Detail table giữ lại bên dưới để reference KPI/Status.<br/>
+  Version 2.5 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  v2.5 changes: <strong>Document public</strong> — bỏ password gate · confidential bar đổi sang public version. <strong>NEW Section 14 Channel Concentration Filters</strong> — 5 filters chống fragmentation (min-bar 3K imp · bundle clustering · top-decile lock · W6 triage · UTM mandatory) sau phản biện 1M impressions distribution quá vụn qua 127 touchpoints. Section 02 Channel KPI thêm channel-by-channel breakdown + core action items chi tiết per channel. Section 07 Pillars: note merge 8→5 pillars waiting for Kallie. Section 08 Interviews: open question owner + remote team loop-in + daily calendar sync notes.<br/>
+  v2.4 changes: Visual Gantt chart rebuild (18 weeks × 14 workstreams, 7 phase gradients, sticky label, event week highlight, phase color legend bên dưới)<br/>
   v2.3 changes: Annotation toolkit port từ shopx-2026/lp.html — toolbar 3 nút (Export · List · Comment) · side panel List · resolve/reopen workflow · markdown export · hotkeys C/H/Esc · 1-shot migration từ shopx-notes-v1<br/>
   v2.2 changes: Owner cleanup theo pin comments (03/06) — bỏ block "Why &gt;10K" (info box trong Influencer section) · Influencer Owner col → "Listing / Outreach": Kallie phụ trách listing, outreach TBD · Seller Interviews 25 rows → tất cả Owner = TBD · Strategic Audience Curation: bỏ cột Owner · Markets Activation: bỏ cột Owner<br/>
   v2.1 changes: 📍 Pin Comment Mode — replaced bởi v2.3 annotation toolkit<br/>
   v2.0 fresh start: Mới KPI logic (1M impressions · 1,000 register pool · 300 qualified) · 60/40 organic-earned vs paid split · 6 channel groups · 4 markets (VN/SG/CN/AU) · 4-tier influencer map (&gt;10K threshold) · 25 Shopify apps · 8 content pillars · 25 seller interviews · Mention scoring framework · 6 risks · Team RACI<br/>
   Sheet owner: chloe.dinh@gempages.help · Maintained by: Chloe Dinh · <a href="https://github.com/chloedinh-create/shopx-2026-master-plan" style="color: var(--primary);">GitHub</a><br/>
-  <em>Tài liệu mật nội bộ. Không chia sẻ ra ngoài team.</em>
+  <em>Public document · maintained bởi Marketing Gem Commerce.</em>
 </div>
 
 
