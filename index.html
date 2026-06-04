@@ -178,16 +178,18 @@
   .gantt-row.event-week { background: linear-gradient(90deg, #fff7ed, #fffbf2); }
   .gantt-task-cell {
     padding: 8px 12px;
-    background: inherit;
-    border-right: 2px solid #e3e6f0;
+    background: #fff;
+    box-shadow: inset -2px 0 0 #e3e6f0;
     font-size: 12px;
     line-height: 1.3;
-    position: sticky; left: 0; z-index: 1;
+    position: sticky; left: 0; z-index: 5;
     height: 100%;
     display: flex; flex-direction: column; justify-content: center;
   }
-  .gantt-row.header .gantt-task-cell { background: #f7f8fc; font-weight: 700; font-size: 11.5px; color: var(--text-soft); text-transform: uppercase; letter-spacing: .4px; }
-  .gantt-row:hover .gantt-task-cell { background: #fafbff; }
+  .gantt-row.header { z-index: 6; }
+  .gantt-row.header .gantt-task-cell { background: #f7f8fc; font-weight: 700; font-size: 11.5px; color: var(--text-soft); text-transform: uppercase; letter-spacing: .4px; z-index: 6; }
+  .gantt-row:hover:not(.header) .gantt-task-cell { background: #fafbff; }
+  .gantt-row.event-week .gantt-task-cell { background: #fff7ed; }
   .gantt-task-cell .gantt-task-name { font-weight: 600; color: var(--text); font-size: 12.5px; }
   .gantt-task-cell .gantt-task-owner { font-size: 10.5px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
   .gantt-week-cell {
@@ -404,7 +406,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v2.8 · Cập nhật 04/06/2026 · Decisions Stack + Glossary</div>
+    <div class="brand-meta">v2.9 · Cập nhật 04/06/2026 · 7-item update</div>
   </div>
 
   <a href="#decisions-stack" class="nav-link" style="background: linear-gradient(135deg, rgba(255,107,107,.15), rgba(245,158,11,.1)); color: #fff; border-left: 3px solid #ef4444;"><span class="num">⚡</span> Decisions Stack (W1-W3)</a>
@@ -424,21 +426,19 @@
 
   <div class="nav-section-title">Content</div>
   <a href="#pillars" class="nav-link"><span class="num">07</span> Content Pillars + FOMO</a>
-  <a href="#interviews" class="nav-link"><span class="num">08</span> Pre-event Seller Interviews</a>
 
   <div class="nav-section-title">Acquisition</div>
-  <a href="#audience-curation" class="nav-link"><span class="num">09</span> Strategic Audience Curation</a>
-  <a href="#timeline" class="nav-link"><span class="num">10</span> Execution Timeline + Gantt</a>
-  <a href="#mention-scoring" class="nav-link"><span class="num">11</span> Mention Scoring Framework</a>
+  <a href="#audience-curation" class="nav-link"><span class="num">08</span> Strategic Audience Curation</a>
+  <a href="#timeline" class="nav-link"><span class="num">09</span> Execution Timeline + Gantt</a>
+  <a href="#mention-scoring" class="nav-link"><span class="num">10</span> Mention Scoring Framework</a>
 
   <div class="nav-section-title">Operations</div>
-  <a href="#risks" class="nav-link"><span class="num">12</span> Risk Register</a>
-  <a href="#raci" class="nav-link"><span class="num">13</span> Team RACI</a>
-  <a href="#concentration-filters" class="nav-link"><span class="num">14</span> Channel Concentration Filters</a>
-  <a href="#budget" class="nav-link"><span class="num">15</span> Communication Budget</a>
+  <a href="#risks" class="nav-link"><span class="num">11</span> Risk Register</a>
+  <a href="#concentration-filters" class="nav-link"><span class="num">12</span> Channel Concentration Filters</a>
+  <a href="#budget" class="nav-link"><span class="num">13</span> Communication Budget</a>
 
   <div class="nav-section-title">Reference</div>
-  <a href="#glossary" class="nav-link"><span class="num">16</span> Glossary + Status Legend</a>
+  <a href="#glossary" class="nav-link"><span class="num">14</span> Glossary + Status Legend</a>
 </aside>
 
 <!-- ============ MAIN ============ -->
@@ -460,8 +460,8 @@
     <div class="ts-card"><div class="ts-v">04/06</div><div class="ts-l">Today</div></div>
     <div class="ts-card"><div class="ts-v">W0</div><div class="ts-l">Pre-launch · 11 days đến W1</div></div>
     <div class="ts-card"><div class="ts-v">105</div><div class="ts-l">Days đến event 17/09</div></div>
-    <div class="ts-card"><div class="ts-v">14</div><div class="ts-l">Workstreams active từ W1</div></div>
-    <div class="ts-card"><div class="ts-v warn">12</div><div class="ts-l">Open risks · 6 High</div></div>
+    <div class="ts-card"><div class="ts-v">13</div><div class="ts-l">Workstreams active từ W1</div></div>
+    <div class="ts-card"><div class="ts-v warn">11</div><div class="ts-l">Open risks · 5 High</div></div>
     <div class="ts-card"><div class="ts-v danger">3</div><div class="ts-l">Critical decisions due W2</div></div>
   </div>
 
@@ -494,12 +494,12 @@
           <td><strong>W1 (15-21/06)</strong></td>
           <td>Validate CPM benchmarks (agency quotes 5 platforms)</td>
           <td>Hellen</td>
-          <td>Section 15 · Risk R7</td>
+          <td>Section 13 · Risk R7</td>
           <td>Use defaults từ APAC benchmarks ±30% buffer</td>
         </tr>
         <tr style="background: #fef3c7;">
           <td><strong>W1 (15-21/06)</strong></td>
-          <td>Founder letter (Chris) draft v1 + post calendar (3 posts W3/W7/W11)</td>
+          <td><strong>Kallie ghost-write</strong> founder letter v1 cho Chris đăng cá nhân (FB + LinkedIn) · post calendar 3 posts W3/W7/W11 · tag strategy theo ShopX 2025 alumni/sponsors/speakers</td>
           <td>Chloe + Chris</td>
           <td>Section 03 (VN market)</td>
           <td>Delay W2 nếu Chris busy</td>
@@ -508,22 +508,22 @@
           <td><strong>W2 (22-28/06)</strong></td>
           <td><strong>Budget approval</strong> — pick 1 of 3 scenarios (Lean $19.6K / Baseline $35K / Aggressive $50.8K)</td>
           <td><strong>Chris (final)</strong></td>
-          <td>Section 15 · Risk R7</td>
+          <td>Section 13 · Risk R7</td>
           <td>Lean scenario default · trigger R7 escalate</td>
-        </tr>
-        <tr style="background: #fee2e2;">
-          <td><strong>W2 (22-28/06)</strong></td>
-          <td><strong>Interview owner decision</strong> — pick 1 of 3 (hire remote PIC / delegate country leads / de-scope 25→15)</td>
-          <td><strong>Chloe</strong></td>
-          <td>Section 08 · Risk R9</td>
-          <td>De-scope 25 → 15 interviews automatic</td>
         </tr>
         <tr style="background: #fee2e2;">
           <td><strong>W2 (22-28/06)</strong></td>
           <td><strong>UTM Dev resource</strong> — pick 1 of 3 (1 Dev sprint / no-code Linktree-Bitly / manual template)</td>
           <td><strong>Chloe → Chris escalate</strong></td>
-          <td>Section 13 · Risk R6</td>
+          <td>Section 11 · Risk R6</td>
           <td>Manual UTM template Google Sheets default</td>
+        </tr>
+        <tr style="background: #fee2e2;">
+          <td><strong>W2 (22-28/06)</strong></td>
+          <td><strong>Influencer outreach owner decision</strong> — assign primary owner cho 60 external influencers</td>
+          <td><strong>Chloe</strong></td>
+          <td>Section 04 · Risk R8</td>
+          <td>Auto-fallback: Kallie part-time support · drop Tier 1 imp target từ 60K → 40K</td>
         </tr>
         <tr style="background: #fef3c7;">
           <td><strong>W2 end (28/06)</strong></td>
@@ -550,14 +550,14 @@
           <td><strong>W3 (29/06-05/07)</strong></td>
           <td><strong>Mention scoring deliver</strong> — 70 influencers + 25 apps scored</td>
           <td>Kallie + Christine</td>
-          <td>Section 11 · Risk R12</td>
+          <td>Section 10 · Risk R11</td>
           <td>Bulk outreach without scoring · risk wasted effort</td>
         </tr>
         <tr style="background: #fef3c7;">
           <td><strong>W3 (29/06-05/07)</strong></td>
           <td>UTM tracking live · all paid + organic launching channels tagged</td>
           <td>Hellen + Dev</td>
-          <td>Section 13 · Risk R6</td>
+          <td>Section 11 · Risk R6</td>
           <td>Launch without UTM = vanity number trap</td>
         </tr>
         <tr style="background: #fef3c7;">
@@ -567,18 +567,11 @@
           <td>Section 03 (AU)</td>
           <td>AU pipeline blocked · de-scope AU 35K → 15K</td>
         </tr>
-        <tr style="background: #fef3c7;">
-          <td><strong>W3 (29/06-05/07)</strong></td>
-          <td>Lead list per interview segment (5 candidates × 5 segments = 25)</td>
-          <td>Interview owner (picked W2)</td>
-          <td>Section 08</td>
-          <td>De-scope segments với &lt;5 confirmed leads</td>
-        </tr>
       </tbody>
     </table>
   </div>
 
-  <p style="color: var(--text-muted); font-size: 11.5px; margin: 12px 0 0;"><em>📍 12 decisions · 4 <span style="color: #991b1b; font-weight: 700;">CRITICAL (red)</span> = block downstream execution if missed · 8 important · auto-fallback embedded để avoid execution freeze.</em></p>
+  <p style="color: var(--text-muted); font-size: 11.5px; margin: 12px 0 0;"><em>📍 11 decisions · 4 <span style="color: #991b1b; font-weight: 700;">CRITICAL (red)</span> = block downstream execution if missed · 7 important · auto-fallback embedded để avoid execution freeze.</em></p>
 </section>
 
 <!-- ============ 00 EXECUTIVE ============ -->
@@ -780,7 +773,7 @@
       <ul style="margin: 6px 0 0 18px; line-height: 1.7; color: var(--text-soft); font-size: 13.5px;">
         <li><strong>W1-W2 (15-28/06)</strong> · Chloe — Finalize LP copy + ShopX 2025 proof assets · LP live by 30/06</li>
         <li><strong>W2-W3 (22/06-05/07)</strong> · Sunny — Email flow setup (4 emails × 6 weeks) cho GemPages user base · template approved</li>
-        <li><strong>W3 (29/06)</strong> · Chloe + Chris — Founder letter from Chris (FB + LinkedIn) · 1 post + 1 carousel</li>
+        <li><strong>W3 (29/06)</strong> · Kallie ghost-write + Chris approve — Founder letter on Chris LinkedIn + FB cá nhân · 1 post + 1 carousel · tag past attendees/sponsors/speakers từ ShopX 2025 để extend reach (xem strategy box dưới)</li>
         <li><strong>W4 onwards</strong> · Kallie — Weekly LP traffic + register conversion report</li>
         <li><strong>W7-W14</strong> · Sunny — In-app GemPages notification + countdown email cadence</li>
       </ul>
@@ -894,7 +887,7 @@
           <td><strong>🇻🇳 Vietnam <span class="badge success">Home</span></strong></td>
           <td>Meta · FB groups (EFE/AE Shopify) · LinkedIn · GemPages email · Founder network (Chris)</td>
           <td>Kallie + Chloe</td>
-          <td>Home-market leverage: founder network + community admin posts + GemPages user blast · Chris founder letter (3 posts W3/W7/W11)</td>
+          <td>Home-market leverage: founder network + community admin posts + GemPages user blast · <strong>Founder letter series</strong>: Kallie ghost-write, Chris đăng cá nhân (3 posts W3/W7/W11) — xem section Founder Letter Strategy dưới</td>
           <td class="num">100,000</td>
           <td>None — existing community access</td>
         </tr>
@@ -918,7 +911,7 @@
           <td><strong>🇦🇺 Australia <span class="badge success">NEW</span></strong></td>
           <td>LinkedIn primary · Meta retargeting · Steve Miguel/Ecom Capital network</td>
           <td>Chloe + Christine + Hellen</td>
-          <td>Warm intro via Steve Miguel · VIP student passes + seller interview exchange · 8 AU agency outreach list</td>
+          <td>Warm intro via Steve Miguel · VIP student passes · partner code + 8 AU agency outreach list</td>
           <td class="num">35,000</td>
           <td>New market — no existing audience · distance/visa friction for attendees · Steve Miguel intro call by W3</td>
         </tr>
@@ -933,7 +926,51 @@
     </table>
   </div>
 
-  <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;"><em>Note: 275K geo-tagged imp + 725K cross-geo (apps/PR/influencers/owned/paid platform spend) = 1M total. Detailed audience targeting trong Section 09 · paid budget allocation per platform/geo trong Section 15.</em></p>
+  <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;"><em>Note: 275K geo-tagged imp + 725K cross-geo (apps/PR/influencers/owned/paid platform spend) = 1M total. Detailed audience targeting trong Section 08 · paid budget allocation per platform/geo trong Section 13.</em></p>
+
+  <h3>✍️ Founder Letter Strategy — Kallie ghost-write · Chris đăng cá nhân</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Founder letter là asset PR cao nhất của ShopX (Chris credibility = anchor). <strong>Kallie ghost-write</strong> content theo brief từ Chloe + Chris. Chris approve + post trên LinkedIn + FB cá nhân của Chris. Mỗi post phải có <strong>value + impact + smart tag strategy</strong> — không "đăng khơi khơi".</p>
+
+  <div class="card" style="border-left: 4px solid #6b46ff;">
+    <div class="card-title">📅 3-post calendar W3 / W7 / W11</div>
+    <div class="card-body">
+      <strong>Post 1 · W3 (29/06) · Why ShopX 2026</strong> — narrative pivot từ CRO/Retention 2025 sang AI eCommerce 2026 · why Saigon · why APAC<br/>
+      &nbsp;&nbsp;<em>Value angle</em>: founder POV về AI shift trong ecom · personal insight không có ở agenda chính<br/>
+      &nbsp;&nbsp;<em>Tag list</em>: 5 ShopX 2025 speakers + 3 returning sponsors + 5-10 alumni đã share 2025 recap<br/><br/>
+
+      <strong>Post 2 · W7 (27/07) · Speaker reveal + ecosystem proof</strong> — show momentum · who's saying yes · why room is forming<br/>
+      &nbsp;&nbsp;<em>Value angle</em>: peer credibility tới sellers/agencies/apps · "If X is going, you should too"<br/>
+      &nbsp;&nbsp;<em>Tag list</em>: confirmed 2026 speakers (tag từng người) + Judge.me / Klaviyo / Gorgias accounts + 2025 sponsors đang convert sang 2026<br/><br/>
+
+      <strong>Post 3 · W11 (24/08) · FOMO + scarcity</strong> — last seats · last waves · agenda highlight · "this room won't happen again same way"<br/>
+      &nbsp;&nbsp;<em>Value angle</em>: scarcity + agenda preview · founder personal take về 3 sessions to-watch<br/>
+      &nbsp;&nbsp;<em>Tag list</em>: 2026 confirmed attendees đã RSVP (top 10 names) + agency partner accounts + Tier 1 influencers
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #ec4899;">
+    <div class="card-title">🎯 Tag strategy — who to tag, why</div>
+    <div class="card-body">
+      Không tag random. Mỗi tag phải có <strong>strategic intent</strong>:<br/><br/>
+      <strong>Tier 1 · Returning 2025 sponsors</strong>: tag account chính thức (Judge.me, ShopOS, etc.) → signal "ecosystem coming back" + create direct DM channel cho 2026 sponsor renewal<br/>
+      <strong>Tier 2 · 2025 speakers</strong>: tag personal LinkedIn của họ → re-engage + give them credit + chance họ amplify post của Chris<br/>
+      <strong>Tier 3 · 2025 alumni đã share recap</strong>: tag list 5-10 attendees viral nhất từ 2025 → social proof "they came back" + extend reach via their network<br/>
+      <strong>Tier 4 · 2026 confirmed attendees/speakers</strong>: tag mới-confirm → public commitment = họ less likely cancel + create FOMO cho fence-sitters<br/>
+      <strong>Tier 5 · Strategic accounts (Shopify SG team, Ecom Capital, etc.)</strong>: tag để force visibility với decision makers
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid #16a085;">
+    <div class="card-title">📋 Action items per post</div>
+    <div class="card-body">
+      <strong>5 ngày trước post</strong> · Kallie — draft v1 + tag list curated · Chloe review angle<br/>
+      <strong>3 ngày trước post</strong> · Chris — approve content + tag list · suggest personal touches<br/>
+      <strong>1 ngày trước post</strong> · Kallie — finalize visual asset (Design support) + schedule queue<br/>
+      <strong>Post-day</strong> · Chris — đăng đúng giờ peak (10am SGT cho LinkedIn · 8pm SGT cho FB) · Kallie monitor + reply key comments giúp Chris<br/>
+      <strong>+2 ngày sau</strong> · Kallie — track engagement (reach · saves · shares · DMs) · log vào Master Tracker Tab 1<br/><br/>
+      <strong>KPI per post</strong>: ≥20K LinkedIn impressions · ≥5 sponsor/speaker accounts engage trực tiếp · ≥3 amplification posts từ tagged accounts trong 48h
+    </div>
+  </div>
 
   <div class="info-box" style="background: #efeaff; border-color: #d8d0ff;">
     <div class="info-box-title">🌏 Why geo execution still matters dù audience-first</div>
@@ -942,7 +979,7 @@
       <strong>2. CPM biến động cực mạnh theo geo</strong>: LinkedIn ecom mgr = $30-80 SG/AU vs Meta VN = $1-3. Cùng audience, cost khác 10x.<br/>
       <strong>3. Localization required</strong>: 简体中文 cho CN · VN cho VN · English cho SG/AU. Không scale 1-message-fit-all.<br/>
       <strong>4. Regulatory compliance per geo</strong>: PIPL (CN), Decree 13 (VN), PDPA (SG), Privacy Act (AU).<br/>
-      <em>Strategic plan = audience-first (Section 09). Execution layer = geo-specific (Section 03 này). Cả 2 axis coexist.</em>
+      <em>Strategic plan = audience-first (Section 08). Execution layer = geo-specific (Section 03 này). Cả 2 axis coexist.</em>
     </div>
   </div>
 </section>
@@ -1300,12 +1337,12 @@
 <!-- ============ 07 CONTENT PILLARS ============ -->
 <section id="pillars">
   <h2><span class="ord">07</span>Content Pillars + FOMO Strategy</h2>
-  <p class="lead">8 content pillars · mỗi pillar có FOMO/behavior trigger riêng · distribution channels · output target · KPI.</p>
+  <p class="lead">7 content pillars · mỗi pillar có FOMO/behavior trigger riêng · distribution channels · output target · KPI.</p>
 
   <div class="info-box" style="background: #fffbeb; border-color: #fcd34d;">
     <div class="info-box-title">⏳ Pending consolidation — waiting for Kallie</div>
     <div class="info-box-body">
-      8 pillars hiện tại sẽ được merge lại còn <strong>5 pillars chính</strong>. Kallie owns recategorization + consolidation logic.
+      7 pillars hiện tại sẽ được merge lại còn <strong>5 pillars chính</strong>. Kallie owns recategorization + consolidation logic.
     </div>
   </div>
 
@@ -1330,7 +1367,7 @@
           <td>Asset production calendar</td>
           <td>W3 end (05/07)</td>
           <td>Kallie + Design</td>
-          <td>Detailed calendar (asset / due date / channel / owner) · sync với seller interview cadence (Section 08) + influencer post waves (Section 04)</td>
+          <td>Detailed calendar (asset / due date / channel / owner) · sync với influencer post waves (Section 04) + audience curation outreach pace (Section 08)</td>
         </tr>
         <tr>
           <td>Weekly asset checkpoint</td>
@@ -1392,18 +1429,8 @@
           <td>Christine / Celine / Maria</td><td>P2–P3</td>
           <td>Partner posts · referral registers</td>
         </tr>
-        <tr>
-          <td><strong>5. Seller interviews pre-event</strong></td>
-          <td>Create peer proof + video material</td>
-          <td>SG/CN/AU/VN sellers + managers</td>
-          <td><em>"People like me are going / are worried about AI adoption"</em></td>
-          <td>Owned · paid video · community · influencer repost · PR</td>
-          <td>10–20 interviews · 1 video/week · 3–5 clips/interview</td>
-          <td><span class="badge warn">TBD</span> · Kallie supports assets</td><td>P2–P3</td>
-          <td>Video views · retargeting CTR · registrations</td>
-        </tr>
         <tr style="background: #fef2f2;">
-          <td><strong>6. Scarcity + room-forming</strong></td>
+          <td><strong>5. Scarcity + room-forming</strong></td>
           <td>Push conversion + FOMO</td>
           <td>Warm audience · LP visitors · undecided sellers</td>
           <td><em>"Seats are limited; the APAC room is forming"</em></td>
@@ -1413,7 +1440,7 @@
           <td>Conversion spike · register volume</td>
         </tr>
         <tr>
-          <td><strong>7. Country / delegate proof</strong></td>
+          <td><strong>6. Country / delegate proof</strong></td>
           <td>Make event feel regional/international</td>
           <td>SG/CN/AU/VN sellers</td>
           <td><em>"Sellers từ your market are joining"</em></td>
@@ -1423,7 +1450,7 @@
           <td>Registers by market</td>
         </tr>
         <tr style="background: #fef3c7;">
-          <td><strong>8. Event-day proof capture</strong></td>
+          <td><strong>7. Event-day proof capture</strong></td>
           <td>Turn event into future asset</td>
           <td>Attendees, sponsors, 2027 prospects</td>
           <td><em>"This is the room everyone talked about"</em></td>
@@ -1437,145 +1464,9 @@
   </div>
 </section>
 
-<!-- ============ 08 SELLER INTERVIEWS ============ -->
-<section id="interviews">
-  <h2><span class="ord">08</span>Pre-event Seller Interviews — 25 interviews</h2>
-  <p class="lead">Pre-event seller interviews → peer proof + video material cho social/paid content. Target: <strong>25 interviews</strong> across 5 segments × 5 interviews each. Output: 1 video/week + 3–5 clips/interview.</p>
-
-  <div class="info-box" style="background: #fef2f2; border-color: #fecaca;">
-    <div class="info-box-title">🚨 CRITICAL — Owner decision required W2 (28/06)</div>
-    <div class="info-box-body">
-      Core team (Chloe/Kallie/Hellen/Christine/Celine/Maria/Sunny) đã full scope với 14 workstreams. Không có bandwidth cho 25 interview outreaches. <strong>Chloe must decide tại W2 standup (28/06)</strong>.
-    </div>
-  </div>
-
-  <h3>🎯 Tightened action items — hard deadlines + de-scope triggers</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Decision / Milestone</th><th>Hard deadline</th><th>Owner</th><th>Action / Output</th></tr></thead>
-      <tbody>
-        <tr style="background: #fee2e2;">
-          <td><strong>Owner decision</strong></td>
-          <td><strong>W2 (28/06)</strong></td>
-          <td><strong>Chloe</strong></td>
-          <td>Pick 1 of 3: (a) Hire remote PIC ~$1.5K/mo (b) Delegate to country leads · AU/CN/SG (c) De-scope 25→15 interviews</td>
-        </tr>
-        <tr>
-          <td>Lead list per segment</td>
-          <td>W3 end (05/07)</td>
-          <td>Owner (picked W2)</td>
-          <td>Sheet với 25 contacts (5 candidates × 5 segments) + status + warm-intro path per lead</td>
-        </tr>
-        <tr style="background: #fef3c7;">
-          <td><strong>First interview live</strong> (proof of concept)</td>
-          <td>W5 (19/07)</td>
-          <td>Owner</td>
-          <td>1 ShopX 2025 alumni clip published · validate workflow trước khi scale</td>
-        </tr>
-        <tr>
-          <td>Interview cadence</td>
-          <td>W5-W11</td>
-          <td>Owner + Kallie</td>
-          <td>1-2 interviews/week pace · 25 interviews total by W11 end (31/08)</td>
-        </tr>
-        <tr>
-          <td>Clip production</td>
-          <td>W6 onwards</td>
-          <td>Kallie + Design</td>
-          <td>3-5 clips/interview · published 1 week sau shoot</td>
-        </tr>
-        <tr>
-          <td>Distribution per segment</td>
-          <td>W6-W14</td>
-          <td>Kallie</td>
-          <td>VN→FB groups · SG→LinkedIn · CN→WeChat · AU→LinkedIn · Alumni→owned/PR</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="info-box warn">
-    <div class="info-box-title">🚨 W4 Hard de-scope trigger</div>
-    <div class="info-box-body">
-      Nếu W4 (12/07) chưa có 5 leads/segment confirmed (vd: 5 SG sellers agreed to interview) → <strong>cut segment đó · drop từ 25 → 15 interviews</strong> (3 segments × 5 = 15). Priority segments giữ lại: VN top Shopify + SG sellers + ShopX 2025 alumni. Drop: CN cross-border (vì CN lead TBD) + AU (nếu Steve Miguel intro chưa active).
-    </div>
-  </div>
-
-  <div class="info-box">
-    <div class="info-box-title">📅 Daily calendar sync — waiting for Kallie</div>
-    <div class="info-box-body">
-      Daily calendar for social posts + community placements (per market × per channel) đang được Kallie build. Khi ready sẽ merge vào dashboard (link tới Social content_Gantt sheet) để team execute theo lịch hằng ngày.<br/>
-      <strong>Action</strong>: Kallie deliver daily calendar template trong W3 · sync với seller interview cadence (1 video/week) + influencer post waves.
-    </div>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Segment</th><th>Target count</th><th>Who to source</th><th>How to source</th><th>Core questions / angle</th><th>Outputs per interview</th><th>Distribution</th><th>Owner</th><th>Status</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>ShopX 2025 alumni</strong></td><td class="num">5</td>
-          <td>Past attendees với credible ecommerce background</td>
-          <td>Attendee list + warm DM</td>
-          <td>What changed after ShopX? Why attend again?</td>
-          <td>1 quote + 1 short clip + 1 social card</td>
-          <td>Owned · community · PR · LP proof</td>
-          <td><span class="badge warn">TBD</span></td>
-          <td>Pending</td>
-        </tr>
-        <tr>
-          <td><strong>🇸🇬 Singapore sellers/managers</strong></td><td class="num">5</td>
-          <td>SG DTC founders · ecom managers · Shopify operators</td>
-          <td>LinkedIn outreach + agency intros + Arvind network</td>
-          <td>What is your biggest AI/ecommerce challenge before BFCM?</td>
-          <td>1 30–60s clip + quote</td>
-          <td>LinkedIn · SG community · paid retargeting</td>
-          <td><span class="badge warn">TBD</span></td>
-          <td>Pending</td>
-        </tr>
-        <tr>
-          <td><strong>🇨🇳 China/HK cross-border</strong></td><td class="num">5</td>
-          <td>Cross-border sellers · CN Shopify · suppliers</td>
-          <td>WeChat/Xiaohongshu groups + Judge.me/CJ intros</td>
-          <td>How can AI help CN sellers compete globally?</td>
-          <td>ZH quote + clip + translated snippet</td>
-          <td>WeChat · Xiaohongshu · ZH LP · paid</td>
-          <td><span class="badge warn">TBD</span></td>
-          <td>Pending</td>
-        </tr>
-        <tr style="background: #f0fdf4;">
-          <td><strong>🇦🇺 Australia / Ecom Capital</strong></td><td class="num">5</td>
-          <td>Ecom Capital students/members + AU sellers</td>
-          <td>Connect Steve Miguel · invite interview exchange</td>
-          <td>Why would an AU seller fly to Saigon for AI ecommerce?</td>
-          <td>1 clip + AU delegate proof</td>
-          <td>LinkedIn · paid AU retargeting · community</td>
-          <td><span class="badge warn">TBD</span></td>
-          <td>Pending outreach</td>
-        </tr>
-        <tr>
-          <td><strong>🇻🇳 Vietnam top Shopify</strong></td><td class="num">5</td>
-          <td>HCM/HN Shopify brands · GemPages users</td>
-          <td>GemPages list + EFE + direct warm outreach</td>
-          <td>How are VN sellers preparing for AI + BFCM?</td>
-          <td>VN quote + video clip</td>
-          <td>VN FB groups · owned social · email</td>
-          <td><span class="badge warn">TBD</span></td>
-          <td>Pending</td>
-        </tr>
-        <tr style="background: var(--surface-3); font-weight: 700;">
-          <td>TOTAL</td><td class="num">25</td><td>—</td><td>—</td><td>—</td>
-          <td>20–25 interviews · 1 video/week · 3–5 clips/interview</td>
-          <td>—</td><td>—</td><td>—</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ============ 09 AUDIENCE CURATION ============ -->
+<!-- ============ 08 AUDIENCE CURATION ============ -->
 <section id="audience-curation">
-  <h2><span class="ord">09</span>Strategic Audience Curation</h2>
+  <h2><span class="ord">08</span>Strategic Audience Curation</h2>
   <p class="lead">Strategic groups contribute 165/220 acquired qualified attendees. Remaining 55 từ broader qualified pool. Curated 80 VIP/Speaker/Sponsor counted separately. <strong>Final 300 qualified.</strong></p>
 
   <div class="table-wrap">
@@ -1593,7 +1484,7 @@
           <td><strong>Sellers từ Singapore + China + Australia</strong></td>
           <td>Make event regionally credible beyond VN</td>
           <td class="num">500</td><td class="num">300</td><td class="num">140</td><td class="num">50</td>
-          <td>Community + partner-led outreach + seller interviews</td>
+          <td>Community + partner-led outreach + market-specific content</td>
           <td><em>"Sellers from your market are joining an APAC AI ecommerce room in Saigon"</em></td>
         </tr>
         <tr>
@@ -1700,12 +1591,12 @@
   </div>
 </section>
 
-<!-- ============ 10 EXECUTION TIMELINE ============ -->
+<!-- ============ 09 EXECUTION TIMELINE ============ -->
 <section id="timeline">
-  <h2><span class="ord">10</span>Execution Timeline + Gantt — 18 weeks</h2>
-  <p class="lead">14 workstreams trải 18 tuần từ W1 (15-21/06) đến W18 (12-18/10). Event day ★ rơi vào W14 (17/09). Bars color-coded theo 5 phases · scroll ngang để xem hết timeline.</p>
+  <h2><span class="ord">09</span>Execution Timeline + Gantt — 18 weeks</h2>
+  <p class="lead">13 workstreams trải 18 tuần từ W1 (15-21/06) đến W18 (12-18/10). Event day ★ rơi vào W14 (17/09). Bars color-coded theo 5 phases align với worksheet (P1 Warming Up · P2 Blooming · P3 Peak · P4 Event Day · P5 After Glow). Sticky label column · scroll ngang để xem timeline.</p>
 
-  <h3>📊 Visual Gantt — 18 weeks × 14 workstreams</h3>
+  <h3>📊 Visual Gantt — 18 weeks × 13 workstreams</h3>
   <div class="gantt-wrap">
     <div class="gantt-chart">
       <!-- Header row: Workstream label + 18 week columns -->
@@ -1731,212 +1622,183 @@
         <div class="gantt-week-cell"><span class="wk-num">W18</span><span class="wk-date">12/10</span></div>
       </div>
 
-      <!-- 1. KPI Planning · P1 · W1-W2 -->
+      <!-- 1. KPI Planning · P1 Warming Up · W1-W2 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">KPI Planning</div>
           <div class="gantt-task-owner">Chloe · Kallie/Hellen support</div>
         </div>
-        <div class="gantt-bar p1" style="grid-column: 2 / 4;" title="P1 · 15/06–22/06 · Dashboard approved">P1 · KPI v3</div>
+        <div class="gantt-bar p1" style="grid-column: 2 / 4;" title="P1 Warming Up · 15/06–22/06 · Dashboard approved">P1 Warming Up · KPI v3</div>
       </div>
 
-      <!-- 2. High audience channels · P1-P2 · W1-W4 -->
+      <!-- 2. High audience channels · P2 Blooming · W1-W4 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">High audience channels</div>
           <div class="gantt-task-owner">Kallie · Hellen support</div>
         </div>
-        <div class="gantt-bar p1p2" style="grid-column: 2 / 6;" title="P1-P2 · 15/06–07/07 · 30+ channels mapped">P1→P2 · Channel mapping</div>
+        <div class="gantt-bar p2" style="grid-column: 2 / 6;" title="P2 Blooming · 15/06–07/07 · 30+ channels mapped">P2 Blooming · Channel mapping</div>
       </div>
 
-      <!-- 3. Paid Ads Planning · P1-P2 · W2-W4 -->
+      <!-- 3. Paid Ads Planning · P2 Blooming · W2-W4 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Paid Ads Planning</div>
           <div class="gantt-task-owner">Hellen · Kallie support</div>
         </div>
-        <div class="gantt-bar p1p2" style="grid-column: 3 / 6;" title="P1-P2 · 22/06–07/07 · 400K paid impressions plan">P1→P2 · 400K paid plan</div>
+        <div class="gantt-bar p2" style="grid-column: 3 / 6;" title="P2 Blooming · 22/06–07/07 · 400K paid impressions plan">P2 Blooming · 400K paid plan</div>
       </div>
 
-      <!-- 4. Influencer Map · P2 · W3-W6 -->
+      <!-- 4. Influencer Map · P2 Blooming · W3-W6 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Influencer Map</div>
           <div class="gantt-task-owner">Kallie · Chloe support</div>
         </div>
-        <div class="gantt-bar p2" style="grid-column: 4 / 8;" title="P2 · 01/07–21/07 · 30 KOLs + 20 admins + 20 cheerleaders">P2 · 70 influencer list</div>
+        <div class="gantt-bar p2" style="grid-column: 4 / 8;" title="P2 Blooming · 01/07–21/07 · 30 KOLs + 20 admins + 20 cheerleaders">P2 Blooming · 70 influencer list</div>
       </div>
 
-      <!-- 5. Influencer Outreach · P2-P3 · W5-W11 -->
+      <!-- 5. Influencer Outreach · P3 Peak · W5-W11 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Influencer Outreach</div>
-          <div class="gantt-task-owner">Chloe · Kallie support</div>
+          <div class="gantt-task-owner">TBD · Kallie supports</div>
         </div>
-        <div class="gantt-bar p2p3" style="grid-column: 6 / 13;" title="P2-P3 · 15/07–31/08 · 15–20 external posts secured">P2→P3 · 15–20 posts</div>
+        <div class="gantt-bar p3" style="grid-column: 6 / 13;" title="P3 Peak · 15/07–31/08 · 15–20 external posts secured">P3 Peak · 15–20 posts</div>
       </div>
 
-      <!-- 6. PR / Press · P2-P3 · W4-W13 -->
+      <!-- 6. PR / Press · P3 Peak · W4-W13 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">PR / Press</div>
           <div class="gantt-task-owner">Maria · Celine · Chloe support</div>
         </div>
-        <div class="gantt-bar p2p3" style="grid-column: 5 / 15;" title="P2-P3 · 08/07–10/09 · 10–15 mentions/articles">P2→P3 · 10–15 mentions</div>
+        <div class="gantt-bar p3" style="grid-column: 5 / 15;" title="P3 Peak · 08/07–10/09 · 10–15 mentions/articles">P3 Peak · 10–15 mentions</div>
       </div>
 
-      <!-- 7. Shopify Apps · P2-P3 · W3-W11 -->
+      <!-- 7. Shopify Apps · P3 Peak · W3-W11 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Shopify Apps Outreach</div>
           <div class="gantt-task-owner">Christine · Celine · Maria</div>
         </div>
-        <div class="gantt-bar p2p3" style="grid-column: 4 / 13;" title="P2-P3 · 01/07–31/08 · 25 apps · 3–5 strategic partners">P2→P3 · 25 apps</div>
+        <div class="gantt-bar p3" style="grid-column: 4 / 13;" title="P3 Peak · 01/07–31/08 · 25 apps · 3–5 strategic partners">P3 Peak · 25 apps</div>
       </div>
 
-      <!-- 8. Content partners · P2-P3 · W4-W11 -->
+      <!-- 8. Content partners · P3 Peak · W4-W11 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Ecom Content Partners</div>
           <div class="gantt-task-owner">Christine · Celine · Maria</div>
         </div>
-        <div class="gantt-bar p2p3" style="grid-column: 5 / 13;" title="P2-P3 · 08/07–31/08 · 5–10 media/content partners">P2→P3 · 5–10 partners</div>
+        <div class="gantt-bar p3" style="grid-column: 5 / 13;" title="P3 Peak · 08/07–31/08 · 5–10 media/content partners">P3 Peak · 5–10 partners</div>
       </div>
 
-      <!-- 9. Seller Interviews · P2-P3 · W3-W11 -->
-      <div class="gantt-row">
-        <div class="gantt-task-cell">
-          <div class="gantt-task-name">Seller Interviews</div>
-          <div class="gantt-task-owner">TBD · Kallie assets support</div>
-        </div>
-        <div class="gantt-bar p2p3" style="grid-column: 4 / 13;" title="P2-P3 · 01/07–31/08 · 20 interviews + clips">P2→P3 · 20 interviews</div>
-      </div>
-
-      <!-- 10. Strategic Audience · P2-P3 · W3-W14 -->
+      <!-- 9. Strategic Audience · P3 Peak · W3-W14 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Strategic Audience</div>
           <div class="gantt-task-owner">Chloe · Christine + team</div>
         </div>
-        <div class="gantt-bar p2p3" style="grid-column: 4 / 16;" title="P2-P3 · 01/07–16/09 · 165+ qualified attendees từ strategic groups">P2→P3 · 165+ qualified curation</div>
+        <div class="gantt-bar p3" style="grid-column: 4 / 16;" title="P3 Peak · 01/07–16/09 · 165+ qualified attendees từ strategic groups">P3 Peak · 165+ qualified curation</div>
       </div>
 
-      <!-- 11. FOMO Push · P3 · W7-W14 -->
+      <!-- 10. FOMO Push · P3 Peak · W7-W14 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">FOMO Push</div>
           <div class="gantt-task-owner">Kallie · Chloe / Design</div>
         </div>
-        <div class="gantt-bar p3" style="grid-column: 8 / 16;" title="P3 · 01/08–16/09 · Register spike + 300 qualified">P3 · FOMO + agenda reveal</div>
+        <div class="gantt-bar p3" style="grid-column: 8 / 16;" title="P3 Peak · 01/08–16/09 · Register spike + 300 qualified">P3 Peak · FOMO + agenda reveal</div>
       </div>
 
-      <!-- 12. All-hands · P3 · W10-W11 -->
+      <!-- 11. All-hands · P3 Peak · W10-W11 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">All-hands amplification</div>
           <div class="gantt-task-owner">Team Lily · Kallie</div>
         </div>
-        <div class="gantt-bar p3" style="grid-column: 11 / 13;" title="P3 · 22/08–31/08 · +30% registration spike">P3 · All-hands week</div>
+        <div class="gantt-bar p3" style="grid-column: 11 / 13;" title="P3 Peak · 22/08–31/08 · +30% registration spike">P3 Peak · All-hands week</div>
       </div>
 
-      <!-- 13. Event-day · P4 · W14 -->
+      <!-- 12. Event-day · P4 Event Day · W14 -->
       <div class="gantt-row event-week">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">★ Event-day proof</div>
           <div class="gantt-task-owner">Kallie + Media · whole team</div>
         </div>
-        <div class="gantt-bar p4" style="grid-column: 15 / 16;" title="P4 · 17/09 · 50+ UGC · 20 clips · 30 photos">★ P4 · Event 17/09</div>
+        <div class="gantt-bar p4" style="grid-column: 15 / 16;" title="P4 Event Day · 17/09 · 50+ UGC · 20 clips · 30 photos">★ P4 Event Day · 17/09</div>
       </div>
 
-      <!-- 14. Afterglow · P5 · W14-W18 -->
+      <!-- 13. Afterglow · P5 After Glow · W14-W18 -->
       <div class="gantt-row">
         <div class="gantt-task-cell">
           <div class="gantt-task-name">Afterglow proof</div>
           <div class="gantt-task-owner">Kallie · Christine · Maria</div>
         </div>
-        <div class="gantt-bar p5" style="grid-column: 15 / 20;" title="P5 · 18/09–17/10 · Recap · sponsor report · 2027 interest 100+">P5 · Afterglow + recap</div>
+        <div class="gantt-bar p5" style="grid-column: 15 / 20;" title="P5 After Glow · 18/09–17/10 · Recap · sponsor report · 2027 interest 100+">P5 After Glow · Recap</div>
       </div>
     </div>
   </div>
 
-  <h3>🎨 Phase color guide · workstream distribution</h3>
+  <h3>🎨 Phase color guide · workstream distribution (5 phases align với worksheet)</h3>
   <div class="phase-legend-chart">
 
     <div class="phase-leg-row">
       <div class="phase-leg-swatch p1"></div>
       <div class="phase-leg-info">
-        <div class="phase-leg-name">P1 · Foundation</div>
-        <div class="phase-leg-desc">W1–W2 · KPI dashboard + planning kickoff</div>
+        <div class="phase-leg-name">P1 Warming Up</div>
+        <div class="phase-leg-desc">Pre-W1 → ~W2 · Internal alignment · KPI planning · narrative + theme chốt</div>
       </div>
       <div class="phase-leg-stats"><strong>1</strong> workstream</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p1" style="width: 7%;"></div></div>
-    </div>
-
-    <div class="phase-leg-row">
-      <div class="phase-leg-swatch p1p2"></div>
-      <div class="phase-leg-info">
-        <div class="phase-leg-name">P1→P2 · Foundation bridging into Build</div>
-        <div class="phase-leg-desc">W1–W4 · Channel mapping + paid ads framework</div>
-      </div>
-      <div class="phase-leg-stats"><strong>2</strong> workstreams</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p1p2" style="width: 14%;"></div></div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p1" style="width: 8%;"></div></div>
     </div>
 
     <div class="phase-leg-row">
       <div class="phase-leg-swatch p2"></div>
       <div class="phase-leg-info">
-        <div class="phase-leg-name">P2 · Build</div>
-        <div class="phase-leg-desc">W3–W6 · Influencer mapping · audience lists</div>
+        <div class="phase-leg-name">P2 Blooming</div>
+        <div class="phase-leg-desc">16/06–31/07 (~W1–W7) · Mở nhận diện · build trust với sponsor/community · warm up VN/SG · channel + audience mapping</div>
       </div>
-      <div class="phase-leg-stats"><strong>1</strong> workstream</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p2" style="width: 7%;"></div></div>
-    </div>
-
-    <div class="phase-leg-row">
-      <div class="phase-leg-swatch p2p3"></div>
-      <div class="phase-leg-info">
-        <div class="phase-leg-name">P2→P3 · Outreach (biggest cluster)</div>
-        <div class="phase-leg-desc">W3–W14 · Influencer/PR/Apps/Content/Interviews/Strategic Audience outreach</div>
-      </div>
-      <div class="phase-leg-stats"><strong>6</strong> workstreams</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p2p3" style="width: 43%;"></div></div>
+      <div class="phase-leg-stats"><strong>3</strong> workstreams</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p2" style="width: 23%;"></div></div>
     </div>
 
     <div class="phase-leg-row">
       <div class="phase-leg-swatch p3"></div>
       <div class="phase-leg-info">
-        <div class="phase-leg-name">P3 · Push</div>
-        <div class="phase-leg-desc">W7–W14 · FOMO + All-hands amplification</div>
+        <div class="phase-leg-name">P3 Peak</div>
+        <div class="phase-leg-desc">01/08–16/09 (~W7–W13) · All-out FOMO · public launch · agenda reveal · paid ticket conversion · all-hands amplification (biggest cluster)</div>
       </div>
-      <div class="phase-leg-stats"><strong>2</strong> workstreams</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p3" style="width: 14%;"></div></div>
+      <div class="phase-leg-stats"><strong>7</strong> workstreams</div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p3" style="width: 54%;"></div></div>
     </div>
 
     <div class="phase-leg-row">
       <div class="phase-leg-swatch p4"></div>
       <div class="phase-leg-info">
-        <div class="phase-leg-name">P4 · Event-day ★</div>
-        <div class="phase-leg-desc">W14 (17/09) · Live capture · UGC · sponsor proof</div>
+        <div class="phase-leg-name">P4 Event Day ★</div>
+        <div class="phase-leg-desc">17/09 (W14) · Capture event energy · live UGC · social proof · sponsor activation</div>
       </div>
       <div class="phase-leg-stats"><strong>1</strong> workstream</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p4" style="width: 7%;"></div></div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p4" style="width: 8%;"></div></div>
     </div>
 
     <div class="phase-leg-row">
       <div class="phase-leg-swatch p5"></div>
       <div class="phase-leg-info">
-        <div class="phase-leg-name">P5 · Afterglow</div>
-        <div class="phase-leg-desc">W14–W18 · Recap + sponsor report + 2027 funnel build</div>
+        <div class="phase-leg-name">P5 After Glow</div>
+        <div class="phase-leg-desc">18/09–17/10 (W14–W18) · Recap · sponsor report deck · NPS survey · ShopX 2027 community migration · 2027 sponsor pipeline build</div>
       </div>
       <div class="phase-leg-stats"><strong>1</strong> workstream</div>
-      <div class="phase-leg-bar-track"><div class="phase-leg-bar p5" style="width: 7%;"></div></div>
+      <div class="phase-leg-bar-track"><div class="phase-leg-bar p5" style="width: 8%;"></div></div>
     </div>
 
     <div class="phase-leg-summary">
-      <div class="phase-leg-summary-card"><div class="v">14</div><div class="l">Total workstreams</div></div>
+      <div class="phase-leg-summary-card"><div class="v">13</div><div class="l">Total workstreams</div></div>
       <div class="phase-leg-summary-card"><div class="v">18</div><div class="l">Weeks (15/06→17/10)</div></div>
-      <div class="phase-leg-summary-card"><div class="v">6</div><div class="l">P2→P3 cluster (43% of work)</div></div>
-      <div class="phase-leg-summary-card"><div class="v">W7-W14</div><div class="l">Peak load (8 streams parallel)</div></div>
+      <div class="phase-leg-summary-card"><div class="v">7</div><div class="l">P3 Peak cluster (54% of work)</div></div>
+      <div class="phase-leg-summary-card"><div class="v">W7-W14</div><div class="l">Peak load (7 streams parallel)</div></div>
     </div>
   </div>
 
@@ -1946,23 +1808,23 @@
       <thead><tr><th>Phase</th><th>Workstream</th><th>Owner</th><th>Support</th><th>Start</th><th>End</th><th>KPI</th><th>Status</th></tr></thead>
       <tbody>
         <tr style="background: #ede9fe;">
-          <td><span class="phase-pill phase-p1">P1</span></td>
+          <td><span class="phase-pill phase-p1">P1 Warming Up</span></td>
           <td><strong>KPI Planning</strong> — Finalize 1M impressions + 1,000 registers + 300 qualified attendee dashboard</td>
           <td>Chloe</td><td>Kallie / Hellen</td>
           <td>15/06</td><td>22/06</td>
           <td>Dashboard approved</td>
           <td><span class="badge warn">IN PROGRESS</span></td>
         </tr>
-        <tr style="background: #ede9fe;">
-          <td><span class="phase-pill phase-p1">P1-P2</span></td>
+        <tr style="background: #dbeafe;">
+          <td><span class="phase-pill phase-p2">P2 Blooming</span></td>
           <td><strong>High audience channels</strong> — Build VN/SG/CN/AU community/channel list with audience size</td>
           <td>Kallie</td><td>Hellen</td>
           <td>15/06</td><td>07/07</td>
           <td>30+ high-audience channels mapped</td>
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
-        <tr style="background: #ede9fe;">
-          <td><span class="phase-pill phase-p1">P1-P2</span></td>
+        <tr style="background: #dbeafe;">
+          <td><span class="phase-pill phase-p2">P2 Blooming</span></td>
           <td><strong>Paid Ads Planning</strong> — Calculate paid impressions + split Meta/LI/WeChat/Xiaohongshu/retargeting</td>
           <td>Hellen</td><td>Kallie</td>
           <td>22/06</td><td>07/07</td>
@@ -1970,55 +1832,47 @@
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
         <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2</span></td>
+          <td><span class="phase-pill phase-p2">P2 Blooming</span></td>
           <td><strong>Influencer Map</strong> — Build list &gt;10K influencers + APAC admins + LinkedIn cheerleaders</td>
           <td>Kallie</td><td>Chloe</td>
           <td>01/07</td><td>21/07</td>
           <td>30 KOLs &gt;10K + 20 admins + 20 cheerleaders shortlisted</td>
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
-        <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2-P3</span></td>
+        <tr style="background: #fee2e2;">
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>Influencer Outreach</strong> — Exchange VIP/event access for social posts</td>
-          <td>Chloe</td><td>Kallie</td>
+          <td><span class="badge warn">TBD</span></td><td>Kallie</td>
           <td>15/07</td><td>31/08</td>
           <td>15–20 external posts secured</td>
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
-        <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2-P3</span></td>
+        <tr style="background: #fee2e2;">
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>PR / Press</strong> — Outreach to press + media partners</td>
           <td>Maria / Celine</td><td>Chloe</td>
           <td>08/07</td><td>10/09</td>
           <td>10–15 mentions/articles</td>
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
-        <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2-P3</span></td>
+        <tr style="background: #fee2e2;">
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>Shopify Apps</strong> — Outreach &gt;20 apps; start với Judge.me + related categories</td>
           <td>Christine / Celine / Maria</td><td>Chloe</td>
           <td>01/07</td><td>31/08</td>
           <td>20+ apps promote · 3–5 sponsor/strategic partners</td>
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
-        <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2-P3</span></td>
+        <tr style="background: #fee2e2;">
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>Ecommerce content partners</strong> — Outreach ecom blogs/content/media partners</td>
           <td>Christine / Celine / Maria</td><td>Chloe</td>
           <td>08/07</td><td>31/08</td>
           <td>5–10 media/content partners</td>
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
-        <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2-P3</span></td>
-          <td><strong>Seller Interviews</strong> — Interview sellers pre-event + repurpose clips</td>
-          <td><span class="badge warn">TBD</span></td><td>Kallie</td>
-          <td>01/07</td><td>31/08</td>
-          <td>20 interviews · 1 video/week · 3–5 clips/interview</td>
-          <td><span class="badge danger">PENDING OWNER</span></td>
-        </tr>
-        <tr style="background: #dbeafe;">
-          <td><span class="phase-pill phase-p2">P2-P3</span></td>
+        <tr style="background: #fee2e2;">
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>Strategic Audience Curation</strong> — Acquire ecom managers/heads · SG/CN/AU sellers · agencies · apps</td>
           <td>Chloe / Christine</td><td>Kallie / Maria / Celine</td>
           <td>01/07</td><td>16/09</td>
@@ -2026,7 +1880,7 @@
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
         <tr style="background: #fee2e2;">
-          <td><span class="phase-pill phase-p3">P3</span></td>
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>FOMO Push</strong> — Full agenda/speaker/partner proof + AI urgency messaging</td>
           <td>Kallie</td><td>Chloe / Design</td>
           <td>01/08</td><td>16/09</td>
@@ -2034,7 +1888,7 @@
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
         <tr style="background: #fee2e2;">
-          <td><span class="phase-pill phase-p3">P3</span></td>
+          <td><span class="phase-pill phase-p3">P3 Peak</span></td>
           <td><strong>All-hands amplification</strong> — Activate speakers/sponsors/apps/influencers/cheerleaders post same week</td>
           <td>Team Lily / Kallie</td><td>All partners</td>
           <td>22/08</td><td>31/08</td>
@@ -2042,7 +1896,7 @@
           <td><span class="badge muted">NOT STARTED</span></td>
         </tr>
         <tr style="background: #fef3c7;">
-          <td><span class="phase-pill phase-p4">P4</span></td>
+          <td><span class="phase-pill phase-p4">P4 Event Day</span></td>
           <td><strong>Event-day proof</strong> — Capture UGC · quotes · demos · sponsor proof · live social</td>
           <td>Kallie + Media</td><td>Team</td>
           <td>17/09</td><td>17/09</td>
@@ -2050,7 +1904,7 @@
           <td><span class="badge info">PLANNED</span></td>
         </tr>
         <tr style="background: #d1fae5;">
-          <td><span class="phase-pill phase-p5">P5</span></td>
+          <td><span class="phase-pill phase-p5">P5 After Glow</span></td>
           <td><strong>Afterglow proof</strong> — Publish recap · sponsor report · media follow-up · community retention</td>
           <td>Kallie / Christine / Maria</td><td>Media / Design</td>
           <td>18/09</td><td>17/10</td>
@@ -2062,9 +1916,9 @@
   </div>
 </section>
 
-<!-- ============ 11 MENTION SCORING ============ -->
+<!-- ============ 10 MENTION SCORING ============ -->
 <section id="mention-scoring">
-  <h2><span class="ord">11</span>Mention Scoring Framework</h2>
+  <h2><span class="ord">10</span>Mention Scoring Framework</h2>
   <p class="lead">Mỗi mention/post được score theo 3 metrics × 1-5 scale: <strong>Audience Fit × Influence × Decision Impact</strong>. Total max 15. Used để prioritize who to ask + what to amplify.</p>
 
   <div class="info-box">
@@ -2144,19 +1998,11 @@
           <td>Feel urgency to learn practical AI workflows</td>
           <td>Chloe / Kallie</td>
         </tr>
-        <tr>
-          <td>AU seller interview clip</td><td>Ecom Capital student/AU seller</td>
-          <td>AU/SG sellers, agencies</td>
-          <td class="num">4</td><td class="num">3</td><td class="num">4</td>
-          <td class="num"><strong>11</strong></td>
-          <td>See peer credibility + consider joining</td>
-          <td><span class="badge warn">TBD</span></td>
-        </tr>
       </tbody>
     </table>
   </div>
 
-  <h3>🎯 Tightened action items — full scoring execution (Risk R12)</h3>
+  <h3>🎯 Tightened action items — full scoring execution (Risk R11)</h3>
   <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Framework hiện chỉ có 3 example targets scored. Phải scored full list trước khi outreach push (W5+) để prioritize · drop touchpoints &lt; 9 (Filter 1).</p>
 
   <div class="table-wrap">
@@ -2205,9 +2051,9 @@
   </div>
 </section>
 
-<!-- ============ 12 RISKS ============ -->
+<!-- ============ 11 RISKS ============ -->
 <section id="risks">
-  <h2><span class="ord">12</span>Risk Register — 12 risks</h2>
+  <h2><span class="ord">11</span>Risk Register — 11 risks</h2>
   <p class="lead">Key risks và decision rules cho revamped KPI model. <strong>Monitor cadence</strong>: Chloe review Monday standup · channel owners report Friday EOD · escalate to Chris nếu trigger fired.</p>
 
   <div class="table-wrap">
@@ -2282,17 +2128,8 @@
         </tr>
 
         <tr style="background: #fef3c7;">
-          <td><strong>R9 · Pre-event Interview owner TBD</strong></td>
-          <td>25 interviews × 5 segments không có primary owner · Kallie chỉ support assets</td>
-          <td><span class="badge warn">Medium</span></td>
-          <td>Owner vẫn TBD sau W2 (28/06) OR first interview chưa live by W5 (19/07)</td>
-          <td>Chloe decide W2: hire remote content writer OR delegate per-country lead · de-scope 25→15 nếu không tìm được owner trong W3</td>
-          <td>Chloe</td>
-        </tr>
-
-        <tr style="background: #fef3c7;">
-          <td><strong>R10 · Team burnout peak load W7-W14</strong></td>
-          <td>8 streams parallel W7-W14 với 6-7 người team · 127 touchpoints active · không có CRM</td>
+          <td><strong>R9 · Team burnout peak load W7-W14</strong></td>
+          <td>7 streams parallel W7-W14 với 6-7 người team · ~100 touchpoints active · không có CRM</td>
           <td><span class="badge warn">Medium</span></td>
           <td>2+ team members báo overload W7+ OR &gt;30% missed Monday standup commitments</td>
           <td>Apply Filter 1 (min-bar 3K) sớm hơn (W5) · drop bottom 20% touchpoints · escalate de-scope decision tới Chris</td>
@@ -2300,7 +2137,7 @@
         </tr>
 
         <tr style="background: #fef3c7;">
-          <td><strong>R11 · Post-event no conversion bridge</strong></td>
+          <td><strong>R10 · Post-event no conversion bridge</strong></td>
           <td>Plan focus communication → register → attend. Không có nurture sequence post-event để track attendee → GemPages signup</td>
           <td><span class="badge warn">Medium</span></td>
           <td>Sales team handoff process chưa defined trước event (W14)</td>
@@ -2309,8 +2146,8 @@
         </tr>
 
         <tr style="background: #fef3c7;">
-          <td><strong>R12 · Mention scoring framework chưa execute</strong></td>
-          <td>Section 11 framework defined với 3 example targets · nhưng 70 influencers + 25 apps + 22 PR chưa được scored để prioritize outreach</td>
+          <td><strong>R11 · Mention scoring framework chưa execute</strong></td>
+          <td>Section 10 framework defined với 3 example targets · nhưng 70 influencers + 25 apps + 22 PR chưa được scored để prioritize outreach</td>
           <td><span class="badge warn">Medium</span></td>
           <td>Full scored list không deliver by W4 (12/07)</td>
           <td>Kallie deliver scored Influencer list W3 · Christine deliver scored App list W3 · Maria deliver scored PR list W4 · Drop touchpoints score &lt; 9</td>
@@ -2329,63 +2166,9 @@
       <strong>Out-of-scope risks</strong> (Event Ops · Sponsor pipeline · Speaker contracts · Visa/travel · Legal): owned bởi respective leads — Chloe sync dependency check at W4 / W8 / W12 standups.
     </div>
   </div>
-</section>
-
-<!-- ============ 13 TEAM RACI ============ -->
-<section id="raci">
-  <h2><span class="ord">13</span>Team RACI</h2>
-  <p class="lead">Team scope dựa trên sheet mới (v3). Compile từ owner columns across all tabs.</p>
-
-  <div class="info-box">
-    <div class="info-box-title">Team scope summary</div>
-    <div class="info-box-body">
-      <strong>R</strong> = Responsible · <strong>A</strong> = Accountable · <strong>C</strong> = Consulted · <strong>I</strong> = Informed<br/>
-      <strong>Chloe</strong>: Consolidate Master Plan · Strategic audience curation · Influencer outreach · AU outreach · KPI dashboard · Risk decisions<br/>
-      <strong>Kallie</strong>: Organic/community/social · Influencer map + outreach · Pillar content · Event-day proof · FOMO push<br/>
-      <strong>Hellen</strong>: Paid Ads planning + execution · CPM/CPL validation · Channel KPI validation<br/>
-      <strong>Christine</strong>: Shopify apps outreach (P1 priorities) · Strategic agencies + apps · Co-marketing<br/>
-      <strong>Celine</strong>: PR/media + apps + content partners support<br/>
-      <strong>Maria</strong>: PR/press primary · Speaker credibility · Apps (Klaviyo/Triple Whale/Shogun/Algolia/Gorgias/AfterShip)<br/>
-      <strong>Sunny</strong>: Owned channels support (email)<br/>
-      <strong>Team Lily</strong>: Internal LinkedIn cheerleaders · All-hands amplification kits<br/>
-      <strong>Media team</strong>: Event-day capture · Recap video<br/>
-      <strong>Design</strong>: FOMO content + speaker assets + recap visuals<br/>
-      <strong>TBD (pending assign)</strong>: Pre-event seller interviews · Influencer outreach (listing by Kallie) · Market owner per market<br/>
-      <strong>CN lead TBD</strong>: WeChat/Xiaohongshu native ZH coordination
-    </div>
-  </div>
-
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Area</th><th>A/R Primary</th><th>R Support</th><th>C / I</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Master Plan consolidate</strong></td><td>Chloe</td><td>—</td><td>All scope owners</td></tr>
-        <tr><td>KPI Dashboard v3</td><td>Chloe</td><td>Kallie · Hellen</td><td>All</td></tr>
-        <tr><td>Owned Channels (LP/email/founder posts)</td><td>Chloe</td><td>Kallie · Sunny</td><td>—</td></tr>
-        <tr><td>Paid Ads (400K impr · 400 reg)</td><td>Hellen</td><td>Kallie</td><td>Chloe</td></tr>
-        <tr><td>Ecommerce Communities (100K impr)</td><td>Kallie</td><td>Hellen validate</td><td>Chloe</td></tr>
-        <tr><td>Influencer Map + Outreach (Tier 1-3)</td><td>Kallie (Map) · Chloe (Outreach)</td><td>—</td><td>Hellen · Team Lily</td></tr>
-        <tr><td>Internal LinkedIn Cheerleaders</td><td>Team Lily</td><td>Chloe</td><td>Maria · Christine</td></tr>
-        <tr><td>PR/Media/Press</td><td>Maria + Celine</td><td>Christine</td><td>Chloe</td></tr>
-        <tr><td>Shopify Apps Cross-promo (25 apps)</td><td>Christine + Celine + Maria</td><td>—</td><td>Chloe</td></tr>
-        <tr><td>Content Pillars (8 pillars)</td><td>Kallie</td><td>Maria (speaker) · Christine (sponsor)</td><td>Chloe · Design</td></tr>
-        <tr><td>Pre-event Seller Interviews (25)</td><td><span class="no-owner">PENDING OWNER</span></td><td>Kallie (assets)</td><td>Chloe</td></tr>
-        <tr><td>Strategic Audience Curation</td><td>Chloe + Christine</td><td>Kallie · Maria · Celine</td><td>—</td></tr>
-        <tr><td>Country 🇻🇳 VN</td><td>Kallie + Chloe</td><td>—</td><td>—</td></tr>
-        <tr><td>Country 🇸🇬 SG</td><td>Kallie / Hellen</td><td>Christine · Celine</td><td>Chloe</td></tr>
-        <tr><td>Country 🇨🇳 CN/HK</td><td>Kallie + Team Chinese</td><td>Christine · Celine</td><td><span class="no-owner">CN local lead TBD</span></td></tr>
-        <tr><td>Country 🇦🇺 AU (mới)</td><td>Chloe · Kallie</td><td>Christine · Hellen</td><td>Steve Miguel external</td></tr>
-        <tr><td>FOMO Push (P3)</td><td>Kallie</td><td>Chloe · Design</td><td>—</td></tr>
-        <tr><td>All-hands amplification</td><td>Team Lily · Kallie</td><td>All partners</td><td>—</td></tr>
-        <tr><td>Event-day Proof (17/9)</td><td>Kallie + Media team</td><td>All team</td><td>—</td></tr>
-        <tr><td>Afterglow Proof (P5)</td><td>Kallie / Christine / Maria</td><td>Media · Design</td><td>Chloe</td></tr>
-        <tr><td>Channel Attribution (UTM)</td><td>Chloe</td><td>Dev · all channel owners</td><td>—</td></tr>
-      </tbody>
-    </table>
-  </div>
 
   <h3>📋 Master Tracker — single source of truth</h3>
-  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Referenced ~10 lần trong plan. Định nghĩa rõ ràng: Master Tracker = Google Sheet (private) Chloe maintain, capture status từ tất cả workstreams + channels + touchpoints. Mỗi owner update row của mình Friday EOD trước Monday standup.</p>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Master Tracker = Google Sheet (private) Chloe maintain · capture status từ tất cả workstreams + channels + touchpoints. Mỗi owner update row của mình Friday EOD trước Monday standup.</p>
 
   <div class="card" style="border-left: 4px solid #6b46ff;">
     <div class="card-title">📊 Master Tracker structure</div>
@@ -2398,36 +2181,17 @@
         <li><strong>Tab 3 · App Tracker</strong> — 25 rows × 6 stages (Identified→Reached out→Responded→Signed→Published→Tracked)</li>
         <li><strong>Tab 4 · PR Tracker</strong> — 22 outlets × stages (Pitched/Responded/Scheduled/Published) · mention score · cost (paid PR)</li>
         <li><strong>Tab 5 · Audience Curation Tracker</strong> — 4 strategic groups × weekly funnel (Lead→Outreach→Register→Qualified)</li>
-        <li><strong>Tab 6 · Interview Tracker</strong> — 25 rows × status (Sourced/Scheduled/Recorded/Edited/Published)</li>
-        <li><strong>Tab 7 · Risk Tracker</strong> — 12 risks · weekly status update (Open/Mitigated/Resolved)</li>
-        <li><strong>Tab 8 · Budget Tracker</strong> — Bucket × Platform × Planned vs Actual spend · weekly burn rate</li>
+        <li><strong>Tab 6 · Risk Tracker</strong> — 11 risks · weekly status update (Open/Mitigated/Resolved)</li>
+        <li><strong>Tab 7 · Budget Tracker</strong> — Bucket × Platform × Planned vs Actual spend · weekly burn rate</li>
       </ul>
     </div>
   </div>
 
-  <div class="info-box">
-    <div class="info-box-title">⏰ Update cadence</div>
-    <div class="info-box-body">
-      <strong>Channel owners</strong>: Update row Friday EOD trước 6pm.<br/>
-      <strong>Chloe</strong>: Review Monday morning trước 10am standup · flag anomalies + missing updates.<br/>
-      <strong>Monday standup (10am)</strong>: 30-min review · per-workstream status · escalate blockers.<br/>
-      <strong>Friday all-hands (Optional)</strong>: 15-min EOD checkpoint nếu peak load weeks (W7-W14).<br/>
-      <strong>Bi-weekly</strong>: W2 / W4 / W6 / W8 / W10 / W12 — formal review meeting với Chris · risk register update.
-    </div>
-  </div>
-
-  <h3>🎯 Tightened action items — 3 pending owners với hard deadlines</h3>
+  <h3>🎯 2 Pending owners còn lại trong scope Comm Plan</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Pending owner</th><th>Hard deadline</th><th>Decision maker</th><th>Decision options (pick 1)</th><th>Trigger if missed</th></tr></thead>
       <tbody>
-        <tr style="background: #fee2e2;">
-          <td><strong>Interview owner</strong> (25 interviews)</td>
-          <td><strong>W2 (28/06)</strong></td>
-          <td>Chloe</td>
-          <td>(a) Hire remote PIC ~$1.5K/mo · (b) Delegate to country leads (AU/CN/SG) · (c) De-scope 25 → 15 interviews</td>
-          <td>De-scope 25 → 15 automatic · Risk R9 escalate Chris W3</td>
-        </tr>
         <tr style="background: #fee2e2;">
           <td><strong>CN local lead</strong></td>
           <td><strong>W3 (05/07)</strong></td>
@@ -2454,9 +2218,10 @@
   </div>
 </section>
 
-<!-- ============ 14 CHANNEL CONCENTRATION FILTERS ============ -->
+<!-- ============ RACI REMOVED IN v2.9 ============ -->
+<!-- ============ 12 CHANNEL CONCENTRATION FILTERS ============ -->
 <section id="concentration-filters">
-  <h2><span class="ord">14</span>Channel Concentration Filters — anti-fragmentation guards</h2>
+  <h2><span class="ord">12</span>Channel Concentration Filters — anti-fragmentation guards</h2>
   <p class="lead">1M impressions hiện tại distribute qua ~127 touchpoints (25 apps + 70 influencers + 22 PR + 10 markets channels + 5 paid). Risk: ops drag từ long-tail + diluted unique reach. 5 filter dưới đây <strong>cắt 40-60% effort vào long-tail</strong> mà vẫn giữ defensibility của portfolio approach.</p>
 
   <div class="stats">
@@ -2549,10 +2314,10 @@
   </div>
 </section>
 
-<!-- ============ 15 COMMUNICATION BUDGET ============ -->
+<!-- ============ 13 COMMUNICATION BUDGET ============ -->
 <section id="budget">
-  <h2><span class="ord">15</span>Communication Budget Allocation</h2>
-  <p class="lead">Proposed allocation cho Communication Plan — Paid Ads (Meta/LinkedIn/WeChat/Xiaohongshu/Google) · PR booking · Production (video/design/event capture). <strong>Numbers pending Chris approval</strong> · estimates dựa trên APAC CPM benchmarks Q2 2026.</p>
+  <h2><span class="ord">13</span>Communication Budget Allocation</h2>
+  <p class="lead">Comm Plan budget chỉ count <strong>2 chi phí</strong>: Paid Ads (Meta/LinkedIn/WeChat/Xiaohongshu/Google) + PR booking (paid placements/sponsored content). Production costs (video/design/event capture) owned bởi Content team — separate budget. <strong>Numbers pending Chris approval</strong> · estimates dựa trên APAC CPM benchmarks Q2 2026.</p>
 
   <div class="info-box warn">
     <div class="info-box-title">⚠ Status: Pending Chris approval (W2 standup)</div>
@@ -2562,7 +2327,7 @@
   </div>
 
   <h3>💰 Bucket 1 · Paid Ads — 400K impressions target</h3>
-  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~70% of total comm budget · 400K paid impressions across 5 platforms theo geo. CPM benchmarks dùng để estimate; Hellen validate trong W3.</p>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~60% of total comm budget · 400K paid impressions across 5 platforms theo geo. CPM benchmarks dùng để estimate; Hellen validate trong W3.</p>
 
   <div class="table-wrap">
     <table>
@@ -2632,7 +2397,7 @@
   </div>
 
   <h3>📰 Bucket 2 · PR Booking — Paid placements + sponsored content</h3>
-  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~15% of total comm budget · majority PR là EARNED media. Paid PR chỉ cho khó-pitch outlets / Vietnamese sponsored content / industry blog placements. Owner: Maria + Celine.</p>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~40% of total comm budget · majority PR là EARNED media. Paid PR chỉ cho khó-pitch outlets / Vietnamese sponsored content / industry blog placements. Owner: Maria + Celine.</p>
 
   <div class="table-wrap">
     <table>
@@ -2680,7 +2445,7 @@
           <td class="num">10</td>
           <td>—</td>
           <td class="num">$5,800-13,900</td>
-          <td>—</td><td>~15% of total budget</td>
+          <td>—</td><td>~40% of total budget</td>
         </tr>
       </tbody>
     </table>
@@ -2688,88 +2453,35 @@
 
   <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;"><em>Note: 22 total PR placements (section 05) bao gồm 10 paid + 12 earned (free press pitch). Bucket này chỉ count paid.</em></p>
 
-  <h3>🎬 Bucket 3 · Production · Design · Event capture</h3>
-  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~15% of total comm budget · video clips production cho 25 seller interviews + design assets cho 8 content pillars + on-site capture event day.</p>
-
+  <h3>📊 Total Communication Budget — 3 scenarios (chỉ 2 buckets)</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Comm Plan scope chỉ count <strong>Paid Ads + PR Booking</strong>. Production costs (video / design / event capture) owned bởi Content team — không trong scope budget này.</p>
   <div class="table-wrap">
     <table>
-      <thead><tr><th>Item</th><th>Quantity</th><th>Unit cost (range)</th><th>Est. total</th><th>Owner</th><th>Note</th></tr></thead>
-      <tbody>
-        <tr>
-          <td><strong>Seller interview video production</strong></td>
-          <td class="num">25 clips</td>
-          <td class="num">$150-400</td>
-          <td class="num">$3,750-10,000</td>
-          <td>Interview owner TBD + Kallie</td>
-          <td>Remote shoot · light editing · 3-5 clips/interview</td>
-        </tr>
-        <tr>
-          <td><strong>Design assets (carousels · banners · speaker cards)</strong></td>
-          <td class="num">~50 assets</td>
-          <td class="num">$30-80</td>
-          <td class="num">$1,500-4,000</td>
-          <td>Design team</td>
-          <td>8 pillars × 5-6 assets each</td>
-        </tr>
-        <tr>
-          <td><strong>Photo + video on-site event day</strong></td>
-          <td class="num">1 crew day</td>
-          <td class="num">$1,500-3,500</td>
-          <td class="num">$1,500-3,500</td>
-          <td>Media team</td>
-          <td>2-photographer + 1 videographer · 17/09</td>
-        </tr>
-        <tr>
-          <td><strong>Post-event recap video</strong></td>
-          <td class="num">1 hero + 5 clips</td>
-          <td class="num">$800-2,000</td>
-          <td class="num">$800-2,000</td>
-          <td>Media + Design</td>
-          <td>Hero 2-3min · 5 short clips for retargeting</td>
-        </tr>
-        <tr style="background: var(--surface-3); font-weight: 700;">
-          <td>TOTAL Production</td>
-          <td>—</td>
-          <td>—</td>
-          <td class="num">$7,550-19,500</td>
-          <td>—</td>
-          <td>~15% of total budget</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>📊 Total Communication Budget — 3 scenarios</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Scenario</th><th>Paid Ads</th><th>PR Booking</th><th>Production</th><th>Contingency 10%</th><th>TOTAL</th><th>Strategic implication</th></tr></thead>
+      <thead><tr><th>Scenario</th><th>Paid Ads</th><th>PR Booking</th><th>Contingency 10%</th><th>TOTAL</th><th>Strategic implication</th></tr></thead>
       <tbody>
         <tr style="background: #fee2e2;">
           <td><strong>🔴 Lean</strong></td>
           <td class="num">$4,500</td>
           <td class="num">$5,800</td>
-          <td class="num">$7,550</td>
-          <td class="num">$1,785</td>
-          <td class="num"><strong>~$19,600</strong></td>
-          <td>Cut LinkedIn high CPM · skip WeChat · earned PR only · minimal production</td>
+          <td class="num">$1,030</td>
+          <td class="num"><strong>~$11,330</strong></td>
+          <td>Cut LinkedIn high CPM · skip WeChat · earned PR only</td>
         </tr>
         <tr style="background: #fef3c7;">
-          <td><strong>🟡 Baseline</strong></td>
+          <td><strong>🟡 Baseline</strong> <span class="badge success">Recommended</span></td>
           <td class="num">$8,500</td>
           <td class="num">$9,800</td>
-          <td class="num">$13,500</td>
-          <td class="num">$3,180</td>
-          <td class="num"><strong>~$35,000</strong></td>
-          <td>Recommended — covers 400K paid + 10 PR + 25 interviews · realistic for 300 qualified target</td>
+          <td class="num">$1,830</td>
+          <td class="num"><strong>~$20,130</strong></td>
+          <td>Covers 400K paid impressions + 10 paid PR placements · realistic cho 300 qualified target</td>
         </tr>
         <tr style="background: #d1fae5;">
           <td><strong>🟢 Aggressive</strong></td>
           <td class="num">$12,750</td>
           <td class="num">$13,900</td>
-          <td class="num">$19,500</td>
-          <td class="num">$4,615</td>
-          <td class="num"><strong>~$50,800</strong></td>
-          <td>Full LinkedIn + WeChat agency · tier-1 PR placements · premium production · target 350+ qualified</td>
+          <td class="num">$2,665</td>
+          <td class="num"><strong>~$29,315</strong></td>
+          <td>Full LinkedIn + WeChat agency · tier-1 PR placements · target 350+ qualified</td>
         </tr>
       </tbody>
     </table>
@@ -2787,19 +2499,18 @@
   </div>
 
   <div class="info-box warn">
-    <div class="info-box-title">⚠ Assumptions + risks</div>
+    <div class="info-box-title">⚠ Assumptions + scope</div>
     <div class="info-box-body">
       <strong>Assumption 1</strong>: CPM benchmarks dựa trên Q2 2026 APAC data từ agency reports — actual có thể ±30% biến động theo geo/season.<br/>
       <strong>Assumption 2</strong>: WeChat + Xiaohongshu cần CN lead + agency setup — không có lead = scenario rút lại $750-2,050.<br/>
-      <strong>Assumption 3</strong>: Interview production cost giảm nếu hire remote video editor (vs agency) — saving 30-40%.<br/>
-      <strong>Out-of-scope</strong>: Event venue · catering · A/V · speaker travel · sponsor activation costs — owned bởi Event Ops + Sponsor team, không trong comm budget này.
+      <strong>Out-of-scope</strong>: Video/clip production · design assets · event-day photo/video crew · post-event recap production · event venue · catering · A/V · speaker travel · sponsor activation — owned bởi Content/Design/Event Ops teams (separate budget).
     </div>
   </div>
 </section>
 
-<!-- ============ 16 GLOSSARY + LEGEND ============ -->
+<!-- ============ 14 GLOSSARY + LEGEND ============ -->
 <section id="glossary">
-  <h2><span class="ord">16</span>Glossary + Status Legend</h2>
+  <h2><span class="ord">14</span>Glossary + Status Legend</h2>
   <p class="lead">Reference cho jargon · status badges · và phase notation dùng trong toàn dashboard.</p>
 
   <h3>🏷 Status badge legend</h3>
@@ -2816,18 +2527,16 @@
     </table>
   </div>
 
-  <h3>📅 Phase notation (P1-P5)</h3>
+  <h3>📅 Phase notation (5 phases align với worksheet)</h3>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Phase</th><th>Weeks</th><th>Focus</th><th>Workstream count</th></tr></thead>
       <tbody>
-        <tr><td><span class="phase-pill phase-p1">P1</span></td><td>W1-W2 (15-28/06)</td><td>Foundation · KPI planning · audience mapping</td><td>1</td></tr>
-        <tr><td><span class="phase-pill phase-p1">P1-P2</span></td><td>W1-W4 (15/06-12/07)</td><td>Foundation bridging into Build</td><td>2</td></tr>
-        <tr><td><span class="phase-pill phase-p2">P2</span></td><td>W3-W6 (29/06-26/07)</td><td>Build · influencer mapping · audience lists</td><td>1</td></tr>
-        <tr><td><span class="phase-pill phase-p2">P2-P3</span></td><td>W3-W14 (29/06-20/09)</td><td>Outreach · biggest cluster (43% workstreams)</td><td>6</td></tr>
-        <tr><td><span class="phase-pill phase-p3">P3</span></td><td>W7-W14 (27/07-20/09)</td><td>Push · FOMO · all-hands amplification</td><td>2</td></tr>
-        <tr><td><span class="phase-pill phase-p4">P4</span></td><td>W14 (17/09 ★)</td><td>Event-day proof capture</td><td>1</td></tr>
-        <tr><td><span class="phase-pill phase-p5">P5</span></td><td>W14-W18 (18/09-17/10)</td><td>Afterglow · recap · sponsor report</td><td>1</td></tr>
+        <tr><td><span class="phase-pill phase-p1">P1 Warming Up</span></td><td>Pre-W1 → ~W2</td><td>Internal alignment · KPI planning · narrative + theme chốt</td><td>1</td></tr>
+        <tr><td><span class="phase-pill phase-p2">P2 Blooming</span></td><td>16/06–31/07 (~W1–W7)</td><td>Mở nhận diện · build trust với sponsor/community · warm up VN/SG · channel + audience mapping</td><td>3</td></tr>
+        <tr><td><span class="phase-pill phase-p3">P3 Peak</span></td><td>01/08–16/09 (~W7–W13)</td><td>All-out FOMO · public launch · agenda reveal · paid ticket conversion · all-hands amplification</td><td>7</td></tr>
+        <tr><td><span class="phase-pill phase-p4">P4 Event Day</span></td><td>17/09 (W14) ★</td><td>Capture event energy · live UGC · social proof · sponsor activation</td><td>1</td></tr>
+        <tr><td><span class="phase-pill phase-p5">P5 After Glow</span></td><td>18/09–17/10 (W14–W18)</td><td>Recap · sponsor report deck · NPS survey · 2027 community migration + sponsor pipeline build</td><td>1</td></tr>
       </tbody>
     </table>
   </div>
@@ -2850,7 +2559,7 @@
     <div class="card">
       <div class="card-title">👥 Role + Team terms</div>
       <div class="card-body">
-        <strong>RACI</strong> — Responsible / Accountable / Consulted / Informed (Section 13).<br/>
+        <strong>RACI</strong> — Responsible / Accountable / Consulted / Informed (Master Tracker definition trong Section 11).<br/>
         <strong>PIC</strong> — Person In Charge (= R/A primary owner).<br/>
         <strong>Owner</strong> — Drives execution end-to-end · single throat-to-choke.<br/>
         <strong>TBD</strong> — To Be Decided (decision pending).<br/>
@@ -2866,19 +2575,19 @@
         <strong>Owned channel</strong> — Brand controls (LP, email, GemPages in-app, founder posts).<br/>
         <strong>Earned channel</strong> — 3rd party amplifies (apps, communities, influencers, PR).<br/>
         <strong>Paid channel</strong> — Bought (Meta, LinkedIn, WeChat, Xiaohongshu, Google).<br/>
-        <strong>Mention score</strong> — 0-15 score · Fit + Influence + Decision Impact (Section 11).<br/>
+        <strong>Mention score</strong> — 0-15 score · Fit + Influence + Decision Impact (Section 10).<br/>
         <strong>Tier 1/2/3 influencer</strong> — High-impact / Niche KOL / Community admins (Section 04).
       </div>
     </div>
     <div class="card">
       <div class="card-title">🛡 Strategy terms</div>
       <div class="card-body">
-        <strong>Filter 1-5</strong> — 5 anti-fragmentation guards (Section 14):<br/>
+        <strong>Filter 1-5</strong> — 5 anti-fragmentation guards (Section 12):<br/>
         &nbsp;&nbsp;F1 = Min-bar 3K imp/touchpoint · F2 = Bundle clustering · F3 = Top-decile lock · F4 = W6 triage · F5 = UTM mandatory.<br/>
         <strong>Filter 4 triage (W6)</strong> — Mid-campaign checkpoint · kill long-tail · re-forecast · trigger Filter 5.<br/>
         <strong>Top-decile lock</strong> — 10 signed sources = 70% of impression target by W6.<br/>
         <strong>FOMO push (P3)</strong> — Last 7 weeks · scarcity messaging · 50/80/95% milestone posts.<br/>
-        <strong>Master Tracker</strong> — Google Sheet single source of truth (8 tabs) maintained bởi Chloe (Section 13).<br/>
+        <strong>Master Tracker</strong> — Google Sheet single source of truth (7 tabs) maintained bởi Chloe (Section 11).<br/>
         <strong>Pin / Annotation</strong> — Comment toolkit toolbar bottom-right · click anywhere to drop comment · localStorage persist.
       </div>
     </div>
@@ -2903,8 +2612,9 @@
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 2.8 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
-  v2.8 changes: <strong>NEW Critical Decisions Stack</strong> ở top page (12 decisions due W1-W3 · 4 critical với auto-fallback · sidebar link). <strong>Today snapshot</strong> trong hero (today date · W0 · 105 days to event · 14 workstreams · 12 risks · 3 critical decisions). <strong>NEW Master Tracker definition</strong> trong Section 13 RACI — 8 tabs (Channel KPI / Influencer / App / PR / Audience / Interview / Risk / Budget) · cadence Friday EOD + Monday standup + bi-weekly review. <strong>NEW Section 16 Glossary + Status Legend</strong> — phase notation P1-P5 + status badges + acronyms (ICP/CPM/CPL/UTM/KOL/PIC/RACI etc.) + Filter 1-5 + version log.<br/>
+  Version 2.9 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  v2.9 changes (7-item update): <strong>(1) Founder Letter strategy</strong> trong Section 03 — Kallie ghost-write, Chris đăng cá nhân · 3-post calendar W3/W7/W11 với value/impact + 5-tier tag strategy (returning sponsors / 2025 speakers / alumni / 2026 attendees / strategic accounts). <strong>(2) Section 08 Pre-event Seller Interviews REMOVED</strong> — chỉ là 1 tactic nhỏ trong content pillar. <strong>(3) Gantt freeze cột đầu tiên</strong> — sticky label column với solid bg + higher z-index. <strong>(4) 5 phase names align worksheet</strong>: P1 Warming Up / P2 Blooming / P3 Peak / P4 Event Day / P5 After Glow (bỏ bridge phases tự bịa). <strong>(5) Influencer outreach owner = TBD</strong> · supporter Kallie. <strong>(6) Section 13 Team RACI REMOVED</strong> — Master Tracker + 2 pending owners moved vào Section 11 Risks. <strong>(7) Budget chỉ 2 buckets</strong>: Paid Ads + PR Booking (bỏ Production · owned bởi Content team) · 3 scenarios mới: Lean ~$11K / Baseline ~$20K / Aggressive ~$29K.<br/>
+  Total sections: 14 (was 16) · 13 workstreams (was 14) · 7 pillars (was 8) · 11 risks (was 12).<br/>
   v2.7 changes: Tightened action items 9 sections sau Director audit · Markets Option B compact restructure<br/>
   v2.6 changes: Risk Register 6→12 risks · monitoring cadence · NEW Section 15 Communication Budget (3 buckets · 3 scenarios)<br/>
   v2.5 changes: Public document · NEW Section 14 Channel Concentration Filters (5 anti-fragmentation filters) · Section 02 channel-by-channel breakdown + action items · pillars merge note · interviews open question<br/>
