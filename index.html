@@ -68,6 +68,12 @@
   .hero p { color: var(--text-soft); font-size: 16px; margin: 8px 0 0; max-width: 720px; }
   .hero .meta { display: flex; gap: 24px; margin-top: 18px; flex-wrap: wrap; font-size: 13px; color: var(--text-muted); }
   .hero .meta strong { color: var(--text); }
+  .today-snapshot { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 16px; padding: 12px 14px; background: linear-gradient(135deg, #f7f8fc, #efeaff); border: 1px solid #d8d0ff; border-radius: 10px; }
+  .ts-card { text-align: center; padding: 6px 4px; }
+  .ts-card .ts-v { font-size: 19px; font-weight: 800; color: var(--text); letter-spacing: -.3px; line-height: 1.1; }
+  .ts-card .ts-v.warn { color: #b45309; }
+  .ts-card .ts-v.danger { color: #991b1b; }
+  .ts-card .ts-l { font-size: 10.5px; color: var(--text-muted); margin-top: 3px; line-height: 1.3; }
 
   /* Sections */
   section { padding: 40px 0 16px; border-top: 1px dashed var(--border); }
@@ -398,8 +404,10 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v2.7 · Cập nhật 04/06/2026 · Tightened action items</div>
+    <div class="brand-meta">v2.8 · Cập nhật 04/06/2026 · Decisions Stack + Glossary</div>
   </div>
+
+  <a href="#decisions-stack" class="nav-link" style="background: linear-gradient(135deg, rgba(255,107,107,.15), rgba(245,158,11,.1)); color: #fff; border-left: 3px solid #ef4444;"><span class="num">⚡</span> Decisions Stack (W1-W3)</a>
 
   <div class="nav-section-title">Overview</div>
   <a href="#executive" class="nav-link"><span class="num">00</span> Executive Summary</a>
@@ -428,6 +436,9 @@
   <a href="#raci" class="nav-link"><span class="num">13</span> Team RACI</a>
   <a href="#concentration-filters" class="nav-link"><span class="num">14</span> Channel Concentration Filters</a>
   <a href="#budget" class="nav-link"><span class="num">15</span> Communication Budget</a>
+
+  <div class="nav-section-title">Reference</div>
+  <a href="#glossary" class="nav-link"><span class="num">16</span> Glossary + Status Legend</a>
 </aside>
 
 <!-- ============ MAIN ============ -->
@@ -443,6 +454,17 @@
     <span><strong>Audience:</strong> Ecommerce Manager/Head of · DTC Founder · Shopify operators</span>
     <span><strong>Owner:</strong> Chloe (consolidate)</span>
   </div>
+
+  <!-- Today snapshot -->
+  <div class="today-snapshot">
+    <div class="ts-card"><div class="ts-v">04/06</div><div class="ts-l">Today</div></div>
+    <div class="ts-card"><div class="ts-v">W0</div><div class="ts-l">Pre-launch · 11 days đến W1</div></div>
+    <div class="ts-card"><div class="ts-v">105</div><div class="ts-l">Days đến event 17/09</div></div>
+    <div class="ts-card"><div class="ts-v">14</div><div class="ts-l">Workstreams active từ W1</div></div>
+    <div class="ts-card"><div class="ts-v warn">12</div><div class="ts-l">Open risks · 6 High</div></div>
+    <div class="ts-card"><div class="ts-v danger">3</div><div class="ts-l">Critical decisions due W2</div></div>
+  </div>
+
   <div style="display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;">
     <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: linear-gradient(135deg, #6b46ff, #b06bff); border: 0; border-radius: 8px; color: white; text-decoration: none; font-size: 13px; font-weight: 600; box-shadow: 0 4px 12px rgba(107,70,255,.3);">
       📊 <span>Master Communication Plan v3 (source)</span> <span style="opacity: .8; font-size: 11px;">↗</span>
@@ -450,8 +472,114 @@
     <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit?gid=1586380890#gid=1586380890" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: white; border: 1px solid var(--border); border-radius: 8px; color: var(--text); text-decoration: none; font-size: 13px; font-weight: 600; box-shadow: var(--shadow-sm);">
       📑 <span>Open specific tab</span> <span style="color: var(--text-muted); font-size: 11px;">↗</span>
     </a>
+    <a href="#decisions-stack" style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #fee2e2; border: 1px solid #fecaca; border-radius: 8px; color: #991b1b; text-decoration: none; font-size: 13px; font-weight: 600;">
+      🚨 <span>Critical Decisions Stack (W1-W3)</span>
+    </a>
   </div>
 </div>
+
+<!-- ============ CRITICAL DECISIONS STACK ============ -->
+<section id="decisions-stack" style="background: linear-gradient(135deg, #fef2f2 0%, #fffbeb 100%); border: 1px solid #fcd34d; border-radius: 12px; padding: 18px 22px; margin: 24px 0 32px; scroll-margin-top: 16px;">
+  <h2 style="margin: 0 0 6px; display: flex; align-items: center; gap: 10px; font-size: 18px;">
+    <span style="background: #991b1b; color: #fff; padding: 3px 10px; border-radius: 6px; font-size: 12px; font-weight: 700;">⚡ DECISIONS</span>
+    Critical Decisions Stack — Next 3 Weeks
+  </h2>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 0 0 14px;">All hard deadlines W1-W3 chronological. Decision miss = auto-fallback hoặc Risk trigger. Chloe ownership trừ khi noted.</p>
+
+  <div class="table-wrap">
+    <table style="background: #fff;">
+      <thead><tr><th>Week</th><th>Decision required</th><th>Decision maker</th><th>Linked Risk / Section</th><th>Auto-fallback if missed</th></tr></thead>
+      <tbody>
+        <tr style="background: #fef3c7;">
+          <td><strong>W1 (15-21/06)</strong></td>
+          <td>Validate CPM benchmarks (agency quotes 5 platforms)</td>
+          <td>Hellen</td>
+          <td>Section 15 · Risk R7</td>
+          <td>Use defaults từ APAC benchmarks ±30% buffer</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W1 (15-21/06)</strong></td>
+          <td>Founder letter (Chris) draft v1 + post calendar (3 posts W3/W7/W11)</td>
+          <td>Chloe + Chris</td>
+          <td>Section 03 (VN market)</td>
+          <td>Delay W2 nếu Chris busy</td>
+        </tr>
+        <tr style="background: #fee2e2;">
+          <td><strong>W2 (22-28/06)</strong></td>
+          <td><strong>Budget approval</strong> — pick 1 of 3 scenarios (Lean $19.6K / Baseline $35K / Aggressive $50.8K)</td>
+          <td><strong>Chris (final)</strong></td>
+          <td>Section 15 · Risk R7</td>
+          <td>Lean scenario default · trigger R7 escalate</td>
+        </tr>
+        <tr style="background: #fee2e2;">
+          <td><strong>W2 (22-28/06)</strong></td>
+          <td><strong>Interview owner decision</strong> — pick 1 of 3 (hire remote PIC / delegate country leads / de-scope 25→15)</td>
+          <td><strong>Chloe</strong></td>
+          <td>Section 08 · Risk R9</td>
+          <td>De-scope 25 → 15 interviews automatic</td>
+        </tr>
+        <tr style="background: #fee2e2;">
+          <td><strong>W2 (22-28/06)</strong></td>
+          <td><strong>UTM Dev resource</strong> — pick 1 of 3 (1 Dev sprint / no-code Linktree-Bitly / manual template)</td>
+          <td><strong>Chloe → Chris escalate</strong></td>
+          <td>Section 13 · Risk R6</td>
+          <td>Manual UTM template Google Sheets default</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W2 end (28/06)</strong></td>
+          <td>Pillar consolidation mapping 8 → 5</td>
+          <td>Kallie</td>
+          <td>Section 07</td>
+          <td>Keep 8-pillar reference · risk content calendar delay</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W2 end (28/06)</strong></td>
+          <td>Email blast template approved · GemPages user list extracted (5,000)</td>
+          <td>Kallie + Hellen</td>
+          <td>Section 03 (VN market)</td>
+          <td>Manual outreach fallback</td>
+        </tr>
+        <tr style="background: #fee2e2;">
+          <td><strong>W3 (29/06-05/07)</strong></td>
+          <td><strong>CN local lead decision</strong> — pick 1 of 3 (hire VN-CN bilingual / partner Judge.me CN / de-scope CN 80K→30K)</td>
+          <td><strong>Chloe + Chris</strong></td>
+          <td>Section 03 (CN) · Risk R8</td>
+          <td>De-scope CN automatic · WeChat Ads dropped · Xiaohongshu cancel</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W3 (29/06-05/07)</strong></td>
+          <td><strong>Mention scoring deliver</strong> — 70 influencers + 25 apps scored</td>
+          <td>Kallie + Christine</td>
+          <td>Section 11 · Risk R12</td>
+          <td>Bulk outreach without scoring · risk wasted effort</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W3 (29/06-05/07)</strong></td>
+          <td>UTM tracking live · all paid + organic launching channels tagged</td>
+          <td>Hellen + Dev</td>
+          <td>Section 13 · Risk R6</td>
+          <td>Launch without UTM = vanity number trap</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W3 (29/06-05/07)</strong></td>
+          <td>Steve Miguel intro call booked (AU market activation)</td>
+          <td>Chloe</td>
+          <td>Section 03 (AU)</td>
+          <td>AU pipeline blocked · de-scope AU 35K → 15K</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>W3 (29/06-05/07)</strong></td>
+          <td>Lead list per interview segment (5 candidates × 5 segments = 25)</td>
+          <td>Interview owner (picked W2)</td>
+          <td>Section 08</td>
+          <td>De-scope segments với &lt;5 confirmed leads</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="color: var(--text-muted); font-size: 11.5px; margin: 12px 0 0;"><em>📍 12 decisions · 4 <span style="color: #991b1b; font-weight: 700;">CRITICAL (red)</span> = block downstream execution if missed · 8 important · auto-fallback embedded để avoid execution freeze.</em></p>
+</section>
 
 <!-- ============ 00 EXECUTIVE ============ -->
 <section id="executive">
@@ -2256,6 +2384,38 @@
     </table>
   </div>
 
+  <h3>📋 Master Tracker — single source of truth</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">Referenced ~10 lần trong plan. Định nghĩa rõ ràng: Master Tracker = Google Sheet (private) Chloe maintain, capture status từ tất cả workstreams + channels + touchpoints. Mỗi owner update row của mình Friday EOD trước Monday standup.</p>
+
+  <div class="card" style="border-left: 4px solid #6b46ff;">
+    <div class="card-title">📊 Master Tracker structure</div>
+    <div class="card-body">
+      <strong>Sheet location</strong>: <span class="badge warn">TBD link</span> — Chloe setup W1 · share view-only với team · edit access cho channel owners only.<br/><br/>
+      <strong>Tabs</strong>:
+      <ul style="margin: 6px 0 0 18px; line-height: 1.7;">
+        <li><strong>Tab 1 · Channel KPI Tracker</strong> — 6 channel groups · weekly impressions + registers + qualified · target vs actual · % pacing</li>
+        <li><strong>Tab 2 · Influencer Tracker</strong> — 70 rows (Tier 1-4) · stage (Listed/Contacted/Signed/Published) · mention score · UTM</li>
+        <li><strong>Tab 3 · App Tracker</strong> — 25 rows × 6 stages (Identified→Reached out→Responded→Signed→Published→Tracked)</li>
+        <li><strong>Tab 4 · PR Tracker</strong> — 22 outlets × stages (Pitched/Responded/Scheduled/Published) · mention score · cost (paid PR)</li>
+        <li><strong>Tab 5 · Audience Curation Tracker</strong> — 4 strategic groups × weekly funnel (Lead→Outreach→Register→Qualified)</li>
+        <li><strong>Tab 6 · Interview Tracker</strong> — 25 rows × status (Sourced/Scheduled/Recorded/Edited/Published)</li>
+        <li><strong>Tab 7 · Risk Tracker</strong> — 12 risks · weekly status update (Open/Mitigated/Resolved)</li>
+        <li><strong>Tab 8 · Budget Tracker</strong> — Bucket × Platform × Planned vs Actual spend · weekly burn rate</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="info-box-title">⏰ Update cadence</div>
+    <div class="info-box-body">
+      <strong>Channel owners</strong>: Update row Friday EOD trước 6pm.<br/>
+      <strong>Chloe</strong>: Review Monday morning trước 10am standup · flag anomalies + missing updates.<br/>
+      <strong>Monday standup (10am)</strong>: 30-min review · per-workstream status · escalate blockers.<br/>
+      <strong>Friday all-hands (Optional)</strong>: 15-min EOD checkpoint nếu peak load weeks (W7-W14).<br/>
+      <strong>Bi-weekly</strong>: W2 / W4 / W6 / W8 / W10 / W12 — formal review meeting với Chris · risk register update.
+    </div>
+  </div>
+
   <h3>🎯 Tightened action items — 3 pending owners với hard deadlines</h3>
   <div class="table-wrap">
     <table>
@@ -2637,13 +2797,115 @@
   </div>
 </section>
 
+<!-- ============ 16 GLOSSARY + LEGEND ============ -->
+<section id="glossary">
+  <h2><span class="ord">16</span>Glossary + Status Legend</h2>
+  <p class="lead">Reference cho jargon · status badges · và phase notation dùng trong toàn dashboard.</p>
+
+  <h3>🏷 Status badge legend</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Badge</th><th>Meaning</th><th>Where used</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge success">Resolved / Confirmed</span></td><td>Action item completed · risk resolved · agreement signed</td><td>Risks · Markets · App tracker</td></tr>
+        <tr><td><span class="badge warn">TBD / Pending</span></td><td>Owner chưa assign · decision chưa pick · waiting input</td><td>Owners columns · Status columns</td></tr>
+        <tr><td><span class="badge danger">High / Critical / PENDING OWNER</span></td><td>High-severity risk · blocker không thể proceed without resolution</td><td>Risk Register · RACI pending owners</td></tr>
+        <tr><td><span class="badge info">Earned / PLANNED / Medium</span></td><td>Earned media · scheduled work · medium-priority risk</td><td>Channel KPI · Risks</td></tr>
+        <tr><td><span class="badge muted">NOT STARTED / Curated</span></td><td>Workstream chưa kick off · curated pool (tracked separately)</td><td>Timeline · Channel KPI</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>📅 Phase notation (P1-P5)</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Phase</th><th>Weeks</th><th>Focus</th><th>Workstream count</th></tr></thead>
+      <tbody>
+        <tr><td><span class="phase-pill phase-p1">P1</span></td><td>W1-W2 (15-28/06)</td><td>Foundation · KPI planning · audience mapping</td><td>1</td></tr>
+        <tr><td><span class="phase-pill phase-p1">P1-P2</span></td><td>W1-W4 (15/06-12/07)</td><td>Foundation bridging into Build</td><td>2</td></tr>
+        <tr><td><span class="phase-pill phase-p2">P2</span></td><td>W3-W6 (29/06-26/07)</td><td>Build · influencer mapping · audience lists</td><td>1</td></tr>
+        <tr><td><span class="phase-pill phase-p2">P2-P3</span></td><td>W3-W14 (29/06-20/09)</td><td>Outreach · biggest cluster (43% workstreams)</td><td>6</td></tr>
+        <tr><td><span class="phase-pill phase-p3">P3</span></td><td>W7-W14 (27/07-20/09)</td><td>Push · FOMO · all-hands amplification</td><td>2</td></tr>
+        <tr><td><span class="phase-pill phase-p4">P4</span></td><td>W14 (17/09 ★)</td><td>Event-day proof capture</td><td>1</td></tr>
+        <tr><td><span class="phase-pill phase-p5">P5</span></td><td>W14-W18 (18/09-17/10)</td><td>Afterglow · recap · sponsor report</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>📖 Glossary — terms + acronyms</h3>
+  <div class="grid grid-2">
+    <div class="card">
+      <div class="card-title">🎯 KPI & Funnel terms</div>
+      <div class="card-body">
+        <strong>Impressions</strong> — Number of times content shown (gross reach, not unique). Plan target: 1M.<br/>
+        <strong>Register</strong> — Email captured via LP form. Plan target: 1,000 pool.<br/>
+        <strong>Qualified attendee</strong> — Register matches ICP (Ecom Manager / DTC Founder / Shopify operator). Plan target: 220 acquired + 80 curated = 300 final.<br/>
+        <strong>Conversion rate guardrail</strong> — 22% (220 qualified / 1,000 registers).<br/>
+        <strong>ICP</strong> — Ideal Customer Profile (Ecom Manager/Head, DTC Founder, Shopify operator APAC).<br/>
+        <strong>CPM</strong> — Cost Per Mille (1,000 impressions). APAC benchmarks Meta $3-8 · LinkedIn $30-80.<br/>
+        <strong>CPL</strong> — Cost Per Lead (register). Plan benchmark TBD by Hellen W3.<br/>
+        <strong>CTR</strong> — Click-Through Rate (clicks / impressions).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">👥 Role + Team terms</div>
+      <div class="card-body">
+        <strong>RACI</strong> — Responsible / Accountable / Consulted / Informed (Section 13).<br/>
+        <strong>PIC</strong> — Person In Charge (= R/A primary owner).<br/>
+        <strong>Owner</strong> — Drives execution end-to-end · single throat-to-choke.<br/>
+        <strong>TBD</strong> — To Be Decided (decision pending).<br/>
+        <strong>Country lead</strong> — Per-market execution owner (VN: Kallie+Chloe · SG: Kallie+Christine · CN: TBD · AU: Chloe).<br/>
+        <strong>Internal LinkedIn squad</strong> — GemCommerce team + speakers + sponsors + friendly partners (20 ppl) post during All-hands week (W10-W11).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📣 Marketing channel terms</div>
+      <div class="card-body">
+        <strong>KOL</strong> — Key Opinion Leader (influencer · Tier 1-2).<br/>
+        <strong>UTM</strong> — Urchin Tracking Module · URL parameters cho attribution (utm_source, utm_medium, utm_campaign).<br/>
+        <strong>Owned channel</strong> — Brand controls (LP, email, GemPages in-app, founder posts).<br/>
+        <strong>Earned channel</strong> — 3rd party amplifies (apps, communities, influencers, PR).<br/>
+        <strong>Paid channel</strong> — Bought (Meta, LinkedIn, WeChat, Xiaohongshu, Google).<br/>
+        <strong>Mention score</strong> — 0-15 score · Fit + Influence + Decision Impact (Section 11).<br/>
+        <strong>Tier 1/2/3 influencer</strong> — High-impact / Niche KOL / Community admins (Section 04).
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🛡 Strategy terms</div>
+      <div class="card-body">
+        <strong>Filter 1-5</strong> — 5 anti-fragmentation guards (Section 14):<br/>
+        &nbsp;&nbsp;F1 = Min-bar 3K imp/touchpoint · F2 = Bundle clustering · F3 = Top-decile lock · F4 = W6 triage · F5 = UTM mandatory.<br/>
+        <strong>Filter 4 triage (W6)</strong> — Mid-campaign checkpoint · kill long-tail · re-forecast · trigger Filter 5.<br/>
+        <strong>Top-decile lock</strong> — 10 signed sources = 70% of impression target by W6.<br/>
+        <strong>FOMO push (P3)</strong> — Last 7 weeks · scarcity messaging · 50/80/95% milestone posts.<br/>
+        <strong>Master Tracker</strong> — Google Sheet single source of truth (8 tabs) maintained bởi Chloe (Section 13).<br/>
+        <strong>Pin / Annotation</strong> — Comment toolkit toolbar bottom-right · click anywhere to drop comment · localStorage persist.
+      </div>
+    </div>
+  </div>
+
+  <h3>📋 Plan version log (quick reference)</h3>
+  <div class="info-box">
+    <div class="info-box-body">
+      <strong>v2.7</strong> — Tightened action items 9 sections + Markets restructure (Option B)<br/>
+      <strong>v2.6</strong> — Risk Register 6→12 + Communication Budget (3 scenarios)<br/>
+      <strong>v2.5</strong> — Public document · Concentration filters · Channel breakdown action items<br/>
+      <strong>v2.4</strong> — Visual Gantt chart 18 weeks · Phase color legend<br/>
+      <strong>v2.3</strong> — Annotation toolkit (port từ lp.html)<br/>
+      <strong>v2.2</strong> — Owner cleanup theo pin comments<br/>
+      <strong>v2.0-2.1</strong> — Fresh restart từ Master Communication Plan v3 sheet
+    </div>
+  </div>
+</section>
+
 </main>
 </div>
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 2.7 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
-  v2.7 changes: <strong>Tightened action items across 9 sections</strong> sau Director-level audit. Section 03 Markets restructured (Option B compact summary thay 10-sub-channel detail · audience-first frame). Section 04 per-tier milestones (Listing W6 / Outreach W7 / Signed W9 / Posts W11) + Kill criteria. Section 05 per-outlet schedule (W4-W17 specific weeks · 2 pitches/week). Section 06 cluster outreach milestones (5 clusters × signed target ≥13/25 by W8). Section 07 pillar merge deadline W2 + asset calendar W3. Section 08 owner decision W2 + de-scope trigger W4. Section 09 weekly cadence (77 outreach/week · funnel benchmarks per group). Section 11 mention scoring deadlines (70 inf + 25 apps W3 · 22 PR W4). Section 13 RACI 3 pending owners với hard deadlines W2-W3 + auto-fallback.<br/>
+  Version 2.8 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  v2.8 changes: <strong>NEW Critical Decisions Stack</strong> ở top page (12 decisions due W1-W3 · 4 critical với auto-fallback · sidebar link). <strong>Today snapshot</strong> trong hero (today date · W0 · 105 days to event · 14 workstreams · 12 risks · 3 critical decisions). <strong>NEW Master Tracker definition</strong> trong Section 13 RACI — 8 tabs (Channel KPI / Influencer / App / PR / Audience / Interview / Risk / Budget) · cadence Friday EOD + Monday standup + bi-weekly review. <strong>NEW Section 16 Glossary + Status Legend</strong> — phase notation P1-P5 + status badges + acronyms (ICP/CPM/CPL/UTM/KOL/PIC/RACI etc.) + Filter 1-5 + version log.<br/>
+  v2.7 changes: Tightened action items 9 sections sau Director audit · Markets Option B compact restructure<br/>
   v2.6 changes: Risk Register 6→12 risks · monitoring cadence · NEW Section 15 Communication Budget (3 buckets · 3 scenarios)<br/>
   v2.5 changes: Public document · NEW Section 14 Channel Concentration Filters (5 anti-fragmentation filters) · Section 02 channel-by-channel breakdown + action items · pillars merge note · interviews open question<br/>
   v2.4 changes: Visual Gantt chart rebuild (18 weeks × 14 workstreams, 7 phase gradients, sticky label, event week highlight, phase color legend bên dưới)<br/>
