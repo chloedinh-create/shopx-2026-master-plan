@@ -398,7 +398,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v2.5 · Cập nhật 04/06/2026 · Public + concentration filters</div>
+    <div class="brand-meta">v2.6 · Cập nhật 04/06/2026 · Risk expansion + Budget</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -427,6 +427,7 @@
   <a href="#risks" class="nav-link"><span class="num">12</span> Risk Register</a>
   <a href="#raci" class="nav-link"><span class="num">13</span> Team RACI</a>
   <a href="#concentration-filters" class="nav-link"><span class="num">14</span> Channel Concentration Filters</a>
+  <a href="#budget" class="nav-link"><span class="num">15</span> Communication Budget</a>
 </aside>
 
 <!-- ============ MAIN ============ -->
@@ -1752,15 +1753,15 @@
 
 <!-- ============ 12 RISKS ============ -->
 <section id="risks">
-  <h2><span class="ord">12</span>Risk Register — 6 risks</h2>
-  <p class="lead">Key risks và decision rules cho revamped KPI model. Monitor weekly bởi Chloe + channel owners.</p>
+  <h2><span class="ord">12</span>Risk Register — 12 risks</h2>
+  <p class="lead">Key risks và decision rules cho revamped KPI model. <strong>Monitor cadence</strong>: Chloe review Monday standup · channel owners report Friday EOD · escalate to Chris nếu trigger fired.</p>
 
   <div class="table-wrap">
     <table>
       <thead><tr><th>Risk / Decision</th><th>Current logic</th><th>Risk level</th><th>Trigger</th><th>Decision rule</th><th>Owner</th></tr></thead>
       <tbody>
         <tr style="background: #d1fae5;">
-          <td><strong>500-register model removed</strong></td>
+          <td><strong>R1 · 500-register model removed</strong></td>
           <td>Old model required 500 registers to produce 300 qualified attendees — too aggressive nếu VIP pool không separate</td>
           <td><span class="badge success">Resolved</span></td>
           <td>New stakeholder logic confirmed</td>
@@ -1768,7 +1769,7 @@
           <td>Chloe</td>
         </tr>
         <tr style="background: #fee2e2;">
-          <td><strong>Paid must deliver 400K impressions + 400 registers</strong></td>
+          <td><strong>R2 · Paid must deliver 400K impressions + 400 registers</strong></td>
           <td>Paid carries 40% of impressions/register pool + 88 acquired qualified</td>
           <td><span class="badge danger">High</span></td>
           <td>Paid CTR/CPL under benchmark by mid-campaign</td>
@@ -1776,7 +1777,7 @@
           <td>Hellen + Kallie</td>
         </tr>
         <tr style="background: #fee2e2;">
-          <td><strong>Organic/earned must deliver 600K impressions + 600 registers</strong></td>
+          <td><strong>R3 · Organic/earned must deliver 600K impressions + 600 registers</strong></td>
           <td>Organic cannot rely only on brand social; cần partners, communities, influencers, apps + PR</td>
           <td><span class="badge danger">High</span></td>
           <td>Organic reach &lt;60% pacing by Aug</td>
@@ -1784,7 +1785,7 @@
           <td>Kallie + channel owners</td>
         </tr>
         <tr style="background: #fef3c7;">
-          <td><strong>Quality risk từ 1,000 registers</strong></td>
+          <td><strong>R4 · Quality risk từ 1,000 registers</strong></td>
           <td>More register volume can dilute ICP quality</td>
           <td><span class="badge warn">Medium</span></td>
           <td>Qualified rate below 22% hoặc strategic audience under target</td>
@@ -1792,7 +1793,7 @@
           <td>Chloe</td>
         </tr>
         <tr style="background: #fef3c7;">
-          <td><strong>VIP pool attendance risk</strong></td>
+          <td><strong>R5 · VIP pool attendance risk</strong></td>
           <td>80 invited/VIP tickets may not all attend</td>
           <td><span class="badge warn">Medium</span></td>
           <td>VIP acceptance/show-up below 80%</td>
@@ -1800,15 +1801,79 @@
           <td>Chloe + Ops</td>
         </tr>
         <tr style="background: #fee2e2;">
-          <td><strong>Channel attribution risk</strong></td>
+          <td><strong>R6 · Channel attribution risk</strong></td>
           <td>Without UTM/source codes, channel KPI không thể trust</td>
           <td><span class="badge danger">High</span></td>
-          <td>Unattributed registers &gt;20%</td>
-          <td>Mandatory UTM/code cho partner, community, influencer, paid, PR/media sources</td>
+          <td>Unattributed registers &gt;20% by W4 (end July)</td>
+          <td>Mandatory UTM/code cho partner, community, influencer, paid, PR/media sources · Dev pixel setup W3</td>
           <td>Chloe + Dev + channel owners</td>
+        </tr>
+
+        <tr style="background: #fee2e2;">
+          <td><strong>R7 · Budget approval delay/cut</strong></td>
+          <td>Paid channel plan dựa trên ước tính budget chưa được approve. Nếu budget cut, 400K paid impressions không reach được</td>
+          <td><span class="badge danger">High</span></td>
+          <td>Budget chưa được Chris approve trong W2 (28/06) OR approved budget &lt; 70% needed</td>
+          <td>Escalate Chris W2 standup · prepare 3 paid budget scenarios (lean/baseline/aggressive) · adjust channel weighting nếu cut · trigger Filter 2 bundle clustering sớm hơn</td>
+          <td>Chloe (escalate) · Hellen (scenarios)</td>
+        </tr>
+
+        <tr style="background: #fee2e2;">
+          <td><strong>R8 · Influencer outreach owner block</strong></td>
+          <td>Outreach owner TBD cho 60 external influencers (Tier 1-3) · listing by Kallie xong nhưng không ai drive outreach</td>
+          <td><span class="badge danger">High</span></td>
+          <td>Outreach owner vẫn TBD sau W3 (05/07) OR &lt; 5 influencers signed by W6</td>
+          <td>Chloe decide W2: hire contractor OR re-assign từ Christine/Maria · fallback bundle clustering nếu không có outreach owner</td>
+          <td>Chloe</td>
+        </tr>
+
+        <tr style="background: #fef3c7;">
+          <td><strong>R9 · Pre-event Interview owner TBD</strong></td>
+          <td>25 interviews × 5 segments không có primary owner · Kallie chỉ support assets</td>
+          <td><span class="badge warn">Medium</span></td>
+          <td>Owner vẫn TBD sau W2 (28/06) OR first interview chưa live by W5 (19/07)</td>
+          <td>Chloe decide W2: hire remote content writer OR delegate per-country lead · de-scope 25→15 nếu không tìm được owner trong W3</td>
+          <td>Chloe</td>
+        </tr>
+
+        <tr style="background: #fef3c7;">
+          <td><strong>R10 · Team burnout peak load W7-W14</strong></td>
+          <td>8 streams parallel W7-W14 với 6-7 người team · 127 touchpoints active · không có CRM</td>
+          <td><span class="badge warn">Medium</span></td>
+          <td>2+ team members báo overload W7+ OR &gt;30% missed Monday standup commitments</td>
+          <td>Apply Filter 1 (min-bar 3K) sớm hơn (W5) · drop bottom 20% touchpoints · escalate de-scope decision tới Chris</td>
+          <td>Chloe + Kallie</td>
+        </tr>
+
+        <tr style="background: #fef3c7;">
+          <td><strong>R11 · Post-event no conversion bridge</strong></td>
+          <td>Plan focus communication → register → attend. Không có nurture sequence post-event để track attendee → GemPages signup</td>
+          <td><span class="badge warn">Medium</span></td>
+          <td>Sales team handoff process chưa defined trước event (W14)</td>
+          <td>Chloe sync Sales team W3-W4 · define handoff CRM list format + 30/60/90 day attribution window · email nurture flow signed off W10</td>
+          <td>Chloe + Sunny</td>
+        </tr>
+
+        <tr style="background: #fef3c7;">
+          <td><strong>R12 · Mention scoring framework chưa execute</strong></td>
+          <td>Section 11 framework defined với 3 example targets · nhưng 70 influencers + 25 apps + 22 PR chưa được scored để prioritize outreach</td>
+          <td><span class="badge warn">Medium</span></td>
+          <td>Full scored list không deliver by W4 (12/07)</td>
+          <td>Kallie deliver scored Influencer list W3 · Christine deliver scored App list W3 · Maria deliver scored PR list W4 · Drop touchpoints score &lt; 9</td>
+          <td>Kallie + Christine + Maria</td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="info-box" style="background: #efeaff; border-color: #d8d0ff;">
+    <div class="info-box-title">📊 Risk monitoring cadence</div>
+    <div class="info-box-body">
+      <strong>Weekly</strong>: Chloe review Monday standup (10am) · channel owners report status + KPI pacing Friday EOD via Master Tracker.<br/>
+      <strong>Bi-weekly</strong>: W2 / W4 / W6 / W8 / W10 / W12 — formal risk review meeting · update risk level (Resolved/Open/Escalated).<br/>
+      <strong>Trigger fired</strong>: Owner notify Chloe immediately · Chloe escalate Chris nếu High/Critical risk · 24h response time for decision rule activation.<br/>
+      <strong>Out-of-scope risks</strong> (Event Ops · Sponsor pipeline · Speaker contracts · Visa/travel · Legal): owned bởi respective leads — Chloe sync dependency check at W4 / W8 / W12 standups.
+    </div>
   </div>
 </section>
 
@@ -1970,13 +2035,262 @@
   </div>
 </section>
 
+<!-- ============ 15 COMMUNICATION BUDGET ============ -->
+<section id="budget">
+  <h2><span class="ord">15</span>Communication Budget Allocation</h2>
+  <p class="lead">Proposed allocation cho Communication Plan — Paid Ads (Meta/LinkedIn/WeChat/Xiaohongshu/Google) · PR booking · Production (video/design/event capture). <strong>Numbers pending Chris approval</strong> · estimates dựa trên APAC CPM benchmarks Q2 2026.</p>
+
+  <div class="info-box warn">
+    <div class="info-box-title">⚠ Status: Pending Chris approval (W2 standup)</div>
+    <div class="info-box-body">
+      Plan này show <strong>% allocation</strong> + <strong>estimated ranges</strong> theo benchmark. Actual $ chờ Chris confirm total comm budget (xem Risk R7). Hellen prepare 3 scenarios (Lean / Baseline / Aggressive) cho W2 review.
+    </div>
+  </div>
+
+  <h3>💰 Bucket 1 · Paid Ads — 400K impressions target</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~70% of total comm budget · 400K paid impressions across 5 platforms theo geo. CPM benchmarks dùng để estimate; Hellen validate trong W3.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Platform</th><th>Geo</th><th>Target imp</th><th>% paid</th><th>CPM benchmark APAC</th><th>Est. spend (range)</th><th>Tactic</th><th>Owner</th></tr></thead>
+      <tbody>
+        <tr style="background: #eff6ff;">
+          <td><strong>Meta (FB + IG)</strong></td>
+          <td>VN · SG · AU</td>
+          <td class="num">150,000</td>
+          <td class="num">38%</td>
+          <td class="num">$3-8</td>
+          <td class="num">$450-1,200</td>
+          <td>Awareness + lookalike + LP retargeting · VN-heavy</td>
+          <td>Hellen</td>
+        </tr>
+        <tr style="background: #f0f9ff;">
+          <td><strong>LinkedIn Ads</strong></td>
+          <td>SG · AU · VN</td>
+          <td class="num">100,000</td>
+          <td class="num">25%</td>
+          <td class="num">$30-80</td>
+          <td class="num">$3,000-8,000</td>
+          <td>B2B ecom mgr + DTC founder targeting · highest CPM nhưng best ICP fit</td>
+          <td>Hellen</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td><strong>WeChat Ads</strong></td>
+          <td>CN / HK</td>
+          <td class="num">70,000</td>
+          <td class="num">18%</td>
+          <td class="num">$5-15</td>
+          <td class="num">$350-1,050</td>
+          <td>Cross-border ecom seller targeting · pending CN lead + agency setup</td>
+          <td>Hellen + CN lead TBD</td>
+        </tr>
+        <tr style="background: #fef2f2;">
+          <td><strong>Xiaohongshu</strong></td>
+          <td>CN / HK</td>
+          <td class="num">50,000</td>
+          <td class="num">12%</td>
+          <td class="num">$8-20</td>
+          <td class="num">$400-1,000</td>
+          <td>Sponsored content + lifestyle/event hybrid posts</td>
+          <td>Hellen + CN lead TBD</td>
+        </tr>
+        <tr style="background: #f0fdf4;">
+          <td><strong>Google Ads</strong></td>
+          <td>VN · SG · AU</td>
+          <td class="num">30,000</td>
+          <td class="num">7%</td>
+          <td class="num">$2-10 CPC</td>
+          <td class="num">$300-1,500</td>
+          <td>Search remarketing · brand keywords · low priority</td>
+          <td>Hellen</td>
+        </tr>
+        <tr style="background: var(--surface-3); font-weight: 700;">
+          <td>TOTAL Paid Ads</td>
+          <td>—</td>
+          <td class="num">400,000</td>
+          <td class="num">100%</td>
+          <td>—</td>
+          <td class="num">$4,500-12,750</td>
+          <td>—</td><td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>📰 Bucket 2 · PR Booking — Paid placements + sponsored content</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~15% of total comm budget · majority PR là EARNED media. Paid PR chỉ cho khó-pitch outlets / Vietnamese sponsored content / industry blog placements. Owner: Maria + Celine.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>PR Category</th><th>Type</th><th>Placement count</th><th>Cost per placement</th><th>Est. total (range)</th><th>Owner</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Tier-1 tech press placement</strong></td>
+          <td>Sponsored article on premium outlets</td>
+          <td class="num">2</td>
+          <td class="num">$1,500-3,000</td>
+          <td class="num">$3,000-6,000</td>
+          <td>Maria</td>
+          <td>Negotiate "founder interview + event preview" angle</td>
+        </tr>
+        <tr>
+          <td><strong>Vietnamese media (sponsored)</strong></td>
+          <td>VN business/tech media sponsored content</td>
+          <td class="num">3</td>
+          <td class="num">$300-800</td>
+          <td class="num">$900-2,400</td>
+          <td>Maria + Celine</td>
+          <td>Vietcetera / CafeBiz / VnExpress business tier</td>
+        </tr>
+        <tr>
+          <td><strong>Ecommerce blog sponsored posts</strong></td>
+          <td>Industry blog thought leadership</td>
+          <td class="num">3</td>
+          <td class="num">$500-1,500</td>
+          <td class="num">$1,500-4,500</td>
+          <td>Christine + Celine</td>
+          <td>Mostly earned · 2-3 paid placements as fallback</td>
+        </tr>
+        <tr>
+          <td><strong>Wire service / press release distribution</strong></td>
+          <td>Distribution service (VN + APAC wires)</td>
+          <td class="num">2</td>
+          <td class="num">$200-500</td>
+          <td class="num">$400-1,000</td>
+          <td>Maria</td>
+          <td>1 pre-event + 1 post-event press release</td>
+        </tr>
+        <tr style="background: var(--surface-3); font-weight: 700;">
+          <td>TOTAL PR Booking</td>
+          <td>—</td>
+          <td class="num">10</td>
+          <td>—</td>
+          <td class="num">$5,800-13,900</td>
+          <td>—</td><td>~15% of total budget</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;"><em>Note: 22 total PR placements (section 05) bao gồm 10 paid + 12 earned (free press pitch). Bucket này chỉ count paid.</em></p>
+
+  <h3>🎬 Bucket 3 · Production · Design · Event capture</h3>
+  <p style="color: var(--text-soft); font-size: 13px; margin: 8px 0 14px;">~15% of total comm budget · video clips production cho 25 seller interviews + design assets cho 8 content pillars + on-site capture event day.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Quantity</th><th>Unit cost (range)</th><th>Est. total</th><th>Owner</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Seller interview video production</strong></td>
+          <td class="num">25 clips</td>
+          <td class="num">$150-400</td>
+          <td class="num">$3,750-10,000</td>
+          <td>Interview owner TBD + Kallie</td>
+          <td>Remote shoot · light editing · 3-5 clips/interview</td>
+        </tr>
+        <tr>
+          <td><strong>Design assets (carousels · banners · speaker cards)</strong></td>
+          <td class="num">~50 assets</td>
+          <td class="num">$30-80</td>
+          <td class="num">$1,500-4,000</td>
+          <td>Design team</td>
+          <td>8 pillars × 5-6 assets each</td>
+        </tr>
+        <tr>
+          <td><strong>Photo + video on-site event day</strong></td>
+          <td class="num">1 crew day</td>
+          <td class="num">$1,500-3,500</td>
+          <td class="num">$1,500-3,500</td>
+          <td>Media team</td>
+          <td>2-photographer + 1 videographer · 17/09</td>
+        </tr>
+        <tr>
+          <td><strong>Post-event recap video</strong></td>
+          <td class="num">1 hero + 5 clips</td>
+          <td class="num">$800-2,000</td>
+          <td class="num">$800-2,000</td>
+          <td>Media + Design</td>
+          <td>Hero 2-3min · 5 short clips for retargeting</td>
+        </tr>
+        <tr style="background: var(--surface-3); font-weight: 700;">
+          <td>TOTAL Production</td>
+          <td>—</td>
+          <td>—</td>
+          <td class="num">$7,550-19,500</td>
+          <td>—</td>
+          <td>~15% of total budget</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>📊 Total Communication Budget — 3 scenarios</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Scenario</th><th>Paid Ads</th><th>PR Booking</th><th>Production</th><th>Contingency 10%</th><th>TOTAL</th><th>Strategic implication</th></tr></thead>
+      <tbody>
+        <tr style="background: #fee2e2;">
+          <td><strong>🔴 Lean</strong></td>
+          <td class="num">$4,500</td>
+          <td class="num">$5,800</td>
+          <td class="num">$7,550</td>
+          <td class="num">$1,785</td>
+          <td class="num"><strong>~$19,600</strong></td>
+          <td>Cut LinkedIn high CPM · skip WeChat · earned PR only · minimal production</td>
+        </tr>
+        <tr style="background: #fef3c7;">
+          <td><strong>🟡 Baseline</strong></td>
+          <td class="num">$8,500</td>
+          <td class="num">$9,800</td>
+          <td class="num">$13,500</td>
+          <td class="num">$3,180</td>
+          <td class="num"><strong>~$35,000</strong></td>
+          <td>Recommended — covers 400K paid + 10 PR + 25 interviews · realistic for 300 qualified target</td>
+        </tr>
+        <tr style="background: #d1fae5;">
+          <td><strong>🟢 Aggressive</strong></td>
+          <td class="num">$12,750</td>
+          <td class="num">$13,900</td>
+          <td class="num">$19,500</td>
+          <td class="num">$4,615</td>
+          <td class="num"><strong>~$50,800</strong></td>
+          <td>Full LinkedIn + WeChat agency · tier-1 PR placements · premium production · target 350+ qualified</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-box" style="background: #efeaff; border-color: #d8d0ff;">
+    <div class="info-box-title">📋 Action items · budget approval flow</div>
+    <div class="info-box-body">
+      <strong>W1 (15-21/06)</strong> · Hellen — Validate CPM benchmarks với agency quotes · refine 3 scenario numbers<br/>
+      <strong>W2 (22-28/06)</strong> · Chloe — Present 3 scenarios với Chris · get approval cho 1 scenario<br/>
+      <strong>W2 end</strong> · Chloe + Finance — Setup budget tracker · monthly burn rate report<br/>
+      <strong>W3 (29/06-05/07)</strong> · Hellen — Allocate budget across platforms theo approved scenario · start awareness campaign setup<br/>
+      <strong>Bi-weekly</strong> · Hellen — Burn rate vs plan · adjust allocation nếu CPM diverges &gt;20% từ benchmark
+    </div>
+  </div>
+
+  <div class="info-box warn">
+    <div class="info-box-title">⚠ Assumptions + risks</div>
+    <div class="info-box-body">
+      <strong>Assumption 1</strong>: CPM benchmarks dựa trên Q2 2026 APAC data từ agency reports — actual có thể ±30% biến động theo geo/season.<br/>
+      <strong>Assumption 2</strong>: WeChat + Xiaohongshu cần CN lead + agency setup — không có lead = scenario rút lại $750-2,050.<br/>
+      <strong>Assumption 3</strong>: Interview production cost giảm nếu hire remote video editor (vs agency) — saving 30-40%.<br/>
+      <strong>Out-of-scope</strong>: Event venue · catering · A/V · speaker travel · sponsor activation costs — owned bởi Event Ops + Sponsor team, không trong comm budget này.
+    </div>
+  </div>
+</section>
+
 </main>
 </div>
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 2.5 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
-  v2.5 changes: <strong>Document public</strong> — bỏ password gate · confidential bar đổi sang public version. <strong>NEW Section 14 Channel Concentration Filters</strong> — 5 filters chống fragmentation (min-bar 3K imp · bundle clustering · top-decile lock · W6 triage · UTM mandatory) sau phản biện 1M impressions distribution quá vụn qua 127 touchpoints. Section 02 Channel KPI thêm channel-by-channel breakdown + core action items chi tiết per channel. Section 07 Pillars: note merge 8→5 pillars waiting for Kallie. Section 08 Interviews: open question owner + remote team loop-in + daily calendar sync notes.<br/>
+  Version 2.6 · Cập nhật 04/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Communication Plan v3 Sheet</a><br/>
+  v2.6 changes: <strong>Section 12 Risk Register expanded 6 → 12 risks</strong> (R7 Budget approval delay · R8 Influencer outreach owner block · R9 Interview owner TBD · R10 Team burnout · R11 Post-event conversion bridge · R12 Mention scoring framework execution) · monitoring cadence (Monday standup + Friday EOD + bi-weekly review). <strong>NEW Section 15 Communication Budget Allocation</strong> — 3 buckets (Paid Ads 70% / PR Booking 15% / Production 15%) với CPM benchmarks APAC + 3 scenarios (Lean $19.6K / Baseline $35K / Aggressive $50.8K) pending Chris approval W2.<br/>
+  v2.5 changes: Public document · NEW Section 14 Channel Concentration Filters (5 anti-fragmentation filters) · Section 02 channel-by-channel breakdown + action items · pillars merge note · interviews open question<br/>
   v2.4 changes: Visual Gantt chart rebuild (18 weeks × 14 workstreams, 7 phase gradients, sticky label, event week highlight, phase color legend bên dưới)<br/>
   v2.3 changes: Annotation toolkit port từ shopx-2026/lp.html — toolbar 3 nút (Export · List · Comment) · side panel List · resolve/reopen workflow · markdown export · hotkeys C/H/Esc · 1-shot migration từ shopx-notes-v1<br/>
   v2.2 changes: Owner cleanup theo pin comments (03/06) — bỏ block "Why &gt;10K" (info box trong Influencer section) · Influencer Owner col → "Listing / Outreach": Kallie phụ trách listing, outreach TBD · Seller Interviews 25 rows → tất cả Owner = TBD · Strategic Audience Curation: bỏ cột Owner · Markets Activation: bỏ cột Owner<br/>
