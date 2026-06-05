@@ -406,7 +406,7 @@
   <div class="brand">
     <h1 class="brand-title">ShopX 2026</h1>
     <div class="brand-sub">Master Communication Plan v3</div>
-    <div class="brand-meta">v4.3 · Cập nhật 05/06/2026 · Decisions Stack removed</div>
+    <div class="brand-meta">v4.4 · Cập nhật 05/06/2026 · Shared comments (Vercel KV)</div>
   </div>
 
   <div class="nav-section-title">Overview</div>
@@ -2198,9 +2198,10 @@
 
 <div class="footer">
   <strong>ShopX 2026 — Master Communication Plan v3</strong><br/>
-  Version 4.3 · Cập nhật 05/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Plan v3</a> + <a href="https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit" target="_blank" style="color: var(--primary);">📊 Sunny's Plan</a><br/>
-  v4.3 changes: Removed "Critical Decisions Stack" section + sidebar link + hero CTA · Today snapshot card "Critical decisions" → "5 Content Pillars".<br/>
-  v4.2: Comment filter tabs (All/Open/Resolved) · Resolved pins hidden từ page.<br/>
+  Version 4.4 · Cập nhật 05/06/2026 · Dashboard build từ <a href="https://docs.google.com/spreadsheets/d/1lhvnb11hKQY4cPX1mcMTjsoQq_7oKGIuoA2YPE4bYok/edit" target="_blank" style="color: var(--primary);">📊 Master Plan v3</a> + <a href="https://docs.google.com/spreadsheets/d/1-Si3FysIOUVTVaUnBxKsYpVxfmytQd_wQHBsCKyucUY/edit" target="_blank" style="color: var(--primary);">📊 Sunny's Plan</a><br/>
+  v4.4 shared comments: NEW <strong>Vercel KV backend</strong> (api/comments.js serverless function) · client fetches/saves tới /api/comments thay localStorage-only · poll mỗi 15s cho live updates · sync status indicator trong panel (Syncing/Synced/Offline) · localStorage làm offline cache. Bây giờ khi A comment → B reload (hoặc đợi 15s) sẽ thấy.<br/>
+  v4.3: Removed Critical Decisions Stack section.<br/>
+  v4.2: Comment filter tabs (All/Open/Resolved) · Resolved pins hidden.<br/>
   v4.1: Removed KPI v3 changes info-box · Removed Sponsor Pipeline section.<br/>
   v4.0 cleanup: removed Section 02 detail cards · consolidated Founder Letter · trimmed Filters · compacted Saigon hooks · sidebar regrouped.<br/>
   <strong>Total</strong>: 12 sections · 13 workstreams · 5 pillars · 13 risks · 138 sub-channels · 7 ticketing stages.<br/>
@@ -2499,7 +2500,8 @@
   <div class="ph">
     <div>
       <div class="t">Annotations</div>
-      <div class="meta" id="anPanelMeta">0 comments · saved locally</div>
+      <div class="meta" id="anPanelMeta">0 comments</div>
+      <div class="meta" id="anSyncStatus" style="margin-top: 2px; font-size: 10.5px;">⟳ Syncing…</div>
     </div>
     <button id="anPanelClose" title="Close (Esc)">×</button>
   </div>
@@ -2578,15 +2580,85 @@
     }
   }
 
-  // ---------- state ----------
-  function load(){
+  // ---------- state + sync ----------
+  var API_URL = '/api/comments';
+  var POLL_MS = 15000; // 15s
+  var CLIENT_ID = 'c_' + Math.random().toString(36).slice(2,8);
+  var lastRemoteUpdatedAt = null;
+  var isSyncing = false;
+  var syncStatus = 'idle'; // 'idle' | 'syncing' | 'error' | 'offline'
+
+  function loadLocal(){
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
     catch(e){ return []; }
   }
-  function save(){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.items));
-    refreshUI();
+  function saveLocal(items){
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(items)); } catch(e){}
   }
+  function setSyncStatus(s){
+    syncStatus = s;
+    var el = document.getElementById('anSyncStatus');
+    if (!el) return;
+    var labels = {
+      idle: '✓ Synced',
+      syncing: '⟳ Syncing…',
+      error: '⚠ Sync error',
+      offline: '⚠ Offline (local only)',
+    };
+    var colors = {
+      idle: 'rgba(120,255,180,.85)',
+      syncing: 'rgba(176,107,255,.85)',
+      error: 'rgba(255,140,140,.95)',
+      offline: 'rgba(255,200,80,.95)',
+    };
+    el.textContent = labels[s] || s;
+    el.style.color = colors[s] || 'rgba(255,255,255,.55)';
+  }
+  function fetchRemote(){
+    if (isSyncing) return Promise.resolve(null);
+    isSyncing = true;
+    setSyncStatus('syncing');
+    return fetch(API_URL, { cache: 'no-store' })
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(payload){
+        isSyncing = false;
+        setSyncStatus('idle');
+        return payload; // { items, updatedAt }
+      })
+      .catch(function(err){
+        isSyncing = false;
+        setSyncStatus('offline');
+        console.warn('[comments] fetch failed:', err);
+        return null;
+      });
+  }
+  function pushRemote(items){
+    setSyncStatus('syncing');
+    return fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: items, clientId: CLIENT_ID }),
+    })
+      .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function(j){
+        lastRemoteUpdatedAt = j.updatedAt || new Date().toISOString();
+        setSyncStatus('idle');
+        return j;
+      })
+      .catch(function(err){
+        setSyncStatus('error');
+        console.warn('[comments] push failed:', err);
+        return null;
+      });
+  }
+  function save(){
+    // Local first (fast UI), then push remote
+    saveLocal(state.items);
+    refreshUI();
+    pushRemote(state.items);
+  }
+  // For migration backward-compat
+  function load(){ return loadLocal(); }
   function uid(){ return 'a_' + Math.random().toString(36).slice(2,8) + Date.now().toString(36).slice(-4); }
   function nowISO(){ return new Date().toISOString(); }
   function fmtRel(iso){
@@ -2693,7 +2765,7 @@
     var n = state.items.length;
     var nOpen = state.items.filter(function(it){ return !it.solved; }).length;
     var nResolved = n - nOpen;
-    meta.textContent = nOpen + ' open · ' + nResolved + ' resolved · saved locally';
+    meta.textContent = nOpen + ' open · ' + nResolved + ' resolved';
 
     // Update counters trong tabs
     var cAll = document.getElementById('anCountAll');
@@ -2922,6 +2994,34 @@
     }
 
     refreshUI();
+
+    // Initial fetch + start polling cho shared comments
+    setSyncStatus('syncing');
+    fetchRemote().then(function(remote){
+      if (remote && Array.isArray(remote.items)) {
+        // Remote is source of truth — replace local
+        state.items = remote.items;
+        lastRemoteUpdatedAt = remote.updatedAt;
+        saveLocal(state.items);
+        refreshUI();
+      }
+    });
+
+    // Poll every 15s
+    setInterval(function(){
+      if (isSyncing) return;
+      if (state.activePopup) return; // don't refresh while editing
+      fetchRemote().then(function(remote){
+        if (!remote || !Array.isArray(remote.items)) return;
+        // Only update if remote updatedAt is newer than what we know
+        if (remote.updatedAt && remote.updatedAt !== lastRemoteUpdatedAt) {
+          lastRemoteUpdatedAt = remote.updatedAt;
+          state.items = remote.items;
+          saveLocal(state.items);
+          refreshUI();
+        }
+      });
+    }, POLL_MS);
   }
 
   var state;
