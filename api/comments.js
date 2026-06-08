@@ -21,14 +21,12 @@ async function kvGet(key) {
 }
 
 async function kvSet(key, value) {
+  // Upstash REST SET: body = raw value (string). We stringify ONCE.
   const body = JSON.stringify(value);
   const r = await fetch(`${REDIS_URL}/set/${encodeURIComponent(key)}`, {
     method: 'POST',
-    headers: {
-      Authorization: `Bearer ${REDIS_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(body),
+    headers: { Authorization: `Bearer ${REDIS_TOKEN}` },
+    body: body,
   });
   if (!r.ok) throw new Error(`KV SET failed: ${r.status}`);
   return true;
